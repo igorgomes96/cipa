@@ -1,0 +1,213 @@
+{
+    "eleicoes": [
+        {
+            "id": 1,
+            "gestao": 2019,
+            "duracaoGestao": 2,
+            "unidadeId": 1,
+            "unidade": {
+                "id": 1,
+                "empresaId": 1,
+                "cidade": "Uberlândia - MG",
+                "endereco": "Av. Floriano Peixoto, nº 6500, bairro Umuarama",
+                "empresa": {
+                    "id": 1,
+                    "razaoSocial": "Algar Tecnologia",
+                    "informacoesGerais": null
+                }
+            },
+            "eleitores": [
+                {
+                    "id": 1,
+                    "nome": "Igor Aparecido Gomes de Oliveira",
+                    "email": "igorgomes96@hotmail.com",
+                    "matricula": "983942",
+                    "area": "Área de Teste da Empresa",
+                    "cargo": "Desenvolvedor de Software",
+                    "dataNascimento": "19/02/1996",
+                    "dataAdmissao": "10/10/2017",
+                    "eleicaoId": 1
+                },
+                {
+                    "id": 2,
+                    "nome": "Igor Aparecido Gomes de Oliveira",
+                    "email": "igorgomes96@hotmail.com",
+                    "matricula": "983942",
+                    "area": "Área de Teste da Empresa",
+                    "cargo": "Desenvolvedor de Software",
+                    "dataNascimento": "19/02/1996",
+                    "dataAdmissao": "10/10/2017",
+                    "eleicaoId": 1
+                },
+                {
+                    "id": 3,
+                    "nome": "Igor Aparecido Gomes de Oliveira",
+                    "email": "igorgomes96@hotmail.com",
+                    "matricula": "983942",
+                    "area": "Área de Teste da Empresa",
+                    "cargo": "Desenvolvedor de Software",
+                    "dataNascimento": "19/02/1996",
+                    "dataAdmissao": "10/10/2017",
+                    "eleicaoId": 1
+                }
+            ],
+            "cronograma": [
+                {
+                    "id": 1,
+                    "eleicaoId": 1,
+                    "etapaId": 1,
+                    "nomeEtapa": "Edital de Abertura",
+                    "descricaoEtapa": "Nessa etapa, você precisa publicar e divulgar o edital de convocação para o processo eleitoral da CIPA, em locais de fácil acesso e visualização. Atente-se ao prazo! A NR-5 determina que a publicação ocorra no prazo mínimo de 45 dias antes do término do mandato em curso.",
+                    "dataPrevista": "2019-01-01",
+                    "dataRealizada": null,
+                    "etapaObrigatoriaId": 1,
+                    "posicaoEtapa": 1,
+                    "etapaObrigatoria": {
+                        "id": 1,
+                        "nome": "Cadastro",
+                        "descricao": "Cadastro dos Funcionários",
+                        "ordem": 1
+                    }
+                },
+                {
+                    "id": 2,
+                    "eleicaoId": 1,
+                    "etapaId": 2,
+                    "nomeEtapa": "Inscrição dos Candidatos",
+                    "descricaoEtapa": "Nessa etapa, todos os eleitores podem acessar o sistema e realizar suas inscrições.",
+                    "dataPrevista": "2019-02-02",
+                    "dataRealizada": null,
+                    "etapaObrigatoriaId": 2,
+                    "posicaoEtapa": 2,
+                    "etapaObrigatoria": {
+                        "id": 2,
+                        "nome": "Incrições",
+                        "descricao": "Inscrição dos Candidatos",
+                        "ordem": 2
+                    }
+                },
+                {
+                    "id": 3,
+                    "eleicaoId": 1,
+                    "etapaId": 3,
+                    "nomeEtapa": "Votação",
+                    "descricaoEtapa": "Nessa etapa, todos os eleitores acessam o sistema e escolhem seu representante da CIPA",
+                    "dataPrevista": "2019-03-03",
+                    "dataRealizada": null,
+                    "etapaObrigatoriaId": 3,
+                    "posicaoEtapa": 2,
+                    "etapaObrigatoria": {
+                        "id": 3,
+                        "nome": "Votaão",
+                        "descricao": "Votação",
+                        "ordem": 3
+                    }
+                },
+                {
+                    "id": 4,
+                    "eleicaoId": 1,
+                    "etapaId": 4,
+                    "nomeEtapa": "Apuração",
+                    "descricaoEtapa": "Período de apuração dos votos",
+                    "dataPrevista": "2019-04-04",
+                    "dataRealizada": null,
+                    "etapaObrigatoriaId": 4,
+                    "posicaoEtapa": 2,
+                    "etapaObrigatoria": {
+                        "id": 4,
+                        "nome": "Votação",
+                        "descricao": "Votação",
+                        "ordem": 4
+                    }
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "gestao": 2019,
+            "duracaoGestao": 2,
+            "unidadeId": 2,
+            "unidade": {
+                "id": 2,
+                "empresaId": 2,
+                "cidade": "Uberlândia - MG",
+                "endereco": "Av. Teste, nº 768, bairro Centro",
+                "empresa": {
+                    "id": 2,
+                    "razaoSocial": "Algar Telecom",
+                    "informacoesGerais": null
+                }
+            },
+            "cronograma": [
+                {
+                    "id": 1,
+                    "eleicaoId": 1,
+                    "etapaId": 2,
+                    "nomeEtapa": "Edital de Abertura",
+                    "descricaoEtapa": "Nessa etapa, você precisa publicar e divulgar o edital de convocação para o processo eleitoral da CIPA, em locais de fácil acesso e visualização. Atente-se ao prazo! A NR-5 determina que a publicação ocorra no prazo mínimo de 45 dias antes do término do mandato em curso.",
+                    "dataPrevista": "2019-01-01",
+                    "dataRealizada": null,
+                    "etapaObrigatoriaId": 1,
+                    "posicaoEtapa": 0,
+                    "etapaObrigatoria": {
+                        "id": 1,
+                        "nome": "Cadastro",
+                        "descricao": "Cadastro dos Funcionários",
+                        "ordem": 1
+                    }
+                },
+                {
+                    "id": 2,
+                    "eleicaoId": 2,
+                    "etapaId": 2,
+                    "nomeEtapa": "Inscrição dos Candidatos",
+                    "descricaoEtapa": "Nessa etapa, todos os eleitores podem acessar o sistema e realizar suas inscrições.",
+                    "dataPrevista": "2019-02-02",
+                    "dataRealizada": null,
+                    "etapaObrigatoriaId": 2,
+                    "posicaoEtapa": 1,
+                    "etapaObrigatoria": {
+                        "id": 2,
+                        "nome": "Incrições",
+                        "descricao": "Inscrição dos Candidatos",
+                        "ordem": 2
+                    }
+                },
+                {
+                    "id": 3,
+                    "eleicaoId": 3,
+                    "etapaId": 2,
+                    "nomeEtapa": "Votação",
+                    "descricaoEtapa": "Nessa etapa, todos os eleitores acessam o sistema e escolhem seu representante da CIPA",
+                    "dataPrevista": "2019-03-03",
+                    "dataRealizada": null,
+                    "etapaObrigatoriaId": 3,
+                    "posicaoEtapa": 2,
+                    "etapaObrigatoria": {
+                        "id": 3,
+                        "nome": "Votação",
+                        "descricao": "Votação",
+                        "ordem": 3
+                    }
+                },
+                {
+                    "id": 4,
+                    "eleicaoId": 4,
+                    "etapaId": 2,
+                    "nomeEtapa": "Apuração",
+                    "descricaoEtapa": "Período de apuração dos votos",
+                    "dataPrevista": "2019-04-04",
+                    "dataRealizada": null,
+                    "etapaObrigatoriaId": 4,
+                    "posicaoEtapa": 2,
+                    "etapaObrigatoria": {
+                        "id": 4,
+                        "nome": "Votação",
+                        "descricao": "Votação",
+                        "ordem": 4
+                    }
+                }
+            ]
+        }
+    ]
+}

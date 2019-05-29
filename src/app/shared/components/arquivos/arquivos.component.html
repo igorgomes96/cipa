@@ -1,0 +1,37 @@
+<h2>Arquivos</h2>
+<label class="dropzone" [class.sk-loading]="spinner" (drop)="onDrop($event)" (dragover)="onDragOver($event)" [style.background]="dropzoneColor">
+  <div class="sk-spinner sk-spinner-wave">
+    <div class="sk-rect1"></div>
+    <div class="sk-rect2"></div>
+    <div class="sk-rect3"></div>
+    <div class="sk-rect4"></div>
+    <div class="sk-rect5"></div>
+  </div>
+  <span class="description">Arraste um arquivo para esta área ou clique para fazer upload.</span>
+  <input type="file" multiple (change)="onInputChange($event)">
+</label>
+
+
+<div class="project-list table-responsive">
+
+  <table class="table table-hover">
+    <tbody>
+      <tr *ngFor="let arquivo of arquivos">
+        <td class="project-status">
+          <button class="btn btn-outline btn-danger btn-xs m-r-xs" (click)="deleteFile(arquivo.id)">
+            <i class="fa fa-trash"></i>
+          </button>
+          <button class="btn btn-outline btn-primary btn-xs" (click)="download(arquivo)">
+            <i class="fa fa-download"></i>
+          </button>
+        </td>
+        <td class="project-title">
+          <strong>{{ arquivo.nome }}</strong>
+          <br />
+          <small>Upload: {{ arquivo.dataUpload | date:'dd/MM/yyy HH:mm' }}, {{ (arquivo.tamanho / 1024) |
+            number:'1.0-1' }}k</small>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

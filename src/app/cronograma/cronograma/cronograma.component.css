@@ -1,0 +1,40 @@
+#vertical-timeline {
+    width: 100%;
+}
+
+.vertical-date {
+    color: #1ab394;
+}
+
+.vertical-date small {
+    color: #999;
+    font-size: 80%;
+}
+
+.vertical-timeline-content .btn {
+    float: initial;
+}
+
+.vertical-timeline-content .arquivos {
+    margin-top: 25px;
+}
+
+@media (min-width: 992px) {
+    .vertical-timeline-content .arquivos {
+        border-left: 1px solid #e7eaec;
+        margin-top: inherit;
+    }
+}
+
+.vertical-timeline-block.inactive {
+    color: #ccc;
+}
+
+.vertical-timeline-block.inactive .vertical-timeline-icon {
+    background: #bbb;
+}
+
+.vertical-container {
+    max-width: initial;
+}
+

@@ -1,0 +1,38 @@
+<div id="vertical-timeline" class="vertical-container light-timeline no-margins">
+    <div class="vertical-timeline-block" [class.inactive]="etapa.posicaoEtapa === PosicaoEtapa.Futura" *ngFor="let etapa of eleicao.cronograma">
+        <div class="vertical-timeline-icon" [ngClass]="etapa.posicaoEtapa === PosicaoEtapa.Atual ? 'blue-bg' : 'navy-bg'">
+            <i class="fa fa-calendar"></i>
+        </div>
+
+        <div class="vertical-timeline-content">
+            <div class="col-lg-8 col-md-7 col-sm-12">
+                <h2>{{ etapa.nomeEtapa }}</h2>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="vertical-date">
+                            <i class="fa fa-calendar"></i> {{ etapa.dataPrevista | date:'dd/MMM/yy' }}<br>
+                            <small>Clique na data acima para alterá-la.</small>
+                        </span>
+                    </div>
+                </div>
+
+                <p>{{ etapa.descricaoEtapa }}</p>
+
+                <p>Possuímos alguns documenntos de exemplo que podem te ajudar. Confira-os e fique à vontade para
+                    utilizá-los!</p>
+                <button class="btn btn-success" [disabled]="etapa.posicaoEtapa === PosicaoEtapa.Futura"><i class="fa fa-file-text"></i> Templates</button>
+
+            </div>
+
+            <div class="col-lg-4 col-md-5 col-sm-12 arquivos" *ngIf="etapa.posicaoEtapa !== PosicaoEtapa.Futura">
+                <app-arquivos [arquivos]="arquivos" dropzoneColor="#eee"></app-arquivos>
+                <div class="row m-t-sm" *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Atual">
+                    <div class="col-md-12">
+                        <a href="#" class="btn btn-primary" style="float: right"> Próxima Etapa</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

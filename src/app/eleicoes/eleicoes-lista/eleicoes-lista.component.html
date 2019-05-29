@@ -1,0 +1,53 @@
+<app-panel>
+  <div class="row">
+    <div class="col-md-12">
+      <h4>
+        Olá, bem-vindo ao sistema de Votação Online!
+      </h4>
+      <p>
+        Deseja iniciar uma nova Eleição? Basta clicar no botão abaixo:
+      </p>
+      <a routerLink="nova" class="btn btn-primary">Nova Eleição <i class="fa fa-plus"></i></a>
+    </div>
+  </div>
+</app-panel>
+
+<h4>Eleições Cadastradas</h4>
+<p>
+  Estão listadas abaixo as últimas eleições administradas por você.
+</p>
+
+<div class="row m-b-md flex-row">
+  <div class="col-md-3 col-sm-6" *ngFor="let eleicao of eleicoes">
+    <div class="widget white-bg">
+      <div class="row">
+        <div class="col-md-12">
+          <span class="label label-warning" style="float: right;">Inscrições</span>
+          <h4>{{ eleicao.unidade.empresa.razaoSocial }}</h4>
+          {{ eleicao.unidade.endereco }}<br>
+          <strong>{{ eleicao.unidade.cidade }}</strong>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <a [routerLink]="'/eleicoes/' + eleicao.id + '/cronograma'"
+            class="btn btn-success btn-outline m-r-sm btn-sm">Cronograma</a>
+          <a href="" class="btn btn-danger btn-outline btn-sm">Excluir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-panel>
+<div class="row">
+  <div class="col-md-12">
+    <h4>
+      Não encontrou a eleição desejada?
+    </h4>
+    <p>Clique no botão abaixo e será uma exibida uma tabela com todas as eleições já cadastradas.</p>
+    <a href="" class="btn btn-primary">Exibir todas as Eleições</a>
+  </div>
+</div>
+</app-panel>
