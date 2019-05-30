@@ -21,14 +21,14 @@
                   <span class="nav-label">{{ item.label }}</span>
                   <span class="fa arrow" *ngIf="item.children != null"></span>
               </a>
-              <a *ngIf="item.children != null">
+              <a *ngIf="item.children != null" (click)="item.active = !item.active">
                   <i [ngClass]="item.icon"></i>
                   <span class="nav-label">{{ item.label }}</span>
                   <span class="fa arrow" *ngIf="item.children != null"></span>
               </a>
-              <ul class="nav nav-second-level" *ngIf="item.children != null">
-                  <li *ngFor="let sub of item.children">
-                      <a [routerLink]="[sub.link]">{{ sub.label }}</a>
+              <ul class="nav nav-second-level" *ngIf="item.children != null" [ngClass]="item.active ? 'collapse in' : 'collapse'">
+                  <li *ngFor="let sub of item.children" [class.active]="sub.active">
+                      <a [routerLink]="[item.link + sub.link]">{{ sub.label }}</a>
                   </li>
               </ul>
           </li>

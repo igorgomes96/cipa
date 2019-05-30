@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EtapaCronograma, PosicaoEtapa } from 'src/app/core/models/cronograma';
 import { Eleicao } from 'src/app/core/models/eleicao';
 import { filter, switchMap } from 'rxjs/operators';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { Arquivo } from 'src/app/core/models/arquivo';
+import { ToastsService } from 'src/app/core/services/toasts.service';
+import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ModalService } from 'src/app/core/services/modal.service';
 
 @Component({
   selector: 'app-cronograma',
@@ -16,8 +19,13 @@ export class CronogramaComponent implements OnInit {
   PosicaoEtapa: typeof PosicaoEtapa = PosicaoEtapa;
   eleicao: Eleicao;
   arquivos: Arquivo[];
+  templates: string[];
+  @ViewChild('modalTemplates') modalTemplates: TemplateRef<any>;
+
   constructor(private route: ActivatedRoute,
-              private api: EleicoesApiService) { }
+              private api: EleicoesApiService,
+              private toasts: ToastsService,
+              private modalService: ModalService) { }
 
   ngOnInit() {
     this.route.data
@@ -42,7 +50,32 @@ export class CronogramaComponent implements OnInit {
         nome: 'Teste.xls',
         path: '/teste/teste.xls'
       }
-    ]
+    ];
+  }
+
+  calendarIcon(etapa: EtapaCronograma): string {
+    switch (etapa.posicaoEtapa) {
+      case PosicaoEtapa.Atual:
+        return 'fa-calendar';
+      case PosicaoEtapa.Passada:
+        return 'fa-calendar-check-o';
+      case PosicaoEtapa.Futura:
+        return 'fa-calendar-o';
+      default:
+        return '';
+    }
+  }
+
+  proximaEtapa() {
+    this.toasts.showMessage({
+      message: 'Message Test',
+      title: 'Título Teste',
+      type: ToastType.success
+    });
+  }
+
+  exibirTemplates() {
+    this.modalService.showModal(this.modalTemplates);
   }
 
 }

@@ -1,0 +1,20 @@
+<div class="modal fade" [class.in]="showModal" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" [hidden]="!titulo">
+        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+        <h4 class="modal-title">{{ titulo }}</h4>
+      </div>
+      <div class="modal-body">
+        <ng-container [ngTemplateOutlet]="template"></ng-container>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="closeModal()">Fechar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="backdrop" [class.in]="showModal"></div>

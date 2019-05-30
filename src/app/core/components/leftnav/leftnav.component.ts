@@ -53,7 +53,32 @@ export class LeftnavComponent implements OnInit, AfterViewInit {
         link: '/eleicoes/:id/candidaturas',
         icon: 'fa fa-vcard',
         visible: true,
-        children: null,
+        children: [
+          {
+            label: 'Pendentes',
+            link: '/pendentes',
+            icon: null,
+            visible: true,
+            children: null,
+            active: false
+          },
+          {
+            label: 'Aprovadas',
+            link: '/aprovadas',
+            icon: null,
+            visible: true,
+            children: null,
+            active: false
+          },
+          {
+            label: 'Reprovadas',
+            link: '/reprovadas',
+            icon: null,
+            visible: true,
+            children: null,
+            active: false
+          }
+        ],
         active: false
       }
     ];
@@ -83,7 +108,7 @@ export class LeftnavComponent implements OnInit, AfterViewInit {
       const id = paths[2];
       this.menu.forEach(item => {
         item.link = item.link.replace(':id', id).replace(/(\d+)/, id);
-        if (item.link === url) {
+        if (url.startsWith(item.link)) {
           item.active = true;
         } else {
           item.active = false;
@@ -91,6 +116,11 @@ export class LeftnavComponent implements OnInit, AfterViewInit {
         if (item.children) {
           item.children.forEach(subitem => {
             subitem.link = subitem.link.replace(':id', id).replace(/(\d+)/, id);
+            if (item.link + subitem.link === url) {
+              subitem.active = true;
+            } else {
+              subitem.active = false;
+            }
           });
         }
       });
@@ -103,7 +133,7 @@ export class LeftnavComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    $('#side-menu').metisMenu();
+    // $('#side-menu').metisMenu();
   }
 
 }

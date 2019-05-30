@@ -3,9 +3,14 @@
     Caso você queira editar algum deles, basta clicar no botão com o ícone de lápis na linha do eleitor a ser alterado.
   </p>
   <p>Para facilitar o cadastro, você pode fazer a importação de um arquivo CSV (.csv) com os dados dos funcionários.
-    Baixe o template, clicando no botão abaixo, preencha os dados e faça a importação.</p>
+    Baixe o template, preencha os dados e faça a importação.</p>
   <button class="btn btn-success m-r-sm m-t-xs"><i class="fa fa-download"></i> Baixar Template</button>
   <button class="btn btn-primary m-t-xs"><i class="fa fa-upload"></i> Importar Dados</button>
+  <hr>
+  <p>
+    Você também tem a opção de fazer o cadastro do eleitor manualmente pelo sistema. Para isso, clique no botão abaixo:
+  </p>
+  <a routerLink="novo" class="btn btn-primary"><i class="fa fa-plus"></i> Cadastrar Novo</a>
   <hr>
   <table class="footable table table-striped" data-page-size="15">
     <thead>
@@ -17,7 +22,7 @@
         <th data-breakpoints="xs sm md lg">Área</th>
         <th data-breakpoints="xs">Admissão</th>
         <th data-breakpoints="xs sm md lg">Nascimento</th>
-        <th class="text-right">Ações</th>
+        <th class="text-right">Edição / Exclusão</th>
       </tr>
     </thead>
     <tbody>
@@ -31,7 +36,7 @@
         <td>{{ eleitor.dataNascimento }}</td>
         <td class="text-right">
           <div>
-            <button class="btn btn-xs btn-outline btn-success m-r-xs"><i class="fa fa-pencil"></i></button>
+            <a class="btn btn-xs btn-outline btn-success m-r-xs" [routerLink]="['./', eleitor.id]"><i class="fa fa-pencil"></i></a>
             <button class="btn btn-xs btn-outline btn-danger"><i class="fa fa-trash"></i></button>
           </div>
         </td>

@@ -27,7 +27,11 @@
 }
 
 .vertical-timeline-block.inactive {
-    color: #ccc;
+    color: #b6b6b6;
+}
+
+.vertical-timeline-block.inactive .templates {
+    display: none;
 }
 
 .vertical-timeline-block.inactive .vertical-timeline-icon {

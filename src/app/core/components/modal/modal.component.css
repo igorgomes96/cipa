@@ -1,0 +1,30 @@
+.modal {
+    display: block;
+    visibility: hidden;    
+}
+
+.in {
+    visibility: visible;
+}
+
+.modal.in {
+    z-index: 2500 !important;
+}
+
+.backdrop {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.backdrop.in {
+    visibility: visible;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 2200;
+    top: 0;
+    left: 0;
+    background: black;
+    opacity: .6;
+    transition: opacity .5s;
+}

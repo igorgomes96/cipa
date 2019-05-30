@@ -1,20 +1,12 @@
-.navbar-form-custom {
-    width: 300px;
-}
-.navbar-form-custom .form-control {
-    width: 100%;
+.navbar {
+    margin-bottom: 0;
+    min-height: 60px;
 }
 
-.content-nav {
-    padding-left: 37px;
-}
-
-.content-nav button.btn {
-    color: #2f4050;
-}
-
-.icon-nav {
-    float: left;
-    padding-top: 5px;
+.navbar-brand {
+    background: #1ab394;
+    color: #fff;
+    padding: 20px 25px;
+    height: 60px;
 }
 

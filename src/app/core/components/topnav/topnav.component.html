@@ -1,45 +1,28 @@
 <div class="row border-bottom">
-    <nav class="navbar navbar-static-top white-bg" [ngClass]="!showToggle ? 'top-navigation' : ''" role="navigation"
-        style="margin-bottom: 0">
+    <nav class="navbar navbar-static-top navbar-expand-lg" role="navigation">
         <div class="navbar-header">
-            <a class="minimalize-styl-2 btn btn-primary" (click)="toggleNavigation()" *ngIf="showToggle"><i
-                    class="fa fa-bars"></i>
-            </a>
+
             <a routerLink="/eleicoes" class="navbar-brand" *ngIf="!showToggle">CIPA Online</a>
-            <form role="search" class="navbar-form-custom">
-                <div class="form-group">
-                    <!-- <app-autocomplete formControlName="pesquisa" [classFunction]="getClassColor" [mapShowFunction]="mapShowFunction" [urlSource]="url" urlQueryParam="nome" placeholder="Pesquisar...">
-                      <ng-template let-item>
-                          <div class="item-nav">
+            <button class="minimalize-styl-2 btn btn-primary" *ngIf="showToggle" aria-label="Toggle navigation" (click)="toggleNavigation()">
+                <i class="fa fa-bars"></i>
+            </button>
 
-                              <div class="icon-nav">
-                                  <span class="fa m-r-sm fa-lg" [ngClass]="getClassIcon(item)"></span>
-                              </div>
-
-                              <div class="content-nav">
-                                  <div class="m-b-sm">
-                                      #{{ item.obj.id }} {{ item.obj.nome }}
-                                      <span *ngIf="item.entityType == EntityType[EntityType.Empresa]"> ({{ item.obj.endereco?.cidade }})</span>
-                                  </div>
-                                  <button class="btn btn-xs m-r-xs btn-default" (click)="navigate('/negociacoes/gestao', item, $event)">Negociações</button>
-                                  <button class="btn btn-xs m-r-xs btn-default" (click)="navigate('/negociacoes/litigios', item, $event)">Litígios</button>
-                                  <button class="btn btn-xs btn-default" *ngIf="item.entityType == EntityType[EntityType.Empresa]" (click)="navigate('/dashboard/empresa', item, $event)">Dashboard</button>
-                              </div>
-                          </div>
-                      </ng-template>
-                  </app-autocomplete> -->
-                </div>
-            </form>
         </div>
 
-
-        <ul class="nav navbar-top-links navbar-right">
-            <li>
-                <a (click)="logout()">
-                    <i class="fa fa-sign-out"></i> Log out
-                </a>
-            </li>
-        </ul>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <a class="right-sidebar-toggle" routerLink="/eleicoes">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li>
+                    <a (click)="logout()">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                </li>
+            </ul>
+        </div>
 
     </nav>
 </div>

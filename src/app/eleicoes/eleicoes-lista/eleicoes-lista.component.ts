@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { Eleicao } from 'src/app/core/models/eleicao';
+import { ModalService } from 'src/app/core/services/modal.service';
 
 @Component({
   selector: 'app-eleicoes-lista',
@@ -11,13 +12,17 @@ import { Eleicao } from 'src/app/core/models/eleicao';
 export class EleicoesListaComponent implements OnInit {
 
   eleicoes: Eleicao[];
-  constructor(private eleicoesApi: EleicoesApiService) { }
+  constructor(private eleicoesApi: EleicoesApiService,
+              private modalService: ModalService) { }
 
   ngOnInit() {
     this.eleicoesApi.getAll()
     .subscribe((eleicoes: Eleicao[]) => {
       this.eleicoes = eleicoes;
     });
+  }
+
+  exibirEleicoes() {
   }
 
 }

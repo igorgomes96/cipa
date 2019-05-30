@@ -22,6 +22,10 @@ const routes: Routes = [
         }
       },
       {
+        path: 'novo',
+        component: EleitoresFormComponent
+      },
+      {
         path: ':id',
         component: EleitoresFormComponent
       }

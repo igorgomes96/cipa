@@ -4,6 +4,7 @@ import { Router, NavigationEnd, ActivationEnd } from '@angular/router';
 import { filter, distinctUntilChanged } from 'rxjs/operators';
 import { correctHeight, detectBody } from '../app.helpers';
 import { NavigationService } from './core/services/navigation.service';
+import { ToastsService } from './core/services/toasts.service';
 
 declare var $: any;
 
@@ -22,7 +23,8 @@ export enum NavigationType {
 export class AppComponent implements OnInit, AfterViewInit {
 
   private navigationType = NavigationType.Left;
-  constructor(private router: Router, private navigationService: NavigationService) { }
+  constructor(private router: Router, private navigationService: NavigationService,
+    private toastsService: ToastsService) { }
 
   ngOnInit() {
     this.router.events.pipe(
