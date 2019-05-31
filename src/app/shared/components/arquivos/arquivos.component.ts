@@ -40,18 +40,19 @@ export class ArquivosComponent implements OnInit {
   }
 
   deleteFile(id: string) {
-    this.toast.swalMessage({
-      title: 'Confirma exlusão?',
-      message: 'Essa ação não poderá ser desfeita!',
-      type: ToastType.warning
-    }, () => this.service.delete(id).subscribe(_ => {
-      this.delete.emit();
-      this.toast.showMessage({
-        message: 'Arquivo excluído com sucesso!',
-        title: 'Sucesso!',
-        type: ToastType.success
+    this.toast.confirm('Essa ação não poderá ser desfeita!', 'Confirma exlusão?')
+      .subscribe((confirmacao: boolean) => {
+        if (confirmacao) {
+          this.service.delete(id).subscribe(_ => {
+            this.delete.emit();
+            this.toast.showMessage({
+              message: 'Arquivo excluído com sucesso!',
+              title: 'Sucesso!',
+              type: ToastType.success
+            });
+          });
+        }
       });
-    }));
   }
 
   onDrop(event: DragEvent) {

@@ -12,42 +12,51 @@
   </p>
   <a routerLink="novo" class="btn btn-primary"><i class="fa fa-plus"></i> Cadastrar Novo</a>
   <hr>
-  <table class="footable table table-striped" data-page-size="15">
-    <thead>
-      <tr>
-        <th data-toggle="true">Nome</th>
-        <th data-breakpoints="xs sm md">E-mail</th>
-        <th data-breakpoints="xs sm md">Matrícula</th>
-        <th data-breakpoints="xs sm md lg">Cargo</th>
-        <th data-breakpoints="xs sm md lg">Área</th>
-        <th data-breakpoints="xs">Admissão</th>
-        <th data-breakpoints="xs sm md lg">Nascimento</th>
-        <th class="text-right">Edição / Exclusão</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let eleitor of eleitores">
-        <td>{{ eleitor.nome }}</td>
-        <td>{{ eleitor.email }}</td>
-        <td>{{ eleitor.matricula }}</td>
-        <td>{{ eleitor.cargo }}</td>
-        <td>{{ eleitor.area }}</td>
-        <td>{{ eleitor.dataAdmissao }}</td>
-        <td>{{ eleitor.dataNascimento }}</td>
-        <td class="text-right">
-          <div>
-            <a class="btn btn-xs btn-outline btn-success m-r-xs" [routerLink]="['./', eleitor.id]"><i class="fa fa-pencil"></i></a>
-            <button class="btn btn-xs btn-outline btn-danger"><i class="fa fa-trash"></i></button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="6">
-          <ul class="pagination float-right"></ul>
-        </td>
-      </tr>
-    </tfoot>
-  </table>
+  <h4>Lista de Eleitores</h4>
+  <p>A tabela abaixo exibe todos os eleitores cadastrados nessa eleição.<br>Para procurar um eleitor específico, basta
+    começar a digitar o nome dele na campo abaixo. À medida que você digita a tabela vai sendo filtrada.</p>
+  <form [formGroup]="form">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <i class="fa fa-search"></i>
+      </span>
+      <input type="text" id="filtro" formControlName="filtro" placeholder="Pesquise pelo nome"
+        class="input form-control">
+    </div>
+  </form>
+  <br>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th data-toggle="true">Nome</th>
+          <th data-breakpoints="xs sm md">E-mail</th>
+          <!-- <th data-breakpoints="xs sm md">Matrícula</th>
+          <th data-breakpoints="xs sm md lg">Cargo</th>
+          <th data-breakpoints="xs sm md lg">Área</th> -->
+          <th data-breakpoints="xs">Admissão</th>
+          <!-- <th data-breakpoints="xs sm md lg">Nascimento</th> -->
+          <th class="text-right">Edição / Exclusão</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let eleitor of eleitores">
+          <td>{{ eleitor.nome }}</td>
+          <td>{{ eleitor.email }}</td>
+          <!-- <td>{{ eleitor.matricula }}</td>
+          <td>{{ eleitor.cargo }}</td>
+          <td>{{ eleitor.area }}</td> -->
+          <td>{{ eleitor.dataAdmissao | date:'dd/MM/yyyy' }}</td>
+          <!-- <td>{{ eleitor.dataNascimento | date:'dd/MM/yyyy' }}</td> -->
+          <td class="text-right">
+            <div>
+              <a class="btn btn-xs btn-outline btn-success m-r-xs" [routerLink]="['./', eleitor.id]"><i
+                  class="fa fa-pencil"></i></a>
+              <button class="btn btn-xs btn-outline btn-danger" (click)="excluir()"><i class="fa fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </app-panel>

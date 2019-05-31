@@ -4,6 +4,7 @@ import { NavigationType } from '../app.component';
 import { EleitoresListaComponent } from './eleitores-lista/eleitores-lista.component';
 import { EleitoresFormComponent } from './eleitores-form/eleitores-form.component';
 import { EleicaoResolverService } from '../core/resolvers/eleicao-resolver.service';
+import { EleitorResolverService } from '../core/resolvers/eleitor-resolver.service';
 
 const routes: Routes = [
   {
@@ -27,7 +28,10 @@ const routes: Routes = [
       },
       {
         path: ':id',
-        component: EleitoresFormComponent
+        component: EleitoresFormComponent,
+        resolve: {
+          eleitor: EleitorResolverService
+        }
       }
     ]
   }

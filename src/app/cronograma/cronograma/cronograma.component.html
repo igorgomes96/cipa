@@ -15,7 +15,8 @@
                     <div class="col-md-12">
                         <span class="vertical-date">
                             <i class="fa fa-calendar"></i> {{ etapa.dataPrevista | date:'dd/MMM/yy' }}<br>
-                            <small [hidden]="etapa.posicaoEtapa === PosicaoEtapa.Passada">Clique na data acima para alterá-la.</small>
+                            <small [hidden]="etapa.posicaoEtapa === PosicaoEtapa.Passada">Clique na data acima para
+                                alterá-la.</small>
                         </span>
                     </div>
                 </div>
@@ -25,8 +26,8 @@
                 <div class="templates">
                     <p>Possuímos alguns documentos de exemplo que podem te ajudar. Confira-os e fique à vontade para
                         utilizá-los!</p>
-                    <button class="btn btn-success" [disabled]="etapa.posicaoEtapa === PosicaoEtapa.Futura" (click)="exibirTemplates()"><i
-                            class="fa fa-file-text"></i> Templates</button>
+                    <button class="btn btn-success" [disabled]="etapa.posicaoEtapa === PosicaoEtapa.Futura"
+                        (click)="exibirTemplates(etapa.id)"><i class="fa fa-file-text"></i> Templates</button>
                 </div>
 
             </div>
@@ -35,7 +36,8 @@
                 <app-arquivos [arquivos]="arquivos" dropzoneColor="#eee"></app-arquivos>
                 <div class="row m-t-sm" *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Atual">
                     <div class="col-md-12">
-                        <button href="#" class="btn btn-primary" style="float: right" (click)="proximaEtapa()"> Próxima Etapa</button>
+                        <button href="#" class="btn btn-primary" style="float: right" (click)="proximaEtapa()"> Próxima
+                            Etapa</button>
                     </div>
                 </div>
             </div>
@@ -46,6 +48,24 @@
 <ng-template #modalTemplates>
     <h4>Documentos Templates</h4>
     <p>Abaixo está a lista de documentos que sugerimos como exemplo para a etapa atual:</p>
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque, nesciunt incidunt? Explicabo, enim consequatur, accusantium fuga repudiandae laboriosam corrupti, temporibus aliquam fugiat magni porro aperiam est. Facere libero ipsam quasi.
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, iure asperiores, natus quisquam nisi quo odit voluptates cumque porro impedit reiciendis autem, ducimus rerum veniam optio illo nobis repudiandae officia!
+    <table class="table table-hover">
+        <tbody>
+            <tr *ngFor="let arquivo of templates">
+                <td class="project-status">
+                    <button class="btn btn-outline btn-danger btn-xs m-r-xs" (click)="deleteFile(arquivo.id)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                    <button class="btn btn-outline btn-primary btn-xs" (click)="download(arquivo)">
+                        <i class="fa fa-download"></i>
+                    </button>
+                </td>
+                <td class="project-title">
+                    <strong>{{ arquivo.nome }}</strong>
+                    <br />
+                    <small>Upload: {{ arquivo.dataUpload | date:'dd/MM/yyy HH:mm' }}, {{ (arquivo.tamanho / 1024) |
+                number:'1.0-1' }}k</small>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </ng-template>

@@ -1,23 +1,35 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { PanelComponent } from './components/panel/panel.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
+import { PanelComponent } from './components/panel/panel.component';
 import { ArquivosComponent } from './components/arquivos/arquivos.component';
+import { CustomInputComponent } from './components/custom-input/custom-input.component';
+import { ValidatorMessageComponent } from './components/validator-message/validator-message.component';
+import { DateValidatorDirective } from './directives/date-validator.directive';
 
 @NgModule({
-  declarations: [PanelComponent, ArquivosComponent],
+  declarations: [PanelComponent, ArquivosComponent, CustomInputComponent, ValidatorMessageComponent, DateValidatorDirective],
   imports: [
     CommonModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     CommonModule,
     RouterModule,
     HttpClientModule,
     PanelComponent,
-    ArquivosComponent
+    ArquivosComponent,
+    ReactiveFormsModule,
+    FormsModule,
+    CustomInputComponent,
+    ValidatorMessageComponent,
+    DateValidatorDirective
   ]
 })
 export class SharedModule { }

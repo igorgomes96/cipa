@@ -9,6 +9,11 @@
 @import '~daterangepicker/daterangepicker.css';
 @import "~angular-calendar/css/angular-calendar.css";
 
+app-custom-input[required] label::after {
+    content: " *";
+    color: red;
+}
+
 .row.flex-row {
     display: flex;
     flex-wrap: wrap;

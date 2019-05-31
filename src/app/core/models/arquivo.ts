@@ -6,5 +6,6 @@ export class Arquivo {
     nome: string;
     extensao: string;
     content: Blob;
+    tamanho: number;
     contentType: string;
 }

@@ -25,7 +25,7 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
   }
 
   getEleitores(idEleicao: number): Observable<Eleitor[]> {
-    return super.get(idEleicao).pipe(map(eleicao => eleicao.eleitores));
+    return this.http.get<Eleitor[]>(`${environment.api}${endpoints.eleitores}`);
     // return this.http.get(`${this.url}/${idEleicao}/eleitores`);
   }
 

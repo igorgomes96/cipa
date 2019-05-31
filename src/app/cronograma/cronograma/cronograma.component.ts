@@ -8,6 +8,7 @@ import { Arquivo } from 'src/app/core/models/arquivo';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 import { ModalService } from 'src/app/core/services/modal.service';
+import { CronogramaApiService } from 'src/app/core/api/cronograma-api.service';
 
 @Component({
   selector: 'app-cronograma',
@@ -19,11 +20,12 @@ export class CronogramaComponent implements OnInit {
   PosicaoEtapa: typeof PosicaoEtapa = PosicaoEtapa;
   eleicao: Eleicao;
   arquivos: Arquivo[];
-  templates: string[];
+  templates: Arquivo[];
   @ViewChild('modalTemplates') modalTemplates: TemplateRef<any>;
 
   constructor(private route: ActivatedRoute,
-              private api: EleicoesApiService,
+              private eleicoesApi: EleicoesApiService,
+              private cronogramaApi: CronogramaApiService,
               private toasts: ToastsService,
               private modalService: ModalService) { }
 
@@ -33,7 +35,7 @@ export class CronogramaComponent implements OnInit {
       filter(routeData => routeData.hasOwnProperty('eleicao')),
       switchMap(routeData => {
         this.eleicao = routeData.eleicao;
-        return this.api.getCronograma(routeData.eleicao.id);
+        return this.eleicoesApi.getCronograma(routeData.eleicao.id);
       })
     ).subscribe(cronograma => {
       this.eleicao.cronograma = cronograma;
@@ -48,6 +50,7 @@ export class CronogramaComponent implements OnInit {
         extensao: '.xls',
         id: '1',
         nome: 'Teste.xls',
+        tamanho: 23989,
         path: '/teste/teste.xls'
       }
     ];
@@ -74,8 +77,12 @@ export class CronogramaComponent implements OnInit {
     });
   }
 
-  exibirTemplates() {
-    this.modalService.showModal(this.modalTemplates);
+  exibirTemplates(etapaId: number) {
+    this.cronogramaApi.getTemplates(etapaId)
+    .subscribe((arquivos: Arquivo[]) => {
+      this.templates = arquivos;
+      this.modalService.showModal(this.modalTemplates);
+    });
   }
 
 }

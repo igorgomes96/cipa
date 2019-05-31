@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
 import { ToastMessage, ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { from, Observable } from 'rxjs';
 
 declare var swal: any;
 
@@ -20,20 +21,21 @@ export class ToastsService {
     this._messageEmitter.emit(message);
   }
 
-  swalMessage(message: ToastMessage, handle: Function = null, handleError: Function = null) {
-    swal({
-      title: message.title,
-      text: message.message,
-      icon: ToastType[message.type],
+  confirm(message: string, title = 'Tem certeza?'): Observable<boolean> {
+    console.log(swal({
+      title,
+      text: message,
+      icon: 'warning',
       buttons: true,
-      dangerMode: ToastType[message.type] === ToastType.warning,
-    }).then((ok) => {
-      if (ok) {
-        handle();
-      } else if (handleError !== null) {
-        handleError();
-      }
-    });
+      dangerMode: true,
+    }));
+    return from(swal({
+      title,
+      text: message,
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    }));
   }
 
 }

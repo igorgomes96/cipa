@@ -1,3 +1,5 @@
+import { Arquivo } from './arquivo';
+
 export enum PosicaoEtapa {
     Passada,
     Atual,
@@ -14,6 +16,7 @@ export class EtapaCronograma {
     dataRealizada: Date;
     etapaObrigatoriaId: number;
     posicaoEtapa: PosicaoEtapa;
+    templates: Arquivo[];
 
     etapaObrigatoria: EtapaObrigatoria;
 }
