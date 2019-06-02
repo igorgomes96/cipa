@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { TipoCardEleitor } from 'src/app/shared/components/card-candidato/card-candidato.component';
+import { Candidato } from 'src/app/core/models/candidato';
+import { CandidatosApiService } from 'src/app/core/api/candidatos-api.service';
 
 @Component({
   selector: 'app-candidaturas-reprovadas',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CandidaturasReprovadasComponent implements OnInit {
 
-  constructor() { }
+  TipoCardEleitor: typeof TipoCardEleitor = TipoCardEleitor;
+  candidatos: Candidato[];
+  constructor(private candidatosApi: CandidatosApiService) { }
 
   ngOnInit() {
+    this.candidatosApi.getAll()
+    .subscribe((candidatos: Candidato[]) => {
+      this.candidatos = candidatos;
+    });
   }
 
 }

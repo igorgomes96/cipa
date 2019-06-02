@@ -11,6 +11,7 @@ export class ModalComponent implements OnInit {
 
   showModal = false;
   template: TemplateRef<any>;
+  titulo: string = null;
   constructor(private modalService: ModalService) { }
 
   ngOnInit() {
@@ -20,7 +21,8 @@ export class ModalComponent implements OnInit {
           this.showModal = templateValue;
         } else {
           this.showModal = true;
-          this.template = templateValue;
+          this.template = templateValue.template;
+          this.titulo = templateValue.titulo;
         }
       });
   }

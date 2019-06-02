@@ -1,1 +1,8 @@
-<app-panel title="Candidaturas Reprovadas"></app-panel>
+<h4>Candidaturas Reprovadas</h4>
+<p>Aaixo, segue a relação de candidaturas reprovadas.</p>
+<div class="row flex-row">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12" *ngFor="let candidato of candidatos; let i = index">
+        <app-card-candidato [candidato]="candidato" [tipo]="TipoCardEleitor.Visualizacao" [numFoto]="i + 1">
+        </app-card-candidato>
+    </div>
+</div>

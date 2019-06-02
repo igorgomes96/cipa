@@ -22,13 +22,6 @@ export class ToastsService {
   }
 
   confirm(message: string, title = 'Tem certeza?'): Observable<boolean> {
-    console.log(swal({
-      title,
-      text: message,
-      icon: 'warning',
-      buttons: true,
-      dangerMode: true,
-    }));
     return from(swal({
       title,
       text: message,

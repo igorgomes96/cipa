@@ -1,0 +1,28 @@
+.ibox {
+    height: 100%;
+}
+
+.product-box {
+    height: 100%;
+}
+
+.foto img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.foto {
+    padding: 0;
+}
+
+
+@media (max-width: 488px) {
+    .foto img {
+        width: 100%;
+        height: initial;
+        object-fit: initial;
+    }
+}
+
+

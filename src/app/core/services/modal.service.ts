@@ -12,8 +12,8 @@ export class ModalService {
     return this._showModalEmitter;
   }
 
-  showModal(template: TemplateRef<any>) {
-    this._showModalEmitter.emit(template);
+  showModal(template: TemplateRef<any>, titulo = null) {
+    this._showModalEmitter.emit({ template, titulo });
   }
 
   closeModal() {

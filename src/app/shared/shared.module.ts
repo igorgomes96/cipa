@@ -9,9 +9,17 @@ import { ArquivosComponent } from './components/arquivos/arquivos.component';
 import { CustomInputComponent } from './components/custom-input/custom-input.component';
 import { ValidatorMessageComponent } from './components/validator-message/validator-message.component';
 import { DateValidatorDirective } from './directives/date-validator.directive';
+import { CardCandidatoComponent } from './components/card-candidato/card-candidato.component';
 
 @NgModule({
-  declarations: [PanelComponent, ArquivosComponent, CustomInputComponent, ValidatorMessageComponent, DateValidatorDirective],
+  declarations: [
+    PanelComponent,
+    ArquivosComponent,
+    CustomInputComponent,
+    ValidatorMessageComponent,
+    DateValidatorDirective,
+    CardCandidatoComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -29,7 +37,8 @@ import { DateValidatorDirective } from './directives/date-validator.directive';
     FormsModule,
     CustomInputComponent,
     ValidatorMessageComponent,
-    DateValidatorDirective
+    DateValidatorDirective,
+    CardCandidatoComponent
   ]
 })
 export class SharedModule { }

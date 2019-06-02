@@ -1,5 +1,6 @@
 export const endpoints = {
     eleicoes: 'eleicoes/',
     arquivos: 'arquivos/',
-    eleitores: 'eleitores/'
+    eleitores: 'eleitores/',
+    candidatos: 'candidatos/'
 };

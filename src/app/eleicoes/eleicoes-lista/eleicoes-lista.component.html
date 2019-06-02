@@ -18,11 +18,14 @@
 </p>
 
 <div class="row m-b-md flex-row">
-  <div class="col-md-3 col-sm-6" *ngFor="let eleicao of eleicoes">
+  <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12" *ngFor="let eleicao of eleicoes">
     <div class="widget white-bg">
       <div class="row">
         <div class="col-md-12">
-          <span class="label label-warning" style="float: right;">Inscrições</span>
+          <span style="float: right;">
+            <a href=""><i class="fa fa-cog"></i></a>
+          </span>
+          <!-- <span class="label label-warning" style="float: right;">Inscrições</span> -->
           <h4>{{ eleicao.unidade.empresa.razaoSocial }}</h4>
           {{ eleicao.unidade.endereco }}<br>
           <strong>{{ eleicao.unidade.cidade }}</strong>
@@ -41,13 +44,13 @@
 </div>
 
 <app-panel>
-<div class="row">
-  <div class="col-md-12">
-    <h4>
-      Não encontrou a eleição desejada?
-    </h4>
-    <p>Clique no botão abaixo e será uma exibida uma tabela com todas as eleições já cadastradas.</p>
-    <button href="" class="btn btn-primary" (click)="exibirEleicoes()">Exibir todas as Eleições</button>
+  <div class="row">
+    <div class="col-md-12">
+      <h4>
+        Não encontrou a eleição desejada?
+      </h4>
+      <p>Clique no botão abaixo e será uma exibida uma tabela com todas as eleições já cadastradas.</p>
+      <button href="" class="btn btn-primary" (click)="exibirEleicoes()">Exibir todas as Eleições</button>
+    </div>
   </div>
-</div>
 </app-panel>

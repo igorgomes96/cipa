@@ -1,0 +1,33 @@
+<div class="ibox">
+    <div class="ibox-content product-box">
+
+        <div class="foto">
+            <img [src]="'/assets/img/pessoa' + numFoto + '.jpg'" alt="">
+        </div>
+        <div class="product-desc">
+            <small class="text-muted">{{ candidato.eleitor.cargo }}</small>
+            <a class="product-name">{{ candidato.eleitor.nome }}</a>
+
+            <div class="small m-t-xs">
+                <strong>Data Admissão: </strong>{{ candidato.eleitor.dataAdmissao | date:'dd/MM/yyyy' }}<br>
+                <strong>Data Nascimento: </strong>{{ candidato.eleitor.dataNascimento | date:'dd/MM/yyyy' }}<br>
+                <strong>Área: </strong>{{ candidato.eleitor.area }}
+            </div>
+            <div class="m-t text-right">
+                <a href="#" class="btn btn-primary" *ngIf="tipo === TipoCardEleitor.Votacao">Votar <i
+                        class="fa fa-thumbs-o-up"></i> </a>
+                <div *ngIf="tipo === TipoCardEleitor.Aprovacao">
+                    <a class="btn btn-primary m-r-xs" (click)="aprovar()"><i class="fa fa-thumbs-o-up"></i> </a>
+                    <a class="btn btn-danger" (click)="abrirModalReprovacao()"><i class="fa fa-thumbs-o-down"></i> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #modalReprovacao>
+    <p>Por favor, informe o motivo da reprovação dessa candidatura:</p>
+    <textarea class="form-control" [(ngModel)]="motivoReprovacao"></textarea>
+    <br>
+    <button class="btn btn-danger" [disabled]="!motivoReprovacao" (click)="reprovar()">Reprovar <i class="fa fa-thumbs-o-down"></i></button>
+</ng-template>

@@ -9,6 +9,12 @@
 @import '~daterangepicker/daterangepicker.css';
 @import "~angular-calendar/css/angular-calendar.css";
 
+@media (max-width: 488px) {
+    .col-xxs-12 {
+        width: 100% !important;
+    }
+}
+
 app-custom-input[required] label::after {
     content: " *";
     color: red;

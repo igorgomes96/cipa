@@ -313,7 +313,7 @@
     },
     {
       "id": 2,
-      "nome": "Igor Aparecido Gomes de Oliveira",
+      "nome": "Igor Ap. Gomes de Oliveira",
       "email": "igorgomes96@hotmail.com",
       "matricula": "983942",
       "area": "Área de Teste da Empresa",
@@ -332,6 +332,56 @@
       "dataNascimento": "1996-02-19T03:00:00.000Z",
       "dataAdmissao": "2017-10-10T03:00:00.000Z",
       "eleicaoId": 1
+    }
+  ],
+  "candidatos": [
+    {
+      "id": 1,
+      "votos": 0,
+      "statusAprovacao": 1,
+      "eleitor": {
+        "id": 1,
+        "nome": "José Ferreira de Almeida",
+        "email": "joseferreira@hotmail.com",
+        "matricula": "347873",
+        "area": "Área de Teste da Empresa",
+        "cargo": "Desenvolvedor de Software",
+        "dataNascimento": "1990-10-20T03:00:00.000Z",
+        "dataAdmissao": "2018-10-01T03:00:00.000Z",
+        "eleicaoId": 1
+      }
+    },
+    {
+      "id": 2,
+      "votos": 0,
+      "statusAprovacao": 1,
+      "eleitor": {
+        "id": 2,
+        "nome": "Igor Ap. Gomes de Oliveira",
+        "email": "igorgomes96@hotmail.com",
+        "matricula": "983942",
+        "area": "Área de Teste da Empresa",
+        "cargo": "Desenvolvedor de Software",
+        "dataNascimento": "1996-03-02T03:00:00.000Z",
+        "dataAdmissao": "2017-10-10T03:00:00.000Z",
+        "eleicaoId": 1
+      }
+    },
+    {
+      "id": 3,
+      "votos": 0,
+      "statusAprovacao": 1,
+      "eleitor": {
+        "id": 3,
+        "nome": "Maria Antônia da Silva",
+        "email": "maria50antonia@hotmail.com",
+        "matricula": "3462536",
+        "area": "Área de Teste da Empresa",
+        "cargo": "Desenvolvedor de Software",
+        "dataNascimento": "1996-02-19T03:00:00.000Z",
+        "dataAdmissao": "2017-10-10T03:00:00.000Z",
+        "eleicaoId": 1
+      }
     }
   ]
 }
