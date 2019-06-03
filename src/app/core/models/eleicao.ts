@@ -1,4 +1,4 @@
-import { Unidade } from './unidade';
+import { Estabelecimento } from './estabelecimento';
 import { EtapaCronograma } from './cronograma';
 import { Eleitor } from './eleitor';
 
@@ -6,9 +6,9 @@ export class Eleicao {
     id: number;
     gestao: number;
     duracaoGestao: number;
-    unidadeId: number;
+    estabelecimentoId: number;
     cronograma: EtapaCronograma[];
-    unidade: Unidade;
+    estabelecimento: Estabelecimento;
     eleitores: Eleitor[];
 
     public nomeGestao(): string {
