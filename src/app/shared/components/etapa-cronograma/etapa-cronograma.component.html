@@ -1,0 +1,39 @@
+<div class="vertical-timeline-icon" [ngClass]="calendarClass">
+  <i class="fa" [ngClass]="calendarIcon"></i>
+</div>
+
+<div class="vertical-timeline-content">
+  <div class="col-sm-12" [ngClass]="tamanhoDescricao">
+    <h2>{{ etapa.nomeEtapa }}</h2>
+
+    <div class="row">
+      <div class="col-md-12">
+        <span class="vertical-date">
+          <i class="fa fa-calendar"></i> {{ etapa.dataPrevista | date:'dd/MMM/yy' }}<br>
+          <small [hidden]="layout === 'Visualização' && etapa.posicaoEtapa === PosicaoEtapa.Passada">Clique na data acima para
+            alterá-la.</small>
+        </span>
+      </div>
+    </div>
+
+    <p>{{ etapa.descricaoEtapa }}</p>
+
+    <div class="templates" *ngIf="layout === 'Visualização'">
+      <p>Possuímos alguns documentos de exemplo que podem te ajudar. Confira-os e fique à vontade para
+        utilizá-los!</p>
+      <button class="btn btn-success" [disabled]="etapa.posicaoEtapa === PosicaoEtapa.Futura"
+        (click)="onExibirTemplates(etapa.id)"><i class="fa fa-file-text"></i> Templates</button>
+    </div>
+
+  </div>
+
+  <div class="col-lg-4 col-md-5 col-sm-12 arquivos" *ngIf="layout === 'Visualização' && etapa.posicaoEtapa !== PosicaoEtapa.Futura">
+    <app-arquivos [arquivos]="arquivos"></app-arquivos>
+    <div class="row m-t-sm" *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Atual">
+      <div class="col-md-12">
+        <button href="#" class="btn btn-primary" style="float: right" (click)="onProximaEtapa()"> Próxima
+          Etapa</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,43 @@
 {
+  "empresas": [
+    {
+      "id": 1,
+      "razaoSocial": "Algar Tecnologia",
+      "informacoesGerais": null
+    },
+    {
+      "id": 2,
+      "razaoSocial": "Algar Telecom",
+      "informacoesGerais": null
+    }
+  ],
+  "estabelecimentos": [
+    {
+      "id": 1,
+      "empresaId": 1,
+      "cidade": "Uberlândia - MG",
+      "endereco": "Av. Floriano Peixoto, nº 6500, bairro Umuarama"
+    },
+    {
+      "id": 3,
+      "empresaId": 1,
+      "cidade": "Araguari - MG",
+      "endereco": "Av. Mato Grosso, nº 6500, bairro Centro"
+    },
+    {
+      "id": 2,
+      "empresaId": 2,
+      "cidade": "Uberlândia - MG",
+      "endereco": "Av. Teste, nº 768, bairro Centro"
+    }
+  ],
   "eleicoes": [
     {
       "id": 1,
       "gestao": 2019,
       "duracaoGestao": 2,
-      "unidadeId": 1,
-      "unidade": {
+      "estabelecimentoId": 1,
+      "estabelecimento": {
         "id": 1,
         "empresaId": 1,
         "cidade": "Uberlândia - MG",
@@ -142,8 +174,8 @@
       "id": 2,
       "gestao": 2019,
       "duracaoGestao": 2,
-      "unidadeId": 2,
-      "unidade": {
+      "estabelecimentoId": 2,
+      "estabelecimento": {
         "id": 2,
         "empresaId": 2,
         "cidade": "Uberlândia - MG",

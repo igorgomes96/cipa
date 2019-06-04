@@ -1,3 +1,115 @@
+<h2>Abertura de Nova Eleição</h2>
 <p>
-  eleicoes-form works!
+  Nós te ajudaremos a abrir um novo processo eleitoral.<br>
+  Em primeiro lugar você precisa definir para qual gestão da CIPA
+  é essa eleição (por padrão, consideramos o ano corrente) e qual a duração da gestão (atualmente a duração das gestões
+  da CIPA são de 2 anos). <br>
+  Em seguida, você precisa definir qual é a empresa;
+  considerando que uma empresa pode possuir diversos estabelecimentos, você precisa cadastrar o estabelecimento que
+  passará pelo processo de eleição ou escolher um que já esteja cadastrado.<br>
+  Por fim, você precisa definir o cronograma da eleição.
 </p>
+
+<app-panel title="1. Gestão" [collapsible]="false"
+  [labelText]="exibeGestao ? 'Concluído' : 'Definição'"
+  [labelClass]="exibeGestao ? 'label-primary' : 'label-warning'">
+
+  <form [formGroup]="formGestao">
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-12">
+        Qual é o ano de gestão a que se refere essa eleição?
+        <input type="number" formControlName="gestao" class="form-control">
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-12">
+        Qual é o tempo de duração dessa gestão? (em anos)
+        <input type="number" formControlName="duracao" class="form-control">
+      </div>
+    </div>
+  </form>
+  <br>
+  <p *ngIf="exibeGestao">Gestão <strong>{{ formGestao.get('gestao').value }} -
+      {{ formGestao.get('gestao').value + formGestao.get('duracao').value - 1}}</strong></p>
+
+</app-panel>
+
+<app-panel title="2. Empresa" *ngIf="exibeGestao" [collapsible]="false"
+  [labelText]="formListaEmpresa.get('empresa').value ? 'Concluído' : 'Definição'"
+  [labelClass]="formListaEmpresa.get('empresa').value ? 'label-primary' : 'label-warning'">
+  <div class="row">
+    <div class="col-md-12" *ngIf="empresas.length; else novaEmpresa">
+      Observamos que você já possui {{ empresas.length }} empresas cadastradas. Escolha uma delas para iniciar a nova
+      eleição, ou
+      cadastre uma nova empresa.
+
+      <form [formGroup]="formListaEmpresa">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <select class="form-control m-t-sm" name="lista-empresa" id="lista-empresa" formControlName="empresa">
+              <option value="">(Selecione a empresa)</option>
+              <option [value]="emp.id" *ngFor="let emp of empresas">{{ emp.razaoSocial }}</option>
+            </select>
+          </div>
+        </div>
+      </form>
+
+      <button class="btn btn-primary m-t-md"><i class="fa fa-plus"></i> Nova Empresa</button>
+    </div>
+    <ng-template #novaEmpresa>
+      <div class="col-md-12">
+        <p>Para iniciar uma eleição, você precisa primeiro cadastrar a empresa.</p>
+        <button class="btn btn-primary"><i class="fa fa-plus"></i> Nova Empresa</button>
+      </div>
+    </ng-template>
+  </div>
+
+</app-panel>
+
+<app-panel title="3. Estabelecimento" *ngIf="formListaEmpresa.get('empresa').value" [collapsible]="false"
+  [labelText]="formListaEstabelecimentos.get('estabelecimento').value ? 'Concluído' : 'Definição'"
+  [labelClass]="formListaEstabelecimentos.get('estabelecimento').value ? 'label-primary' : 'label-warning'">
+  <div class="row">
+    <div class="col-md-12" *ngIf="estabelecimentos.length; else novoEstabelecimento">
+      <div *ngIf="estabelecimentos.length > 1; else estabelecimentoUnico">
+        A empresa selecionada possui {{ estabelecimentos.length }} estabelecimentos.
+        Selecione um deles ou cadastre um novo estabelecimento.
+      </div>
+      <ng-template #estabelecimentoUnico>
+        A empresa selecionada já possui 1 estabelecimento cadastrado. Já selecionamos ele para você.<br>
+        Se precisar cadastrar um novo estabelecimento, basta clicar no botão abaixo.
+      </ng-template>
+      <form [formGroup]="formListaEstabelecimentos">
+        <div class="row">
+          <div class="col-lg-6 col-md-8 col-sm-12">
+            <select class="form-control m-t-sm" name="lista-estabelecimento" id="lista-estabelecimento"
+              formControlName="estabelecimento">
+              <option value="">(Selecione o estabelecimento)</option>
+              <option [value]="est.id" *ngFor="let est of estabelecimentos">{{ est.enderecoStr() }}</option>
+            </select>
+          </div>
+        </div>
+      </form>
+      <button class="btn btn-primary m-t-md"><i class="fa fa-plus"></i> Novo Estabelecimento</button>
+    </div>
+    <ng-template #novoEstabelecimento>
+      <div class="col-md-12">
+        <p>Agora que você definiu a empresa, precisa cadastrar o estabelecimento que passará pelo processo de eleição da
+          CIPA. Clique no botão abaixo para realizar o cadastro</p>
+        <button class="btn btn-primary"><i class="fa fa-plus"></i> Novo Estabelecimento</button>
+      </div>
+    </ng-template>
+  </div>
+</app-panel>
+
+<app-panel title="4. Cronograma" *ngIf="formListaEstabelecimentos.get('estabelecimento').value" [collapsible]="false"
+  labelText="Definição" labelClass="label-warning">
+
+  <div id="vertical-timeline" class="vertical-container dark-timeline no-margins">
+    <div etapa-cronograma class="vertical-timeline-block" *ngFor="let etapa of cronograma" [etapa]="etapa"
+      layout="Cadastro"></div>
+  </div>
+
+  <button class="btn btn-success m-t-md">Abrir Eleição!</button>
+</app-panel>

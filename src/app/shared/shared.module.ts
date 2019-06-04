@@ -10,6 +10,7 @@ import { CustomInputComponent } from './components/custom-input/custom-input.com
 import { ValidatorMessageComponent } from './components/validator-message/validator-message.component';
 import { DateValidatorDirective } from './directives/date-validator.directive';
 import { CardCandidatoComponent } from './components/card-candidato/card-candidato.component';
+import { EtapaCronogramaComponent } from './components/etapa-cronograma/etapa-cronograma.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CardCandidatoComponent } from './components/card-candidato/card-candida
     CustomInputComponent,
     ValidatorMessageComponent,
     DateValidatorDirective,
-    CardCandidatoComponent
+    CardCandidatoComponent,
+    EtapaCronogramaComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { CardCandidatoComponent } from './components/card-candidato/card-candida
     CustomInputComponent,
     ValidatorMessageComponent,
     DateValidatorDirective,
-    CardCandidatoComponent
+    CardCandidatoComponent,
+    EtapaCronogramaComponent
   ]
 })
 export class SharedModule { }

@@ -15,6 +15,23 @@
     }
 }
 
+.vertical-timeline-block.inactive {
+    color: #b6b6b6;
+}
+
+.vertical-timeline-block.inactive .templates {
+    display: none;
+}
+
+.vertical-container {
+    max-width: initial;
+    width: 100%;
+}
+
+.light-timeline .dropzone {
+    background: #eee;
+}
+
 app-custom-input[required] label::after {
     content: " *";
     color: red;

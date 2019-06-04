@@ -15,7 +15,7 @@ export class ArquivosComponent implements OnInit {
   @Input() arquivos: Arquivo[];
   @Output() upload = new EventEmitter<FileList>();
   @Output() delete = new EventEmitter<number>();
-  @Input() dropzoneColor = 'white';
+  // @Input() dropzoneColor = 'white';
   @Input() spinner = false;
 
   constructor(private service: ArquivosApiService, private toast: ToastsService) { }

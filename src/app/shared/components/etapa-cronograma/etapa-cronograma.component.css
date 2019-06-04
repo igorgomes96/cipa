@@ -1,0 +1,30 @@
+
+.vertical-date {
+    color: #1ab394;
+}
+
+.vertical-date small {
+    color: #999;
+    font-size: 80%;
+}
+
+.vertical-timeline-content .btn {
+    float: initial;
+}
+
+.vertical-timeline-content .arquivos {
+    margin-top: 25px;
+}
+
+@media (min-width: 992px) {
+    .vertical-timeline-content .arquivos {
+        border-left: 1px solid #ddd;
+        margin-top: inherit;
+    }
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+

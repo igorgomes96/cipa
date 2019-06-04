@@ -56,20 +56,7 @@ export class CronogramaComponent implements OnInit {
     ];
   }
 
-  calendarIcon(etapa: EtapaCronograma): string {
-    switch (etapa.posicaoEtapa) {
-      case PosicaoEtapa.Atual:
-        return 'fa-calendar';
-      case PosicaoEtapa.Passada:
-        return 'fa-calendar-check-o';
-      case PosicaoEtapa.Futura:
-        return 'fa-calendar-o';
-      default:
-        return '';
-    }
-  }
-
-  proximaEtapa() {
+  proximaEtapa(etapa: EtapaCronograma) {
     this.toasts.showMessage({
       message: 'Message Test',
       title: 'Título Teste',
@@ -77,8 +64,8 @@ export class CronogramaComponent implements OnInit {
     });
   }
 
-  exibirTemplates(etapaId: number) {
-    this.cronogramaApi.getTemplates(etapaId)
+  exibirTemplates(etapa: EtapaCronograma) {
+    this.cronogramaApi.getTemplates(etapa.id)
     .subscribe((arquivos: Arquivo[]) => {
       this.templates = arquivos;
       this.modalService.showModal(this.modalTemplates);
