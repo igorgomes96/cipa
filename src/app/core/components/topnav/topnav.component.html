@@ -9,7 +9,7 @@
 
         </div>
 
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse" [ngClass]="!showToggle ? 'white-bg' : ''">
             <ul class="nav navbar-top-links navbar-right">
                 <li>
                     <a class="right-sidebar-toggle" routerLink="/eleicoes">

@@ -6,16 +6,25 @@ import { NavigationType } from '../app.component';
 import { EleicaoResolverService } from '../core/resolvers/eleicao-resolver.service';
 import { CandidaturasReprovadasComponent } from './candidaturas-reprovadas/candidaturas-reprovadas.component';
 import { CandidaturasPendentesComponent } from './candidaturas-pendentes/candidaturas-pendentes.component';
+import { CandidaturasFormComponent } from './candidaturas-form/candidaturas-form.component';
 
 const routes: Routes = [
   {
     path: '',
     data: {
-      navigationType: NavigationType.Left,
       breadcrumb: 'Candidaturas',
-      title: 'Candidaturas'
+      title: 'Nova'
     },
     children: [
+      {
+        path: 'nova',
+        component: CandidaturasFormComponent,
+        data: {
+          navigationType: NavigationType.Top,
+          breadcrumb: 'Incrição',
+          title: 'Inscrição'
+        }
+      },
       {
         path: 'aprovadas',
         component: CandidaturasAprovadasComponent,

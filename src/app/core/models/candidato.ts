@@ -17,6 +17,7 @@ export class Candidato {
     id: number;
     votos: number;
     statusAprovacao: StatusAprovacao;
+    objetivos: string;
 
     eleitor: Eleitor;
     reprovacoes: Reprovacao[];
