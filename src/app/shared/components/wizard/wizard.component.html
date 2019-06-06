@@ -1,0 +1,28 @@
+<div class="wizard">
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="steps">
+        <li class="step" *ngFor="let step of steps;let i=index" [class.current]="currentStep === (i + 1)" [class.done]="currentStep > (i + 1)">
+          {{ i + 1 }}. {{ step }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="content">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row m-t-md">
+    <div class="col-md-12 actions">
+      <button class="btn btn-primary" (click)="nextStep()" *ngIf="currentStep < steps.length" [disabled]="!validNext">Próximo >></button>
+      <button class="btn btn-primary" (click)="previousStep()" *ngIf="currentStep > 1"><< Anterior</button>
+    </div>
+  </div>
+</div>

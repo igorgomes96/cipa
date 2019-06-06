@@ -5,7 +5,7 @@ import { Eleicao } from 'src/app/core/models/eleicao';
 import { Empresa } from 'src/app/core/models/empresa';
 import { EmpresasApiService } from 'src/app/core/api/empresas-api.service';
 import { Estabelecimento } from 'src/app/core/models/estabelecimento';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { tap, filter, switchMap } from 'rxjs/operators';
 import { EstabelecimentosApiService } from 'src/app/core/api/estabelecimentos-api.service';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
@@ -18,6 +18,8 @@ import { EtapaCronograma, PosicaoEtapa } from 'src/app/core/models/cronograma';
 })
 export class EleicoesFormComponent implements OnInit {
 
+  steps = ['Gestão', 'Empresa', 'Estabelecimento', 'Cronograma'];
+  currentStepIndex = 1;
   formListaEmpresa: FormGroup;
   formListaEstabelecimentos: FormGroup;
   formGestao: FormGroup;
@@ -47,7 +49,7 @@ export class EleicoesFormComponent implements OnInit {
       });
 
     this.formListaEmpresa = this.formBuilder.group({
-      empresa: ['']
+      empresa: ['', Validators.required]
     });
 
     // Carrega os estabelecimentos de acordo com a empresa selecionada
@@ -69,7 +71,7 @@ export class EleicoesFormComponent implements OnInit {
       });
 
     this.formListaEstabelecimentos = this.formBuilder.group({
-      estabelecimento: ['']
+      estabelecimento: ['', Validators.required]
     });
 
     this.eleicoesApi.getCronograma(1).subscribe(cronograma => {
@@ -77,13 +79,33 @@ export class EleicoesFormComponent implements OnInit {
     });
 
     this.formGestao = this.formBuilder.group({
-      gestao: [new Date().getFullYear()],
-      duracao: [2]
+      gestao: [new Date().getFullYear(), Validators.required],
+      duracao: [2, Validators.required]
     });
+  }
+
+  get validNext() {
+    switch (this.currentStepIndex) {
+      case 1:
+        return this.formGestao.valid;
+      case 2:
+        return this.formListaEmpresa.valid;
+      case 3:
+        return this.formListaEstabelecimentos.valid;
+      case 4:
+        return true;
+      default:
+        return false;
+    }
   }
 
   get exibeGestao() {
     return this.formGestao.get('gestao').value && this.formGestao.get('duracao').value;
   }
+
+  changeStep(step: number) {
+    this.currentStepIndex = step;
+  }
+
 
 }

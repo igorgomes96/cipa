@@ -22,10 +22,6 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    data: {
-      breadcrumb: 'Eleições',
-      title: 'Eleições'
-    },
     children: [
       {
         path: '',
@@ -40,18 +36,34 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: '../dashboard/dashboard.module#DashboardModule',
+        data: {
+          breadcrumb: 'Eleições',
+          title: 'Eleições'
+        }
       },
       {
         path: 'cronograma',
-        loadChildren: '../cronograma/cronograma.module#CronogramaModule'
+        loadChildren: '../cronograma/cronograma.module#CronogramaModule',
+        data: {
+          breadcrumb: 'Eleições',
+          title: 'Eleições'
+        }
       },
       {
         path: 'eleitores',
-        loadChildren: '../eleitores/eleitores.module#EleitoresModule'
+        loadChildren: '../eleitores/eleitores.module#EleitoresModule',
+        data: {
+          breadcrumb: 'Eleições',
+          title: 'Eleições'
+        }
       },
       {
         path: 'candidaturas',
         loadChildren: '../candidaturas/candidaturas.module#CandidaturasModule'
+      },
+      {
+        path: 'votacao',
+        loadChildren: '../votacoes/votacoes.module#VotacoesModule'
       }
     ]
   }

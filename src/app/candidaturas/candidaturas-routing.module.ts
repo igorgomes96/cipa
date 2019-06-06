@@ -13,7 +13,6 @@ const routes: Routes = [
     path: '',
     data: {
       breadcrumb: 'Candidaturas',
-      title: 'Nova'
     },
     children: [
       {
@@ -21,8 +20,8 @@ const routes: Routes = [
         component: CandidaturasFormComponent,
         data: {
           navigationType: NavigationType.Top,
-          breadcrumb: 'Incrição',
-          title: 'Inscrição'
+          // breadcrumb: 'Incrição',
+          // title: 'Inscrição'
         }
       },
       {

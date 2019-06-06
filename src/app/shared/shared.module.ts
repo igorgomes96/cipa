@@ -11,6 +11,7 @@ import { ValidatorMessageComponent } from './components/validator-message/valida
 import { DateValidatorDirective } from './directives/date-validator.directive';
 import { CardCandidatoComponent } from './components/card-candidato/card-candidato.component';
 import { EtapaCronogramaComponent } from './components/etapa-cronograma/etapa-cronograma.component';
+import { WizardComponent } from './components/wizard/wizard.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { EtapaCronogramaComponent } from './components/etapa-cronograma/etapa-cr
     ValidatorMessageComponent,
     DateValidatorDirective,
     CardCandidatoComponent,
-    EtapaCronogramaComponent
+    EtapaCronogramaComponent,
+    WizardComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import { EtapaCronogramaComponent } from './components/etapa-cronograma/etapa-cr
     ValidatorMessageComponent,
     DateValidatorDirective,
     CardCandidatoComponent,
-    EtapaCronogramaComponent
+    EtapaCronogramaComponent,
+    WizardComponent
   ]
 })
 export class SharedModule { }
