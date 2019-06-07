@@ -1,0 +1,30 @@
+<form #form="ngForm" (submit)="salvar()">
+  <div class="row">
+    <div class="col-lg-2 col-md-3 col-sm-6">
+      <app-custom-input [(ngModel)]="empresa.id" #id="ngModel" [control]="id" id="id" label="Código" name="id"
+        readOnly="true">
+      </app-custom-input>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <app-custom-input [(ngModel)]="empresa.razaoSocial" #razaoSocial="ngModel" [control]="razaoSocial" id="razaoSocial"
+        label="Razão Social" name="razaoSocial" required>
+      </app-custom-input>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label class="control-label">Informações Gerais</label>
+        <textarea name="informacoesGerais" id="informacoesGerais" rows="5"  [(ngModel)]="empresa.informacoesGerais" 
+          #informacoesGerais="ngModel" class="form-control"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary m-r-sm"><i class="fa fa-save"></i> Salvar</button>
+  <button type="button" class="btn btn-default" (click)="cancelar()">Cancelar</button>
+</form>

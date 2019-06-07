@@ -9,6 +9,11 @@
       "id": 2,
       "razaoSocial": "Algar Telecom",
       "informacoesGerais": null
+    },
+    {
+      "razaoSocial": "Testando",
+      "informacoesGerais": "Informações",
+      "id": 3
     }
   ],
   "estabelecimentos": [
@@ -29,6 +34,20 @@
       "empresaId": 2,
       "cidade": "Uberlândia - MG",
       "endereco": "Av. Teste, nº 768, bairro Centro"
+    },
+    {
+      "id": 5,
+      "empresaId": 1,
+      "cidade": "Araguari",
+      "endereco": "Rua 3",
+      "descricao": "Teste"
+    },
+    {
+      "id": 6,
+      "empresaId": 1,
+      "cidade": "Uberlândia",
+      "endereco": "Endereço",
+      "descricao": "Testando"
     }
   ],
   "eleicoes": [

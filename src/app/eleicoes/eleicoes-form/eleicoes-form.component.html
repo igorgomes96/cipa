@@ -32,7 +32,7 @@
 
       <div *ngSwitchCase="2">
         <div class="row">
-          <div class="col-md-12" *ngIf="empresas.length; else novaEmpresa">
+          <div class="col-md-12" [hidden]="novaEmpresa">
             Observamos que você já possui {{ empresas.length }} empresas cadastradas. Escolha uma delas para iniciar a
             nova
             eleição, ou
@@ -49,20 +49,19 @@
               </div>
             </form>
 
-            <button class="btn btn-primary m-t-md"><i class="fa fa-plus"></i> Nova Empresa</button>
+            <button class="btn btn-primary m-t-md" (click)="empresaForm()"><i class="fa fa-plus"></i> Nova
+              Empresa</button>
           </div>
-          <ng-template #novaEmpresa>
-            <div class="col-md-12">
-              <p>Para iniciar uma eleição, você precisa primeiro cadastrar a empresa.</p>
-              <button class="btn btn-primary"><i class="fa fa-plus"></i> Nova Empresa</button>
-            </div>
-          </ng-template>
+          <div class="col-md-12" [hidden]="!novaEmpresa">
+            <app-empresa-shared-form (cancelarEdicao)="cancelarEmpresa()" (salvarEmpresa)="salvarEmpresa($event)">
+            </app-empresa-shared-form>
+          </div>
         </div>
       </div>
 
       <div *ngSwitchCase="3">
         <div class="row">
-          <div class="col-md-12" *ngIf="estabelecimentos.length; else novoEstabelecimento">
+          <div class="col-md-12" [hidden]="novoEstabelecimento">
             <div *ngIf="estabelecimentos.length > 1; else estabelecimentoUnico">
               A empresa selecionada possui {{ estabelecimentos.length }} estabelecimentos.
               Selecione um deles ou cadastre um novo estabelecimento.
@@ -82,16 +81,12 @@
                 </div>
               </div>
             </form>
-            <button class="btn btn-primary m-t-md"><i class="fa fa-plus"></i> Novo Estabelecimento</button>
+            <button class="btn btn-primary m-t-md" (click)="estabelecimentoForm()"><i class="fa fa-plus"></i> Novo Estabelecimento</button>
           </div>
-          <ng-template #novoEstabelecimento>
-            <div class="col-md-12">
-              <p>Agora que você definiu a empresa, precisa cadastrar o estabelecimento que passará pelo processo de
-                eleição da
-                CIPA. Clique no botão abaixo para realizar o cadastro</p>
-              <button class="btn btn-primary"><i class="fa fa-plus"></i> Novo Estabelecimento</button>
-            </div>
-          </ng-template>
+          <div class="col-md-12" [hidden]="!novoEstabelecimento">
+            <app-estabelecimento-shared-form [empresas]="[empresaSelecionada]" (cancelarEdicao)="cancelarEstabelecimento()" (salvarEstabelecimento)="salvarEstabelecimento($event)">
+            </app-estabelecimento-shared-form>
+          </div>
         </div>
       </div>
 

@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EtapaCronograma, PosicaoEtapa } from 'src/app/core/models/cronograma';
 import { Arquivo } from 'src/app/core/models/arquivo';
 
+declare var $: any;
+
 @Component({
   selector: '[etapa-cronograma]',
   templateUrl: './etapa-cronograma.component.html',
@@ -21,6 +23,13 @@ export class EtapaCronogramaComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    // $('#data_1 .input-group.date').datepicker({
+    //   todayBtn: 'linked',
+    //   keyboardNavigation: false,
+    //   forceParse: false,
+    //   calendarWeeks: true,
+    //   autoclose: true
+    // });
   }
 
   get calendarIcon(): string {

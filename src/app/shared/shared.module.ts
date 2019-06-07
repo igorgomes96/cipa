@@ -12,6 +12,9 @@ import { DateValidatorDirective } from './directives/date-validator.directive';
 import { CardCandidatoComponent } from './components/card-candidato/card-candidato.component';
 import { EtapaCronogramaComponent } from './components/etapa-cronograma/etapa-cronograma.component';
 import { WizardComponent } from './components/wizard/wizard.component';
+import { EmpresaSharedFormComponent } from './components/empresa-shared-form/empresa-shared-form.component';
+import { EstabelecimentoSharedFormComponent } from './components/estabelecimento-shared-form/estabelecimento-shared-form.component';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { WizardComponent } from './components/wizard/wizard.component';
     DateValidatorDirective,
     CardCandidatoComponent,
     EtapaCronogramaComponent,
-    WizardComponent
+    WizardComponent,
+    EmpresaSharedFormComponent,
+    EstabelecimentoSharedFormComponent,
+    DatepickerComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +50,10 @@ import { WizardComponent } from './components/wizard/wizard.component';
     DateValidatorDirective,
     CardCandidatoComponent,
     EtapaCronogramaComponent,
-    WizardComponent
+    WizardComponent,
+    EmpresaSharedFormComponent,
+    EstabelecimentoSharedFormComponent,
+    DatepickerComponent
   ]
 })
 export class SharedModule { }

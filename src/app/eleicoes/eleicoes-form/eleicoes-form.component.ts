@@ -10,6 +10,7 @@ import { tap, filter, switchMap } from 'rxjs/operators';
 import { EstabelecimentosApiService } from 'src/app/core/api/estabelecimentos-api.service';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { EtapaCronograma, PosicaoEtapa } from 'src/app/core/models/cronograma';
+import { EmpresaSharedFormComponent } from 'src/app/shared/components/empresa-shared-form/empresa-shared-form.component';
 
 @Component({
   selector: 'app-eleicoes-form',
@@ -27,6 +28,8 @@ export class EleicoesFormComponent implements OnInit {
   estabelecimentos: Estabelecimento[] = [];
   empresas: Empresa[] = [];
   eleicao: Eleicao;
+  novaEmpresa = false;
+  novoEstabelecimento = false;
   PosicaoEtapa: typeof PosicaoEtapa = PosicaoEtapa;
 
   constructor(private route: ActivatedRoute,
@@ -103,9 +106,48 @@ export class EleicoesFormComponent implements OnInit {
     return this.formGestao.get('gestao').value && this.formGestao.get('duracao').value;
   }
 
+  get empresaSelecionada(): Empresa {
+    // tslint:disable-next-line: triple-equals
+    const empresa = this.empresas.find(emp => emp.id == this.formListaEmpresa.get('empresa').value);
+    return empresa;
+  }
+
   changeStep(step: number) {
     this.currentStepIndex = step;
   }
 
+  empresaForm() {
+    this.novaEmpresa = true;
+  }
+
+  salvarEmpresa(empresa: Empresa) {
+    this.empresasApi.post(empresa)
+      .subscribe((novaEmpresa: Empresa) => {
+        this.novaEmpresa = false;
+        this.empresas.push(novaEmpresa);
+        this.formListaEmpresa.get('empresa').setValue(novaEmpresa.id);
+      });
+  }
+
+  cancelarEmpresa() {
+    this.novaEmpresa = false;
+  }
+
+  estabelecimentoForm() {
+    this.novoEstabelecimento = true;
+  }
+
+  salvarEstabelecimento(estabelecimento: Estabelecimento) {
+    this.estabelecimentosApi.post(estabelecimento)
+      .subscribe((novoEstabelecimento: Estabelecimento) => {
+        this.novoEstabelecimento = false;
+        this.estabelecimentos.push(new Estabelecimento(novoEstabelecimento));
+        this.formListaEstabelecimentos.get('estabelecimento').setValue(novoEstabelecimento.id);
+      });
+  }
+
+  cancelarEstabelecimento() {
+    this.novoEstabelecimento = false;
+  }
 
 }
