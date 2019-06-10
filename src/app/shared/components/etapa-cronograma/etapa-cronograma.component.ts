@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EtapaCronograma, PosicaoEtapa } from 'src/app/core/models/cronograma';
 import { Arquivo } from 'src/app/core/models/arquivo';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 declare var $: any;
 
@@ -20,16 +21,17 @@ export class EtapaCronogramaComponent implements OnInit {
 
   PosicaoEtapa: typeof PosicaoEtapa = PosicaoEtapa;
 
-  constructor() { }
+  form: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    // $('#data_1 .input-group.date').datepicker({
-    //   todayBtn: 'linked',
-    //   keyboardNavigation: false,
-    //   forceParse: false,
-    //   calendarWeeks: true,
-    //   autoclose: true
-    // });
+    this.form = this.formBuilder.group({
+      data: [this.etapa.dataPrevista]
+    });
+    this.form.get('data').valueChanges.subscribe((v) => {
+      console.log(v);
+    });
   }
 
   get calendarIcon(): string {
@@ -74,6 +76,7 @@ export class EtapaCronogramaComponent implements OnInit {
       return 'col-lg-8 col-md-7';
     }
   }
+
 
   onProximaEtapa() {
     this.proximaEtapa.emit(this.etapa);

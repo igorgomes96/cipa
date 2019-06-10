@@ -30,6 +30,22 @@
     width: 100%;
 }
 
+.vertical-timeline-content app-datepicker .form-group {
+    margin-bottom: 0;
+}
+
+.vertical-timeline-content app-datepicker input {
+    background-color: initial !important;
+    border: 0;
+    height: initial;
+    padding: 0 0 0 5px;
+}
+
+.vertical-timeline-content app-datepicker .input-group-addon {
+    border: 0;
+    padding: 0;
+}
+
 .light-timeline .dropzone {
     background: #eee;
 }

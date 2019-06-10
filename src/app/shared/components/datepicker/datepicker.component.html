@@ -1,8 +1,8 @@
 <div class="form-group">
-  <label class="control-label">{{ label }}</label>
-  <div class="input-group date">
+  <label class="control-label" *ngIf="label">{{ label }}</label>
+  <div class="input-group date" [id]="id">
     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
     <input type="text" (input)="pushChanges($event.target.value)" [readOnly]="!!readOnly" [(ngModel)]="value"
-      [name]="name" [id]="id" class="form-control">
+      [name]="name" [id]="id + 'input'" class="form-control">
   </div>
 </div>

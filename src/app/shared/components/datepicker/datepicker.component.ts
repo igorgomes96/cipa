@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, AfterViewInit } from '@angular/core';
 import { AbstractControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LOCALE_ID } from '@angular/core';
 import { formatDate } from '@angular/common';
@@ -17,7 +17,7 @@ export const CUSTOM_VALUE_ACCESSOR: any = {
   styleUrls: ['./datepicker.component.css'],
   providers: [CUSTOM_VALUE_ACCESSOR, { provide: LOCALE_ID, useValue: 'pt-BR' }]
 })
-export class DatepickerComponent implements OnInit {
+export class DatepickerComponent implements OnInit, AfterViewInit {
 
   @Input() name: string;
   @Input() label: string;
@@ -25,8 +25,8 @@ export class DatepickerComponent implements OnInit {
   @Input() control: AbstractControl;
   @Input() readOnly = true;
 
-  private innerValue: any;
-  private value: any;
+  // private innerValue: any;  // Valor de fato
+  private value: any; // Texto exibido no controle
   public hasError = false;
 
   private jDate: any;
@@ -34,45 +34,60 @@ export class DatepickerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.jDate = $(`#${this.id} .input-group.date`).datepicker({
-      todayBtn: 'linked',
+  }
+
+  ngAfterViewInit() {
+    $.fn.datepicker.dates['pt-BR'] = {
+      days: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'],
+      daysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+      daysMin: ['Do', 'Se', 'Te', 'Qu', 'Qu', 'Se', 'Sá'],
+      months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+      monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      today: 'Hoje',
+      clear: 'Limpar',
+      format: 'dd/mm/yyyy',
+      titleFormat: 'MM yyyy', /* Leverages same syntax as 'format' */
+      weekStart: 0
+    };
+    this.jDate = $(`#${this.id}`).datepicker({
       keyboardNavigation: false,
       forceParse: false,
       calendarWeeks: false,
       autoclose: true,
       language: 'pt-BR'
     });
+    if (this.control.value) {
+      this.jDate.datepicker('setDate', formatDate(this.control.value as Date, 'dd/MM/yyyy', 'pt-BR'));
+    }
     this.jDate.on('changeDate', (e: { date: any; }) => {
       this.pushChanges(e.date);
     });
-
   }
-
   onChange: (_: any) => void = () => { };
   onTouch: (_: any) => void = () => { };
 
   updateValue(valor: any) {
     if (valor != null) {
-      this.innerValue = valor;
       this.value = formatDate(valor as Date, 'dd/MM/yyyy', 'pt-BR');
     } else {
-      this.innerValue = '';
+      this.value = '';
     }
   }
 
   pushChanges(valor: any) {
     this.updateValue(valor);
-    this.onChange(this.innerValue);
+    this.onChange(valor);
   }
 
 
   writeValue(valor: any): void {
     if (valor !== null) {
-      this.innerValue = valor;
-      this.value = valor;
-      this.jDate.datepicker('setDate', this.value);
+      this.value = formatDate(valor as Date, 'dd/MM/yyyy', 'pt-BR');
+      if (this.jDate) {
+        this.jDate.datepicker('setDate', formatDate(valor as Date, 'dd/MM/yyyy', 'pt-BR'));
+      }
     } else {
-      this.innerValue = '';
+      this.value = '';
     }
   }
 

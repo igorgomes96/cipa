@@ -8,13 +8,15 @@
 
     <div class="row">
       <div class="col-md-12">
-        <span class="vertical-date">
-          <app-datepicker name="data" id="data" [(ngModel)]="etapa.dataPrevista" #data="ngModel"
-            [control]="data"></app-datepicker>
-          <small [hidden]="layout === 'Visualização' && etapa.posicaoEtapa === PosicaoEtapa.Passada">Clique na data
-            acima para
-            alterá-la.</small>
-        </span>
+        <form [formGroup]="form">
+          <span class="vertical-date">
+            <app-datepicker [name]="'data' + etapa.id" [id]="'data' + etapa.id" formControlName="data"
+              [control]="form.get('data')"></app-datepicker>
+            <small [hidden]="layout === 'Visualização' && etapa.posicaoEtapa === PosicaoEtapa.Passada">Clique na data
+              acima para
+              alterá-la.</small>
+          </span>
+        </form>
       </div>
     </div>
 

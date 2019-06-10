@@ -78,6 +78,7 @@
           "dataRealizada": null,
           "etapaObrigatoriaId": 1,
           "posicaoEtapa": 0,
+          "prazoMinimo": null,
           "etapaObrigatoria": {
             "id": 1,
             "nome": "Cadastro",
@@ -95,6 +96,7 @@
           "dataRealizada": null,
           "etapaObrigatoriaId": 2,
           "posicaoEtapa": 1,
+          "prazoMinimo": null,
           "etapaObrigatoria": {
             "id": 2,
             "nome": "Cadastro",
@@ -112,6 +114,7 @@
           "dataRealizada": null,
           "etapaObrigatoriaId": 3,
           "posicaoEtapa": 2,
+          "prazoMinimo": null,
           "etapaObrigatoria": {
             "id": 3,
             "nome": "Edital de Inscrição",
@@ -129,6 +132,7 @@
           "dataRealizada": null,
           "etapaObrigatoriaId": 4,
           "posicaoEtapa": 2,
+          "prazoMinimo": 15,
           "etapaObrigatoria": {
             "id": 4,
             "nome": "Incrições",
@@ -146,6 +150,7 @@
           "dataRealizada": null,
           "etapaObrigatoriaId": 5,
           "posicaoEtapa": 2,
+          "prazoMinimo": null,
           "etapaObrigatoria": {
             "id": 5,
             "nome": "Votaão",
@@ -163,6 +168,7 @@
           "dataRealizada": null,
           "etapaObrigatoriaId": 6,
           "posicaoEtapa": 2,
+          "prazoMinimo": null,
           "etapaObrigatoria": {
             "id": 6,
             "nome": "Apuração",
@@ -180,6 +186,7 @@
           "dataRealizada": null,
           "etapaObrigatoriaId": 7,
           "posicaoEtapa": 2,
+          "prazoMinimo": null,
           "etapaObrigatoria": {
             "id": 7,
             "nome": "Ata de Eleição",
@@ -216,6 +223,7 @@
           "dataRealizada": null,
           "etapaObrigatoriaId": 1,
           "posicaoEtapa": 1,
+          "prazoMinimo": null,
           "etapaObrigatoria": {
             "id": 1,
             "nome": "Cadastro",
@@ -233,6 +241,7 @@
           "dataRealizada": null,
           "etapaObrigatoriaId": 2,
           "posicaoEtapa": 2,
+          "prazoMinimo": null,
           "etapaObrigatoria": {
             "id": 2,
             "nome": "Cadastro",
@@ -250,6 +259,7 @@
           "dataRealizada": null,
           "etapaObrigatoriaId": 3,
           "posicaoEtapa": 2,
+          "prazoMinimo": null,
           "etapaObrigatoria": {
             "id": 3,
             "nome": "Edital de Inscrição",
@@ -267,6 +277,7 @@
           "dataRealizada": null,
           "etapaObrigatoriaId": 4,
           "posicaoEtapa": 2,
+          "prazoMinimo": null,
           "etapaObrigatoria": {
             "id": 4,
             "nome": "Incrições",
@@ -284,6 +295,7 @@
           "dataRealizada": null,
           "etapaObrigatoriaId": 5,
           "posicaoEtapa": 2,
+          "prazoMinimo": null,
           "etapaObrigatoria": {
             "id": 5,
             "nome": "Votaão",
@@ -301,6 +313,7 @@
           "dataRealizada": null,
           "etapaObrigatoriaId": 6,
           "posicaoEtapa": 2,
+          "prazoMinimo": null,
           "etapaObrigatoria": {
             "id": 6,
             "nome": "Apuração",
@@ -318,6 +331,7 @@
           "dataRealizada": null,
           "etapaObrigatoriaId": 7,
           "posicaoEtapa": 2,
+          "prazoMinimo": null,
           "etapaObrigatoria": {
             "id": 7,
             "nome": "Ata de Eleição",
