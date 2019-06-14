@@ -27,11 +27,15 @@ export class EtapaCronogramaComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      data: [this.etapa.dataPrevista]
+      data: [{ value: this.etapa.dataPrevista, disabled: this.isDateDisabled }]
     });
     this.form.get('data').valueChanges.subscribe((v) => {
-      console.log(v);
+      this.onAtualizarEtapa();
     });
+  }
+
+  get isDateDisabled() {
+    return this.layout === 'Visualização' && this.etapa.posicaoEtapa === PosicaoEtapa.Passada;
   }
 
   get calendarIcon(): string {

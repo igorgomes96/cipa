@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Eleicao } from 'src/app/core/models/eleicao';
 import { Empresa } from 'src/app/core/models/empresa';
@@ -10,7 +10,8 @@ import { tap, filter, switchMap } from 'rxjs/operators';
 import { EstabelecimentosApiService } from 'src/app/core/api/estabelecimentos-api.service';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { EtapaCronograma, PosicaoEtapa } from 'src/app/core/models/cronograma';
-import { EmpresaSharedFormComponent } from 'src/app/shared/components/empresa-shared-form/empresa-shared-form.component';
+import { ToastsService } from 'src/app/core/services/toasts.service';
+import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 
 @Component({
   selector: 'app-eleicoes-form',
@@ -36,7 +37,9 @@ export class EleicoesFormComponent implements OnInit {
     private empresasApi: EmpresasApiService,
     private estabelecimentosApi: EstabelecimentosApiService,
     private formBuilder: FormBuilder,
-    private eleicoesApi: EleicoesApiService) { }
+    private eleicoesApi: EleicoesApiService,
+    private router: Router,
+    private toasts: ToastsService) { }
 
   ngOnInit() {
     this.route.data
@@ -82,8 +85,8 @@ export class EleicoesFormComponent implements OnInit {
     });
 
     this.formGestao = this.formBuilder.group({
-      gestao: [new Date().getFullYear(), Validators.required],
-      duracao: [2, Validators.required]
+      dataInicio: [new Date(), Validators.required],
+      duracaoGestao: [2, Validators.required]
     });
   }
 
@@ -103,7 +106,7 @@ export class EleicoesFormComponent implements OnInit {
   }
 
   get exibeGestao() {
-    return this.formGestao.get('gestao').value && this.formGestao.get('duracao').value;
+    return this.formGestao.get('duracao').value;
   }
 
   get empresaSelecionada(): Empresa {
@@ -148,6 +151,37 @@ export class EleicoesFormComponent implements OnInit {
 
   cancelarEstabelecimento() {
     this.novoEstabelecimento = false;
+  }
+
+  atualizarEtapa(etapaAtualizada: EtapaCronograma) {
+
+    console.log('Teste');
+    console.log(etapaAtualizada);
+  }
+
+  salvarEleicao() {
+    const eleicao = {
+      gestao: (this.formGestao.get('dataInicio').value as Date).getFullYear(),
+      dataInicio: this.formGestao.get('dataInicio').value as Date,
+      duracaoGestao: this.formGestao.get('duracaoGestao').value as number,
+      estabelecimentoId: this.formListaEstabelecimentos.get('estabelecimento').value as number
+    } as any;
+
+    /* Retirar após implementação do back-end */
+    eleicao.estabelecimento = this.estabelecimentos.find(e => e.id === eleicao.estabelecimentoId);
+    eleicao.estabelecimento.empresa = this.empresas.find(e => e.id === eleicao.estabelecimento.empresaId);
+    eleicao.cronograma = this.cronograma;
+    /* Retirar após implementação do back-end */
+
+    this.eleicoesApi.post(eleicao)
+      .subscribe((novaEleicao: Eleicao) => {
+        this.toasts.showMessage({
+          message: 'Eleição aberta com sucesso!',
+          title: 'Sucesso!',
+          type: ToastType.success
+        });
+        this.router.navigate([`/eleicoes/${novaEleicao.id}/cronograma`]);
+      });
   }
 
 }

@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { TooltipModule } from 'ng2-tooltip-directive';
+
 import { PanelComponent } from './components/panel/panel.component';
 import { ArquivosComponent } from './components/arquivos/arquivos.component';
 import { CustomInputComponent } from './components/custom-input/custom-input.component';
@@ -15,6 +17,7 @@ import { WizardComponent } from './components/wizard/wizard.component';
 import { EmpresaSharedFormComponent } from './components/empresa-shared-form/empresa-shared-form.component';
 import { EstabelecimentoSharedFormComponent } from './components/estabelecimento-shared-form/estabelecimento-shared-form.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import { AjudaTooltipComponent } from './components/ajuda-tooltip/ajuda-tooltip.component';
 
 @NgModule({
   declarations: [
@@ -28,14 +31,16 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
     WizardComponent,
     EmpresaSharedFormComponent,
     EstabelecimentoSharedFormComponent,
-    DatepickerComponent
+    DatepickerComponent,
+    AjudaTooltipComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    TooltipModule
   ],
   exports: [
     CommonModule,
@@ -53,7 +58,9 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
     WizardComponent,
     EmpresaSharedFormComponent,
     EstabelecimentoSharedFormComponent,
-    DatepickerComponent
+    DatepickerComponent,
+    TooltipModule,
+    AjudaTooltipComponent
   ]
 })
 export class SharedModule { }

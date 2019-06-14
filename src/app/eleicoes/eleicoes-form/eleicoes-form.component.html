@@ -1,6 +1,6 @@
 <h2>Abertura de Nova Eleição</h2>
 <p>
-  Para abrir uma nova eleição, basta seguir os passos abaixo.
+  Para abrir uma nova eleição, basta seguir os passos abaixo. <app-ajuda-tooltip ajuda="Testando a ajuda"></app-ajuda-tooltip>
 </p>
 
 <app-panel>
@@ -13,21 +13,19 @@
         <form [formGroup]="formGestao">
           <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-12">
-              Qual é o ano de gestão a que se refere essa eleição?
-              <input type="number" formControlName="gestao" class="form-control">
+              Data de Início do processo de Eleição
+              <app-datepicker formControlName="dataInicio" inputClasses="input-white" control="formGestao.get('dataInicio')"></app-datepicker>
             </div>
           </div>
           <br>
           <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-12">
               Qual é o tempo de duração dessa gestão? (em anos)
-              <input type="number" formControlName="duracao" class="form-control">
+              <input type="number" formControlName="duracaoGestao" class="form-control">
             </div>
           </div>
         </form>
-        <br>
-        <p *ngIf="exibeGestao">Gestão <strong>{{ formGestao.get('gestao').value }} -
-            {{ formGestao.get('gestao').value + formGestao.get('duracao').value - 1}}</strong></p>
+
       </div>
 
       <div *ngSwitchCase="2">
@@ -97,7 +95,7 @@
             layout="Cadastro"></div>
         </div>
 
-        <button class="btn btn-success m-t-md">Abrir Eleição!</button>
+        <button class="btn btn-success m-t-md" (click)="salvarEleicao()">Abrir Eleição!</button>
       </div>
 
     </div>

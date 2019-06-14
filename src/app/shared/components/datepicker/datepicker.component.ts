@@ -2,6 +2,7 @@ import { Component, OnInit, Input, forwardRef, AfterViewInit } from '@angular/co
 import { AbstractControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LOCALE_ID } from '@angular/core';
 import { formatDate } from '@angular/common';
+import { race } from 'rxjs/operators';
 
 declare var $: any;
 
@@ -24,11 +25,13 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
   @Input() id: string;
   @Input() control: AbstractControl;
   @Input() readOnly = true;
+  @Input() inputClasses = '';
 
   // private innerValue: any;  // Valor de fato
   private value: any; // Texto exibido no controle
   public hasError = false;
 
+  private isDisabled = false;
   private jDate: any;
 
   constructor() { }
@@ -49,6 +52,20 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
       titleFormat: 'MM yyyy', /* Leverages same syntax as 'format' */
       weekStart: 0
     };
+    this.updateDatePicker();
+  }
+  onChange: (_: any) => void = () => { };
+  onTouch: (_: any) => void = () => { };
+
+  updateValue(valor: any) {
+    if (valor != null) {
+      this.value = formatDate(valor as Date, 'dd/MM/yyyy', 'pt-BR');
+    } else {
+      this.value = '';
+    }
+  }
+
+  updateDatePicker(isDisabled = false) {
     this.jDate = $(`#${this.id}`).datepicker({
       keyboardNavigation: false,
       forceParse: false,
@@ -62,16 +79,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
     this.jDate.on('changeDate', (e: { date: any; }) => {
       this.pushChanges(e.date);
     });
-  }
-  onChange: (_: any) => void = () => { };
-  onTouch: (_: any) => void = () => { };
 
-  updateValue(valor: any) {
-    if (valor != null) {
-      this.value = formatDate(valor as Date, 'dd/MM/yyyy', 'pt-BR');
-    } else {
-      this.value = '';
-    }
   }
 
   pushChanges(valor: any) {
@@ -98,8 +106,10 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
   registerOnTouched(fn: any): void {
     this.onTouch = fn;
   }
+
   setDisabledState?(isDisabled: boolean): void {
-    this.readOnly = isDisabled;
+    this.isDisabled = isDisabled;
+    this.updateDatePicker(isDisabled);
   }
 
 }

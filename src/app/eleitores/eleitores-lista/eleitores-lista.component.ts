@@ -6,6 +6,8 @@ import { filter, switchMap, distinctUntilChanged, debounce, debounceTime } from 
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { EleitoresApiService } from 'src/app/core/api/eleitores-api.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';
+import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { Eleicao } from 'src/app/core/models/eleicao';
 
 declare var $: any;
 
@@ -17,40 +19,58 @@ declare var $: any;
 export class EleitoresListaComponent implements OnInit {
 
   eleitores: Eleitor[];
+  eleicao: Eleicao;
   form: FormGroup;
   constructor(private eleicoesApi: EleicoesApiService,
-              private route: ActivatedRoute,
-              private formBuilder: FormBuilder,
-              private eleitoresApi: EleitoresApiService,
-              private toasts: ToastsService) { }
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private eleitoresApi: EleitoresApiService,
+    private toasts: ToastsService) { }
 
   ngOnInit() {
     this.route.data
       .pipe(
         filter(routeData => routeData.hasOwnProperty('eleicao')),
         switchMap(routeData => {
-          return this.eleicoesApi.getEleitores(routeData.eleicao.id);
+          this.eleicao = routeData.eleicao;
+          return this.eleicoesApi.getEleitores(this.eleicao.id);
         })
       ).subscribe(eleitores => {
         this.eleitores = eleitores;
-        // $('.footable').footable();
       });
 
     this.form = this.formBuilder.group({
       filtro: ['']
     });
     this.form.get('filtro').valueChanges
-    .pipe(distinctUntilChanged(), debounceTime(500))
-    .subscribe((value: any) => {
-      console.log(value);
-    });
+      .pipe(distinctUntilChanged(), debounceTime(500))
+      .subscribe((value: any) => {
+        //console.log(value);
+      });
   }
 
-  excluir() {
+  carregaEleitores() {
+    return this.eleicoesApi.getEleitores(this.eleicao.id)
+      .subscribe(eleitores => {
+        this.eleitores = eleitores;
+      });
+  }
+
+  excluir(id: number) {
     this.toasts.confirm('Deseja mesmo excluir esse eleitor?')
-    .subscribe((confirmacao: boolean) => {
-      console.log(confirmacao);
-    });
+      .subscribe((confirmacao: boolean) => {
+        if (confirmacao) {
+          this.eleitoresApi.delete(id)
+            .subscribe(_ => {
+              this.toasts.showMessage({
+                message: 'Eleitor excluído com sucesso!',
+                title: 'Sucesso!',
+                type: ToastType.success
+              });
+              this.carregaEleitores();
+            });
+        }
+      });
   }
 
 

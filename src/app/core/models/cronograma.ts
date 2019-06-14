@@ -25,5 +25,6 @@ export class EtapaObrigatoria {
     id: number;
     nome: string;
     descricao: string;
+    duracaoMinima: number;
     ordem: number;
 }

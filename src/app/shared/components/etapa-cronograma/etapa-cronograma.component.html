@@ -10,9 +10,12 @@
       <div class="col-md-12">
         <form [formGroup]="form">
           <span class="vertical-date">
+            <div *ngIf="isDateDisabled" style="font-size: 14px;cursor: not-allowed;">
+                <span><i class="fa fa-calendar"></i></span> {{ form.get('data').value | date:'dd/MM/yyyy' }}
+            </div>
             <app-datepicker [name]="'data' + etapa.id" [id]="'data' + etapa.id" formControlName="data"
-              [control]="form.get('data')"></app-datepicker>
-            <small [hidden]="layout === 'Visualização' && etapa.posicaoEtapa === PosicaoEtapa.Passada">Clique na data
+              [control]="form.get('data')" *ngIf="!isDateDisabled"></app-datepicker>
+            <small *ngIf="!isDateDisabled">Clique na data
               acima para
               alterá-la.</small>
           </span>

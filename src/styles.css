@@ -16,6 +16,9 @@
     }
 }
 
+input[readonly].input-white {
+    background-color: white;   
+}
 
 .vertical-timeline-block.inactive {
     color: #b6b6b6;

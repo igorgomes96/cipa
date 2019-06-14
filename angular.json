@@ -35,7 +35,8 @@
               "src/assets/plugins/js/pace.min.js",
               "src/assets/plugins/js/bootstrap-datepicker.js",
               "src/assets/plugins/toastr/toastr.min.js",
-              "src/assets/plugins/footable/js/footable.min.js"
+              "src/assets/plugins/footable/js/footable.min.js",
+              "src/assets/plugins/wow/wow.min.js"
             ],
             "es5BrowserSupport": true
           },

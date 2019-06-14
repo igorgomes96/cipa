@@ -72,4 +72,8 @@ export class CronogramaComponent implements OnInit {
     });
   }
 
+  atualizarEtapa(etapa: EtapaCronograma) {
+    // Put Cronograma
+  }
+
 }
