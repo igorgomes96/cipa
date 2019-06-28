@@ -1,0 +1,11 @@
+.widget {
+    border: 1px solid #ddd;
+    height: 100%;
+}
+
+@media (max-width: 400px) {
+    .tabs-container .nav-tabs > li.active > a {
+        border-bottom: 1px solid #e7eaec !important;
+        margin: 0;
+    }
+}

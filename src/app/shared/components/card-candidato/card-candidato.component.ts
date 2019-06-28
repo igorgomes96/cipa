@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 
-import { Candidato, Reprovacao } from 'src/app/core/models/candidato';
+import { Candidato, Reprovacao } from 'src/app/shared/models/candidato';
 import { ModalService } from 'src/app/core/services/modal.service';
 
 export enum TipoCardEleitor {

@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { GenericApi } from './generic-api';
-import { Eleicao } from '../models/eleicao';
+import { Eleicao } from '../../shared/models/eleicao';
 import { environment } from 'src/environments/environment';
 import { endpoints } from 'src/environments/endpoints';
 import { map, tap } from 'rxjs/operators';
-import { EtapaCronograma } from '../models/cronograma';
+import { EtapaCronograma } from '../../shared/models/cronograma';
 import { Observable } from 'rxjs';
-import { Eleitor } from '../models/eleitor';
+import { Eleitor } from '../../shared/models/eleitor';
 
 @Injectable({
   providedIn: 'root'

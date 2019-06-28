@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { GenericApi } from './generic-api';
 import { environment } from 'src/environments/environment';
 import { endpoints } from 'src/environments/endpoints';
-import { Estabelecimento } from '../models/estabelecimento';
+import { Estabelecimento } from '../../shared/models/estabelecimento';
 
 @Injectable({
     providedIn: 'root'

@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { Estabelecimento } from 'src/app/core/models/estabelecimento';
+import { Estabelecimento } from 'src/app/shared/models/estabelecimento';
 import { EmpresasApiService } from 'src/app/core/api/empresas-api.service';
-import { Empresa } from 'src/app/core/models/empresa';
+import { Empresa } from 'src/app/shared/models/empresa';
 
 @Component({
   selector: 'app-estabelecimento-shared-form',

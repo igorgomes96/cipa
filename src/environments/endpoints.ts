@@ -4,5 +4,6 @@ export const endpoints = {
     eleitores: 'eleitores/',
     candidatos: 'candidatos/',
     empresas: 'empresas/',
-    estabelecimentos: 'estabelecimentos/'
+    estabelecimentos: 'estabelecimentos/',
+    login: 'login/'
 };

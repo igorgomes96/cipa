@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { GenericApi } from './generic-api';
 import { environment } from 'src/environments/environment';
-import { Candidato, Reprovacao } from '../models/candidato';
+import { Candidato, Reprovacao } from '../../shared/models/candidato';
 import { endpoints } from 'src/environments/endpoints';
 import { Observable, of } from 'rxjs';
 

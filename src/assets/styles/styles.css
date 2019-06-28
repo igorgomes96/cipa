@@ -3010,7 +3010,7 @@ a.forum-item-title:hover {
   border-color: #e7eaec #e7eaec #e7eaec transparent;
   z-index: 1;
 }
-@media (max-width: 767px) {
+@media (max-width: 380px) {
   .tabs-container .nav-tabs > li {
     float: none !important;
   }
@@ -3766,7 +3766,7 @@ body.body-small .footer.fixed {
 .nav-tabs > li > a {
   color: #A7B1C2;
   font-weight: 600;
-  padding: 10px 20px 10px 25px;
+  padding: 10px 10px 10px 10px;
 }
 .nav-tabs > li > a:hover,
 .nav-tabs > li > a:focus {

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { EtapaCronograma, PosicaoEtapa } from 'src/app/core/models/cronograma';
-import { Arquivo } from 'src/app/core/models/arquivo';
+import { EtapaCronograma, PosicaoEtapa } from 'src/app/shared/models/cronograma';
+import { Arquivo } from 'src/app/shared/models/arquivo';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 declare var $: any;

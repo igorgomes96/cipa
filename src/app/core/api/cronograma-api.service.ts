@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { GenericApi } from './generic-api';
-import { EtapaCronograma } from '../models/cronograma';
+import { EtapaCronograma } from '../../shared/models/cronograma';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { endpoints } from 'src/environments/endpoints';
 import { Observable } from 'rxjs';
-import { Arquivo } from '../models/arquivo';
+import { Arquivo } from '../../shared/models/arquivo';
 
 @Injectable({
   providedIn: 'root'

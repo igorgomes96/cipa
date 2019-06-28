@@ -1,0 +1,62 @@
+<div class="loginColumns animated fadeInDown">
+  <div class="row">
+
+    <div class="col-md-6">
+      <h2 class="font-bold">Bem-vindo ao Sistema de Votação Online!</h2>
+
+      <p>
+        Administre o processo eleitoral da CIPA de todos os estabelecimentos de sua empresa através do nosso sistema!
+      </p>
+
+      <p>
+        Inicie seu processo, definindo o cronograma, desde a Convocação até a Ata da Eleição, e o sistema te guiará por
+        cada uma das etapas.
+      </p>
+
+      <p>
+        Disponibilizamos templates de editais para publicação, enviamos comunicados para todos os funcionários de acordo
+        com a etapa da eleição, e permitimos que você salve todos os documentos relacionados ao processo. E tudo isso,
+        seguindo todas as definições da NR-5.
+      </p>
+      <!-- 
+          <p>
+              <small>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</small>
+          </p> -->
+
+    </div>
+    <div class="col-md-6">
+      <div class="ibox-content">
+        <form class="m-t" role="form" (submit)="login()" [formGroup]="form">
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="E-mail" formControlName="email">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="Senha" formControlName="senha">
+          </div>
+          <button type="submit" class="btn btn-primary block full-width m-b" [disabled]="form.invalid">Login</button>
+
+
+          <p class="text-muted text-center">
+            <a href="#" class="text-center">
+              <small>Esqueceu sua senha?</small>
+            </a>
+          </p>
+          <br>
+          <a class="btn btn-sm btn-white btn-block" href="register.html">Crie uma Conta</a>
+        </form>
+        <p class="m-t">
+          <small>Sistema Web para Votação Online &copy; 2019</small>
+        </p>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-md-6">
+      Copyright Soluções Online
+    </div>
+    <div class="col-md-6 text-right">
+      <small>© 2019</small>
+    </div>
+  </div>
+</div>
