@@ -72,7 +72,6 @@
         {
           "id": 1,
           "eleicaoId": 1,
-          "etapaId": 1,
           "nomeEtapa": "Convocação para a Eleição",
           "descricaoEtapa": "No início do processo eleitoral, o empregador deve convocar as eleições para a escolha dos representantes dos empregados na CIPA. Essa convocação precisa ocorrer no prazo mínimo de 60 dias antes do término do mandato em curso (NR-05 - 5.38)",
           "dataPrevista": "2019-01-01T03:00:00.000Z",
@@ -90,7 +89,6 @@
         {
           "id": 2,
           "eleicaoId": 1,
-          "etapaId": 2,
           "nomeEtapa": "Formação da Comissão Eleitoral",
           "descricaoEtapa": "A Norma Regulamentadora 05 também determina que, no prazo mínimo de 55 dias antes do término do mandato em curso, seja constituída a Comissão Eleitoral (CE). Essa comissão deve ser formada pelos membros atuais da CIPA e será responsável pela organização e acompanhamento do processo eleitoral (NR-05 5.39).",
           "dataPrevista": "2019-01-01T03:00:00.000Z",
@@ -108,7 +106,6 @@
         {
           "id": 3,
           "eleicaoId": 1,
-          "etapaId": 3,
           "nomeEtapa": "Edital de Inscrição dos Candidatos",
           "descricaoEtapa": "Nessa etapa, você precisa publicar e divulgar o edital de inscrição para a CIPA, em locais de fácil acesso e visualização. Atente-se ao prazo! A NR-5 determina que a publicação ocorra no prazo mínimo de 45 dias antes do término do mandato em curso. (NR-05 - 5.40 a)",
           "dataPrevista": "2019-03-03T03:00:00.000Z",
@@ -126,7 +123,6 @@
         {
           "id": 4,
           "eleicaoId": 1,
-          "etapaId": 4,
           "nomeEtapa": "Inscrição dos Candidatos",
           "descricaoEtapa": "Nessa etapa, o sistema libera acesso aos eleitores cadastrados nessa eleição para eles realizarem sua inscrição. Essa etapa deve ter duração mínima de 15 dias. É importante lembrar que qualquer empregado do estabelecimento, independentemente do setor ou local de trabalho, pode se inscrever. (NR-05 5.40 b. c.)",
           "dataPrevista": "2019-04-04T03:00:00.000Z",
@@ -144,7 +140,6 @@
         {
           "id": 5,
           "eleicaoId": 1,
-          "etapaId": 5,
           "nomeEtapa": "Votação",
           "descricaoEtapa": "Nessa etapa, todos os eleitores podem acessar o sistema e escolher um dos candidatos como representante para o próximo mandato da CIPA. A eleição deve ser realizada em um dia normal de trabalho e 30 dias antes do término do mandato em curso, no mínimo. (NR-05 5.40 e. f.)",
           "dataPrevista": "2019-03-03T03:00:00.000Z",
@@ -154,7 +149,7 @@
           "prazoMinimo": null,
           "etapaObrigatoria": {
             "id": 5,
-            "nome": "Votaão",
+            "nome": "Votação",
             "descricao": "Votação",
             "ordem": 5
           }
@@ -162,7 +157,6 @@
         {
           "id": 6,
           "eleicaoId": 1,
-          "etapaId": 6,
           "nomeEtapa": "Apuração",
           "descricaoEtapa": "A NR-05 estabelece que a apuração dos votos deve ser feita em horário normal de trabalho, com acompanhamento de representante do empregador e dos empregados, em número a ser definido pela comissão eleitoral (NR-05 5.40 h). Obs.: a apuração dos votos não acontecerá caso haja participação inferior a 50% dos empregados na votação. Nesse caso, deve ser organizada outra votação, no prazo máximo de 10 dias.",
           "dataPrevista": "2019-06-06T03:00:00.000Z",
@@ -180,7 +174,6 @@
         {
           "id": 7,
           "eleicaoId": 1,
-          "etapaId": 7,
           "nomeEtapa": "Ata de Eleição",
           "descricaoEtapa": "Os candidatos votados e não eleitos devem estar relacionados nessa ata, em ordem decrescente de votos para nomeação posterior, em caso de vacância de suplentes. Não se preocupe, a criação desse documento é por nossa conta!",
           "dataPrevista": "2019-07-07T03:00:00.000Z",
@@ -218,7 +211,6 @@
         {
           "id": 1,
           "eleicaoId": 2,
-          "etapaId": 1,
           "nomeEtapa": "Convocação para a Eleição",
           "descricaoEtapa": "No início do processo eleitoral, o empregador deve convocar as eleições para a escolha dos representantes dos empregados na CIPA. Essa convocação precisa ocorrer no prazo mínimo de 60 dias antes do término do mandato em curso (NR-05 - 5.38)",
           "dataPrevista": "2019-01-01T03:00:00.000Z",
@@ -236,7 +228,6 @@
         {
           "id": 2,
           "eleicaoId": 2,
-          "etapaId": 2,
           "nomeEtapa": "Formação da Comissão Eleitoral",
           "descricaoEtapa": "A Norma Regulamentadora 05 também determina que, no prazo mínimo de 55 dias antes do término do mandato em curso, seja constituída a Comissão Eleitoral (CE). Essa comissão deve ser formada pelos membros atuais da CIPA e será responsável pela organização e acompanhamento do processo eleitoral (NR-05 5.39).",
           "dataPrevista": "2019-01-01T03:00:00.000Z",
@@ -254,7 +245,6 @@
         {
           "id": 3,
           "eleicaoId": 2,
-          "etapaId": 3,
           "nomeEtapa": "Edital de Inscrição dos Candidatos",
           "descricaoEtapa": "Nessa etapa, você precisa publicar e divulgar o edital de inscrição para a CIPA, em locais de fácil acesso e visualização. Atente-se ao prazo! A NR-5 determina que a publicação ocorra no prazo mínimo de 45 dias antes do término do mandato em curso. (NR-05 - 5.40 a)",
           "dataPrevista": "2019-03-03T03:00:00.000Z",
@@ -272,7 +262,6 @@
         {
           "id": 4,
           "eleicaoId": 2,
-          "etapaId": 4,
           "nomeEtapa": "Inscrição dos Candidatos",
           "descricaoEtapa": "Nessa etapa, o sistema libera acesso aos eleitores cadastrados nessa eleição para eles realizarem sua inscrição. Essa etapa deve ter duração mínima de 15 dias. É importante lembrar que qualquer empregado do estabelecimento, independentemente do setor ou local de trabalho, pode se inscrever. (NR-05 5.40 b. c.)",
           "dataPrevista": "2019-04-04T03:00:00.000Z",
@@ -290,7 +279,6 @@
         {
           "id": 5,
           "eleicaoId": 2,
-          "etapaId": 5,
           "nomeEtapa": "Votação",
           "descricaoEtapa": "Nessa etapa, todos os eleitores podem acessar o sistema e escolher um dos candidatos como representante para o próximo mandato da CIPA. A eleição deve ser realizada em um dia normal de trabalho e 30 dias antes do término do mandato em curso, no mínimo. (NR-05 5.40 e. f.)",
           "dataPrevista": "2019-03-03T03:00:00.000Z",
@@ -308,7 +296,6 @@
         {
           "id": 6,
           "eleicaoId": 2,
-          "etapaId": 6,
           "nomeEtapa": "Apuração",
           "descricaoEtapa": "A NR-05 estabelece que a apuração dos votos deve ser feita em horário normal de trabalho, com acompanhamento de representante do empregador e dos empregados, em número a ser definido pela comissão eleitoral (NR-05 5.40 h). Obs.: a apuração dos votos não acontecerá caso haja participação inferior a 50% dos empregados na votação. Nesse caso, deve ser organizada outra votação, no prazo máximo de 10 dias.",
           "dataPrevista": "2019-06-06T03:00:00.000Z",
@@ -326,7 +313,6 @@
         {
           "id": 7,
           "eleicaoId": 2,
-          "etapaId": 7,
           "nomeEtapa": "Ata de Eleição",
           "descricaoEtapa": "Os candidatos votados e não eleitos devem estar relacionados nessa ata, em ordem decrescente de votos para nomeação posterior, em caso de vacância de suplentes. Não se preocupe, a criação desse documento é por nossa conta!",
           "dataPrevista": "2019-07-07T03:00:00.000Z",
@@ -363,7 +349,6 @@
         {
           "id": 1,
           "eleicaoId": 1,
-          "etapaId": 1,
           "nomeEtapa": "Convocação para a Eleição",
           "descricaoEtapa": "No início do processo eleitoral, o empregador deve convocar as eleições para a escolha dos representantes dos empregados na CIPA. Essa convocação precisa ocorrer no prazo mínimo de 60 dias antes do término do mandato em curso (NR-05 - 5.38)",
           "dataPrevista": "2019-01-01T03:00:00.000Z",
@@ -381,7 +366,6 @@
         {
           "id": 2,
           "eleicaoId": 1,
-          "etapaId": 2,
           "nomeEtapa": "Formação da Comissão Eleitoral",
           "descricaoEtapa": "A Norma Regulamentadora 05 também determina que, no prazo mínimo de 55 dias antes do término do mandato em curso, seja constituída a Comissão Eleitoral (CE). Essa comissão deve ser formada pelos membros atuais da CIPA e será responsável pela organização e acompanhamento do processo eleitoral (NR-05 5.39).",
           "dataPrevista": "2019-01-01T03:00:00.000Z",
@@ -399,7 +383,6 @@
         {
           "id": 3,
           "eleicaoId": 1,
-          "etapaId": 3,
           "nomeEtapa": "Edital de Inscrição dos Candidatos",
           "descricaoEtapa": "Nessa etapa, você precisa publicar e divulgar o edital de inscrição para a CIPA, em locais de fácil acesso e visualização. Atente-se ao prazo! A NR-5 determina que a publicação ocorra no prazo mínimo de 45 dias antes do término do mandato em curso. (NR-05 - 5.40 a)",
           "dataPrevista": "2019-03-03T03:00:00.000Z",
@@ -417,7 +400,6 @@
         {
           "id": 4,
           "eleicaoId": 1,
-          "etapaId": 4,
           "nomeEtapa": "Inscrição dos Candidatos",
           "descricaoEtapa": "Nessa etapa, o sistema libera acesso aos eleitores cadastrados nessa eleição para eles realizarem sua inscrição. Essa etapa deve ter duração mínima de 15 dias. É importante lembrar que qualquer empregado do estabelecimento, independentemente do setor ou local de trabalho, pode se inscrever. (NR-05 5.40 b. c.)",
           "dataPrevista": "2019-04-04T03:00:00.000Z",
@@ -435,7 +417,6 @@
         {
           "id": 5,
           "eleicaoId": 1,
-          "etapaId": 5,
           "nomeEtapa": "Votação",
           "descricaoEtapa": "Nessa etapa, todos os eleitores podem acessar o sistema e escolher um dos candidatos como representante para o próximo mandato da CIPA. A eleição deve ser realizada em um dia normal de trabalho e 30 dias antes do término do mandato em curso, no mínimo. (NR-05 5.40 e. f.)",
           "dataPrevista": "2019-03-03T03:00:00.000Z",
@@ -453,7 +434,6 @@
         {
           "id": 6,
           "eleicaoId": 1,
-          "etapaId": 6,
           "nomeEtapa": "Apuração",
           "descricaoEtapa": "A NR-05 estabelece que a apuração dos votos deve ser feita em horário normal de trabalho, com acompanhamento de representante do empregador e dos empregados, em número a ser definido pela comissão eleitoral (NR-05 5.40 h). Obs.: a apuração dos votos não acontecerá caso haja participação inferior a 50% dos empregados na votação. Nesse caso, deve ser organizada outra votação, no prazo máximo de 10 dias.",
           "dataPrevista": "2019-06-06T03:00:00.000Z",
@@ -471,7 +451,6 @@
         {
           "id": 7,
           "eleicaoId": 1,
-          "etapaId": 7,
           "nomeEtapa": "Ata de Eleição",
           "descricaoEtapa": "Os candidatos votados e não eleitos devem estar relacionados nessa ata, em ordem decrescente de votos para nomeação posterior, em caso de vacância de suplentes. Não se preocupe, a criação desse documento é por nossa conta!",
           "dataPrevista": "2019-07-07T03:00:00.000Z",

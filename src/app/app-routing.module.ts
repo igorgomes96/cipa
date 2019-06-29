@@ -12,14 +12,14 @@ const routes: Routes = [
   },
   {
     path: 'autenticacao',
-    loadChildren: './modules/autenticacao/autenticacao.module#AutenticacaoModule',
+    loadChildren: () => import('./modules/autenticacao/autenticacao.module').then(m => m.AutenticacaoModule),
     data: {
       navigationType: NavigationType.None
     }
   },
   {
     path: 'eleicoes',
-    loadChildren: './modules/eleicoes/eleicoes.module#EleicoesModule'
+    loadChildren: () => import('./modules/eleicoes/eleicoes.module').then(m => m.EleicoesModule)
   },
   { path: '', redirectTo: 'eleicoes', pathMatch: 'full' },
   { path: '**', redirectTo: '/not-found' }

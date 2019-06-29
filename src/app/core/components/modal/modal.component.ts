@@ -1,6 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ModalService } from '../../services/modal.service';
-import { template } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-modal',

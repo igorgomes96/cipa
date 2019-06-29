@@ -35,7 +35,7 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
-        loadChildren: '../dashboard/dashboard.module#DashboardModule',
+        loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule),
         data: {
           breadcrumb: 'Eleições',
           title: 'Eleições'
@@ -43,7 +43,7 @@ const routes: Routes = [
       },
       {
         path: 'cronograma',
-        loadChildren: '../cronograma/cronograma.module#CronogramaModule',
+        loadChildren: () => import('../cronograma/cronograma.module').then(m => m.CronogramaModule),
         data: {
           breadcrumb: 'Eleições',
           title: 'Eleições'
@@ -51,7 +51,7 @@ const routes: Routes = [
       },
       {
         path: 'eleitores',
-        loadChildren: '../eleitores/eleitores.module#EleitoresModule',
+        loadChildren: () => import('../eleitores/eleitores.module').then(m => m.EleitoresModule),
         data: {
           breadcrumb: 'Eleições',
           title: 'Eleições'
@@ -59,11 +59,11 @@ const routes: Routes = [
       },
       {
         path: 'candidaturas',
-        loadChildren: '../candidaturas/candidaturas.module#CandidaturasModule'
+        loadChildren: () => import('../candidaturas/candidaturas.module').then(m => m.CandidaturasModule)
       },
       {
         path: 'votacao',
-        loadChildren: '../votacoes/votacoes.module#VotacoesModule'
+        loadChildren: () => import('../votacoes/votacoes.module').then(m => m.VotacoesModule)
       }
     ]
   }

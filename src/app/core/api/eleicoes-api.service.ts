@@ -20,13 +20,13 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
   }
 
   getCronograma(idEleicao: number): Observable<EtapaCronograma[]> {
-    return super.get(idEleicao).pipe(map(eleicao => eleicao.cronograma));
-    // return this.http.get(`${this.url}/${idEleicao}/cronograma`);
+    // return super.get(idEleicao).pipe(map(eleicao => eleicao.cronograma));
+    return this.http.get<EtapaCronograma[]>(`${this.url}${idEleicao}/cronograma`);
   }
 
   getEleitores(idEleicao: number): Observable<Eleitor[]> {
     return this.http.get<Eleitor[]>(`${environment.api}${endpoints.eleitores}`);
-    // return this.http.get(`${this.url}/${idEleicao}/eleitores`);
+    // return this.http.get(`${this.url}${idEleicao}/eleitores`);
   }
 
 }

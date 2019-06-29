@@ -9,7 +9,6 @@ export enum PosicaoEtapa {
 export class EtapaCronograma {
     id: number;
     eleicaoId: number;
-    etapaId: number;
     nomeEtapa: string;
     descricaoEtapa: string;
     dataPrevista: Date;
