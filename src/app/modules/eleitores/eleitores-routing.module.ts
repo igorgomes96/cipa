@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NavigationType } from '../../app.component';
 import { EleitoresListaComponent } from './pages/eleitores-lista/eleitores-lista.component';
-import { EleitoresFormComponent } from './pages/eleitores-form/eleitores-form.component';
+import { EleitoresFormComponent } from './components/eleitores-form/eleitores-form.component';
 import { EleicaoResolverService } from '../../core/resolvers/eleicao-resolver.service';
 import { EleitorResolverService } from '../../core/resolvers/eleitor-resolver.service';
+import { EleitorNovoComponent } from './pages/eleitor-novo/eleitor-novo.component';
+import { EleitorEdicaoComponent } from './pages/eleitor-edicao/eleitor-edicao.component';
 
 const routes: Routes = [
   {
@@ -24,11 +26,11 @@ const routes: Routes = [
       },
       {
         path: 'novo',
-        component: EleitoresFormComponent
+        component: EleitorNovoComponent
       },
       {
         path: ':id',
-        component: EleitoresFormComponent,
+        component: EleitorEdicaoComponent,
         resolve: {
           eleitor: EleitorResolverService
         }

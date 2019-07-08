@@ -25,7 +25,7 @@ export class CardCandidatoComponent implements OnInit {
   @Output() reprovacao = new EventEmitter<Reprovacao>();
   @Output() votacao = new EventEmitter<Candidato>();
 
-  @ViewChild('modalReprovacao') modalReprovacao: TemplateRef<any>;
+  @ViewChild('modalReprovacao', { static: false }) modalReprovacao: TemplateRef<any>;
 
   motivoReprovacao: string = null;
 

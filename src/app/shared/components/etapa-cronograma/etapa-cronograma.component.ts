@@ -30,6 +30,7 @@ export class EtapaCronogramaComponent implements OnInit {
       data: [{ value: this.etapa.dataPrevista, disabled: this.isDateDisabled }]
     });
     this.form.get('data').valueChanges.subscribe((v) => {
+      this.etapa.dataPrevista = v;
       this.onAtualizarEtapa();
     });
   }

@@ -1,0 +1,22 @@
+<h4>Documentos Templates</h4>
+<p>Abaixo está a lista de documentos que sugerimos como exemplo para a etapa atual:</p>
+<table class="table table-hover">
+    <tbody>
+        <tr *ngFor="let arquivo of templates">
+            <td class="project-status">
+                <button class="btn btn-outline btn-danger btn-xs m-r-xs" (click)="deleteFile(arquivo.id)">
+                    <i class="fa fa-trash"></i>
+                </button>
+                <button class="btn btn-outline btn-primary btn-xs" (click)="download(arquivo)">
+                    <i class="fa fa-download"></i>
+                </button>
+            </td>
+            <td class="project-title">
+                <strong>{{ arquivo.nome }}</strong>
+                <br />
+                <small>Upload: {{ arquivo.dataUpload | date:'dd/MM/yyy HH:mm' }}, {{ (arquivo.tamanho / 1024) |
+                number:'1.0-1' }}k</small>
+            </td>
+        </tr>
+    </tbody>
+</table>

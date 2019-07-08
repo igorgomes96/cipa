@@ -13,7 +13,7 @@ import { Arquivo } from '../../shared/models/arquivo';
 export class CronogramaApiService extends GenericApi<EtapaCronograma> {
 
   constructor(private http: HttpClient) {
-    super(http, environment.api + endpoints.arquivos);
+    super(http, environment.api + endpoints.cronograma);
   }
 
   getTemplates(idEtapa: number): Observable<Arquivo[]> {

@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
-import { ToastMessage, ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastMessage } from 'src/app/shared/components/toasts/toasts.component';
 import { from, Observable } from 'rxjs';
 
 declare var swal: any;
@@ -10,6 +10,7 @@ declare var swal: any;
 })
 export class ToastsService {
 
+// tslint:disable-next-line: variable-name
   private _messageEmitter: EventEmitter<ToastMessage> = new EventEmitter<ToastMessage>();
   constructor() { }
 
@@ -21,7 +22,7 @@ export class ToastsService {
     this._messageEmitter.emit(message);
   }
 
-  confirm(message: string, title = 'Tem certeza?'): Observable<boolean> {
+  confirm(message: string, title = 'Tem certeza?'): Observable<any> {
     return from(swal({
       title,
       text: message,

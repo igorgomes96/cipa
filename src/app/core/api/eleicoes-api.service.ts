@@ -5,7 +5,6 @@ import { GenericApi } from './generic-api';
 import { Eleicao } from '../../shared/models/eleicao';
 import { environment } from 'src/environments/environment';
 import { endpoints } from 'src/environments/endpoints';
-import { map, tap } from 'rxjs/operators';
 import { EtapaCronograma } from '../../shared/models/cronograma';
 import { Observable } from 'rxjs';
 import { Eleitor } from '../../shared/models/eleitor';
@@ -25,8 +24,8 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
   }
 
   getEleitores(idEleicao: number): Observable<Eleitor[]> {
-    return this.http.get<Eleitor[]>(`${environment.api}${endpoints.eleitores}`);
-    // return this.http.get(`${this.url}${idEleicao}/eleitores`);
+    // return this.http.get<Eleitor[]>(`${environment.api}${endpoints.eleitores}`);
+    return this.http.get<Eleitor[]>(`${this.url}${idEleicao}/eleitores`);
   }
 
 }
