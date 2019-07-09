@@ -33,7 +33,7 @@
           <div class="form-group">
             <input type="password" class="form-control" placeholder="Senha" formControlName="senha">
           </div>
-          <button type="submit" class="btn btn-primary block full-width m-b" [disabled]="form.invalid">Login</button>
+          <button type="submit" class="btn btn-primary block full-width m-b" [disabled]="form.invalid" [ladda]="loggingOn">Login</button>
 
 
           <p class="text-muted text-center">

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 import { Observable } from 'rxjs';
 
@@ -26,7 +26,9 @@ export class EleitoresFormComponent implements OnInit {
               private location: Location) { }
 
   ngOnInit() {
-    this.eleitor = new Eleitor();
+    if (!this.eleitor) {
+      this.eleitor = new Eleitor();
+    }
   }
 
   reset() {

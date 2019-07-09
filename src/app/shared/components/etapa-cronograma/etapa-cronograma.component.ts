@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EtapaCronograma, PosicaoEtapa } from 'src/app/shared/models/cronograma';
 import { Arquivo } from 'src/app/shared/models/arquivo';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { CronogramaApiService } from 'src/app/core/api/cronograma-api.service';
+import { finalize, switchMap } from 'rxjs/operators';
 
 declare var $: any;
 
@@ -13,17 +15,19 @@ declare var $: any;
 export class EtapaCronogramaComponent implements OnInit {
 
   @Input() etapa: EtapaCronograma;
-  @Input() arquivos: Arquivo[];
   @Input() layout = 'Visualização';
+  @Input() carregandoProximaEtapa = false;
   @Output() proximaEtapa: EventEmitter<EtapaCronograma> = new EventEmitter<EtapaCronograma>();
   @Output() exibirTemplates: EventEmitter<EtapaCronograma> = new EventEmitter<EtapaCronograma>();
   @Output() atualizarEtapa: EventEmitter<EtapaCronograma> = new EventEmitter<EtapaCronograma>();
 
   PosicaoEtapa: typeof PosicaoEtapa = PosicaoEtapa;
-
+  carregandoArquivos = false;
+  arquivos: Arquivo[] = [];
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+    private cronogramaApi: CronogramaApiService) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -33,6 +37,10 @@ export class EtapaCronogramaComponent implements OnInit {
       this.etapa.dataPrevista = v;
       this.onAtualizarEtapa();
     });
+    this.cronogramaApi.getArquivos(this.etapa.id)
+      .subscribe((arquivos: Arquivo[]) => {
+        this.arquivos = arquivos;
+      });
   }
 
   get isDateDisabled() {
@@ -82,6 +90,23 @@ export class EtapaCronogramaComponent implements OnInit {
     }
   }
 
+  upload(files: FileList) {
+    this.carregandoArquivos = true;
+    this.cronogramaApi.uploadArquivos(this.etapa.id, files)
+      .pipe(
+        switchMap(_ => this.cronogramaApi.getArquivos(this.etapa.id)),
+        finalize(() => this.carregandoArquivos = false)
+      ).subscribe((arquivos: Arquivo[]) => {
+        this.arquivos = arquivos;
+      });
+  }
+
+  deleteArquivo() {
+    this.cronogramaApi.getArquivos(this.etapa.id)
+      .subscribe((arquivos: Arquivo[]) => {
+        this.arquivos = arquivos;
+      });
+  }
 
   onProximaEtapa() {
     this.proximaEtapa.emit(this.etapa);

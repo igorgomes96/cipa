@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { smoothlyMenu } from 'src/app.helpers';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -12,14 +13,14 @@ export class TopnavComponent implements OnInit {
 
   @Input() showToggle = true;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   logout() {
     // this.authService.logout();
-    // this.router.navigate(['/login']);
+    this.router.navigate(['/autenticacao/login']);
   }
 
   toggleNavigation(): void {

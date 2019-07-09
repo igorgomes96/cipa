@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +16,13 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
+  loggingOn = false;
+
   constructor(private loginService: LoginApiService,
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private toast: ToastsService,
-    private authService: AuthService) { }
+              private formBuilder: FormBuilder,
+              private router: Router,
+              private toast: ToastsService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -29,8 +32,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.loggingOn = true;
     const usuario = this.form.value as Usuario;
     this.loginService.login(usuario)
+    .pipe(finalize(() => this.loggingOn = false))
     .subscribe((authInfo: any) => {
       this.authService.token = authInfo.accessToken;
       this.toast.showMessage({

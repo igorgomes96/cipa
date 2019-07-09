@@ -5,7 +5,6 @@ export class Arquivo {
     dataCriacao: Date;
     nome: string;
     extensao: string;
-    content: Blob;
     tamanho: number;
     contentType: string;
 }

@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { NotFoundComponent } from './modules/not-found/pages/not-found/not-found.component';
-import { CronogramaModule } from './modules/cronograma/cronograma.module';
 import { InterceptorsModule } from './core/interceptors/interceptors.module';
 
 @NgModule({
@@ -19,8 +18,7 @@ import { InterceptorsModule } from './core/interceptors/interceptors.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
-    InterceptorsModule,
-    CronogramaModule
+    InterceptorsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

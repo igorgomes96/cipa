@@ -18,6 +18,7 @@ import { EmpresaSharedFormComponent } from './components/empresa-shared-form/emp
 import { EstabelecimentoSharedFormComponent } from './components/estabelecimento-shared-form/estabelecimento-shared-form.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { AjudaTooltipComponent } from './components/ajuda-tooltip/ajuda-tooltip.component';
+import { LaddaModule } from 'angular2-ladda';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AjudaTooltipComponent } from './components/ajuda-tooltip/ajuda-tooltip.
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    TooltipModule
+    TooltipModule,
+    LaddaModule
   ],
   exports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { AjudaTooltipComponent } from './components/ajuda-tooltip/ajuda-tooltip.
     EstabelecimentoSharedFormComponent,
     DatepickerComponent,
     TooltipModule,
-    AjudaTooltipComponent
+    AjudaTooltipComponent,
+    LaddaModule
   ]
 })
 export class SharedModule { }

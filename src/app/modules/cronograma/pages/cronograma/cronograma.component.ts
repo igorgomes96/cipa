@@ -20,6 +20,7 @@ export class CronogramaComponent implements OnInit {
   PosicaoEtapa: typeof PosicaoEtapa = PosicaoEtapa;
   eleicao: Eleicao;
   templates: Arquivo[];
+  carregandoProximaEtapa = false;
   @ViewChild('modalTemplates', { static: false }) modalTemplates: TemplateRef<any>;
 
   constructor(private route: ActivatedRoute,
@@ -41,12 +42,19 @@ export class CronogramaComponent implements OnInit {
       });
   }
 
-  proximaEtapa(etapa: EtapaCronograma) {
-    this.toasts.showMessage({
-      message: 'Message Test',
-      title: 'Título Teste',
-      type: ToastType.success
-    });
+  proximaEtapa(_: EtapaCronograma) {
+    this.carregandoProximaEtapa = true;
+    this.eleicoesApi.postProximaEtapa(this.eleicao.id)
+      .pipe(finalize(() => this.carregandoProximaEtapa = false))
+      .subscribe((cronograma: EtapaCronograma[]) => {
+        this.eleicao.cronograma = cronograma;
+        this.toasts.showMessage({
+          message: 'Mudança de etapa concluída com Sucesso!',
+          title: 'Sucesso!',
+          type: ToastType.success
+        });
+      });
+
   }
 
   exibirTemplates(etapa: EtapaCronograma) {
@@ -57,7 +65,6 @@ export class CronogramaComponent implements OnInit {
     });*/
     this.templates = [
       {
-        content: null,
         contentType: 'plain/text',
         dataCriacao: new Date(),
         dataUpload: new Date(),
@@ -73,22 +80,22 @@ export class CronogramaComponent implements OnInit {
 
   updateCronograma() {
     this.eleicoesApi.getCronograma(this.eleicao.id)
-    .subscribe(cronograma => {
-      this.eleicao.cronograma = cronograma;
-    });
+      .subscribe(cronograma => {
+        this.eleicao.cronograma = cronograma;
+      });
   }
 
   atualizarEtapa(etapa: EtapaCronograma) {
     this.cronogramaApi.put(etapa.id, etapa)
-    .pipe(finalize(() => {
-      this.updateCronograma();
-    })).subscribe(_ => {
-      this.toasts.showMessage({
-        message: 'Data atualizada com sucesso!',
-        title: 'Sucesso!',
-        type: ToastType.success
+      .pipe(finalize(() => {
+        this.updateCronograma();
+      })).subscribe(_ => {
+        this.toasts.showMessage({
+          message: 'Data atualizada com sucesso!',
+          title: 'Sucesso!',
+          type: ToastType.success
+        });
       });
-    });
   }
 
 }

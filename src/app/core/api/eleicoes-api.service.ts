@@ -28,4 +28,8 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
     return this.http.get<Eleitor[]>(`${this.url}${idEleicao}/eleitores`);
   }
 
+  postProximaEtapa(idEleicao: number): Observable<EtapaCronograma[]> {
+    return this.http.post<EtapaCronograma[]>(`${this.url}${idEleicao}/proximaetapa`, null);
+  }
+
 }

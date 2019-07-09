@@ -37,10 +37,13 @@
 
   <div class="col-lg-4 col-md-5 col-sm-12 arquivos"
     *ngIf="layout === 'Visualização' && etapa.posicaoEtapa !== PosicaoEtapa.Futura">
-    <app-arquivos [arquivos]="arquivos"></app-arquivos>
+
+    <app-arquivos [arquivos]="arquivos" (upload)="upload($event)" (delete)="deleteArquivo()"></app-arquivos>
+
+
     <div class="row m-t-sm" *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Atual">
       <div class="col-md-12">
-        <button href="#" class="btn btn-primary" style="float: right" (click)="onProximaEtapa()"> Próxima
+        <button href="#" class="btn btn-primary" style="float: right" [ladda]="carregandoProximaEtapa" (click)="onProximaEtapa()"> Próxima
           Etapa</button>
       </div>
     </div>
