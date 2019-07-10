@@ -16,6 +16,10 @@
     }
 }
 
+select.form-control.input-sm {
+    padding: 3px 6px;
+}
+
 input[readonly].input-white {
     background-color: white;   
 }

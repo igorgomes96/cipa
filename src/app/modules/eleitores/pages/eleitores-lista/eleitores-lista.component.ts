@@ -8,6 +8,7 @@ import { EleitoresApiService } from 'src/app/core/api/eleitores-api.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 import { Eleicao } from 'src/app/shared/models/eleicao';
+import { PagedResult } from 'src/app/shared/models/paged-result';
 
 declare var $: any;
 
@@ -18,14 +19,20 @@ declare var $: any;
 })
 export class EleitoresListaComponent implements OnInit {
 
-  eleitores: Eleitor[];
+  eleitores: PagedResult<Eleitor> = {
+    currentPage: 1,
+    pageCount: 0,
+    pageSize: 50,
+    result: [],
+    totalRecords: 0
+  };
   eleicao: Eleicao;
   form: FormGroup;
   constructor(private eleicoesApi: EleicoesApiService,
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    private eleitoresApi: EleitoresApiService,
-    private toasts: ToastsService) { }
+              private route: ActivatedRoute,
+              private formBuilder: FormBuilder,
+              private eleitoresApi: EleitoresApiService,
+              private toasts: ToastsService) { }
 
   ngOnInit() {
     this.route.data
@@ -33,9 +40,9 @@ export class EleitoresListaComponent implements OnInit {
         filter(routeData => routeData.hasOwnProperty('eleicao')),
         switchMap(routeData => {
           this.eleicao = routeData.eleicao;
-          return this.eleicoesApi.getEleitores(this.eleicao.id);
+          return this.eleicoesApi.getEleitores(this.eleicao.id, this.pageParams);
         })
-      ).subscribe(eleitores => {
+      ).subscribe((eleitores: PagedResult<Eleitor>) => {
         this.eleitores = eleitores;
       });
 
@@ -49,11 +56,25 @@ export class EleitoresListaComponent implements OnInit {
       });
   }
 
+  get pageParams(): any {
+    return { pageSize: this.eleitores.pageSize, pageNumber: this.eleitores.currentPage };
+  }
+
   carregaEleitores() {
-    return this.eleicoesApi.getEleitores(this.eleicao.id)
-      .subscribe(eleitores => {
+    return this.eleicoesApi.getEleitores(this.eleicao.id, this.pageParams)
+      .subscribe((eleitores: PagedResult<Eleitor>) => {
         this.eleitores = eleitores;
       });
+  }
+
+  alteraPagina(pagina: number) {
+    this.eleitores.currentPage = pagina;
+    this.carregaEleitores();
+  }
+
+  alteraTamanhoPagina(tamanhoPagina: number) {
+    this.eleitores.pageSize = tamanhoPagina;
+    this.carregaEleitores();
   }
 
   excluir(id: number) {

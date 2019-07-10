@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+    <div class="form-group">
+      <label class="control-label">Qtda. <app-ajuda-tooltip ajuda="Quantidade de registros a serem exibido por página."></app-ajuda-tooltip></label>
+      <select name="registros" [ngModel]="paginationInfo.pageSize" (ngModelChange)="mudaTamanhoPagina($event)"
+        id="registros" class="form-control input-sm">
+        <option *ngFor="let tamanho of tamanhosDisponiveis" [value]="tamanho">{{ tamanho }}</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination" *ngIf="paginationInfo.pageCount > 1">
+    <li>
+      <a (click)="primeiro()">
+        <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
+      </a>
+    </li>
+
+    <li>
+      <a (click)="anterior()"><i class="fa fa-angle-left"></i></a>
+    </li>
+
+    <li [class.active]="page === paginationInfo.currentPage" *ngFor="let page of pages | slice:startPage:endPage">
+      <a (click)="mudaPagina(page)">{{ page }}</a>
+    </li>
+
+    <li>
+      <a (click)="proximo()"><i class="fa fa-angle-right"></i></a>
+    </li>
+
+    <li>
+      <a (click)="ultimo()">
+        <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div class="row" *ngIf="showRegistrosPorPagina">
+  <div class="col-sm-12">
+    <small>Total de Registros: {{ paginationInfo.totalRecords }}</small>
+  </div>
+</div>

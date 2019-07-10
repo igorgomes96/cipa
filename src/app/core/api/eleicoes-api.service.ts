@@ -8,6 +8,7 @@ import { endpoints } from 'src/environments/endpoints';
 import { EtapaCronograma } from '../../shared/models/cronograma';
 import { Observable } from 'rxjs';
 import { Eleitor } from '../../shared/models/eleitor';
+import { PagedResult } from 'src/app/shared/models/paged-result';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,9 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
     return this.http.get<EtapaCronograma[]>(`${this.url}${idEleicao}/cronograma`);
   }
 
-  getEleitores(idEleicao: number): Observable<Eleitor[]> {
+  getEleitores(idEleicao: number, params: any): Observable<Eleitor[] | PagedResult<Eleitor>> {
     // return this.http.get<Eleitor[]>(`${environment.api}${endpoints.eleitores}`);
-    return this.http.get<Eleitor[]>(`${this.url}${idEleicao}/eleitores`);
+    return this.http.get<Eleitor[] | PagedResult<Eleitor>>(`${this.url}${idEleicao}/eleitores`, { params });
   }
 
   postProximaEtapa(idEleicao: number): Observable<EtapaCronograma[]> {

@@ -1,0 +1,23 @@
+li.page-item.active a {
+    cursor: pointer;
+    color: white;
+}
+
+li.page-item a {
+    cursor: pointer;
+    color: #007bff;
+}
+
+.registros-label {
+    font-size: 90%;
+}
+
+.pagination > li.active > a {
+    color: white;
+    background-color: #1c84c6;
+}
+
+nav > ul {
+    margin-top: 0;
+    margin-bottom: 8px;
+}

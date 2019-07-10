@@ -1,12 +1,13 @@
 <div class="form-group" [class.has-error]="hasError">
-    <label class="control-label">{{ label }}</label>
-    <div class="input-group" *ngIf="addOnBefore != null || addOnAfter != null">
-      <span class="input-group-addon" *ngIf="addOnBefore != null">{{ addOnBefore }}</span>
-      <input [type]="innerType" (input)="pushChanges($event.target.value)" [readOnly]="!!readOnly" [(ngModel)]="value" [placeholder]="placeholder" [name]="name" [id]="id"
-        class="form-control">
-      <span class="input-group-addon" *ngIf="addOnAfter != null">{{ addOnAfter }}</span> 
-    </div>
-    <input [type]="innerType" (input)="pushChanges($event.target.value)" *ngIf="addOnBefore == null && addOnAfter == null" [readOnly]="!!readOnly" [(ngModel)]="value"
+  <label class="control-label">{{ label }}</label>
+  <div class="input-group" *ngIf="addOnBefore != null || addOnAfter != null">
+    <span class="input-group-addon" *ngIf="addOnBefore != null">{{ addOnBefore }}</span>
+    <input [type]="innerType" (input)="pushChanges($event.target.value)" [readOnly]="!!readOnly" [(ngModel)]="value"
       [placeholder]="placeholder" [name]="name" [id]="id" class="form-control">
-    <app-validator-message [control]="control" [controlName]="label"></app-validator-message>
+    <span class="input-group-addon" *ngIf="addOnAfter != null">{{ addOnAfter }}</span>
   </div>
+  <input [type]="innerType" (input)="pushChanges($event.target.value)" *ngIf="addOnBefore == null && addOnAfter == null"
+    [readOnly]="!!readOnly" [(ngModel)]="value" [placeholder]="placeholder" [name]="name" [id]="id"
+    class="form-control">
+  <app-validator-message [control]="control" [controlName]="label"></app-validator-message>
+</div>
