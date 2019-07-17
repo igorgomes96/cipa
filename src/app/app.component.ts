@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Router, NavigationEnd, ActivationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivationEnd, ActivationStart } from '@angular/router';
 
 import { filter, distinctUntilChanged } from 'rxjs/operators';
 import { correctHeight, detectBody } from '../app.helpers';
@@ -23,7 +23,9 @@ export enum NavigationType {
 export class AppComponent implements OnInit, AfterViewInit {
 
   private navigationType = NavigationType.Left;
-  constructor(private router: Router, private navigationService: NavigationService,
+  showFooter = true;
+  constructor(private router: Router,
+    private navigationService: NavigationService,
     private toastsService: ToastsService) { }
 
   ngOnInit() {
@@ -38,11 +40,16 @@ export class AppComponent implements OnInit, AfterViewInit {
       }
     });
     this.router.events.pipe(
-      filter(event => event instanceof ActivationEnd),
+      filter(event => event instanceof ActivationStart),
       distinctUntilChanged()
-    ).subscribe((event: ActivationEnd) => {
+    ).subscribe((event: ActivationStart) => {
       if (event.snapshot.data.hasOwnProperty('navigationType')) {
         this.navigationType = event.snapshot.data.navigationType;
+      }
+
+      this.showFooter = true;
+      if (event.snapshot.data.hasOwnProperty('showFooter')) {
+        this.showFooter = event.snapshot.data.showFooter;
       }
     });
   }

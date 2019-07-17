@@ -9,6 +9,7 @@ import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { CronogramaApiService } from 'src/app/core/api/cronograma-api.service';
+import { EtapasObrigatoriasApiService } from 'src/app/core/api/etapas-obrigatorias-api.service';
 
 @Component({
   selector: 'app-cronograma',
@@ -24,10 +25,11 @@ export class CronogramaComponent implements OnInit {
   @ViewChild('modalTemplates', { static: false }) modalTemplates: TemplateRef<any>;
 
   constructor(private route: ActivatedRoute,
-    private eleicoesApi: EleicoesApiService,
-    private cronogramaApi: CronogramaApiService,
-    private toasts: ToastsService,
-    private modalService: ModalService) { }
+              private eleicoesApi: EleicoesApiService,
+              private cronogramaApi: CronogramaApiService,
+              private toasts: ToastsService,
+              private modalService: ModalService,
+              private etapasObrigatoriasApi: EtapasObrigatoriasApiService) { }
 
   ngOnInit() {
     this.route.data
@@ -58,24 +60,11 @@ export class CronogramaComponent implements OnInit {
   }
 
   exibirTemplates(etapa: EtapaCronograma) {
-    /*this.cronogramaApi.getTemplates(etapa.id)
+    this.etapasObrigatoriasApi.getTemplates(etapa.id)
     .subscribe((arquivos: Arquivo[]) => {
       this.templates = arquivos;
       this.modalService.showModal(this.modalTemplates);
-    });*/
-    this.templates = [
-      {
-        contentType: 'plain/text',
-        dataCriacao: new Date(),
-        dataUpload: new Date(),
-        extensao: '.csv',
-        id: 'id',
-        nome: 'Arquivo 1',
-        path: 'caminho',
-        tamanho: 34276
-      }
-    ];
-    this.modalService.showModal(this.modalTemplates);
+    });
   }
 
   updateCronograma() {

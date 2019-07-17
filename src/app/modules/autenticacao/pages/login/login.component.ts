@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
         title: 'Sucesso!',
         type: ToastType.success
       });
-      this.router.navigate(['/eleicoes']);
+      this.router.navigate(['/']);
     });
   }
 

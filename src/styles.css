@@ -165,3 +165,11 @@ ul.inline li a:not(.btn) {
 popover-content .popover {
     width: 150px;
 }
+
+.wrapper-content {
+    padding: 20px 10px 80px;
+}
+
+.float-right {
+    float: right!important;
+}

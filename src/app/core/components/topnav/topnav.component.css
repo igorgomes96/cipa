@@ -10,3 +10,10 @@
     height: 60px;
 }
 
+.collapse {
+    display: inherit !important;
+}
+
+.navbar-right {
+    float: right;   
+}

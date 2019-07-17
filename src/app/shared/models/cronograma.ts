@@ -16,7 +16,7 @@ export class EtapaCronograma {
     etapaObrigatoriaId: number;
     posicaoEtapa: PosicaoEtapa;
     templates: Arquivo[];
-
+    possuiTemplates: boolean;
     etapaObrigatoria: EtapaObrigatoria;
 }
 

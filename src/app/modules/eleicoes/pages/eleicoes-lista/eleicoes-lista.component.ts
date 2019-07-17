@@ -3,6 +3,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { Eleicao } from 'src/app/shared/models/eleicao';
 import { ModalService } from 'src/app/core/services/modal.service';
+import { PagedResult } from 'src/app/shared/models/paged-result';
 
 @Component({
   selector: 'app-eleicoes-lista',
@@ -11,17 +12,29 @@ import { ModalService } from 'src/app/core/services/modal.service';
 })
 export class EleicoesListaComponent implements OnInit {
 
-  eleicoes: Eleicao[];
+  paginationInfo: PagedResult<Eleicao> = {
+    currentPage: 1,
+    pageSize: 10,
+    pageCount: 0,
+    result: [],
+    totalRecords: 0
+  };
+  eleicoes: Eleicao[] = [];
   constructor(private eleicoesApi: EleicoesApiService,
               private modalService: ModalService) { }
 
   ngOnInit() {
-    this.eleicoesApi.getAll()
-    .subscribe((eleicoes: Eleicao[]) => {
-      this.eleicoes = eleicoes;
-    });
+    this.carregaEleicoes();
   }
 
+
+  carregaEleicoes() {
+    this.eleicoesApi.getAll({ pageSize: this.paginationInfo.pageSize, pageNumber: this.paginationInfo.currentPage })
+    .subscribe((eleicoes: PagedResult<Eleicao>) => {
+      this.paginationInfo = eleicoes;
+      this.eleicoes = eleicoes.result;
+    });
+  }
   exibirEleicoes() {
   }
 

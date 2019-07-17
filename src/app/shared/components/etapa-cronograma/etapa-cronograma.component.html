@@ -10,14 +10,12 @@
       <div class="col-md-12">
         <form [formGroup]="form">
           <span class="vertical-date">
-            <div *ngIf="isDateDisabled" style="font-size: 14px;cursor: not-allowed;">
-                <span><i class="fa fa-calendar"></i></span> {{ form.get('data').value | date:'dd/MM/yyyy' }}
+            <div *ngIf="isDateDisabled" style="font-size: 14px;cursor: not-allowed;color:#676a6c">
+              <span><i class="fa fa-calendar"></i></span> {{ form.get('data').value | date:'dd/MM/yyyy' }}
             </div>
             <app-datepicker [name]="'data' + etapa.id" [id]="'data' + etapa.id" formControlName="data"
               [control]="form.get('data')" *ngIf="!isDateDisabled"></app-datepicker>
-            <small *ngIf="!isDateDisabled">Clique na data
-              acima para
-              alterá-la.</small>
+            <small *ngIf="!isDateDisabled">Clique na data acima para alterá-la.</small>
           </span>
         </form>
       </div>
@@ -26,7 +24,7 @@
     <p>{{ etapa.descricaoEtapa }}</p>
 
 
-    <div class="templates" *ngIf="layout === 'Visualização'">
+    <div class="templates" *ngIf="layout === 'Visualização' && etapa.possuiTemplates">
       <p>Possuímos alguns documentos de exemplo que podem te ajudar. Confira-os e fique à vontade para
         utilizá-los!</p>
       <button class="btn btn-success" [disabled]="etapa.posicaoEtapa === PosicaoEtapa.Futura"
@@ -43,7 +41,8 @@
 
     <div class="row m-t-sm" *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Atual">
       <div class="col-md-12">
-        <button href="#" class="btn btn-primary" style="float: right" [ladda]="carregandoProximaEtapa" (click)="onProximaEtapa()"> Próxima
+        <button href="#" class="btn btn-primary" style="float: right" [ladda]="carregandoProximaEtapa"
+          (click)="onProximaEtapa()"> Próxima
           Etapa</button>
       </div>
     </div>

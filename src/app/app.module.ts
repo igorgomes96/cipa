@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { NotFoundComponent } from './modules/not-found/pages/not-found/not-found.component';
 import { InterceptorsModule } from './core/interceptors/interceptors.module';
+import { HomeComponent } from './modules/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

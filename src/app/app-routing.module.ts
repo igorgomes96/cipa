@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './modules/not-found/pages/not-found/not-found.component';
 import { NavigationType } from './app.component';
+import { HomeComponent } from './modules/home/home.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,14 @@ const routes: Routes = [
     path: 'eleicoes',
     loadChildren: () => import('./modules/eleicoes/eleicoes.module').then(m => m.EleicoesModule)
   },
-  { path: '', redirectTo: 'eleicoes', pathMatch: 'full' },
+  {
+    path: 'home',
+    component: HomeComponent,
+    data: {
+      navigationType: NavigationType.Top
+    }
+  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: '/not-found' }
 ];
 

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
     <div class="form-group">
-      <label class="control-label">Qtda. <app-ajuda-tooltip ajuda="Quantidade de registros a serem exibido por página."></app-ajuda-tooltip></label>
+      <label class="control-label">Qtda. <app-ajuda-tooltip ajuda="Quantidade de registros a serem exibidos por página."></app-ajuda-tooltip></label>
       <select name="registros" [ngModel]="paginationInfo.pageSize" (ngModelChange)="mudaTamanhoPagina($event)"
         id="registros" class="form-control input-sm">
         <option *ngFor="let tamanho of tamanhosDisponiveis" [value]="tamanho">{{ tamanho }}</option>

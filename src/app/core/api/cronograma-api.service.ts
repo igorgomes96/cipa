@@ -16,11 +16,6 @@ export class CronogramaApiService extends GenericApi<EtapaCronograma> {
     super(http, environment.api + endpoints.cronograma);
   }
 
-  getTemplates(idEtapa: number): Observable<Arquivo[]> {
-    return this.http.get<Arquivo[]>(`${this.url}`);
-    // return this.http.get<Arquivo[]>(`${this.url}${idEtapa}/templates`);
-  }
-
   getArquivos(idEtapa: number): Observable<Arquivo[]> {
     return this.http.get<Arquivo[]>(`${this.url}${idEtapa}/arquivos`);
   }

@@ -5,14 +5,15 @@ import { LeftnavComponent } from './components/leftnav/leftnav.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { ToastsComponent } from './components/toasts/toasts.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
-  declarations: [TopnavComponent, LeftnavComponent, ToastsComponent, BreadcrumbComponent, ModalComponent],
+  declarations: [TopnavComponent, LeftnavComponent, ToastsComponent, BreadcrumbComponent, ModalComponent, FooterComponent],
   imports: [
     SharedModule
   ],
   exports: [
-    TopnavComponent, LeftnavComponent, ToastsComponent, ModalComponent
+    TopnavComponent, LeftnavComponent, ToastsComponent, ModalComponent, FooterComponent
   ]
 })
 export class CoreModule { }
