@@ -1,17 +1,18 @@
 <div id="wrapper">
 
-    <app-leftnav *ngIf="showLeftNav"></app-leftnav>
+  <app-leftnav *ngIf="showLeftNav"></app-leftnav>
 
-    <div id="page-wrapper" class="gray-bg">
+  <div id="page-wrapper" class="gray-bg">
 
-        <app-topnav *ngIf="showTopNav" [showToggle]="showLeftNav"></app-topnav>
-        
-        <div class="wrapper wrapper-content animated fadeInRight">
-            <router-outlet></router-outlet>
-            <router-outlet name="popup"></router-outlet>
-        </div>
-        <app-footer *ngIf="showFooter" class="m-t-md"></app-footer>
-    </div>
+    <app-topnav *ngIf="showTopNav" [showToggle]="showLeftNav"></app-topnav>
+
+      <div class="wrapper wrapper-content animated fadeInRight">
+        <router-outlet></router-outlet>
+        <router-outlet name="popup"></router-outlet>
+      </div>
+      <app-footer *ngIf="showFooter" class="m-t-md"></app-footer>
+
+  </div>
 
 </div>
 <app-toasts [mensagem]="toastsService.messageEmitter"></app-toasts>

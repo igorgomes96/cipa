@@ -1,74 +1,76 @@
-<div class="row">
-  <div class="col-lg-12">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
 
       <div class="ibox product-detail">
-          <div class="ibox-content">
+        <div class="ibox-content">
 
-              <div class="row">
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-
-
-                      <div class="product-images">
-
-                          <div class="foto">
-                            <img src="/assets/img/pessoa1.jpg">
-                          </div>
-
-                      </div>
-
-                  </div>
-                  <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12">
-
-                      <h2 class="font-bold m-b-xs">
-                          {{ candidato.eleitor?.nome }}
-                      </h2>
-                      <small>{{ candidato.eleitor?.cargo }}</small>
-                      <!-- <div class="m-t-md">
-                          <h2 class="product-main-price">$406,602 <small class="text-muted">Exclude Tax</small> </h2>
-                      </div> -->
-                      <hr>
-
-                      <h4>Objetivos</h4>
-
-                      <div class="text-muted">
-                          {{ candidato.objetivos }}
-                      </div>
-
-                      <dl class="m-t-md">
-                          <dt>Área</dt>
-                          <dd>{{ candidato.eleitor?.area }}</dd>
-                          <dt>Matrícula</dt>
-                          <dd>{{ candidato.eleitor?.matricula }}</dd>
-                          <dt>Email</dt>
-                          <dd>{{ candidato.eleitor?.email }}</dd>
-                          <dt>Data de Admissão</dt>
-                          <dd>{{ candidato.eleitor?.dataAdmissao | date:'dd/MM/yyyy' }}</dd>
-                          <dt>Data de Nascimento</dt>
-                          <dd>{{ candidato.eleitor?.dataNascimento | date:'dd/MM/yyyy' }}</dd>
-                      </dl>
-                      <hr>
-
-                      <div>
-                          <div class="btn-group">
-                              <button class="btn btn-primary btn-sm"><i class="fa fa-vcard"></i> Confirmar Candidatura</button>
-                              <!-- <button class="btn btn-white btn-sm"><i class="fa fa-star"></i> Add to wishlist </button>
-                              <button class="btn btn-white btn-sm"><i class="fa fa-envelope"></i> Contact with author </button> -->
-                          </div>
-                      </div>
+          <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
 
 
+              <div class="product-images">
 
-                  </div>
+                <div class="foto">
+                  <img src="/assets/img/pessoa1.jpg">
+                </div>
+
               </div>
 
+            </div>
+            <div class="col-lg-8 col-md-7 col-sm-6 col-xs-12">
+
+              <h2 class="font-bold m-b-xs">
+                {{ candidato.eleitor?.nome }}
+              </h2>
+              <small>{{ candidato.eleitor?.cargo }}</small>
+              <!-- <div class="m-t-md">
+                          <h2 class="product-main-price">$406,602 <small class="text-muted">Exclude Tax</small> </h2>
+                      </div> -->
+              <hr>
+
+              <h4>Objetivos</h4>
+
+              <div class="text-muted">
+                {{ candidato.objetivos }}
+              </div>
+
+              <dl class="m-t-md">
+                <dt>Área</dt>
+                <dd>{{ candidato.eleitor?.area }}</dd>
+                <dt>Matrícula</dt>
+                <dd>{{ candidato.eleitor?.matricula }}</dd>
+                <dt>Email</dt>
+                <dd>{{ candidato.eleitor?.email }}</dd>
+                <dt>Data de Admissão</dt>
+                <dd>{{ candidato.eleitor?.dataAdmissao | date:'dd/MM/yyyy' }}</dd>
+                <dt>Data de Nascimento</dt>
+                <dd>{{ candidato.eleitor?.dataNascimento | date:'dd/MM/yyyy' }}</dd>
+              </dl>
+              <hr>
+
+              <div>
+                <div class="btn-group">
+                  <button class="btn btn-primary btn-sm"><i class="fa fa-vcard"></i> Confirmar Candidatura</button>
+                  <!-- <button class="btn btn-white btn-sm"><i class="fa fa-star"></i> Add to wishlist </button>
+                              <button class="btn btn-white btn-sm"><i class="fa fa-envelope"></i> Contact with author </button> -->
+                </div>
+              </div>
+
+
+
+            </div>
           </div>
-          <div class="ibox-footer">
-              <span class="pull-right">
-                  <i class="fa fa-clock-o"></i> {{ horario | date:'dd/MMM/yyyy HH:mm' }}
-              </span>
-              Incrição para a CIPA
-          </div>
+
+        </div>
+        <div class="ibox-footer">
+          <span class="pull-right">
+            <i class="fa fa-clock-o"></i> {{ horario | date:'dd/MMM/yyyy HH:mm' }}
+          </span>
+          Incrição para a CIPA
+        </div>
       </div>
 
+    </div>
   </div>
 </div>
