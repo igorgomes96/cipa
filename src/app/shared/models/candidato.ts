@@ -1,9 +1,9 @@
 import { Eleitor } from './eleitor';
 
 export enum StatusAprovacao {
-    Pendente,
-    Aprovada,
-    Reprovada
+    Pendente = 'Pendente',
+    Aprovada = 'Aprovada',
+    Reprovada = 'Reprovada'
 }
 
 export class Reprovacao {
@@ -18,6 +18,7 @@ export class Candidato {
     votos: number;
     statusAprovacao: StatusAprovacao;
     objetivos: string;
+    eleitorId: number;
 
     eleitor: Eleitor;
     reprovacoes: Reprovacao[];

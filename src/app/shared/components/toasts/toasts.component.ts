@@ -17,7 +17,6 @@ export interface ToastMessage {
 
 @Component({
   selector: 'app-toasts',
-  template: '',
   styleUrls: ['./toasts.component.css']
 })
 export class ToastsComponent implements OnInit {

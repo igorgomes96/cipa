@@ -12,8 +12,14 @@
               <div class="product-images">
 
                 <div class="foto">
-                  <img src="/assets/img/pessoa1.jpg">
+                  <img alt="Foto do usuário." *ngIf="foto" [src]="foto">
+                  <img alt="Nenhuma foto carregada." *ngIf="!foto" src="/assets/img/icone.jpg">
                 </div>
+
+                <label title="Upload image file" for="inputImage" class="btn btn-white btn-block m-t-sm">
+                  <input type="file" accept="image/*" name="file" id="inputImage" class="hide" (change)="onUploadImage($event)">
+                  Carregar foto
+                </label>
 
               </div>
 
@@ -51,7 +57,7 @@
 
               <div>
                 <div class="btn-group">
-                  <button class="btn btn-primary btn-sm"><i class="fa fa-vcard"></i> Confirmar Candidatura</button>
+                  <button class="btn btn-primary" (click)="confirmaCandidatura()"><i class="fa fa-vcard"></i> Confirmar Candidatura</button>
                   <!-- <button class="btn btn-white btn-sm"><i class="fa fa-star"></i> Add to wishlist </button>
                               <button class="btn btn-white btn-sm"><i class="fa fa-envelope"></i> Contact with author </button> -->
                 </div>

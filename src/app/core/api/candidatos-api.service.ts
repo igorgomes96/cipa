@@ -1,5 +1,6 @@
+import { ArquivosApiService } from './arquivos-api.service';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 
 import { GenericApi } from './generic-api';
 import { environment } from 'src/environments/environment';
@@ -12,7 +13,8 @@ import { Observable, of } from 'rxjs';
 })
 export class CandidatosApiService extends GenericApi<Candidato> {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private arquivosApiService: ArquivosApiService) {
     super(http, environment.api + endpoints.candidatos);
   }
 
@@ -24,6 +26,14 @@ export class CandidatosApiService extends GenericApi<Candidato> {
   postReprovar(id: number, reprovacao: Reprovacao): Observable<Reprovacao> {
     return of(reprovacao);
     // return this.http.post<Reprovacao>(`${this.url}${id}/reprovar`, reprovacao);
+  }
+
+  getFoto(id: number): Observable<Blob> {
+    return this.http.get<Blob>(`${this.url}${id}/foto`);
+  }
+
+  postFoto(id: number, foto: FileList): Observable<HttpEvent<{}>> {
+    return this.arquivosApiService.uploadFiles(`${this.url}${id}/foto`, foto);
   }
 
 }

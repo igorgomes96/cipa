@@ -1,9 +1,9 @@
 import { Arquivo } from './arquivo';
 
 export enum PosicaoEtapa {
-    Passada,
-    Atual,
-    Futura
+    Passada = 'Passada',
+    Atual = 'Atual',
+    Futura = 'Futura'
 }
 
 export class EtapaCronograma {

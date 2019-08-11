@@ -20,16 +20,18 @@ export class ArquivosApiService {
       formData.append(`file${i}`, files[i]);
     }
 
-    const req = new HttpRequest('POST', url, formData);
-    return this.http.request(req);
+    return this.http.post(url, formData, {
+      observe: 'events',
+      reportProgress: true
+    });
    }
 
    download(id: string) {
-    return this.http.get(`${environment.api}arquivos/${id}/download`, {responseType: 'arraybuffer'});
+    return this.http.get(`${this.url}${id}/download`, {responseType: 'arraybuffer'});
    }
 
    delete(id: string) {
-    return this.http.delete(`${environment.api}arquivos/${id}`);
+    return this.http.delete(`${this.url}${id}`);
    }
 
 }

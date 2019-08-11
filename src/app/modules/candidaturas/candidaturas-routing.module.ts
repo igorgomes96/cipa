@@ -19,9 +19,10 @@ const routes: Routes = [
         path: 'nova',
         component: CandidaturasFormComponent,
         data: {
-          navigationType: NavigationType.Top,
-          // breadcrumb: 'Incrição',
-          // title: 'Inscrição'
+          navigationType: NavigationType.Top
+        },
+        resolve: {
+          eleicao: EleicaoResolverService
         }
       },
       {
