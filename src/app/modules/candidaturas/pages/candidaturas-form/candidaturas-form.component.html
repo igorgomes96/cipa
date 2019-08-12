@@ -17,7 +17,8 @@
                 </div>
 
                 <label title="Upload image file" for="inputImage" class="btn btn-white btn-block m-t-sm">
-                  <input type="file" accept="image/*" name="file" id="inputImage" class="hide" (change)="onUploadImage($event)">
+                  <input type="file" accept="image/*" name="file" id="inputImage" class="hide"
+                    (change)="onUploadImage($event)">
                   Carregar foto
                 </label>
 
@@ -30,16 +31,8 @@
                 {{ candidato.eleitor?.nome }}
               </h2>
               <small>{{ candidato.eleitor?.cargo }}</small>
-              <!-- <div class="m-t-md">
-                          <h2 class="product-main-price">$406,602 <small class="text-muted">Exclude Tax</small> </h2>
-                      </div> -->
               <hr>
-
-              <h4>Objetivos</h4>
-
-              <div class="text-muted">
-                {{ candidato.objetivos }}
-              </div>
+              <span class="label label-warning" style="font-size: 14px;">Aguardando Aprovação</span>
 
               <dl class="m-t-md">
                 <dt>Área</dt>
@@ -53,13 +46,20 @@
                 <dt>Data de Nascimento</dt>
                 <dd>{{ candidato.eleitor?.dataNascimento | date:'dd/MM/yyyy' }}</dd>
               </dl>
+
+              <h4>Objetivos</h4>
+              <textarea name="objetivos" id="objetivos" cols="30" rows="2" class="form-control"
+                [(ngModel)]="candidato.objetivos"></textarea>
               <hr>
 
               <div>
-                <div class="btn-group">
-                  <button class="btn btn-primary" (click)="confirmaCandidatura()"><i class="fa fa-vcard"></i> Confirmar Candidatura</button>
-                  <!-- <button class="btn btn-white btn-sm"><i class="fa fa-star"></i> Add to wishlist </button>
-                              <button class="btn btn-white btn-sm"><i class="fa fa-envelope"></i> Contact with author </button> -->
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="btn-group float-right">
+                      <button class="btn btn-primary" (click)="confirmaCandidatura()"><i
+                          class="fa fa-vcard"></i> Confirmar Candidatura</button>
+                    </div>
+                  </div>
                 </div>
               </div>
 

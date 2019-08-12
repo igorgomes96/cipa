@@ -28,9 +28,8 @@ export class CandidatosApiService extends GenericApi<Candidato> {
     // return this.http.post<Reprovacao>(`${this.url}${id}/reprovar`, reprovacao);
   }
 
-  getFoto(id: number): Observable<Blob> {
-    // , { headers: { 'Content-Type': 'image/jpeg' }, responseType: 'blob' }
-    return this.http.get<Blob>(`${this.url}${id}/foto`);
+  getFoto(id: number): Observable<any> {
+    return this.http.get(`${this.url}${id}/foto`, { headers: { 'Content-Type': 'image/jpeg' }, responseType: 'blob' });
   }
 
   postFoto(id: number, foto: FileList): Observable<HttpEvent<{}>> {

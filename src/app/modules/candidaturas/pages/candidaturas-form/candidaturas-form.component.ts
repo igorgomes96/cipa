@@ -4,13 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { CandidatosApiService } from 'src/app/core/api/candidatos-api.service';
 import { Component, OnInit } from '@angular/core';
 import { Candidato } from 'src/app/shared/models/candidato';
-import { Eleitor } from 'src/app/shared/models/eleitor';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 import { uploadProgress, filterResponse } from 'src/app/shared/components/rxjs-operators';
 import { switchMap, filter } from 'rxjs/operators';
 import { Eleicao } from 'src/app/shared/models/eleicao';
-import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-candidaturas-form',
@@ -26,9 +24,9 @@ export class CandidaturasFormComponent implements OnInit {
   eleicao: Eleicao;
   jaInscrito = false;
   constructor(private toasts: ToastsService,
-    private candidatosApi: CandidatosApiService,
-    private route: ActivatedRoute,
-    private eleicoesApi: EleicoesApiService) { }
+              private candidatosApi: CandidatosApiService,
+              private route: ActivatedRoute,
+              private eleicoesApi: EleicoesApiService) { }
 
   ngOnInit() {
     this.candidato = new Candidato();
@@ -81,8 +79,13 @@ export class CandidaturasFormComponent implements OnInit {
       this.readFoto(file);
       if (this.jaInscrito) {
         this.candidatosApi.postFoto(this.candidato.id, this.fileList)
-          .pipe(filterResponse())
-          .subscribe(_ => {
+          .pipe(
+            filterResponse(),
+            switchMap(_ => {
+              return this.candidatosApi.getFoto(this.candidato.id);
+            })
+          ).subscribe((foto: Blob) => {
+            this.readFoto(foto);
             this.toasts.showMessage({
               message: 'Foto atualizada com sucesso!',
               title: 'Sucesso!',
@@ -124,10 +127,15 @@ export class CandidaturasFormComponent implements OnInit {
     this.candidatosApi.post(this.candidato)
       .pipe(
         switchMap((candidato: Candidato) => {
+          this.candidato = candidato;
           return this.candidatosApi.postFoto(candidato.id, this.fileList);
         }),
-        filterResponse()
-      ).subscribe(_ => {
+        filterResponse(),
+        switchMap(_ => {
+          return this.candidatosApi.getFoto(this.candidato.id);
+        })
+      ).subscribe((foto: Blob) => {
+        this.readFoto(foto);
         this.jaInscrito = true;
         this.toasts.showMessage({
           message: 'Inscrição realizada com sucesso!',
