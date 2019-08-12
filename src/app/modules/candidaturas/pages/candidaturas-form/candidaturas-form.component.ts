@@ -10,6 +10,7 @@ import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 import { uploadProgress, filterResponse } from 'src/app/shared/components/rxjs-operators';
 import { switchMap, filter } from 'rxjs/operators';
 import { Eleicao } from 'src/app/shared/models/eleicao';
+import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-candidaturas-form',
@@ -23,6 +24,7 @@ export class CandidaturasFormComponent implements OnInit {
   fileList: FileList = null;
   foto: string;
   eleicao: Eleicao;
+  jaInscrito = false;
   constructor(private toasts: ToastsService,
     private candidatosApi: CandidatosApiService,
     private route: ActivatedRoute,
@@ -39,15 +41,15 @@ export class CandidaturasFormComponent implements OnInit {
         })
       ).subscribe(candidato => {
         if (candidato) {
+          this.jaInscrito = true;
           this.candidato = candidato;
           this.candidatosApi.getFoto(this.candidato.id)
-            .subscribe(foto => {
-              this.foto = "data:image;base64," + foto;
-              // const fileReader = new FileReader();
-              // fileReader.readAsDataURL(foto);
-              // fileReader.onload = ($loaded) => {
-              //   this.foto = $loaded.target['result'];
-              // };
+            .subscribe((foto: Blob) => {
+              const fileReader = new FileReader();
+              fileReader.readAsDataURL(foto);
+              fileReader.onload = ($loaded) => {
+                this.foto = $loaded.target['result'];
+              };
             });
         } else {
           this.eleicoesApi.getEleitor(this.eleicao.id)
@@ -57,17 +59,6 @@ export class CandidaturasFormComponent implements OnInit {
             });
         }
       });
-    // this.candidato = new Candidato();
-    // this.candidato.eleitorId = 1;
-    // this.candidato.objetivos = 'Auxiliar a prevenir acidentes na empresa.';
-    // this.candidato.eleitor = new Eleitor();
-    // this.candidato.eleitor.nome = 'Igor Aparecido Gomes de Oliveira';
-    // this.candidato.eleitor.matricula = '43434';
-    // this.candidato.eleitor.email = 'igorgomes96@hotmail.com';
-    // this.candidato.eleitor.area = 'Fábrica de Software';
-    // this.candidato.eleitor.cargo = 'Desenvolvedor de Software';
-    // this.candidato.eleitor.dataAdmissao = new Date(2018, 1, 1);
-    // this.candidato.eleitor.dataNascimento = new Date(1996, 2, 19);
   }
 
   // tslint:disable: no-string-literal
@@ -86,10 +77,25 @@ export class CandidaturasFormComponent implements OnInit {
     }
     this.fileList = files;
     const file = $event.target['files'][0];
-    this.readFoto(file);
+    try {
+      this.readFoto(file);
+      if (this.jaInscrito) {
+        this.candidatosApi.postFoto(this.candidato.id, this.fileList)
+          .pipe(filterResponse())
+          .subscribe(_ => {
+            this.toasts.showMessage({
+              message: 'Foto atualizada com sucesso!',
+              title: 'Sucesso!',
+              type: ToastType.success
+            });
+          });
+      }
+    } catch (err) {
+      console.error(err);
+    }
   }
 
-  readFoto(file) {
+  readFoto(file: Blob) {
     const fileReader = new FileReader();
     if (/^image\/\w+$/.test(file.type)) {
       fileReader.readAsDataURL(file);
@@ -102,6 +108,7 @@ export class CandidaturasFormComponent implements OnInit {
         title: 'Inválido!',
         type: ToastType.error
       });
+      throw new Error('Erro ao ler imagem');
     }
   }
 
@@ -121,6 +128,7 @@ export class CandidaturasFormComponent implements OnInit {
         }),
         filterResponse()
       ).subscribe(_ => {
+        this.jaInscrito = true;
         this.toasts.showMessage({
           message: 'Inscrição realizada com sucesso!',
           title: 'Sucesso!',

@@ -1,6 +1,6 @@
 import { ArquivosApiService } from './arquivos-api.service';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { GenericApi } from './generic-api';
 import { environment } from 'src/environments/environment';
@@ -29,6 +29,7 @@ export class CandidatosApiService extends GenericApi<Candidato> {
   }
 
   getFoto(id: number): Observable<Blob> {
+    // , { headers: { 'Content-Type': 'image/jpeg' }, responseType: 'blob' }
     return this.http.get<Blob>(`${this.url}${id}/foto`);
   }
 
