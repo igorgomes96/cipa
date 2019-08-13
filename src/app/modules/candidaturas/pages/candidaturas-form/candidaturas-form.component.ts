@@ -3,7 +3,7 @@ import { element } from 'protractor';
 import { ActivatedRoute } from '@angular/router';
 import { CandidatosApiService } from 'src/app/core/api/candidatos-api.service';
 import { Component, OnInit } from '@angular/core';
-import { Candidato } from 'src/app/shared/models/candidato';
+import { Candidato, StatusAprovacao, Reprovacao } from 'src/app/shared/models/candidato';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 import { uploadProgress, filterResponse } from 'src/app/shared/components/rxjs-operators';
@@ -24,9 +24,9 @@ export class CandidaturasFormComponent implements OnInit {
   eleicao: Eleicao;
   jaInscrito = false;
   constructor(private toasts: ToastsService,
-              private candidatosApi: CandidatosApiService,
-              private route: ActivatedRoute,
-              private eleicoesApi: EleicoesApiService) { }
+    private candidatosApi: CandidatosApiService,
+    private route: ActivatedRoute,
+    private eleicoesApi: EleicoesApiService) { }
 
   ngOnInit() {
     this.candidato = new Candidato();
@@ -34,6 +34,7 @@ export class CandidaturasFormComponent implements OnInit {
       .pipe(
         filter(routeData => routeData.hasOwnProperty('eleicao')),
         switchMap(routeData => {
+          console.log(routeData.eleicao);
           this.eleicao = routeData.eleicao;
           return this.eleicoesApi.getCandidato(routeData.eleicao.id);
         })
@@ -58,6 +59,70 @@ export class CandidaturasFormComponent implements OnInit {
         }
       });
   }
+
+  get confirmacaoButtonText(): string {
+    if (!this.jaInscrito) {
+      return 'Confirmar Inscrição';
+    }
+    if (this.candidato.statusAprovacao === StatusAprovacao.Pendente) {
+      return 'Atualizar Inscrição';
+    }
+    if (this.candidato.statusAprovacao === StatusAprovacao.Reprovada) {
+      return 'Solicitar Aprovação';
+    }
+    return '';
+  }
+
+  get ultimaReprovacao(): Reprovacao {
+    if (!this.candidato || !this.candidato.reprovacoes || !this.candidato.reprovacoes.length) {
+      return null;
+    }
+    this.candidato.reprovacoes.sort((a, b) => {
+      if (a.horario < b.horario) {
+        return 1;
+      }
+      if (a.horario > b.horario) {
+        return -1;
+      }
+      return 0;
+    });
+    return this.candidato.reprovacoes[0];
+  }
+
+  get statusAprovacaoClass(): string {
+    if (!this.jaInscrito || !this.candidato) {
+      return '';
+    }
+    const status = StatusAprovacao[this.candidato.statusAprovacao];
+    switch (status) {
+      case StatusAprovacao.Aprovada:
+        return 'label-primary';
+      case StatusAprovacao.Pendente:
+        return 'label-warning';
+      case StatusAprovacao.Reprovada:
+        return 'label-danger';
+      default:
+        return '';
+    }
+  }
+
+  get statusAprovacao(): string {
+    if (!this.jaInscrito || !this.candidato) {
+      return '';
+    }
+    const status = StatusAprovacao[this.candidato.statusAprovacao];
+    switch (status) {
+      case StatusAprovacao.Aprovada:
+        return 'Aprovada';
+      case StatusAprovacao.Pendente:
+        return 'Pendente';
+      case StatusAprovacao.Reprovada:
+        return 'Reprovada';
+      default:
+        return '';
+    }
+  }
+
 
   // tslint:disable: no-string-literal
   onUploadImage($event: Event) {

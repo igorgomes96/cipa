@@ -11,6 +11,8 @@ export class Reprovacao {
     candidatoId: number;
     motivoReprovacao: string;
     horario: Date;
+    usuarioNome: string;
+    usuarioEmail: string;
 }
 
 export class Candidato {
