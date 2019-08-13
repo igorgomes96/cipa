@@ -1,7 +1,6 @@
-<h4>Candidaturas Aprovadas</h4>
-<p>Aaixo, segue a relação de candidaturas aprovadas.</p>
-<div class="row flex-row">
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12" *ngFor="let candidato of candidatos; let i = index">
-        <app-card-candidato [candidato]="candidato" [tipo]="TipoCardEleitor.Visualizacao" [numFoto]="i + 1"></app-card-candidato>
-    </div>
-</div>
+<app-candidaturas-lista
+    titulo="Candidaturas Aprovadas"
+    descricao="Abaixo, segue a relação de candidaturas aprovadas."
+    [candidatos]="candidatos"
+    [tipoCard]="TipoCardEleitor.Visualizacao"
+></app-candidaturas-lista>

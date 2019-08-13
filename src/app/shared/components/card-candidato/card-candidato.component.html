@@ -2,7 +2,9 @@
     <div class="ibox-content product-box">
 
         <div class="foto">
-            <img [src]="'/assets/img/pessoa' + numFoto + '.jpg'" alt="">
+            <img [src]="foto" alt="Foto do candidato" *ngIf="foto">
+            <img  src="/assets/img/icone.jpg" alt="Nenhuma foto do candidato" *ngIf="!foto">
+
         </div>
         <div class="product-desc">
             <small class="text-muted">{{ candidato.eleitor.cargo }}</small>

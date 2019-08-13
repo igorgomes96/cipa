@@ -9,7 +9,7 @@ import { EtapaCronograma } from '../../shared/models/cronograma';
 import { Observable } from 'rxjs';
 import { Eleitor } from '../../shared/models/eleitor';
 import { PagedResult } from 'src/app/shared/models/paged-result';
-import { Candidato } from 'src/app/shared/models/candidato';
+import { Candidato, StatusAprovacao } from 'src/app/shared/models/candidato';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,10 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
 
   getCandidato(idEleicao: number): Observable<Candidato> {
     return this.http.get<Candidato>(`${this.url}${idEleicao}/candidato`);
+  }
+
+  getCandidatos(idEleicao: number, status: StatusAprovacao): Observable<Candidato[]> {
+    return this.http.get<Candidato[]>(`${this.url}${idEleicao}/candidatos`, { params: { status: StatusAprovacao[status] }});
   }
 
   getCronograma(idEleicao: number): Observable<EtapaCronograma[]> {

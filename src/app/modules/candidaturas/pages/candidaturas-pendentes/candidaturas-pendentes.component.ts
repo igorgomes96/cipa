@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TipoCardEleitor } from 'src/app/shared/components/card-candidato/card-candidato.component';
-import { Candidato, Reprovacao } from 'src/app/shared/models/candidato';
+import { Candidato, Reprovacao, StatusAprovacao } from 'src/app/shared/models/candidato';
 import { CandidatosApiService } from 'src/app/core/api/candidatos-api.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
+import { ActivatedRoute } from '@angular/router';
+import { filter, switchMap } from 'rxjs/operators';
+import { Eleicao } from 'src/app/shared/models/eleicao';
 
 @Component({
   selector: 'app-candidaturas-pendentes',
@@ -15,7 +19,12 @@ export class CandidaturasPendentesComponent implements OnInit {
 
   TipoCardEleitor: typeof TipoCardEleitor = TipoCardEleitor;
   candidatos: Candidato[];
-  constructor(private candidatosApi: CandidatosApiService,
+  eleicao: Eleicao;
+
+  constructor(
+    private candidatosApi: CandidatosApiService,
+    private eleicoesApi: EleicoesApiService,
+    private route: ActivatedRoute,
     private toasts: ToastsService) { }
 
   ngOnInit() {
@@ -23,8 +32,14 @@ export class CandidaturasPendentesComponent implements OnInit {
   }
 
   loadCandidatos() {
-    this.candidatosApi.getAll()
-      .subscribe((candidatos: Candidato[]) => {
+    this.route.data
+      .pipe(
+        filter(routeData => routeData.hasOwnProperty('eleicao')),
+        switchMap(routeData => {
+          this.eleicao = routeData.eleicao;
+          return this.eleicoesApi.getCandidatos(routeData.eleicao.id, StatusAprovacao.Pendente);
+        })
+      ).subscribe((candidatos: Candidato[]) => {
         this.candidatos = candidatos;
       });
   }
@@ -39,13 +54,14 @@ export class CandidaturasPendentesComponent implements OnInit {
               title: 'Sucesso!',
               type: ToastType.success
             }));
+          this.loadCandidatos();
         }
       });
   }
 
   reprovacao(reprovacao: Reprovacao) {
     this.candidatosApi.postReprovar(reprovacao.candidatoId, reprovacao)
-      .subscribe((novaReprovacao: Reprovacao) => {
+      .subscribe(_ => {
         this.toasts.showMessage({
           message: 'Candidatura Reprovada!',
           title: 'Sucesso!',

@@ -6,7 +6,8 @@ import { GenericApi } from './generic-api';
 import { environment } from 'src/environments/environment';
 import { Candidato, Reprovacao } from '../../shared/models/candidato';
 import { endpoints } from 'src/environments/endpoints';
-import { Observable, of } from 'rxjs';
+import { Observable, of, bindCallback } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ import { Observable, of } from 'rxjs';
 export class CandidatosApiService extends GenericApi<Candidato> {
 
   constructor(private http: HttpClient,
-              private arquivosApiService: ArquivosApiService) {
+    private arquivosApiService: ArquivosApiService) {
     super(http, environment.api + endpoints.candidatos);
   }
 
@@ -29,7 +30,18 @@ export class CandidatosApiService extends GenericApi<Candidato> {
   }
 
   getFoto(id: number): Observable<any> {
-    return this.http.get(`${this.url}${id}/foto`, { headers: { 'Content-Type': 'image/jpeg' }, responseType: 'blob' });
+    const readFoto = (foto: Blob) => {
+      return new Promise(resolve => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(foto);
+        fileReader.onload = ($loaded) => {
+          resolve($loaded.target['result']);
+        };
+      });
+    };
+
+    return this.http.get(`${this.url}${id}/foto`, { headers: { 'Content-Type': 'image/jpeg' }, responseType: 'blob' })
+      .pipe(switchMap((foto) => readFoto(foto)));
   }
 
   postFoto(id: number, foto: FileList): Observable<HttpEvent<{}>> {

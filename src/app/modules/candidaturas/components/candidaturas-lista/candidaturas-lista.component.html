@@ -1,0 +1,8 @@
+<h4>{{ titulo }}</h4>
+<p>{{ descricao }}</p>
+<div class="row flex-row">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12" *ngFor="let candidato of candidatos">
+        <app-card-candidato [candidato]="candidato" [tipo]="tipoCard" (aprovacao)="onAprovacao($event)"
+            (reprovacao)="onReprovacao($event)"></app-card-candidato>
+    </div>
+</div>
