@@ -2,17 +2,6 @@
   <div class="row">
     <div class="col-lg-12">
       <h1 class="text-center">Eleições CIPA {{ eleicao.dataInicio | date:'yyyy' }}</h1>
-      <h2 class="text-center">Faça sua inscrição!</h2>
-      <!-- <br>
-      <div class="ibox">
-        <div class="ibox-content">
-          <p>
-            <strong>Empresa: </strong> {{ eleicao.estabelecimento.empresa.razaoSocial }}<br>
-            <strong>Estabelecimento: </strong> {{ eleicao.estabelecimento.descricao }}<br>
-            <strong>Endereço: </strong> {{ eleicao.estabelecimento.endereco }}
-          </p>
-        </div>
-      </div> -->
 
       <div class="ibox product-detail">
         <div class="ibox-content">
@@ -53,7 +42,7 @@
                 </div>
               </div>
 
-              <div class="row" *ngIf="ultimaReprovacao">
+              <div class="row" *ngIf="candidato.statusAprovacao == StatusAprovacao.Reprovada && ultimaReprovacao">
                 <div class="col-lg-12">
                   <dl class="dl-horizontal">
                     <dt>Motivo:</dt>
@@ -61,12 +50,14 @@
                       <p>
                         {{ ultimaReprovacao.motivoReprovacao }}<br>
                         <small>{{ ultimaReprovacao.horario | date:'dd/MM/yyyy HH:mm' }} -
-                          {{ ultimaReprovacao.usuarioNome }}
-                          ({{ ultimaReprovacao.usuarioEmail }})</small>
+                          {{ ultimaReprovacao.nomeAprovador }}
+                          ({{ ultimaReprovacao.emailAprovador }})</small>
                       </p>
-                      <small *ngIf="candidato.reprovacoes && candidato.reprovacoes.length > 1"><a href="">Exibir
-                          Histório de
-                          Reprovações</a></small>
+
+                      <small *ngIf="candidato.reprovacoes.length > 1">
+                        <a href="">Exibir Histório de Reprovações</a>
+                      </small>
+
                     </dd>
                   </dl>
                 </div>
@@ -96,8 +87,8 @@
 
 
               <h4>Objetivos</h4>
-              <textarea name="objetivos" id="objetivos" cols="30" rows="2" class="form-control"
-                [(ngModel)]="candidato.objetivos"></textarea>
+              <textarea name="objetivos" [disabled]="!confirmacaoButtonText" id="objetivos" cols="30" rows="2" class="form-control"
+                [(ngModel)]="candidato.objetivos" placeholder="Digite aqui seus objetivos como membro da CIPA."></textarea>
               <hr>
 
               <div class="row" *ngIf="confirmacaoButtonText">

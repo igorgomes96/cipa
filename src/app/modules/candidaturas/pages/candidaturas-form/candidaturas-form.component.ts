@@ -17,6 +17,7 @@ import { Eleicao } from 'src/app/shared/models/eleicao';
 })
 export class CandidaturasFormComponent implements OnInit {
 
+  StatusAprovacao = StatusAprovacao;
   candidato: Candidato;
   horario = new Date();
   fileList: FileList = null;
@@ -179,7 +180,8 @@ export class CandidaturasFormComponent implements OnInit {
   confirmaCandidatura() {
     if (this.jaInscrito) {
       this.candidatosApi.put(this.candidato.id, this.candidato)
-        .subscribe(_ => {
+        .subscribe((candidato: Candidato) => {
+          this.candidato = candidato;
           this.toasts.showMessage({
             message: 'Inscrição atualizada com sucesso!',
             title: 'Sucesso!',

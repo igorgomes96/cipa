@@ -14,19 +14,21 @@ import { map, switchMap, tap } from 'rxjs/operators';
 })
 export class CandidatosApiService extends GenericApi<Candidato> {
 
-  constructor(private http: HttpClient,
-    private arquivosApiService: ArquivosApiService) {
+  constructor(
+    private http: HttpClient,
+    private arquivosApiService: ArquivosApiService
+  ) {
     super(http, environment.api + endpoints.candidatos);
   }
 
   postAprovar(id: number): Observable<Candidato> {
-    return this.get(id);
-    // return this.http.post<Candidato>(`${this.url}${id}/aprovar`, null);
+    // return this.get(id);
+    return this.http.post<Candidato>(`${this.url}${id}/aprova`, null);
   }
 
   postReprovar(id: number, reprovacao: Reprovacao): Observable<Reprovacao> {
-    return of(reprovacao);
-    // return this.http.post<Reprovacao>(`${this.url}${id}/reprovar`, reprovacao);
+    // return of(reprovacao);
+    return this.http.post<Reprovacao>(`${this.url}${id}/reprova`, reprovacao);
   }
 
   getFoto(id: number): Observable<any> {
@@ -35,7 +37,7 @@ export class CandidatosApiService extends GenericApi<Candidato> {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(foto);
         fileReader.onload = ($loaded) => {
-          resolve($loaded.target['result']);
+          resolve(($loaded.target as any).result);
         };
       });
     };

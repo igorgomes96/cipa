@@ -49,12 +49,14 @@ export class CandidaturasPendentesComponent implements OnInit {
       .subscribe((confirmacao: boolean) => {
         if (confirmacao) {
           this.candidatosApi.postAprovar(candidato.id)
-            .subscribe(_ => this.toasts.showMessage({
-              message: 'Candidatura Aprovada!',
-              title: 'Sucesso!',
-              type: ToastType.success
-            }));
-          this.loadCandidatos();
+            .subscribe(_ => {
+              this.toasts.showMessage({
+                message: 'Candidatura Aprovada!',
+                title: 'Sucesso!',
+                type: ToastType.success
+              });
+              this.loadCandidatos();
+            });
         }
       });
   }
