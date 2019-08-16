@@ -9,6 +9,7 @@ import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 import { Eleicao } from 'src/app/shared/models/eleicao';
 import { PagedResult } from 'src/app/shared/models/paged-result';
+import { ImportacoesApiService } from 'src/app/core/api/importacoes-api.service';
 
 declare var $: any;
 
@@ -28,11 +29,13 @@ export class EleitoresListaComponent implements OnInit {
   };
   eleicao: Eleicao;
   form: FormGroup;
-  constructor(private eleicoesApi: EleicoesApiService,
-              private route: ActivatedRoute,
-              private formBuilder: FormBuilder,
-              private eleitoresApi: EleitoresApiService,
-              private toasts: ToastsService) { }
+  constructor(
+    private eleicoesApi: EleicoesApiService,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private eleitoresApi: EleitoresApiService,
+    private toasts: ToastsService,
+    private importacoesApi: ImportacoesApiService) { }
 
   ngOnInit() {
     this.route.data
@@ -53,6 +56,11 @@ export class EleitoresListaComponent implements OnInit {
       .pipe(distinctUntilChanged(), debounceTime(500))
       .subscribe((value: any) => {
         //console.log(value);
+      });
+
+    this.importacoesApi.progressoImportacao()
+      .subscribe(valor => {
+        console.log(valor);
       });
   }
 

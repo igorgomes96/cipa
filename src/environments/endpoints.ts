@@ -7,5 +7,7 @@ export const endpoints = {
     estabelecimentos: 'estabelecimentos/',
     login: 'login/',
     cronograma: 'cronograma/',
-    etapasObrigatorias: 'etapasobrigatorias/'
+    etapasObrigatorias: 'etapasobrigatorias/',
+    importacoes: 'importacoes/',
+    signalr: 'signalr/'
 };
