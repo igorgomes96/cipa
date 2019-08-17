@@ -1,11 +1,36 @@
 <app-panel title="Eleitores" [labelText]="eleitores?.totalRecords + ' eleitores'" [collapsible]="false">
-  <!-- <p>Nesta página você consegue consultar todos os funcionários cadastrados para esta eleição.<br>
-    Caso você queira editar algum deles, basta clicar no botão com o ícone de lápis na linha do eleitor a ser alterado.
-  </p> -->
   <p>Para facilitar o cadastro, você pode fazer a importação de um arquivo CSV (.csv) com os dados dos funcionários.
     Baixe o template, preencha os dados e faça a importação.</p>
   <button class="btn btn-success m-r-sm m-t-xs"><i class="fa fa-download"></i> Baixar Template</button>
   <button class="btn btn-primary m-t-xs"><i class="fa fa-upload"></i> Importar Dados</button>
+
+  <div class="project-list table-responsive m-t-md" *ngIf="ultimaImportacao">
+
+    <table class="table table-hover">
+      <tbody>
+        <tr>
+          <td class="project-status">
+            <button class="btn btn-outline btn-primary btn-xs">
+              <i class="fa fa-download"></i>
+            </button>
+          </td>
+          <td class="project-title">
+            <strong>{{ ultimaImportacao.arquivo.nome }}</strong>
+            <br />
+            <small>Upload: {{ ultimaImportacao.arquivo.dataUpload | date:'dd/MM/yyyy HH:mm' }}, {{ (ultimaImportacao.arquivo.tamanho / 1024) |
+              number:'1.0-1' }}k</small>
+          </td>
+          <td class="project-completion" *ngIf="progresso">
+            <small>Progresso da Importação: {{ progresso?.progresso | number:'1.1-1' }}%</small>
+            <div class="progress progress-mini">
+              <div [style.width]="progresso?.progresso + '%'" class="progress-bar"></div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
   <hr>
   <p>
     Você também tem a opção de fazer o cadastro do eleitor manualmente pelo sistema. Para isso, clique no botão abaixo:

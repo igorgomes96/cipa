@@ -10,6 +10,7 @@ import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 import { Eleicao } from 'src/app/shared/models/eleicao';
 import { PagedResult } from 'src/app/shared/models/paged-result';
 import { ImportacoesApiService } from 'src/app/core/api/importacoes-api.service';
+import { Importacao, ProgressoImportacao } from 'src/app/shared/models/importacao';
 
 declare var $: any;
 
@@ -29,6 +30,9 @@ export class EleitoresListaComponent implements OnInit {
   };
   eleicao: Eleicao;
   form: FormGroup;
+  ultimaImportacao: Importacao;
+  progresso: ProgressoImportacao;
+
   constructor(
     private eleicoesApi: EleicoesApiService,
     private route: ActivatedRoute,
@@ -43,6 +47,7 @@ export class EleitoresListaComponent implements OnInit {
         filter(routeData => routeData.hasOwnProperty('eleicao')),
         switchMap(routeData => {
           this.eleicao = routeData.eleicao;
+          this.carregaUltimaImportacao();
           return this.eleicoesApi.getEleitores(this.eleicao.id, this.pageParams);
         })
       ).subscribe((eleitores: PagedResult<Eleitor>) => {
@@ -60,7 +65,19 @@ export class EleitoresListaComponent implements OnInit {
 
     this.importacoesApi.progressoImportacao()
       .subscribe(valor => {
-        console.log(valor);
+        if (valor && !this.progresso) {
+          this.carregaUltimaImportacao();
+        }
+        valor.progresso = valor.progresso * 100;
+        this.progresso = valor;
+      });
+
+  }
+
+  carregaUltimaImportacao() {
+    this.importacoesApi.getUltimaImportacao(this.eleicao.id)
+      .subscribe(importacao => {
+        this.ultimaImportacao = importacao;
       });
   }
 

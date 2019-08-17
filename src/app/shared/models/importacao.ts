@@ -19,4 +19,5 @@ export class Importacao {
     horario: Date;
     status: StatusImportacao;
     arquivo: Arquivo;
+    progresso: ProgressoImportacao;
 }

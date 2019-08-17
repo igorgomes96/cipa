@@ -21,6 +21,10 @@ export class ImportacoesApiService extends GenericApi<Importacao>  {
     this.signalRService.startConnection(environment.api + endpoints.signalr, this.authService.token);
   }
 
+  public getUltimaImportacao(idEleicao: number): Observable<Importacao> {
+    return this.http.get<Importacao>(`${this.url}${idEleicao}/ultima`);
+  }
+
   public progressoImportacao(): Observable<ProgressoImportacao> {
     return this.signalRService.on('progressoimportacao');
   }
