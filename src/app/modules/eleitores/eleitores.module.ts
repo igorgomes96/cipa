@@ -7,9 +7,10 @@ import { EleitoresFormComponent } from './components/eleitores-form/eleitores-fo
 import { SharedModule } from '../../shared/shared.module';
 import { EleitorNovoComponent } from './pages/eleitor-novo/eleitor-novo.component';
 import { EleitorEdicaoComponent } from './pages/eleitor-edicao/eleitor-edicao.component';
+import { InconsistenciasComponent } from './pages/inconsistencias/inconsistencias.component';
 
 @NgModule({
-  declarations: [EleitoresListaComponent, EleitoresFormComponent, EleitorNovoComponent, EleitorEdicaoComponent],
+  declarations: [EleitoresListaComponent, EleitoresFormComponent, EleitorNovoComponent, EleitorEdicaoComponent, InconsistenciasComponent],
   imports: [
     SharedModule,
     EleitoresRoutingModule

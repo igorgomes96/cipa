@@ -1,8 +1,8 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Eleitor } from 'src/app/shared/models/eleitor';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { ActivatedRoute } from '@angular/router';
-import { filter, switchMap, distinctUntilChanged, debounce, debounceTime } from 'rxjs/operators';
+import { filter, switchMap, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { EleitoresApiService } from 'src/app/core/api/eleitores-api.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';
@@ -10,7 +10,7 @@ import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 import { Eleicao } from 'src/app/shared/models/eleicao';
 import { PagedResult } from 'src/app/shared/models/paged-result';
 import { ImportacoesApiService } from 'src/app/core/api/importacoes-api.service';
-import { Importacao, ProgressoImportacao } from 'src/app/shared/models/importacao';
+import { Importacao, ProgressoImportacao, StatusImportacao } from 'src/app/shared/models/importacao';
 
 declare var $: any;
 
@@ -32,6 +32,7 @@ export class EleitoresListaComponent implements OnInit {
   form: FormGroup;
   ultimaImportacao: Importacao;
   progresso: ProgressoImportacao;
+  filtro: string;
 
   constructor(
     private eleicoesApi: EleicoesApiService,
@@ -60,18 +61,67 @@ export class EleitoresListaComponent implements OnInit {
     this.form.get('filtro').valueChanges
       .pipe(distinctUntilChanged(), debounceTime(500))
       .subscribe((value: any) => {
-        //console.log(value);
+        this.filtro = value;
+        this.carregaEleitores();
       });
 
     this.importacoesApi.progressoImportacao()
       .subscribe(valor => {
-        if (valor && !this.progresso) {
+        if (!this.progresso) {
           this.carregaUltimaImportacao();
         }
-        valor.progresso = valor.progresso * 100;
-        this.progresso = valor;
+        if (valor.progresso === 100) {
+          this.progresso = null;
+          this.carregaUltimaImportacao();
+        } else {
+          this.progresso = valor;
+        }
       });
+  }
 
+  get labelStatusImportacao(): string {
+    if (!this.ultimaImportacao) { return ''; }
+    switch (this.ultimaImportacao.status) {
+      case StatusImportacao.Aguardando:
+        return 'label-warning';
+      case StatusImportacao.Processando:
+        return 'label-success';
+      case StatusImportacao.FinalizadoComFalha:
+        return 'label-danger';
+      case StatusImportacao.FinalizadoComSucesso:
+        return 'label-primary';
+      default:
+        return '';
+    }
+  }
+
+  // tslint:disable: no-string-literal
+  onUploadArquivo($event: Event) {
+    const files = $event.target['files'];
+    if (!files || !files.length) {
+      return;
+    }
+    if (files.length > 1) {
+      this.toasts.showMessage({
+        message: 'Você só pode carregar um arquivo!',
+        title: 'Inválido!',
+        type: ToastType.error
+      });
+      return;
+    }
+    try {
+      this.eleicoesApi.postImportacao(this.eleicao.id, files)
+        .subscribe((importacao: Importacao) => {
+          this.ultimaImportacao = importacao;
+          this.toasts.showMessage({
+            message: 'O arquivo foi colocado na fila de processamento!',
+            title: 'Sucesso!',
+            type: ToastType.success
+          });
+        });
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   carregaUltimaImportacao() {
@@ -82,7 +132,7 @@ export class EleitoresListaComponent implements OnInit {
   }
 
   get pageParams(): any {
-    return { pageSize: this.eleitores.pageSize, pageNumber: this.eleitores.currentPage };
+    return { pageSize: this.eleitores.pageSize, pageNumber: this.eleitores.currentPage, nome: this.filtro };
   }
 
   carregaEleitores() {

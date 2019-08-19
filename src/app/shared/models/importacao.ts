@@ -1,10 +1,10 @@
 import { Arquivo } from './arquivo';
 
 export enum StatusImportacao {
-    Aguardando = 'Aguardando',
-    Processando = 'Processando',
-    FinalizadoComSucesso = 'FinalizadoComSucesso',
-    FinalizadoComFalha = 'FinalizadoComFalha'
+    Aguardando = 'Pendente',
+    Processando = 'Em processamento',
+    FinalizadoComSucesso = 'Processado',
+    FinalizadoComFalha = 'Falha'
 }
 
 export class ProgressoImportacao {

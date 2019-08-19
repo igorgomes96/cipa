@@ -1,0 +1,21 @@
+<app-panel title="Inconsistências encontradas" [collapsible]="false"
+    [labelText]="inconsistencias.length + ' inconsistencias'">
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Linha</th>
+                    <th>Coluna</th>
+                    <th>Erro</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let inconsistencia of inconsistencias">
+                    <td>{{ inconsistencia.linha }}</td>
+                    <td>{{ inconsistencia.coluna }}</td>
+                    <td>{{ inconsistencia.mensagem }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</app-panel>

@@ -3,6 +3,7 @@ import * as signalR from '@aspnet/signalr';
 import { ProgressoImportacao } from 'src/app/shared/models/importacao';
 import { Observable, Subject } from 'rxjs';
 import { IHttpConnectionOptions } from '@aspnet/signalr';
+import { throttleTime, debounce, debounceTime, merge, auditTime } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,8 @@ export class SignalRService {
     this.hubConnection.on(event, (data) => {
       subject.next(data);
     });
-    return subject.asObservable();
+    return subject.asObservable()
+      .pipe(auditTime(1000));
+
   }
 }
