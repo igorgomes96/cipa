@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { VotacoesRoutingModule } from './votacoes-routing.module';
-import { VotacaoComponent } from './votacao/votacao.component';
 import { SharedModule } from '../../shared/shared.module';
+import { VotacaoComponent } from './pages/votacao/votacao.component';
 
 @NgModule({
   declarations: [VotacaoComponent],

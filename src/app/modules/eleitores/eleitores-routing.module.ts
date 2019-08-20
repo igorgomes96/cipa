@@ -27,7 +27,10 @@ const routes: Routes = [
       },
       {
         path: 'novo',
-        component: EleitorNovoComponent
+        component: EleitorNovoComponent,
+        resolve: {
+          eleicao: EleicaoResolverService
+        }
       },
       {
         path: ':id',

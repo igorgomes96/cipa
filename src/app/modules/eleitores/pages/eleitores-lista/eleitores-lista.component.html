@@ -1,6 +1,9 @@
 <app-panel title="Eleitores" [labelText]="eleitores?.totalRecords + ' eleitores'" [collapsible]="false">
-  <p>Para facilitar o cadastro, você pode fazer a importação de um arquivo CSV (.csv) com os dados dos funcionários.
-    Baixe o template, preencha os dados e faça a importação.</p>
+  <p>Importação em massa de eleitores.
+    <app-ajuda-tooltip ajuda="Para facilitar o cadastro, você pode fazer a importação de um arquivo Excel com os dados dos funcionários.
+    Baixe o template, preencha os dados e faça a importação.">
+    </app-ajuda-tooltip>
+  </p>
   <button class="btn btn-success m-r-sm m-t-xs"><i class="fa fa-download"></i> Baixar Template</button>
   <label for="upload" class="btn btn-primary m-t-xs">
     <input type="file" name="upload" id="upload" class="hide" (change)="onUploadArquivo($event)">
@@ -27,7 +30,7 @@
           <td class="project-status text-right">
             <span class="label" [ngClass]="labelStatusImportacao">{{ ultimaImportacao?.status }}</span>
           </td>
-          <td class="text-right">
+          <td class="text-right" *ngIf="ultimaImportacao?.status === StatusImportacao.FinalizadoComFalha">
             <a [routerLink]="['importacoes', ultimaImportacao.id, 'inconsistencias']">Detalhes</a>
           </td>
         </tr>
@@ -35,15 +38,15 @@
     </table>
   </div>
 
-  <hr>
-  <p>
-    Você também tem a opção de fazer o cadastro do eleitor manualmente pelo sistema. Para isso, clique no botão abaixo:
-  </p>
-  <a routerLink="novo" class="btn btn-primary"><i class="fa fa-plus"></i> Cadastrar Novo</a>
-  <hr>
-  <h4>Lista de Eleitores</h4>
-  <p>A tabela abaixo exibe todos os eleitores cadastrados nessa eleição.<br>Para procurar um eleitor específico, basta
-    começar a digitar o nome dele na campo abaixo. À medida que você digita a tabela vai sendo filtrada.</p>
+  <hr *ngIf="!ultimaImportacao">
+
+  <h4>
+    Lista de Eleitores
+    <app-ajuda-tooltip ajuda="A tabela abaixo exibe todos os eleitores cadastrados nessa eleição. Para procurar um eleitor específico, basta
+        começar a digitar o nome dele na campo abaixo. À medida que você digita a tabela vai sendo filtrada.">
+    </app-ajuda-tooltip>
+  </h4>
+  <p></p>
   <form [formGroup]="form">
     <div class="input-group">
       <span class="input-group-addon">
@@ -54,13 +57,21 @@
     </div>
   </form>
   <br>
+  <div class="row m-t-md m-b-lg">
+    <div class="col-sm-12">
+      <a routerLink="novo" class="btn btn-primary m-r-sm"><i class="fa fa-plus"></i> Cadastrar Novo</a>
+      <button class="btn btn-danger" (click)="excluirTodos()"><i class="fa fa-trash"></i> Excluir todos</button>
+    </div>
+  </div>
 
-  <div class="row mt-3">
+  <div class="row">
     <div class="col-sm-12">
       <app-pagination [paginationInfo]="eleitores" (alteraPagina)="alteraPagina($event)"
         (alteraTamanhoPagina)="alteraTamanhoPagina($event)"></app-pagination>
     </div>
   </div>
+
+
 
   <div class="table-responsive">
     <table class="table table-striped">

@@ -11,6 +11,7 @@ export class Eleicao {
     estabelecimento: Estabelecimento;
     eleitores: Eleitor[];
     dataInicio: Date;
+    etapaAtual: EtapaCronograma;
 
     public nomeGestao(): string {
         const fimGestao = this.gestao + this.duracaoGestao - 1;

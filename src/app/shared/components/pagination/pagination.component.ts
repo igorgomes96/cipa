@@ -12,13 +12,17 @@ export class PaginationComponent implements OnInit {
   pages: number[] = [];
 
   // tslint:disable-next-line:variable-name
-  _paginationInfo: PagedResult<any>;
+  private _paginationInfo: PagedResult<any>;
 
   @Input() showRegistrosPorPagina = true;
   @Input() quantidadePages = 5;
   @Input() tamanhosDisponiveis = [5, 10, 25, 50, 100, 200];
   @Input()
   set paginationInfo(pageResult: PagedResult<any>) {
+    if (pageResult && !pageResult.currentPage) {
+      pageResult.currentPage = 1;
+      return;
+    }
     this._paginationInfo = pageResult;
     this.pages = [];
     if (pageResult && pageResult.pageCount > 1) {
@@ -28,6 +32,10 @@ export class PaginationComponent implements OnInit {
     } else if (pageResult && pageResult.currentPage > pageResult.pageCount) {  // Se a página corrente for maior que a quantidade de páginas
       this._paginationInfo.currentPage = pageResult.pageCount;
       this.alteraPagina.emit(this._paginationInfo.currentPage);
+    }
+    if (this._paginationInfo.currentPage > this._paginationInfo.pageCount) {
+      this._paginationInfo.currentPage = this._paginationInfo.pageCount;
+      this.alteraPagina.emit(this.paginationInfo.currentPage);
     }
   }
 
@@ -87,16 +95,21 @@ export class PaginationComponent implements OnInit {
 
   get startPage(): number {
     const tamanhoPages = this.quantidadePages % 2 ? this.quantidadePages + 1 : this.quantidadePages;
-    const startPage = this._paginationInfo.currentPage - (tamanhoPages / 2);
+    let startPage = this._paginationInfo.currentPage - (tamanhoPages / 2);
     if (startPage < 0) { return 0; }
     if ((startPage + this.quantidadePages) > this._paginationInfo.pageCount) {
-      return this._paginationInfo.pageCount - this.quantidadePages;
+      startPage = this._paginationInfo.pageCount - this.quantidadePages;
     }
+    if (startPage < 0) { return 0; }
     return startPage;
   }
 
   get endPage(): number {
     return this.startPage + this.quantidadePages;
+  }
+
+  isPageActive(page: number) {
+    return this.paginationInfo.currentPage === page;
   }
 
   mudaTamanhoPagina(tamanhoPagina: number) {

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { VotacaoComponent } from './votacao/votacao.component';
 import { NavigationType } from '../../app.component';
+import { VotacaoComponent } from './pages/votacao/votacao.component';
+import { EleicaoResolverService } from 'src/app/core/resolvers/eleicao-resolver.service';
 
 const routes: Routes = [
   {
@@ -11,6 +12,9 @@ const routes: Routes = [
       navigationType: NavigationType.Top,
       // breadcrumb: 'Votação',
       // title: 'Votação'
+    },
+    resolve: {
+      eleicao: EleicaoResolverService
     }
   }
 ];

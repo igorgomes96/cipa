@@ -46,6 +46,10 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
     return this.http.get<Eleitor[] | PagedResult<Eleitor>>(`${this.url}${idEleicao}/eleitores`, { params: validParams });
   }
 
+  deleteEleitores(idEleicao: number): Observable<{}> {
+    return this.http.delete(`${this.url}${idEleicao}/eleitores`);
+  }
+
   postProximaEtapa(idEleicao: number): Observable<EtapaCronograma[]> {
     return this.http.post<EtapaCronograma[]>(`${this.url}${idEleicao}/proximaetapa`, null);
   }

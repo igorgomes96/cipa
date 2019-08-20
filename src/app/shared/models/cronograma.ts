@@ -6,6 +6,16 @@ export enum PosicaoEtapa {
     Futura = 'Futura'
 }
 
+export enum CodigoEtapaObrigatoria {
+    Convocacao = 1,
+    FormacaoComissao = 2,
+    EditalInscricao = 3,
+    Inscricao = 4,
+    Votacao = 5,
+    Apuracao = 6,
+    Ata = 7
+}
+
 export class EtapaCronograma {
     id: number;
     eleicaoId: number;

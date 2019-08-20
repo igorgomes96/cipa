@@ -33,6 +33,7 @@ export class EleitoresListaComponent implements OnInit {
   ultimaImportacao: Importacao;
   progresso: ProgressoImportacao;
   filtro: string;
+  StatusImportacao = StatusImportacao;
 
   constructor(
     private eleicoesApi: EleicoesApiService,
@@ -167,6 +168,21 @@ export class EleitoresListaComponent implements OnInit {
               this.carregaEleitores();
             });
         }
+      });
+  }
+
+  excluirTodos() {
+    this.toasts.confirm('Deseja mesmo excluir todos os eleitores dessa eleição?')
+      .pipe(
+        filter(confimacao => confimacao),
+        switchMap(_ => this.eleicoesApi.deleteEleitores(this.eleicao.id))
+      ).subscribe(_ => {
+        this.carregaEleitores();
+        this.toasts.showMessage({
+          message: 'Eleitores excluídos com sucesso!',
+          title: 'Sucesso!',
+          type: ToastType.success
+        });
       });
   }
 

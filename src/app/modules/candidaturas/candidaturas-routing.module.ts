@@ -7,6 +7,8 @@ import { EleicaoResolverService } from '../../core/resolvers/eleicao-resolver.se
 import { CandidaturasReprovadasComponent } from './pages/candidaturas-reprovadas/candidaturas-reprovadas.component';
 import { CandidaturasPendentesComponent } from './pages/candidaturas-pendentes/candidaturas-pendentes.component';
 import { CandidaturasFormComponent } from './pages/candidaturas-form/candidaturas-form.component';
+import { EleitorGuard } from 'src/app/core/guards/eleitor.guard';
+import { EtapaCandidaturaGuard } from 'src/app/core/guards/etapa-candidatura.guard';
 
 const routes: Routes = [
   {
@@ -23,7 +25,8 @@ const routes: Routes = [
         },
         resolve: {
           eleicao: EleicaoResolverService
-        }
+        },
+        canActivate: [EleitorGuard, EtapaCandidaturaGuard]
       },
       {
         path: 'aprovadas',
