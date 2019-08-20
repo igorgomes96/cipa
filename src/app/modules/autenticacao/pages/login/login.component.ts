@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/shared/models/usuario';
 import { LoginApiService } from 'src/app/core/api/login-api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { finalize } from 'rxjs/operators';
+import { finalize, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -17,34 +17,41 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
   loggingOn = false;
+  redirectTo = '/';
 
-  constructor(private loginService: LoginApiService,
-              private formBuilder: FormBuilder,
-              private router: Router,
-              private toast: ToastsService,
-              private authService: AuthService) { }
+  constructor(
+    private loginService: LoginApiService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private toast: ToastsService,
+    private authService: AuthService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       senha: ['', Validators.required]
     });
+    this.route.queryParamMap
+      .pipe(
+        filter(params => params.has('redirectTo'))
+      ).subscribe(params => this.redirectTo = params.get('redirectTo'));
   }
 
   login() {
     this.loggingOn = true;
     const usuario = this.form.value as Usuario;
     this.loginService.login(usuario)
-    .pipe(finalize(() => this.loggingOn = false))
-    .subscribe((authInfo: any) => {
-      this.authService.token = authInfo.accessToken;
-      this.toast.showMessage({
-        message: 'Login realizado com Sucesso!',
-        title: 'Sucesso!',
-        type: ToastType.success
+      .pipe(finalize(() => this.loggingOn = false))
+      .subscribe((authInfo: any) => {
+        this.authService.token = authInfo.accessToken;
+        this.toast.showMessage({
+          message: 'Login realizado com Sucesso!',
+          title: 'Sucesso!',
+          type: ToastType.success
+        });
+        this.router.navigate([this.redirectTo]);
       });
-      this.router.navigate(['/']);
-    });
   }
 
 }

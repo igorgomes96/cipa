@@ -12,7 +12,7 @@ export class SignalRService {
 
   private hubConnection: signalR.HubConnection;
 
-  startConnection(url: string, token: string) {
+  private _startConnection(url: string, token: string) {
     const options: IHttpConnectionOptions = {
       accessTokenFactory: () => {
         return token;
@@ -27,6 +27,12 @@ export class SignalRService {
       .start()
       .then(() => console.log('Conexão SignalR iniciada.'))
       .catch(err => console.log('Erro ao iniciar conexão SignalR: ' + err));
+  }
+
+  startConnection(url: string, token: string) {
+    if (!this.hubConnection || this.hubConnection.state !== signalR.HubConnectionState.Connected) {
+      this._startConnection(url, token);
+    }
   }
 
   stopConnection() {

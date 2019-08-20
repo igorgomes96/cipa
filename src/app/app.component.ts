@@ -24,9 +24,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   private navigationType = NavigationType.Left;
   showFooter = true;
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private navigationService: NavigationService,
-    private toastsService: ToastsService) { }
+    public toastsService: ToastsService) { }
 
   ngOnInit() {
     this.router.events.pipe(

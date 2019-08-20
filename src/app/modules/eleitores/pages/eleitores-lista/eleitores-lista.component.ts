@@ -73,6 +73,7 @@ export class EleitoresListaComponent implements OnInit {
         if (valor.progresso === 100) {
           this.progresso = null;
           this.carregaUltimaImportacao();
+          this.carregaEleitores();
         } else {
           this.progresso = valor;
         }
