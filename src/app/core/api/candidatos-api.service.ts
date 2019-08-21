@@ -8,6 +8,7 @@ import { Candidato, Reprovacao } from '../../shared/models/candidato';
 import { endpoints } from 'src/environments/endpoints';
 import { Observable, of, bindCallback } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
+import { Voto } from 'src/app/shared/models/voto';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,10 @@ export class CandidatosApiService extends GenericApi<Candidato> {
 
   postFoto(id: number, foto: FileList): Observable<HttpEvent<{}>> {
     return this.arquivosApiService.uploadFiles(`${this.url}${id}/foto`, foto);
+  }
+
+  postVotar(id: number): Observable<Voto> {
+    return this.http.post<Voto>(`${this.url}${id}/registravoto`, null);
   }
 
 }

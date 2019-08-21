@@ -10,7 +10,7 @@ import { CodigoEtapaObrigatoria } from 'src/app/shared/models/cronograma';
 @Injectable({
     providedIn: 'root'
 })
-export class EtapaVotacaoGuard implements CanActivate {
+export class VotoDuplicadoGuard implements CanActivate {
 
     constructor(
         private eleicoesApi: EleicoesApiService,
@@ -22,20 +22,11 @@ export class EtapaVotacaoGuard implements CanActivate {
             return false;
         } else {
             const id = +next.paramMap.get('id');
-            return this.eleicoesApi.get(id)
-                .pipe(map(eleicao => {
-                    if (!eleicao) {
+            return this.eleicoesApi.getVotoUsuario(id)
+                .pipe(map(voto => {
+                    if (voto) {
                         this.toasts.showMessage({
-                            message: 'Eleição não encontrada.',
-                            title: 'Inválido!',
-                            type: ToastType.error
-                        });
-                        this.router.navigate(['/home']);
-                        return false;
-                    }
-                    if (!eleicao.etapaAtual || eleicao.etapaAtual.etapaObrigatoriaId !== CodigoEtapaObrigatoria.Votacao) {
-                        this.toasts.showMessage({
-                            message: 'Esta eleição não está no período de votação!',
+                            message: 'Você já votou nessa eleição. Não é permitido votar mais de uma vez.',
                             title: 'Inválido!',
                             type: ToastType.error
                         });

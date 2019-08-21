@@ -37,7 +37,6 @@ export class EleitorNovoComponent implements OnInit {
     if (!eleitor.eleicaoId) {
       eleitor.eleicaoId = this.eleicao.id;
     }
-    console.log(eleitor);
     this.eleitoresApi.post(eleitor).subscribe(_ => {
       this.toasts.showMessage({
         message: 'Eleitor salvo com sucesso!',

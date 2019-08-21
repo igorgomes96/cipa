@@ -13,6 +13,7 @@ import { Candidato, StatusAprovacao } from 'src/app/shared/models/candidato';
 import { Importacao } from 'src/app/shared/models/importacao';
 import { ArquivosApiService } from './arquivos-api.service';
 import { filterResponse } from 'src/app/shared/components/rxjs-operators';
+import { Voto } from 'src/app/shared/models/voto';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,21 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
   postImportacao(idEleicao: number, arquivo: FileList): Observable<any> {
     return this.arquivosApiService.uploadFiles(`${this.url}${idEleicao}/importacao`, arquivo)
       .pipe(filterResponse());
+  }
+
+  getVotos(idEleicao: number): Observable<Voto[]> {
+    return this.http.get<Voto[]>(`${this.url}${idEleicao}/votos`);
+  }
+
+  getVotoEleitor(idEleicao: number, idEleitor: number): Observable<Voto[]> {
+    const params: any = {
+      eleitorId: idEleitor
+    };
+    return this.http.get<Voto[]>(`${this.url}${idEleicao}/voto`, { params });
+  }
+
+  getVotoUsuario(idEleicao: number): Observable<Voto[]> {
+    return this.http.get<Voto[]>(`${this.url}${idEleicao}/voto`);
   }
 
 }
