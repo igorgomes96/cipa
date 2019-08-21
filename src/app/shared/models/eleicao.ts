@@ -12,6 +12,10 @@ export class Eleicao {
     eleitores: Eleitor[];
     dataInicio: Date;
     etapaAtual: EtapaCronograma;
+    grupoId: number;
+    grupo: string;
+    qtdaEfetivos: number;
+    qtdaSuplentes: number;
 
     public nomeGestao(): string {
         const fimGestao = this.gestao + this.duracaoGestao - 1;
