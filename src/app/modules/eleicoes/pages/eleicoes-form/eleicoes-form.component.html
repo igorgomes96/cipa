@@ -3,7 +3,6 @@
   Para abrir uma nova eleição, basta seguir os passos abaixo.
 </p>
 
-
 <app-panel>
 
 
@@ -13,21 +12,20 @@
       <div *ngSwitchCase="1">
         <form [formGroup]="formGestao">
           <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12">
-              Data de Início do processo de Eleição
-              <app-datepicker formControlName="dataInicio" inputClasses="input-white"
-                control="formGestao.get('dataInicio')"></app-datepicker>
-            </div>
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                  Data de Início do processo de Eleição
+                  <app-datepicker formControlName="dataInicio" inputClasses="input-white"
+                      control="formGestao.get('dataInicio')"></app-datepicker>
+              </div>
           </div>
           <br>
           <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12">
-              Qual é o tempo de duração dessa gestão? (em anos)
-              <input type="number" formControlName="duracaoGestao" class="form-control">
-            </div>
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                  Qual é o tempo de duração dessa gestão? (em anos)
+                  <input type="number" formControlName="duracaoGestao" class="form-control">
+              </div>
           </div>
-        </form>
-
+      </form>
       </div>
 
       <div *ngSwitchCase="2">
@@ -92,7 +90,7 @@
         </div>
       </div>
 
-      <div *ngSwitchCase="4">
+      <!-- <div *ngSwitchCase="4">
 
         <div id="vertical-timeline" class="vertical-container light-timeline no-margins">
           <div etapa-cronograma class="vertical-timeline-block" *ngFor="let etapa of cronograma" [etapa]="etapa"
@@ -100,7 +98,7 @@
         </div>
 
         <button class="btn btn-success m-t-md" (click)="salvarEleicao()">Abrir Eleição!</button>
-      </div>
+      </div> -->
 
     </div>
   </app-wizard>

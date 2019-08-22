@@ -20,7 +20,7 @@ import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 })
 export class EleicoesFormComponent implements OnInit {
 
-  steps = ['Gestão', 'Empresa', 'Estabelecimento', 'Cronograma'];
+  steps = ['Gestão', 'Empresa', 'Estabelecimento']; //'Cronograma'
   currentStepIndex = 1;
   formListaEmpresa: FormGroup;
   formListaEstabelecimentos: FormGroup;
@@ -33,7 +33,8 @@ export class EleicoesFormComponent implements OnInit {
   novoEstabelecimento = false;
   PosicaoEtapa: typeof PosicaoEtapa = PosicaoEtapa;
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private empresasApi: EmpresasApiService,
     private estabelecimentosApi: EstabelecimentosApiService,
     private formBuilder: FormBuilder,

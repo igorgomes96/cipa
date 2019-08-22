@@ -9,5 +9,6 @@ export const endpoints = {
     cronograma: 'cronograma/',
     etapasObrigatorias: 'etapasobrigatorias/',
     importacoes: 'importacoes/',
-    signalr: 'signalr/'
+    signalr: 'signalr/',
+    grupos: 'grupos/'
 };
