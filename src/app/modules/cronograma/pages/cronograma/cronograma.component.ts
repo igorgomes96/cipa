@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EtapaCronograma, PosicaoEtapa } from 'src/app/shared/models/cronograma';
 import { Eleicao } from 'src/app/shared/models/eleicao';
-import { filter, switchMap, finalize } from 'rxjs/operators';
+import { filter, switchMap, finalize, tap, map } from 'rxjs/operators';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { Arquivo } from 'src/app/shared/models/arquivo';
 import { ToastsService } from 'src/app/core/services/toasts.service';
@@ -10,6 +10,7 @@ import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { CronogramaApiService } from 'src/app/core/api/cronograma-api.service';
 import { EtapasObrigatoriasApiService } from 'src/app/core/api/etapas-obrigatorias-api.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-cronograma',
@@ -24,23 +25,29 @@ export class CronogramaComponent implements OnInit {
   carregandoProximaEtapa = false;
   @ViewChild('modalTemplates', { static: false }) modalTemplates: TemplateRef<any>;
 
-  constructor(private route: ActivatedRoute,
-              private eleicoesApi: EleicoesApiService,
-              private cronogramaApi: CronogramaApiService,
-              private toasts: ToastsService,
-              private modalService: ModalService,
-              private etapasObrigatoriasApi: EtapasObrigatoriasApiService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private eleicoesApi: EleicoesApiService,
+    private cronogramaApi: CronogramaApiService,
+    private toasts: ToastsService,
+    private modalService: ModalService,
+    private etapasObrigatoriasApi: EtapasObrigatoriasApiService) { }
 
   ngOnInit() {
     this.route.data
       .pipe(
         filter(routeData => routeData.hasOwnProperty('eleicao')),
-        switchMap(routeData => {
-          this.eleicao = routeData.eleicao;
-          return this.eleicoesApi.getCronograma(routeData.eleicao.id);
-        })
-      ).subscribe(cronograma => {
-        this.eleicao.cronograma = cronograma;
+        map(routeData => routeData.eleicao),
+        tap(eleicao => this.eleicao = eleicao),
+        switchMap((eleicao: Eleicao) =>
+          forkJoin({
+            cronograma: this.eleicoesApi.getCronograma(eleicao.id),
+            dimensionamento: this.eleicoesApi.getDimensionamento(eleicao.id)
+          })
+        )
+      ).subscribe((detalhes: any) => {
+        this.eleicao.cronograma = detalhes.cronograma;
+        console.log(detalhes);
       });
   }
 
@@ -61,10 +68,10 @@ export class CronogramaComponent implements OnInit {
 
   exibirTemplates(etapa: EtapaCronograma) {
     this.etapasObrigatoriasApi.getTemplates(etapa.id)
-    .subscribe((arquivos: Arquivo[]) => {
-      this.templates = arquivos;
-      this.modalService.showModal(this.modalTemplates);
-    });
+      .subscribe((arquivos: Arquivo[]) => {
+        this.templates = arquivos;
+        this.modalService.showModal(this.modalTemplates);
+      });
   }
 
   updateCronograma() {

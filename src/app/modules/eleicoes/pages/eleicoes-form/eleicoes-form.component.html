@@ -83,7 +83,7 @@
               Estabelecimento</button>
           </div>
           <div class="col-md-12" [hidden]="!novoEstabelecimento">
-            <app-estabelecimento-shared-form [empresas]="[empresaSelecionada]"
+            <app-estabelecimento-shared-form [empresas]="[empresaSelecionada]" [estabelecimento]="estabelecimento"
               (cancelarEdicao)="cancelarEstabelecimento()" (salvarEstabelecimento)="salvarEstabelecimento($event)">
             </app-estabelecimento-shared-form>
           </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Eleitor } from 'src/app/shared/models/eleitor';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { ActivatedRoute } from '@angular/router';
@@ -11,6 +11,7 @@ import { Eleicao } from 'src/app/shared/models/eleicao';
 import { PagedResult } from 'src/app/shared/models/paged-result';
 import { ImportacoesApiService } from 'src/app/core/api/importacoes-api.service';
 import { Importacao, ProgressoImportacao, StatusImportacao } from 'src/app/shared/models/importacao';
+import { Subscriber, Subscription } from 'rxjs';
 
 declare var $: any;
 
@@ -19,7 +20,7 @@ declare var $: any;
   templateUrl: './eleitores-lista.component.html',
   styleUrls: ['./eleitores-lista.component.css']
 })
-export class EleitoresListaComponent implements OnInit {
+export class EleitoresListaComponent implements OnInit, OnDestroy {
 
   eleitores: PagedResult<Eleitor> = {
     currentPage: 1,
@@ -34,6 +35,7 @@ export class EleitoresListaComponent implements OnInit {
   progresso: ProgressoImportacao;
   filtro: string;
   StatusImportacao = StatusImportacao;
+  progressoSubscriber: Subscription;
 
   constructor(
     private eleicoesApi: EleicoesApiService,
@@ -66,7 +68,7 @@ export class EleitoresListaComponent implements OnInit {
         this.carregaEleitores();
       });
 
-    this.importacoesApi.progressoImportacao()
+    this.progressoSubscriber = this.importacoesApi.progressoImportacao()
       .subscribe(valor => {
         if (!this.progresso) {
           this.carregaUltimaImportacao();
@@ -79,6 +81,10 @@ export class EleitoresListaComponent implements OnInit {
           this.progresso = valor;
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    this.progressoSubscriber.unsubscribe();
   }
 
   get labelStatusImportacao(): string {

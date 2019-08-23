@@ -11,12 +11,14 @@
     <div class="col-lg-9 col-md-8 col-sm-12">
       <div class="form-group">
         <label class="control-label">Empresa</label>
-        <select name="empresa" id="empresa" class="form-control">
+        <select name="empresa" id="empresa" class="form-control" required [(ngModel)]="estabelecimento.empresaId">
           <option value="">(Selecione)</option>
-          <option *ngFor="let emp of empresas" value="emp.id">{{ emp.razaoSocial }}</option>
+          <option *ngFor="let emp of empresas" [value]="emp.id">{{ emp.razaoSocial }}</option>
         </select>
       </div>
     </div>
+
+
 
     <div class="col-lg-3 col-md-4 col-sm-12">
       <app-custom-input [(ngModel)]="estabelecimento.cidade" #cidade="ngModel" [control]="cidade" id="cidade"
@@ -32,6 +34,19 @@
       <app-custom-input [(ngModel)]="estabelecimento.endereco" #endereco="ngModel" [control]="endereco" id="endereco"
         label="Endereço" name="endereco" required>
       </app-custom-input>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-2 col-md-3 col-sm-12">
+      <div class="form-group">
+        <label class="control-label">Grupo</label>
+        <app-ajuda-tooltip ajuda="O grupo ao qual pertence a empresa define o dimensionamento dos membros da CIPA. Consulta a NR-5."></app-ajuda-tooltip>
+        <select name="grupo" id="grupo" class="form-control">
+          <option value="">(Selecione)</option>
+          <option *ngFor="let grupo of grupos" value="grupo.id">{{ grupo.codigoGrupo }}</option>
+        </select>
+      </div>
     </div>
   </div>
 

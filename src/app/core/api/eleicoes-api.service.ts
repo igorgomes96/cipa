@@ -14,6 +14,7 @@ import { Importacao } from 'src/app/shared/models/importacao';
 import { ArquivosApiService } from './arquivos-api.service';
 import { filterResponse } from 'src/app/shared/components/rxjs-operators';
 import { Voto } from 'src/app/shared/models/voto';
+import { Dimensionamento } from 'src/app/shared/models/dimensionamento';
 
 @Injectable({
   providedIn: 'root'
@@ -73,6 +74,10 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
 
   getVotoUsuario(idEleicao: number): Observable<Voto[]> {
     return this.http.get<Voto[]>(`${this.url}${idEleicao}/voto`);
+  }
+
+  getDimensionamento(idEleicao: number): Observable<Dimensionamento> {
+    return this.http.get<Dimensionamento>(`${this.url}${idEleicao}/dimensionamento`);
   }
 
 }

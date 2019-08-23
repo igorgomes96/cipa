@@ -4,6 +4,7 @@ import { Arquivo } from 'src/app/shared/models/arquivo';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CronogramaApiService } from 'src/app/core/api/cronograma-api.service';
 import { finalize, switchMap } from 'rxjs/operators';
+import { Dimensionamento } from '../../models/dimensionamento';
 
 declare var $: any;
 
@@ -17,6 +18,7 @@ export class EtapaCronogramaComponent implements OnInit {
   @Input() etapa: EtapaCronograma;
   @Input() layout = 'Visualização';
   @Input() carregandoProximaEtapa = false;
+  @Input() dimensionamento: Dimensionamento;
   @Output() proximaEtapa: EventEmitter<EtapaCronograma> = new EventEmitter<EtapaCronograma>();
   @Output() exibirTemplates: EventEmitter<EtapaCronograma> = new EventEmitter<EtapaCronograma>();
   @Output() atualizarEtapa: EventEmitter<EtapaCronograma> = new EventEmitter<EtapaCronograma>();
@@ -26,7 +28,8 @@ export class EtapaCronogramaComponent implements OnInit {
   arquivos: Arquivo[] = [];
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private cronogramaApi: CronogramaApiService) { }
 
   ngOnInit() {

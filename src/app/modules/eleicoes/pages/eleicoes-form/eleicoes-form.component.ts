@@ -20,13 +20,14 @@ import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 })
 export class EleicoesFormComponent implements OnInit {
 
-  steps = ['Gestão', 'Empresa', 'Estabelecimento']; //'Cronograma'
+  steps = ['Gestão', 'Empresa', 'Estabelecimento']; // 'Cronograma'
   currentStepIndex = 1;
   formListaEmpresa: FormGroup;
   formListaEstabelecimentos: FormGroup;
   formGestao: FormGroup;
   cronograma: EtapaCronograma[];
   estabelecimentos: Estabelecimento[] = [];
+  estabelecimento: Estabelecimento;
   empresas: Empresa[] = [];
   eleicao: Eleicao;
   novaEmpresa = false;
@@ -62,6 +63,7 @@ export class EleicoesFormComponent implements OnInit {
     // Carrega os estabelecimentos de acordo com a empresa selecionada
     this.formListaEmpresa.get('empresa').valueChanges
       .pipe(tap((value: any) => {
+        this.estabelecimento.empresaId = value;
         if (!value) {
           this.estabelecimentos = [];
         }
@@ -88,6 +90,14 @@ export class EleicoesFormComponent implements OnInit {
     this.formGestao = this.formBuilder.group({
       dataInicio: [new Date(), Validators.required],
       duracaoGestao: [2, Validators.required]
+    });
+
+    this.estabelecimento = new Estabelecimento({
+      cidade: null,
+      descricao: null,
+      empresaId: null,
+      endereco: null,
+      id: null
     });
   }
 
