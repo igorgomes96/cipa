@@ -1,8 +1,10 @@
 export class Dimensionamento {
     grupoId: number;
+    codigoGrupo: string;
     minimo: number;
     maximo: number;
-    qtdaEfetivo: number;
+    qtdaEfetivos: number;
     qtdaSuplentes: number;
-    qtdaCandidatos: number;
+    qtdaEleitores: number;
+    qtdaInscricoes: number;
 }

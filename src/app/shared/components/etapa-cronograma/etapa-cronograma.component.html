@@ -22,6 +22,21 @@
     </div>
 
     <p>{{ etapa.descricaoEtapa }}</p>
+    <br>
+    <div class="row" *ngIf="dimensionamento && etapa.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao">
+      <div class="col-sm-12">
+        <div class="alert" [ngClass]="possuiQtdaMinimaInscricoes ? 'alert-success' : 'alert-danger'">
+          Para empresas do grupo <strong>{{ dimensionamento.codigoGrupo }}</strong>, com <strong>{{ dimensionamento.qtdaEleitores }}</strong> funcionários, o dimensionamento dos membros da CIPA é:
+          <br>
+          <strong>Efetivos: </strong>{{ dimensionamento.qtdaEfetivos }}<br />
+          <strong>Suplentes: </strong>{{ dimensionamento.qtdaSuplentes }}<br />
+          <strong>Inscrições: </strong>{{ dimensionamento.qtdaInscricoes }}<br />
+          <span style="display: block; margin-bottom: 8px;" *ngIf="!possuiQtdaMinimaInscricoes">Portanto, somente será permitido passar para a próxima etapa, se houverem <strong>no mínimo {{ dimensionamento.qtdaEfetivos + dimensionamento.qtdaSuplentes }} inscrições</strong>.</span>
+          <span style="display: block; margin-bottom: 8px;" *ngIf="possuiQtdaMinimaInscricoes">A quantidade mínima de inscrições já foi alcançada.</span>
+          <small>Última atualização: {{ ultimaAtualizacao | date:'dd/MM/yyyy HH:mm'}}</small>
+        </div>
+      </div>
+    </div>
 
 
     <div class="templates" *ngIf="layout === 'Visualização' && etapa.possuiTemplates">

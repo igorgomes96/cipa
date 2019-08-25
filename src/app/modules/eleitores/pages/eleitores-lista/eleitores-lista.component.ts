@@ -1,3 +1,4 @@
+import { ArquivosApiService } from 'src/app/core/api/arquivos-api.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Eleitor } from 'src/app/shared/models/eleitor';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
@@ -11,7 +12,8 @@ import { Eleicao } from 'src/app/shared/models/eleicao';
 import { PagedResult } from 'src/app/shared/models/paged-result';
 import { ImportacoesApiService } from 'src/app/core/api/importacoes-api.service';
 import { Importacao, ProgressoImportacao, StatusImportacao } from 'src/app/shared/models/importacao';
-import { Subscriber, Subscription } from 'rxjs';
+import { Subscriber, Subscription, Subject } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
 
 declare var $: any;
 
@@ -43,7 +45,8 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private eleitoresApi: EleitoresApiService,
     private toasts: ToastsService,
-    private importacoesApi: ImportacoesApiService) { }
+    private importacoesApi: ImportacoesApiService,
+    private arquivosApi: ArquivosApiService) { }
 
   ngOnInit() {
     this.route.data
@@ -85,6 +88,24 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.progressoSubscriber.unsubscribe();
+  }
+
+  downloadTemplate() {
+    this.arquivosApi.downloadTemplateImportacao().subscribe(res => {
+      const a = document.createElement('a');
+      const binaryData = [];
+      binaryData.push(res);
+      a.href = window.URL.createObjectURL(new Blob(binaryData,
+        {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        }));
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.download = 'Importacao CIPA.xlsx';
+      a.click();
+      window.URL.revokeObjectURL(a.href);
+      a.remove(); // remove the element
+    });
   }
 
   get labelStatusImportacao(): string {

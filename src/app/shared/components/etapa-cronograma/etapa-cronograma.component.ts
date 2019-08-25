@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { EtapaCronograma, PosicaoEtapa } from 'src/app/shared/models/cronograma';
+import { EtapaCronograma, PosicaoEtapa, CodigoEtapaObrigatoria } from 'src/app/shared/models/cronograma';
 import { Arquivo } from 'src/app/shared/models/arquivo';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CronogramaApiService } from 'src/app/core/api/cronograma-api.service';
@@ -23,10 +23,12 @@ export class EtapaCronogramaComponent implements OnInit {
   @Output() exibirTemplates: EventEmitter<EtapaCronograma> = new EventEmitter<EtapaCronograma>();
   @Output() atualizarEtapa: EventEmitter<EtapaCronograma> = new EventEmitter<EtapaCronograma>();
 
-  PosicaoEtapa: typeof PosicaoEtapa = PosicaoEtapa;
+  PosicaoEtapa = PosicaoEtapa;
   carregandoArquivos = false;
   arquivos: Arquivo[] = [];
   form: FormGroup;
+  CodigoEtapaObrigatoria = CodigoEtapaObrigatoria;
+  ultimaAtualizacao: Date;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,6 +46,7 @@ export class EtapaCronogramaComponent implements OnInit {
       .subscribe((arquivos: Arquivo[]) => {
         this.arquivos = arquivos;
       });
+    this.ultimaAtualizacao = new Date();
   }
 
   get isDateDisabled() {
@@ -91,6 +94,11 @@ export class EtapaCronogramaComponent implements OnInit {
     } else {
       return 'col-lg-8 col-md-7';
     }
+  }
+
+  get possuiQtdaMinimaInscricoes() {
+    return this.dimensionamento &&
+      this.dimensionamento.qtdaInscricoes >= (this.dimensionamento.qtdaEfetivos + this.dimensionamento.qtdaSuplentes);
   }
 
   upload(files: FileList) {

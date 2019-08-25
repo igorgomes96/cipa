@@ -2,7 +2,7 @@
     <div etapa-cronograma class="vertical-timeline-block"
         [class.inactive]="etapa.posicaoEtapa === PosicaoEtapa.Futura" *ngFor="let etapa of eleicao.cronograma"
         [etapa]="etapa" (proximaEtapa)="proximaEtapa($event)" (atualizarEtapa)="atualizarEtapa($event)" (exibirTemplates)="exibirTemplates($event)"
-        [carregandoProximaEtapa]="carregandoProximaEtapa"></div>
+        [carregandoProximaEtapa]="carregandoProximaEtapa" [dimensionamento]="dimensionamento"></div>
 </div>
 
 <ng-template #modalTemplates>

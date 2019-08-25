@@ -4,7 +4,7 @@
     Baixe o template, preencha os dados e faça a importação.">
     </app-ajuda-tooltip>
   </p>
-  <button class="btn btn-success m-r-sm m-t-xs"><i class="fa fa-download"></i> Baixar Template</button>
+  <button class="btn btn-success m-r-sm m-t-xs" (click)="downloadTemplate()"><i class="fa fa-download"></i> Baixar Template</button>
   <label for="upload" class="btn btn-primary m-t-xs">
     <input type="file" name="upload" id="upload" class="hide" (change)="onUploadArquivo($event)">
     <i class="fa fa-upload"></i> Importar Dados

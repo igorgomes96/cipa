@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpEvent, HttpRequest, HttpClient } from '@angular/common/http';
+import { HttpEvent, HttpRequest, HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { endpoints } from '../../../environments/endpoints';
 
@@ -24,6 +24,10 @@ export class ArquivosApiService {
       observe: 'events',
       reportProgress: true
     });
+   }
+
+   downloadTemplateImportacao() {
+    return this.http.get(`${this.url}templateimportacao`, {responseType: 'arraybuffer'});
    }
 
    download(id: string) {

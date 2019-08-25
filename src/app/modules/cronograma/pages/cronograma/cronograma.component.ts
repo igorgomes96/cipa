@@ -1,3 +1,5 @@
+import { CodigoEtapaObrigatoria } from './../../../../shared/models/cronograma';
+import { Dimensionamento } from './../../../../shared/models/dimensionamento';
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EtapaCronograma, PosicaoEtapa } from 'src/app/shared/models/cronograma';
@@ -23,6 +25,7 @@ export class CronogramaComponent implements OnInit {
   eleicao: Eleicao;
   templates: Arquivo[];
   carregandoProximaEtapa = false;
+  dimensionamento: Dimensionamento;
   @ViewChild('modalTemplates', { static: false }) modalTemplates: TemplateRef<any>;
 
   constructor(
@@ -46,8 +49,8 @@ export class CronogramaComponent implements OnInit {
           })
         )
       ).subscribe((detalhes: any) => {
+        this.dimensionamento = detalhes.dimensionamento;
         this.eleicao.cronograma = detalhes.cronograma;
-        console.log(detalhes);
       });
   }
 
