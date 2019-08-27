@@ -1,2 +1,6 @@
-<app-form-cadastro titulo="Reset de Senha" descricao="Cadastre uma nova senha de acesso para continuar utilizando nosso sistema." botaoSalvar="Cadastrar">
+<app-form-cadastro titulo="Reset de Senha"
+    descricao="Cadastre uma nova senha de acesso para continuar utilizando nosso sistema."
+    botaoSalvar="Resetar Senha"
+    [usuario]="usuario"
+    (enviar)="resetar($event)">
 </app-form-cadastro>

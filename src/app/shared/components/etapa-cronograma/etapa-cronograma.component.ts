@@ -96,10 +96,6 @@ export class EtapaCronogramaComponent implements OnInit {
     }
   }
 
-  get possuiQtdaMinimaInscricoes() {
-    return this.dimensionamento &&
-      this.dimensionamento.qtdaInscricoes >= (this.dimensionamento.qtdaEfetivos + this.dimensionamento.qtdaSuplentes);
-  }
 
   upload(files: FileList) {
     this.carregandoArquivos = true;

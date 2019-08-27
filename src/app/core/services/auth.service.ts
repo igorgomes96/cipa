@@ -10,6 +10,7 @@ export class AuthService {
   constructor() { }
 
   set token(token: string) {
+    console.log(token);
     localStorage.setItem('token', JSON.stringify(token));
     this.onUserChanges.emit(token);
   }

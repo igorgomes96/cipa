@@ -18,4 +18,12 @@ export class LoginApiService {
     return this.http.post<any>(this.url, usuario);
   }
 
+  buscaPeloCodigoRecuperacao(codigo: string): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.url}recuperacao/${codigo}`);
+  }
+
+  resetSenha(usuario: Usuario): Observable<any> {
+    return this.http.post(`${this.url}reset`, usuario);
+  }
+
 }

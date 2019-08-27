@@ -20,6 +20,9 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
 import { AjudaTooltipComponent } from './components/ajuda-tooltip/ajuda-tooltip.component';
 import { LaddaModule } from 'angular2-ladda';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { EqualsToValidatorDirective } from './directives/equasto-validator.directive';
+import { EtapaAlertComponent } from './components/etapa-dimensionamento/etapa-dimensionamento.component';
+import { EtapaPercentualVotosComponent } from './components/etapa-percentual-votos/etapa-percentual-votos.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     CustomInputComponent,
     ValidatorMessageComponent,
     DateValidatorDirective,
+    EqualsToValidatorDirective,
     CardCandidatoComponent,
     EtapaCronogramaComponent,
     WizardComponent,
@@ -35,7 +39,9 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     EstabelecimentoSharedFormComponent,
     DatepickerComponent,
     AjudaTooltipComponent,
-    PaginationComponent
+    PaginationComponent,
+    EtapaAlertComponent,
+    EtapaPercentualVotosComponent
   ],
   imports: [
     CommonModule,
@@ -57,6 +63,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     CustomInputComponent,
     ValidatorMessageComponent,
     DateValidatorDirective,
+    EqualsToValidatorDirective,
     CardCandidatoComponent,
     EtapaCronogramaComponent,
     WizardComponent,

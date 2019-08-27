@@ -33,6 +33,7 @@ export class CustomInputComponent implements OnInit, ControlValueAccessor {
   @Input() addOnAfter: string = null;
   @Input() addOnBefore: string = null;
   @Input() formatNumber = '1.0-2';
+  @Input() showLabel = true;
 
   private innerValue: any;
   private value: any;

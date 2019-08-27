@@ -1,0 +1,21 @@
+<div class="alert" [ngClass]="possuiQtdaMinimaInscricoes ? 'alert-success' : 'alert-danger'">
+  Para empresas do grupo <strong>{{ dimensionamento.codigoGrupo }}</strong>, com
+  <strong>{{ dimensionamento.qtdaEleitores }}</strong> funcionários, o dimensionamento dos membros da CIPA é:
+  <br>
+  <strong>Efetivos: </strong>{{ dimensionamento.qtdaEfetivos }}<br />
+  <strong>Suplentes: </strong>{{ dimensionamento.qtdaSuplentes }}<br />
+  <strong>Inscrições: </strong><br />
+  <ul>
+    <li>Aprovadas: {{ dimensionamento.qtdaInscricoesAprovadas }}</li>
+    <li>Reprovadas: {{ dimensionamento.qtdaInscricoesReprovadas }}</li>
+    <li>Pendentes: {{ dimensionamento.qtdaInscricoesPendentes }}</li>
+    <li>Total: {{ dimensionamento.qtdaInscricoes }}</li>
+  </ul>
+  <br />
+  <span style="display: block; margin-bottom: 8px;" *ngIf="!possuiQtdaMinimaInscricoes">Portanto, somente será
+    permitido passar para a próxima etapa, se houverem <strong>no mínimo
+      {{ dimensionamento.qtdaEfetivos + dimensionamento.qtdaSuplentes }} inscrições aprovadas</strong>.</span>
+  <span style="display: block; margin-bottom: 8px;" *ngIf="possuiQtdaMinimaInscricoes">A quantidade mínima de
+    inscrições já foi alcançada.</span>
+  <small>Última atualização: {{ ultimaAtualizacao | date:'dd/MM/yyyy HH:mm'}}</small>
+</div>

@@ -17,6 +17,13 @@ export class FormCadastroComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (!this.usuario) {
+      this.usuario = new Usuario();
+    }
+  }
+
+  enviarUsuario() {
+    this.enviar.emit(this.usuario);
   }
 
 }

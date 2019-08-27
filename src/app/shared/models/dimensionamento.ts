@@ -7,4 +7,9 @@ export class Dimensionamento {
     qtdaSuplentes: number;
     qtdaEleitores: number;
     qtdaInscricoes: number;
+    qtdaInscricoesAprovadas: number;
+    qtdaInscricoesReprovadas: number;
+    qtdaInscricoesPendentes: number;
+    qtdaMinimaVotos: number;
+    qtdaVotos: number;
 }

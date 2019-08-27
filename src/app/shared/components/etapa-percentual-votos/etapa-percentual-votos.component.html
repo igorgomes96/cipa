@@ -1,0 +1,13 @@
+<div class="alert" [ngClass]="possuiQtdaMinimaVotos ? 'alert-success' : 'alert-danger'">
+  A NR-5 define que havendo participação <strong>inferior a 50%</strong> dos empregados na votação, não haverá a apuração
+  dos votos e a comissão eleitoral deverá organizar outra
+  votação que ocorrerá no prazo máximo de <strong>10 dias</strong>.<br />
+  <strong>Empregados: </strong>{{ dimensionamento.qtdaEleitores }}<br />
+  <strong>Votos: </strong>{{ dimensionamento.qtdaVotos }}<br />
+  <span style="display: block; margin-bottom: 8px; margin-top: 5px;" *ngIf="!possuiQtdaMinimaVotos">Portanto, somente será
+    permitido passar para a próxima etapa, se houverem <strong>no mínimo
+      {{ dimensionamento.qtdaMinimaVotos }} votos</strong>.</span>
+  <span style="display: block; margin-bottom: 8px;" *ngIf="possuiQtdaMinimaVotos">A quantidade mínima de
+    votos necessária para apuração já foi alcançada.</span>
+  <small>Última atualização: {{ ultimaAtualizacao | date:'dd/MM/yyyy HH:mm'}}</small>
+</div>
