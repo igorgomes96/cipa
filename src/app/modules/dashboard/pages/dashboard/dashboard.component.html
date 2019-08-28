@@ -1,0 +1,26 @@
+<app-widgets [dimensionamento]="dimensionamento"></app-widgets>
+
+<app-panel title="Apuração dos votos" [collapsible]="false">
+  <h2 class="text-center">Qtda. de Votos</h2>
+  <h5 class="text-center">Ultima atualização: {{ ultimaAtualizacao | date:'dd/MMM/yyyy HH:mm:ss' }}</h5>
+  <br>
+  <app-apuracao-chart [apuracao]="apuracao" barChartType="horizontalBar"></app-apuracao-chart>
+</app-panel>
+
+<app-panel title="Relatório de eleitores">
+  <app-relatorio-eleitores [eleicao]="eleicao"></app-relatorio-eleitores>
+</app-panel>
+
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <app-panel title="Apuração dos Votos" labelText="Efetivos" labelClass="label-primary" [collapsible]="false">
+      <app-resultado-apuracao [apuracao]="resultado.efetivos"></app-resultado-apuracao>
+    </app-panel>
+  </div>
+
+  <div class="col-md-6 col-sm-12">
+    <app-panel title="Apuração dos Votos" labelText="Suplentes" labelClass="label-primary" [collapsible]="false">
+      <app-resultado-apuracao [apuracao]="resultado.suplentes"></app-resultado-apuracao>
+    </app-panel>
+  </div>
+</div>

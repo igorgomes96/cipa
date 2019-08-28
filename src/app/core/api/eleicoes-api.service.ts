@@ -1,3 +1,4 @@
+import { ResultadoApuracao } from './../../shared/models/apuracao';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -15,6 +16,7 @@ import { ArquivosApiService } from './arquivos-api.service';
 import { filterResponse } from 'src/app/shared/components/rxjs-operators';
 import { Voto } from 'src/app/shared/models/voto';
 import { Dimensionamento } from 'src/app/shared/models/dimensionamento';
+import { Apuracao } from 'src/app/shared/models/apuracao';
 
 @Injectable({
   providedIn: 'root'
@@ -61,8 +63,9 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
       .pipe(filterResponse());
   }
 
-  getVotos(idEleicao: number): Observable<Voto[]> {
-    return this.http.get<Voto[]>(`${this.url}${idEleicao}/votos`);
+  getVotos(idEleicao: number, params: any = {}): Observable<Voto[] | PagedResult<Voto>> {
+    const validParams = this.validParams(params);
+    return this.http.get<Voto[]>(`${this.url}${idEleicao}/votos`, { params: validParams });
   }
 
   getVotoEleitor(idEleicao: number, idEleitor: number): Observable<Voto[]> {
@@ -78,6 +81,14 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
 
   getDimensionamento(idEleicao: number): Observable<Dimensionamento> {
     return this.http.get<Dimensionamento>(`${this.url}${idEleicao}/dimensionamento`);
+  }
+
+  getApuracao(idEleicao: number): Observable<Apuracao[]> {
+    return this.http.get<Apuracao[]>(`${this.url}${idEleicao}/apuracao`);
+  }
+
+  getResultado(idEleicao: number): Observable<ResultadoApuracao> {
+    return this.http.get<ResultadoApuracao>(`${this.url}${idEleicao}/resultado`);
   }
 
 }

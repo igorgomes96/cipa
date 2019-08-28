@@ -1,0 +1,12 @@
+<div class="feed-activity-list">
+  <div class="feed-element" *ngFor="let ap of apuracao;let i=index">
+    <div class="pull-left" *ngIf="ap.foto">
+      <img alt="image" class="img-circle" [src]="ap.foto">
+   </div>
+    <div class="media-body">
+      <small class="pull-right">{{ ap.votos }} Votos</small>
+      <strong class="ng-binding">{{ i + 1 }}º</strong> - {{ ap.nome }}<br>
+      <p class="text-muted">{{ ap.cargo }}</p>
+    </div>
+  </div>
+</div>

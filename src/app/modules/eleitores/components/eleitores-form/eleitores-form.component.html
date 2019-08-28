@@ -1,4 +1,4 @@
-<form #form="ngForm" (submit)="submit()" (reset)="reset()">
+<form #form="ngForm" (submit)="submit()" (reset)="reset()" id="eleitores-form">
     <div class="row">
         <div class="col-lg-2 col-md-3 col-sm-6">
             <app-custom-input [(ngModel)]="eleitor.id" #id="ngModel" [control]="id" id="id" label="Código" name="id"
@@ -28,15 +28,13 @@
         </div>
 
         <div class="col-sm-4">
-            <app-custom-input [(ngModel)]="eleitor.dataAdmissao" #dataAdmissao="ngModel" [control]="dataAdmissao"
-                id="dataAdmissao" label="Data de Admissão" name="dataAdmissao" type="date" date-validation>
-            </app-custom-input>
+            <app-datepicker name="dataAdmissao" id="dataAdmissao" [(ngModel)]="eleitor.dataAdmissao"
+            #dataAdmissao="ngModel" [control]="dataAdmissao" label="Data de Admissão" placeholder="Data de Admissão"></app-datepicker>
         </div>
 
         <div class="col-sm-4">
-            <app-custom-input [(ngModel)]="eleitor.dataNascimento" #dataNascimento="ngModel" [control]="dataNascimento"
-                id="dataNascimento" label="Data de Nascimento" name="dataNascimento" type="date" date-validation>
-            </app-custom-input>
+            <app-datepicker name="dataNascimento" id="dataNascimento" [(ngModel)]="eleitor.dataNascimento"
+            #dataNascimento="ngModel" [control]="dataNascimento" label="Data de Nascimento" placeholder="Data de Nascimento"></app-datepicker>
         </div>
     </div>
 

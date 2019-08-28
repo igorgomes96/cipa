@@ -20,7 +20,8 @@ export class PaginationComponent implements OnInit {
   @Input()
   set paginationInfo(pageResult: PagedResult<any>) {
     if (pageResult && !pageResult.currentPage) {
-      pageResult.currentPage = 1;
+      this._paginationInfo.currentPage = 1;
+      this._paginationInfo.totalRecords = pageResult.totalRecords;
       return;
     }
     this._paginationInfo = pageResult;

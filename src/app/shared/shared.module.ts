@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { TooltipModule } from 'ng2-tooltip-directive';
+import { ChartsModule } from 'ng2-charts';
 
 import { PanelComponent } from './components/panel/panel.component';
 import { ArquivosComponent } from './components/arquivos/arquivos.component';
@@ -23,6 +24,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { EqualsToValidatorDirective } from './directives/equasto-validator.directive';
 import { EtapaAlertComponent } from './components/etapa-dimensionamento/etapa-dimensionamento.component';
 import { EtapaPercentualVotosComponent } from './components/etapa-percentual-votos/etapa-percentual-votos.component';
+import { WidgetDashboardComponent } from './components/widget-dashboard/widget-dashboard.component';
+import { CountCharDirective } from './directives/count-char.directive';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import { EtapaPercentualVotosComponent } from './components/etapa-percentual-vot
     AjudaTooltipComponent,
     PaginationComponent,
     EtapaAlertComponent,
-    EtapaPercentualVotosComponent
+    EtapaPercentualVotosComponent,
+    WidgetDashboardComponent,
+    CountCharDirective
   ],
   imports: [
     CommonModule,
@@ -50,7 +55,8 @@ import { EtapaPercentualVotosComponent } from './components/etapa-percentual-vot
     ReactiveFormsModule,
     FormsModule,
     TooltipModule,
-    LaddaModule
+    LaddaModule,
+    ChartsModule
   ],
   exports: [
     CommonModule,
@@ -73,7 +79,10 @@ import { EtapaPercentualVotosComponent } from './components/etapa-percentual-vot
     TooltipModule,
     AjudaTooltipComponent,
     LaddaModule,
-    PaginationComponent
+    PaginationComponent,
+    ChartsModule,
+    WidgetDashboardComponent,
+    CountCharDirective
   ]
 })
 export class SharedModule { }

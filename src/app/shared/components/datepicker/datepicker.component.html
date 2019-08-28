@@ -3,6 +3,6 @@
   <div class="input-group date" [id]="id">
     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
     <input type="text" (input)="pushChanges($event.target.value)" [ngClass]="inputClasses" [readOnly]="!!readOnly" [disabled]="!!isDisabled" [(ngModel)]="value"
-      [name]="name" [id]="id + 'input'" class="form-control">
+      [name]="name" [id]="id + 'input'" class="form-control" [placeholder]="placeholder">
   </div>
 </div>

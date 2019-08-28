@@ -26,9 +26,10 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
   @Input() control: AbstractControl;
   @Input() readOnly = true;
   @Input() inputClasses = '';
+  @Input() placeholder = '';
 
   // private innerValue: any;  // Valor de fato
-  private value: any; // Texto exibido no controle
+  value: any; // Texto exibido no controle
   public hasError = false;
 
   private isDisabled = false;
@@ -89,7 +90,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
 
 
   writeValue(valor: any): void {
-    if (valor !== null) {
+    if (valor != null) {
       this.value = formatDate(valor as Date, 'dd/MM/yyyy', 'pt-BR');
       if (this.jDate) {
         this.jDate.datepicker('setDate', formatDate(valor as Date, 'dd/MM/yyyy', 'pt-BR'));

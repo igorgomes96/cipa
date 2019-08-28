@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-3 col-sm-6 col-xs-12">
+    <app-widget-dashboard titulo="Funcionários" icone="fa-users" [valor]="dimensionamento.qtdaEleitores"
+      estilo="navy-bg">
+    </app-widget-dashboard>
+  </div>
+  <div class="col-md-3 col-sm-6 col-xs-12">
+    <app-widget-dashboard titulo="Qtda de Votantes" icone="fa-address-book" [valor]="dimensionamento.qtdaVotos"
+      estilo="lazur-bg">
+    </app-widget-dashboard>
+  </div>
+  <div class="col-md-3 col-sm-6 col-xs-12">
+    <app-widget-dashboard titulo="Não Votantes" icone="fa-ban" [valor]="qtdaNaoVotantes" estilo="yellow-bg">
+    </app-widget-dashboard>
+  </div>
+  <div class="col-md-3 col-sm-6 col-xs-12">
+    <app-widget-dashboard titulo="Perc. de Votos" [icone]="possuiQtdaMinimaVotos ? 'fa-check' : 'fa-times'"
+      [valor]="percentualVotos | percent:'1.0-2'" [estilo]="possuiQtdaMinimaVotos ? 'navy-bg' : 'red-bg'">
+    </app-widget-dashboard>
+  </div>
+</div>
