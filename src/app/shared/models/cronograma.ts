@@ -28,6 +28,7 @@ export class EtapaCronograma {
     templates: Arquivo[];
     possuiTemplates: boolean;
     etapaObrigatoria: EtapaObrigatoria;
+    ordem: number;
 }
 
 export class EtapaObrigatoria {

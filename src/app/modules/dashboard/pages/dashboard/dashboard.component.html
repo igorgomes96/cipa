@@ -18,15 +18,19 @@
 
   <div class="row">
     <div class="col-md-6 col-sm-12">
-      <app-panel title="Apuração dos Votos" labelText="Efetivos" labelClass="label-primary" [collapsible]="false">
+      <app-panel title="Resultado da Apuração" labelText="Efetivos" labelClass="label-primary" [collapsible]="false">
         <app-resultado-apuracao [apuracao]="resultado.efetivos"></app-resultado-apuracao>
       </app-panel>
     </div>
 
     <div class="col-md-6 col-sm-12">
-      <app-panel title="Apuração dos Votos" labelText="Suplentes" labelClass="label-primary" [collapsible]="false">
+      <app-panel title="Resultado da Apuração" labelText="Suplentes" labelClass="label-primary" [collapsible]="false">
         <app-resultado-apuracao [apuracao]="resultado.suplentes"></app-resultado-apuracao>
       </app-panel>
     </div>
   </div>
 </div>
+
+<app-panel title="Relação de Candidatos">
+  <app-relacao-candidatos [resultado]="resultado"></app-relacao-candidatos>
+</app-panel>

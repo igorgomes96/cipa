@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-sm-12">
+    <button class="btn btn-primary m-b-md m-t-xs">
+      <i class="fa fa-download"></i> Baixar Relatório
+    </button>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Nome</th>
+        <th>Cargo</th>
+        <th>Área</th>
+        <th>Votos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let candidato of candidatos">
+        <td>
+          <span class="label" [ngClass]="resultadoClass(candidato)">{{ candidato.resultadoApuracao }}
+          </span>
+        </td>
+        <td>{{ candidato.nome }}</td>
+        <td>{{ candidato.cargo }}</td>
+        <td>{{ candidato.area }}</td>
+        <td>{{ candidato.votos }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

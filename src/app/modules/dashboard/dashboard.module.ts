@@ -8,9 +8,10 @@ import { ApuracaoChartComponent } from './components/apuracao-chart/apuracao-cha
 import { WidgetsComponent } from './components/widgets/widgets.component';
 import { RelatorioEleitoresComponent } from './components/relatorio-eleitores/relatorio-eleitores.component';
 import { ResultadoApuracaoComponent } from './components/resultado-apuracao/resultado-apuracao.component';
+import { RelacaoCandidatosComponent } from './components/relacao-candidatos/relacao-candidatos.component';
 
 @NgModule({
-  declarations: [DashboardComponent, ApuracaoChartComponent, WidgetsComponent, RelatorioEleitoresComponent, ResultadoApuracaoComponent],
+  declarations: [DashboardComponent, ApuracaoChartComponent, WidgetsComponent, RelatorioEleitoresComponent, ResultadoApuracaoComponent, RelacaoCandidatosComponent],
   imports: [
     CommonModule,
     SharedModule,

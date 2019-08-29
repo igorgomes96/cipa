@@ -1,4 +1,3 @@
-import { CodigoEtapaObrigatoria } from './../../../../shared/models/cronograma';
 import { Dimensionamento } from './../../../../shared/models/dimensionamento';
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +11,8 @@ import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { CronogramaApiService } from 'src/app/core/api/cronograma-api.service';
 import { EtapasObrigatoriasApiService } from 'src/app/core/api/etapas-obrigatorias-api.service';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-cronograma',
@@ -54,19 +54,33 @@ export class CronogramaComponent implements OnInit {
       });
   }
 
-  proximaEtapa(_: EtapaCronograma) {
-    this.carregandoProximaEtapa = true;
-    this.eleicoesApi.postProximaEtapa(this.eleicao.id)
-      .pipe(finalize(() => this.carregandoProximaEtapa = false))
-      .subscribe((cronograma: EtapaCronograma[]) => {
-        this.eleicao.cronograma = cronograma;
-        this.toasts.showMessage({
-          message: 'Mudança de etapa concluída com Sucesso!',
-          title: 'Sucesso!',
-          type: ToastType.success
-        });
-      });
+  confirmacaoProximaEtapa(etapa: EtapaCronograma): Observable<boolean> {
+    if (etapa.dataPrevista < new Date()) {
+      return this.toasts
+        .confirm(`O fim dessa etapa está previsto para o dia ${formatDate(etapa.dataPrevista, 'dd/MM/yyyy', 'pt-BR')}.
+                  Se não houver nenhuma inconsistência, passaremos para o próxima etapa automaticamente na data prevista.
+                  Tem certeza que deseja antecipar a próxima etapa?`, 'Essa ação não pode ser desfeita!');
+    }
+    return this.toasts
+        .confirm(`Tem certeza que deseja passar para a próxima etapa?`, 'Essa ação não pode ser desfeita!');
+  }
 
+  proximaEtapa(etapa: EtapaCronograma) {
+    this.confirmacaoProximaEtapa(etapa)
+    .pipe(filter(confirmacao => confirmacao))
+    .subscribe(_ => {
+      this.carregandoProximaEtapa = true;
+      this.eleicoesApi.postProximaEtapa(this.eleicao.id)
+        .pipe(finalize(() => this.carregandoProximaEtapa = false))
+        .subscribe((cronograma: EtapaCronograma[]) => {
+          this.eleicao.cronograma = cronograma;
+          this.toasts.showMessage({
+            message: 'Mudança de etapa concluída com sucesso!',
+            title: 'Sucesso!',
+            type: ToastType.success
+          });
+        });
+    });
   }
 
   exibirTemplates(etapa: EtapaCronograma) {

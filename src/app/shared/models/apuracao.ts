@@ -1,6 +1,13 @@
+export enum Resultado {
+  Efetivo = 'Efetivo',
+  Suplente = 'Suplente',
+  NaoEleito = 'Não eleito'
+}
+
 export class ResultadoApuracao {
   efetivos: Apuracao[];
   suplentes: Apuracao[];
+  naoEleitos: Apuracao[];
 }
 
 export class Apuracao {
@@ -11,4 +18,5 @@ export class Apuracao {
   votos: number;
   foto: string;
   candidatoId: number;
+  resultadoApuracao: Resultado;
 }

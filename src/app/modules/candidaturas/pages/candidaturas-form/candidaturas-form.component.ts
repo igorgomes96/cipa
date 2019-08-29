@@ -9,6 +9,7 @@ import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
 import { uploadProgress, filterResponse } from 'src/app/shared/components/rxjs-operators';
 import { switchMap, filter } from 'rxjs/operators';
 import { Eleicao } from 'src/app/shared/models/eleicao';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-candidaturas-form',
@@ -139,22 +140,6 @@ export class CandidaturasFormComponent implements OnInit {
     const file = $event.target['files'][0];
     try {
       this.readFoto(file);
-      if (this.jaInscrito) {
-        this.candidatosApi.postFoto(this.candidato.id, this.fileList)
-          .pipe(
-            filterResponse(),
-            switchMap(_ => {
-              return this.candidatosApi.getFoto(this.candidato.id);
-            })
-          ).subscribe((foto: string) => {
-            this.foto = foto;
-            this.toasts.showMessage({
-              message: 'Foto atualizada com sucesso!',
-              title: 'Sucesso!',
-              type: ToastType.success
-            });
-          });
-      }
     } catch (err) {
       console.error(err);
     }
@@ -178,45 +163,46 @@ export class CandidaturasFormComponent implements OnInit {
   }
 
   confirmaCandidatura() {
-    if (this.jaInscrito) {
-      this.candidatosApi.put(this.candidato.id, this.candidato)
-        .subscribe((candidato: Candidato) => {
-          this.candidato = candidato;
-          this.toasts.showMessage({
-            message: 'Inscrição atualizada com sucesso!',
-            title: 'Sucesso!',
-            type: ToastType.success
-          });
-        });
-    } else {
-      if (!this.fileList) {
-        this.toasts.showMessage({
-          message: 'Escolha uma foto para se candidatar!',
-          title: 'Inválido!',
-          type: ToastType.error
-        });
-        return;
-      }
-      this.candidatosApi.post(this.candidato)
-        .pipe(
-          switchMap((candidato: Candidato) => {
-            this.candidato = candidato;
-            return this.candidatosApi.postFoto(candidato.id, this.fileList);
-          }),
-          filterResponse(),
-          switchMap(_ => {
-            return this.candidatosApi.getFoto(this.candidato.id);
-          })
-        ).subscribe((foto: string) => {
-          this.foto = foto;
-          this.jaInscrito = true;
-          this.toasts.showMessage({
-            message: 'Inscrição realizada com sucesso!',
-            title: 'Sucesso!',
-            type: ToastType.success
-          });
-        });
+    if (!this.fileList) {
+      this.toasts.showMessage({
+        message: 'Escolha uma foto para se candidatar!',
+        title: 'Inválido!',
+        type: ToastType.error
+      });
+      return;
     }
+    let chamada: Observable<Candidato>;
+    if (this.jaInscrito) {
+      chamada = this.candidatosApi.put(this.candidato.id, this.candidato) as Observable<Candidato>;
+    } else {
+      chamada = this.candidatosApi.post(this.candidato);
+    }
+    chamada.pipe(
+      switchMap((candidato: Candidato) => {
+        this.candidato = candidato;
+        return this.candidatosApi.postFoto(candidato.id, this.fileList);
+      }),
+      filterResponse(),
+      switchMap(_ => {
+        return this.candidatosApi.getFoto(this.candidato.id);
+      })
+    ).subscribe((foto: string) => {
+      this.foto = foto;
+      this.jaInscrito = true;
+      if (this.jaInscrito) {
+        this.toasts.showMessage({
+          message: 'Inscrição atualizada com sucesso!',
+          title: 'Sucesso!',
+          type: ToastType.success
+        });
+      } else {
+        this.toasts.showMessage({
+          message: 'Inscrição realizada com sucesso!',
+          title: 'Sucesso!',
+          type: ToastType.success
+        });
+      }
+    });
   }
 
 }

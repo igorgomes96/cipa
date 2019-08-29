@@ -1,3 +1,4 @@
+import { EtapaAnteriorVotacaoGuard } from './../../core/guards/etapa-anterior-votacao.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EleicoesListaComponent } from './pages/eleicoes-lista/eleicoes-lista.component';
