@@ -87,7 +87,7 @@
 
 
               <h4>Objetivos</h4>
-              <textarea name="objetivos" [disabled]="!confirmacaoButtonText" id="objetivos" cols="30" rows="2" class="form-control"
+              <textarea name="objetivos" countChar maxChar="255" [disabled]="!confirmacaoButtonText" id="objetivos" cols="30" rows="2" class="form-control"
                 [(ngModel)]="candidato.objetivos" placeholder="Digite aqui seus objetivos como membro da CIPA."></textarea>
               <hr>
 

@@ -26,11 +26,14 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe((routeData: any) => {
-      this.ultimaAtualizacao = new Date();
-      this.apuracao = routeData.apuracao;
-      this.dimensionamento = routeData.dimensionamento;
       this.eleicao = routeData.eleicao;
-      this.resultado = routeData.resultado;
+      this.ultimaAtualizacao = new Date();
+      this.dimensionamento = routeData.dimensionamento;
+      if (this.dimensionamento.qtdaVotos) {
+        this.eleicao = routeData.eleicao;
+        this.resultado = routeData.resultado;
+        this.apuracao = routeData.apuracao;
+      }
     });
   }
 

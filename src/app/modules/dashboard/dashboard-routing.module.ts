@@ -8,7 +8,6 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NavigationType } from '../../app.component';
 import { EleicaoResolverService } from '../../core/resolvers/eleicao-resolver.service';
 import { DimensionamentoResolverService } from 'src/app/core/resolvers/dimensionamento-resolver.service';
-import { VotosResolverService } from 'src/app/core/resolvers/votos-resolver.service';
 
 const routes: Routes = [
   {

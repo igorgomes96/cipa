@@ -20,7 +20,7 @@ export class ApuracaoResolverService implements Resolve<Apuracao[]> {
       const id: number = +route.paramMap.get('id');
       return this.api.getApuracao(id).pipe(
         catchError(_ => {
-          this.router.navigate(['/not-found']);
+          // this.router.navigate(['/not-found']);
           return of(null);
         })
       );
