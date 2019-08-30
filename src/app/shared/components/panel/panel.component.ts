@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { PanelOption } from './panel-option';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 declare var $: any;
 
@@ -13,6 +14,8 @@ export class PanelComponent implements OnInit {
   @Input() collapsible = true;
   @Input() labelText: string;
   @Input() labelClass = 'label-success';
+  @Input() options: PanelOption[];
+  @Output() optionClick = new EventEmitter<PanelOption>();
 
   constructor() { }
 
@@ -29,6 +32,10 @@ export class PanelComponent implements OnInit {
       ibox.resize();
       ibox.find('[id^=map-]').resize();
     }, 50);
+  }
+
+  onOptionClick(option: PanelOption) {
+    this.optionClick.emit(option);
   }
 
 }

@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { ResultadoApuracao, Apuracao, Resultado } from 'src/app/shared/models/apuracao';
-import { ResourceLoader } from '@angular/compiler';
+import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
+import { Eleicao } from 'src/app/shared/models/eleicao';
 
 @Component({
   selector: 'app-relacao-candidatos',
@@ -9,10 +10,13 @@ import { ResourceLoader } from '@angular/compiler';
 })
 export class RelacaoCandidatosComponent implements OnInit {
 
+  @Input() eleicao: Eleicao;
   @Input() resultado: ResultadoApuracao;
-  constructor() { }
+  @Input() downloadRelatorio = new EventEmitter<{}>();
+  constructor(private eleicoesApi: EleicoesApiService) { }
 
   ngOnInit() {
+    this.downloadRelatorio.subscribe(_ => this.download());
   }
 
   get candidatos(): Apuracao[] {
@@ -30,6 +34,10 @@ export class RelacaoCandidatosComponent implements OnInit {
       default:
         return '';
     }
+  }
+
+  private download() {
+    this.eleicoesApi.downloadRelatorioCandidatos(this.eleicao.id, 'Candidatos.xlsx').subscribe();
   }
 
 }

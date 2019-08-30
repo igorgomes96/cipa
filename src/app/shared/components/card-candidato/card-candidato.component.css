@@ -1,5 +1,18 @@
 .ibox {
     height: 100%;
+    margin-bottom: 0;
+}
+
+.ibox-content,
+.product-desc {
+  display: flex;
+	flex: 1 0 auto;
+  flex-direction: column;
+  padding-bottom: 12px;
+}
+
+.ibox-content {
+  padding-bottom: 20px;
 }
 
 .product-box {
@@ -23,6 +36,10 @@
         height: initial;
         object-fit: initial;
     }
+}
+
+.actions {
+  margin-right: 20px;
 }
 
 

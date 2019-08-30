@@ -24,18 +24,7 @@ export class ArquivosComponent implements OnInit {
   }
 
   download(arquivo: Arquivo) {
-    this.service.download(arquivo.id).subscribe(res => {
-      const a = document.createElement('a');
-      const binaryData = [];
-      binaryData.push(res);
-      a.href = window.URL.createObjectURL(new Blob(binaryData, { type: arquivo.contentType }));
-      document.body.appendChild(a);
-      a.setAttribute('style', 'display: none');
-      a.download = arquivo.nome;
-      a.click();
-      window.URL.revokeObjectURL(a.href);
-      a.remove(); // remove the element
-    });
+    this.service.download(arquivo.id, arquivo.nome, arquivo.contentType).subscribe();
 
   }
 

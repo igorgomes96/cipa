@@ -1,11 +1,3 @@
-<div class="row">
-  <div class="col-sm-12">
-    <button class="btn btn-primary m-b-md m-t-xs">
-      <i class="fa fa-download"></i> Baixar Relatório
-    </button>
-  </div>
-</div>
-
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -14,19 +6,23 @@
         <th>Nome</th>
         <th>Cargo</th>
         <th>Área</th>
-        <th>Votos</th>
+        <th class="text-center">Votos</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let candidato of candidatos">
         <td>
-          <span class="label" [ngClass]="resultadoClass(candidato)">{{ candidato.resultadoApuracao }}
+          <span class="label" [ngClass]="resultadoClass(candidato)"
+            *ngIf="candidato.nome !== '(Em Branco)'">{{ candidato.resultadoApuracao }}
+          </span>
+          <span class="label"
+            *ngIf="candidato.nome === '(Em Branco)'">Branco
           </span>
         </td>
         <td>{{ candidato.nome }}</td>
         <td>{{ candidato.cargo }}</td>
         <td>{{ candidato.area }}</td>
-        <td>{{ candidato.votos }}</td>
+        <td class="text-center">{{ candidato.votos }}</td>
       </tr>
     </tbody>
   </table>

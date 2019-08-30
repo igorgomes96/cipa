@@ -1,12 +1,9 @@
 import { EleicoesApiService } from './../../../../core/api/eleicoes-api.service';
-import { Voto } from 'src/app/shared/models/voto';
 import { Dimensionamento } from 'src/app/shared/models/dimensionamento';
 import { Apuracao, ResultadoApuracao } from './../../../../shared/models/apuracao';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { PagedResult } from 'src/app/shared/models/paged-result';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Eleicao } from 'src/app/shared/models/eleicao';
-import { tap, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,8 +18,14 @@ export class DashboardComponent implements OnInit {
   ultimaAtualizacao: Date;
   resultado: ResultadoApuracao;
 
+  optionsEleitoresVotantes = [{ nome: 'download', icon: 'fa-download' }];
+  optionsCandidatos = [{ nome: 'download', icon: 'fa-download' }];
+
+  donwloadRelatorioCandidatos = new EventEmitter<{}>();
+
   constructor(
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private eleicoesApi: EleicoesApiService) { }
 
   ngOnInit() {
     this.route.data.subscribe((routeData: any) => {
@@ -35,6 +38,14 @@ export class DashboardComponent implements OnInit {
         this.apuracao = routeData.apuracao;
       }
     });
+  }
+
+  onOptionsEleitoresVotantesClick() {
+    this.eleicoesApi.downloadRelatorioVotos(this.eleicao.id, 'Votos.xlsx').subscribe();
+  }
+
+  onOptionsCandidatosClick() {
+    this.donwloadRelatorioCandidatos.emit();
   }
 
 

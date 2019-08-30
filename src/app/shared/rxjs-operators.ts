@@ -1,5 +1,5 @@
 import { pipe } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 
 export function filterResponse<T>() {
@@ -15,4 +15,29 @@ export function uploadProgress<T>(cb: (progress: number) => void) {
       cb(Math.round((event.loaded * 100) / event.total));
     }
   });
+}
+
+export function downloadArquivo(contentType: string, fileName: string) {
+  return tap((res) => {
+    const a = document.createElement('a');
+    const binaryData = [];
+    binaryData.push(res);
+    a.href = window.URL.createObjectURL(new Blob(binaryData,
+      {
+        type: contentType
+      }));
+    document.body.appendChild(a);
+    a.setAttribute('style', 'display: none');
+    a.download = fileName;
+    a.click();
+    window.URL.revokeObjectURL(a.href);
+    a.remove(); // remove the element
+  });
+}
+
+export function inputPesquisa() {
+  return pipe(
+    debounceTime(300),
+    map(value => (value as string).trim()),
+    distinctUntilChanged());
 }

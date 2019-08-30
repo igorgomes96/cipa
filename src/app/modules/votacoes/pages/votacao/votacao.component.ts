@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TipoCardEleitor } from 'src/app/shared/components/card-candidato/card-candidato.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, switchMap } from 'rxjs/operators';
+import { filter, switchMap, distinctUntilChanged, debounceTime, map, tap, finalize } from 'rxjs/operators';
 import { Eleicao } from 'src/app/shared/models/eleicao';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { StatusAprovacao, Candidato } from 'src/app/shared/models/candidato';
@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { CandidatosApiService } from 'src/app/core/api/candidatos-api.service';
 import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { inputPesquisa } from 'src/app/shared/rxjs-operators';
 
 @Component({
   selector: 'app-votacao',
@@ -21,6 +22,8 @@ export class VotacaoComponent implements OnInit {
   eleicao: Eleicao;
   candidatos: Candidato[];
   form: FormGroup;
+  pesquisando = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -45,6 +48,14 @@ export class VotacaoComponent implements OnInit {
     this.form = this.formBuilder.group({
       filtro: []
     });
+
+    this.form.get('filtro').valueChanges
+    .pipe(
+      tap(_ => this.pesquisando = true),
+      inputPesquisa(),
+      switchMap(value => this.eleicoesApi.getCandidatos(this.eleicao.id, StatusAprovacao.Aprovada, value)),
+      tap(_ => this.pesquisando = false),
+    ).subscribe(candidatos => this.candidatos = candidatos);
   }
 
   votar(candidato: Candidato) {
@@ -52,7 +63,7 @@ export class VotacaoComponent implements OnInit {
       .pipe(
         filter(confirmacao => confirmacao),
         switchMap(_ => this.candidatosApi.postVotar(candidato.id))
-      ).subscribe(voto => {
+      ).subscribe(_ => {
         this.toasts.showMessage({
           message: 'Voto registrado com sucesso',
           title: 'Sucesso',
@@ -60,6 +71,10 @@ export class VotacaoComponent implements OnInit {
         });
         this.router.navigate(['/home']);
       });
+  }
+
+  votoBranco() {
+
   }
 
 }

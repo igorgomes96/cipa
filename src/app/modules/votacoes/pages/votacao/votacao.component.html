@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h2>Escolha um representante para a CIPA!</h2>
-            
+
             <form [formGroup]="form">
                 <div class="input-group">
                     <span class="input-group-addon">
@@ -11,7 +11,15 @@
                     <input type="text" id="filtro" formControlName="filtro" placeholder="Pesquise pelo nome"
                         class="input form-control">
                 </div>
+                <span class="help-block m-b-none" *ngIf="pesquisando">Pesquisando...</span>
+
             </form>
+
+            <div class="row m-t-md">
+              <div class="col-md-12">
+                <button class="btn btn-white">Voto em Branco</button>
+              </div>
+            </div>
 
             <div class="row flex-row m-t-lg">
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xxs-12" *ngFor="let candidato of candidatos">

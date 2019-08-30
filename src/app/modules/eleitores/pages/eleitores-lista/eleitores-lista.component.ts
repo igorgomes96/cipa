@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Eleitor } from 'src/app/shared/models/eleitor';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { ActivatedRoute } from '@angular/router';
-import { filter, switchMap, distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { filter, switchMap, distinctUntilChanged, debounceTime, tap } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { EleitoresApiService } from 'src/app/core/api/eleitores-api.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';
@@ -12,8 +12,8 @@ import { Eleicao } from 'src/app/shared/models/eleicao';
 import { PagedResult } from 'src/app/shared/models/paged-result';
 import { ImportacoesApiService } from 'src/app/core/api/importacoes-api.service';
 import { Importacao, ProgressoImportacao, StatusImportacao } from 'src/app/shared/models/importacao';
-import { Subscriber, Subscription, Subject } from 'rxjs';
-import { HttpResponse } from '@angular/common/http';
+import { Subscription } from 'rxjs';
+import { downloadArquivo, inputPesquisa } from 'src/app/shared/rxjs-operators';
 
 declare var $: any;
 
@@ -65,7 +65,7 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
       filtro: ['']
     });
     this.form.get('filtro').valueChanges
-      .pipe(distinctUntilChanged(), debounceTime(500))
+      .pipe(inputPesquisa())
       .subscribe((value: any) => {
         this.filtro = value;
         this.carregaEleitores();
@@ -91,21 +91,7 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
   }
 
   downloadTemplate() {
-    this.arquivosApi.downloadTemplateImportacao().subscribe(res => {
-      const a = document.createElement('a');
-      const binaryData = [];
-      binaryData.push(res);
-      a.href = window.URL.createObjectURL(new Blob(binaryData,
-        {
-          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        }));
-      document.body.appendChild(a);
-      a.setAttribute('style', 'display: none');
-      a.download = 'Importacao CIPA.xlsx';
-      a.click();
-      window.URL.revokeObjectURL(a.href);
-      a.remove(); // remove the element
-    });
+    this.arquivosApi.downloadTemplateImportacao('Importacao CIPA.xlsx').subscribe();
   }
 
   get labelStatusImportacao(): string {

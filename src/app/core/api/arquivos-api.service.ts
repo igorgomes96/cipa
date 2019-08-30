@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpEvent, HttpRequest, HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { endpoints } from '../../../environments/endpoints';
+import { downloadArquivo } from 'src/app/shared/rxjs-operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,18 +25,20 @@ export class ArquivosApiService {
       observe: 'events',
       reportProgress: true
     });
-   }
+  }
 
-   downloadTemplateImportacao() {
-    return this.http.get(`${this.url}templateimportacao`, {responseType: 'arraybuffer'});
-   }
+  downloadTemplateImportacao(arquivo: string) {
+    return this.http.get(`${this.url}templateimportacao`, { responseType: 'arraybuffer' })
+      .pipe(downloadArquivo('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', arquivo));
+  }
 
-   download(id: string) {
-    return this.http.get(`${this.url}${id}/download`, {responseType: 'arraybuffer'});
-   }
+  download(id: string, arquivo: string, contentType: string) {
+    return this.http.get(`${this.url}${id}/download`, { responseType: 'arraybuffer' })
+      .pipe(downloadArquivo(contentType, arquivo));
+  }
 
-   delete(id: string) {
+  delete(id: string) {
     return this.http.delete(`${this.url}${id}`);
-   }
+  }
 
 }

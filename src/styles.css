@@ -67,13 +67,21 @@ app-custom-input[required] label::after {
 }
 
 .row.flex-row {
-    display: flex;
-    flex-wrap: wrap;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .row.flex-row > [class*='col-'] {
     display: flex;
     flex-direction: column;
+}
+
+app-card-candidato {
+  flex-grow: 1;
+  margin-bottom: 25px;
 }
 
 .table-responsive th,

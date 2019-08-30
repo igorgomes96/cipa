@@ -96,6 +96,19 @@ export class EtapaCronogramaComponent implements OnInit {
     }
   }
 
+  get diasAtrasos(): number {
+    let date1 = new Date(this.etapa.dataPrevista);
+    date1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate());
+    let date2 = new Date();
+    date2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate());
+
+    // To calculate the time difference of two dates
+    const diffTime = date2.getTime() - date1.getTime();
+
+    // To calculate the no. of days between two dates
+    return diffTime / (1000 * 3600 * 24);
+  }
+
 
   upload(files: FileList) {
     this.carregandoArquivos = true;

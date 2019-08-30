@@ -17,6 +17,7 @@ import { filterResponse } from 'src/app/shared/components/rxjs-operators';
 import { Voto } from 'src/app/shared/models/voto';
 import { Dimensionamento } from 'src/app/shared/models/dimensionamento';
 import { Apuracao } from 'src/app/shared/models/apuracao';
+import { downloadArquivo } from 'src/app/shared/rxjs-operators';
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +38,9 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
     return this.http.get<Candidato>(`${this.url}${idEleicao}/candidato`);
   }
 
-  getCandidatos(idEleicao: number, status: StatusAprovacao): Observable<Candidato[]> {
-    return this.http.get<Candidato[]>(`${this.url}${idEleicao}/candidatos`, { params: { status: StatusAprovacao[status] } });
+  getCandidatos(idEleicao: number, status: StatusAprovacao, pesquisa: string = ''): Observable<Candidato[]> {
+    return this.http.get<Candidato[]>(`${this.url}${idEleicao}/candidatos`,
+      { params: { status: StatusAprovacao[status], eleitorNome: pesquisa || '' } });
   }
 
   getCronograma(idEleicao: number): Observable<EtapaCronograma[]> {
@@ -89,6 +91,16 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
 
   getResultado(idEleicao: number): Observable<ResultadoApuracao> {
     return this.http.get<ResultadoApuracao>(`${this.url}${idEleicao}/resultado`);
+  }
+
+  downloadRelatorioVotos(idEleicao: number, arquivo: string) {
+    return this.http.get(`${this.url}${idEleicao}/relatorios/votos`, { responseType: 'arraybuffer' })
+      .pipe(downloadArquivo('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', arquivo));
+  }
+
+  downloadRelatorioCandidatos(idEleicao: number, arquivo: string) {
+    return this.http.get(`${this.url}${idEleicao}/relatorios/candidatos`, { responseType: 'arraybuffer' })
+      .pipe(downloadArquivo('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', arquivo));
   }
 
 }

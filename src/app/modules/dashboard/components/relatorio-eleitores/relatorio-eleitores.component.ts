@@ -46,4 +46,7 @@ export class RelatorioEleitoresComponent implements OnInit {
     return { pageSize: this.votos.pageSize, pageNumber: this.votos.currentPage };
   }
 
+  downloadRelatorio() {
+  }
+
 }

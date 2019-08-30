@@ -12,7 +12,7 @@
     <app-apuracao-chart [apuracao]="apuracao" barChartType="horizontalBar"></app-apuracao-chart>
   </app-panel>
 
-  <app-panel title="Relatório de eleitores">
+  <app-panel title="Relatório de eleitores" [options]="optionsEleitoresVotantes" (optionClick)="onOptionsEleitoresVotantesClick($event)">
     <app-relatorio-eleitores [eleicao]="eleicao"></app-relatorio-eleitores>
   </app-panel>
 
@@ -31,6 +31,6 @@
   </div>
 </div>
 
-<app-panel title="Relação de Candidatos">
-  <app-relacao-candidatos [resultado]="resultado"></app-relacao-candidatos>
+<app-panel title="Relação de Votos por Candidato" [options]="optionsCandidatos" (optionClick)="onOptionsCandidatosClick()">
+  <app-relacao-candidatos [resultado]="resultado" [eleicao]="eleicao" [downloadRelatorio]="donwloadRelatorioCandidatos"></app-relacao-candidatos>
 </app-panel>
