@@ -12,6 +12,8 @@ import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { EtapaCronograma, PosicaoEtapa } from 'src/app/shared/models/cronograma';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { Grupo } from 'src/app/shared/models/grupo';
+import { GruposApiService } from 'src/app/core/api/grupos-api.service';
 
 @Component({
   selector: 'app-eleicoes-form',
@@ -28,6 +30,7 @@ export class EleicoesFormComponent implements OnInit {
   cronograma: EtapaCronograma[];
   estabelecimentos: Estabelecimento[] = [];
   estabelecimento: Estabelecimento;
+  grupos: Grupo[];
   empresas: Empresa[] = [];
   eleicao: Eleicao;
   novaEmpresa = false;
@@ -41,7 +44,8 @@ export class EleicoesFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private eleicoesApi: EleicoesApiService,
     private router: Router,
-    private toasts: ToastsService) { }
+    private toasts: ToastsService,
+    private gruposApi: GruposApiService) { }
 
   ngOnInit() {
     this.route.data
@@ -80,7 +84,8 @@ export class EleicoesFormComponent implements OnInit {
       });
 
     this.formListaEstabelecimentos = this.formBuilder.group({
-      estabelecimento: ['', Validators.required]
+      estabelecimento: ['', Validators.required],
+      // grupo: ['', Validators.required]
     });
 
     this.eleicoesApi.getCronograma(1).subscribe(cronograma => {
@@ -92,12 +97,19 @@ export class EleicoesFormComponent implements OnInit {
       duracaoGestao: [2, Validators.required]
     });
 
+    this.gruposApi.getAll()
+    .subscribe((grupos: Grupo[]) => {
+      this.grupos = grupos;
+    });
+
     this.estabelecimento = new Estabelecimento({
       cidade: null,
       descricao: null,
       empresaId: null,
       endereco: null,
-      id: null
+      id: null,
+      grupo: null,
+      grupoId: null
     });
   }
 
@@ -124,6 +136,16 @@ export class EleicoesFormComponent implements OnInit {
     // tslint:disable-next-line: triple-equals
     const empresa = this.empresas.find(emp => emp.id == this.formListaEmpresa.get('empresa').value);
     return empresa;
+  }
+
+  get estabelecimentoSelecionado() {
+    const value = this.formListaEstabelecimentos.get('estabelecimento').value;
+    if (!value) {
+      return null;
+    }
+    const id = +value;
+    const estabelecimento = this.estabelecimentos.find(e => e.id === id);
+    return estabelecimento;
   }
 
   changeStep(step: number) {
@@ -164,12 +186,6 @@ export class EleicoesFormComponent implements OnInit {
     this.novoEstabelecimento = false;
   }
 
-  atualizarEtapa(etapaAtualizada: EtapaCronograma) {
-
-    console.log('Teste');
-    console.log(etapaAtualizada);
-  }
-
   salvarEleicao() {
     const eleicao = {
       gestao: (this.formGestao.get('dataInicio').value as Date).getFullYear(),
@@ -177,12 +193,6 @@ export class EleicoesFormComponent implements OnInit {
       duracaoGestao: this.formGestao.get('duracaoGestao').value as number,
       estabelecimentoId: this.formListaEstabelecimentos.get('estabelecimento').value as number
     } as any;
-
-    /* Retirar após implementação do back-end */
-    eleicao.estabelecimento = this.estabelecimentos.find(e => e.id === eleicao.estabelecimentoId);
-    eleicao.estabelecimento.empresa = this.empresas.find(e => e.id === eleicao.estabelecimento.empresaId);
-    eleicao.cronograma = this.cronograma;
-    /* Retirar após implementação do back-end */
 
     this.eleicoesApi.post(eleicao)
       .subscribe((novaEleicao: Eleicao) => {

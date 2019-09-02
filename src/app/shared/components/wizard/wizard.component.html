@@ -22,6 +22,7 @@
   <div class="row m-t-md">
     <div class="col-md-12 actions">
       <button class="btn btn-primary" (click)="nextStep()" *ngIf="currentStep < steps.length" [disabled]="!validNext">Próximo >></button>
+      <button class="btn btn-primary" (click)="nextStep()" *ngIf="currentStep == steps.length && saveButtonText" [disabled]="!validNext">{{ saveButtonText }}</button>
       <button class="btn btn-primary" (click)="previousStep()" *ngIf="currentStep > 1"><< Anterior</button>
     </div>
   </div>

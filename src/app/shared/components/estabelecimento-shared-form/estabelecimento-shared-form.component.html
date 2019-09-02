@@ -42,7 +42,7 @@
       <div class="form-group">
         <label class="control-label">Grupo</label>
         <app-ajuda-tooltip ajuda="O grupo ao qual pertence a empresa define o dimensionamento dos membros da CIPA. Consulta a NR-5."></app-ajuda-tooltip>
-        <select name="grupo" id="grupo" class="form-control">
+        <select name="grupo" id="grupo" class="form-control" [(ngModel)]="estabelecimento.grupoId">
           <option value="">(Selecione)</option>
           <option *ngFor="let grupo of grupos" value="grupo.id">{{ grupo.codigoGrupo }}</option>
         </select>

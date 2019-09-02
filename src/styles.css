@@ -185,3 +185,10 @@ popover-content .popover {
 .float-right {
     float: right!important;
 }
+
+.tooltip-show {
+  z-index: 9999 !important;
+}
+.tooltip-image {
+  display: table !important;
+}

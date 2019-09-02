@@ -9,7 +9,10 @@ export class WizardComponent implements OnInit {
 
   @Input() steps: string[];
   @Input() validNext = true;
+  @Input() saveButtonText = 'Salvar';
   @Output() changeStep = new EventEmitter<number>();
+  @Output() finalize = new EventEmitter<{}>();
+
   currentStep = 1;
 
   constructor() { }
@@ -21,6 +24,8 @@ export class WizardComponent implements OnInit {
     if (this.steps.length > this.currentStep) {
       this.currentStep++;
       this.changeStep.emit(this.currentStep);
+    } else {
+      this.finalize.emit();
     }
   }
 

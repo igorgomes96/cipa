@@ -6,26 +6,27 @@
 <app-panel>
 
 
-  <app-wizard [steps]="steps" (changeStep)="changeStep($event)" [validNext]="validNext">
+  <app-wizard [steps]="steps" (changeStep)="changeStep($event)" [validNext]="validNext" (finalize)="salvarEleicao()"
+    saveButtonText="Abrir Eleição!">
     <div [ngSwitch]="currentStepIndex">
 
       <div *ngSwitchCase="1">
         <form [formGroup]="formGestao">
           <div class="row">
-              <div class="col-lg-4 col-md-6 col-sm-12">
-                  Data de Início do processo de Eleição
-                  <app-datepicker formControlName="dataInicio" inputClasses="input-white"
-                      control="formGestao.get('dataInicio')"></app-datepicker>
-              </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              Data de Início do processo de Eleição
+              <app-datepicker formControlName="dataInicio" inputClasses="input-white"
+                control="formGestao.get('dataInicio')"></app-datepicker>
+            </div>
           </div>
           <br>
           <div class="row">
-              <div class="col-lg-4 col-md-6 col-sm-12">
-                  Qual é o tempo de duração dessa gestão? (em anos)
-                  <input type="number" formControlName="duracaoGestao" class="form-control">
-              </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              Qual é o tempo de duração dessa gestão? (em anos)
+              <input type="number" formControlName="duracaoGestao" class="form-control">
+            </div>
           </div>
-      </form>
+        </form>
       </div>
 
       <div *ngSwitchCase="2">
@@ -78,7 +79,32 @@
                   </select>
                 </div>
               </div>
+
+              <!-- <br>
+              <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-2">
+                  <div class="form-group">
+                    Grupo
+                    <select class="form-control" name="grupo" id="grupo" formControlName="grupo">
+                      <option value="">(Selecione o grupo)</option>
+                      <option [value]="gr.id" *ngFor="let gr of grupos">{{ gr.codigoGrupo }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div> -->
             </form>
+
+            <br>
+
+            <div class="row" *ngIf="estabelecimentoSelecionado">
+              <div class="col-sm-12 col-md-4 col-lg-3">
+                <div class="alert alert-info">
+                  Grupo: <strong>{{ estabelecimentoSelecionado?.grupo }}</strong>
+                </div>
+              </div>
+            </div>
+
+
             <button class="btn btn-primary m-t-md" (click)="estabelecimentoForm()"><i class="fa fa-plus"></i> Novo
               Estabelecimento</button>
           </div>
@@ -88,6 +114,7 @@
             </app-estabelecimento-shared-form>
           </div>
         </div>
+
       </div>
 
       <!-- <div *ngSwitchCase="4">

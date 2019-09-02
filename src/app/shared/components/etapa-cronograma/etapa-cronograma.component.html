@@ -4,9 +4,16 @@
 
 <div class="vertical-timeline-content">
   <div class="col-sm-12" [ngClass]="tamanhoDescricao">
-    <h2>{{ etapa.nomeEtapa }}
+    <h2>
+      <span [tooltip]="etapa.erroMudancaEtapa" theme="dark" *ngIf="etapa.erroMudancaEtapa" class="text-danger">
+        <i class="fa fa-exclamation-circle"></i> {{ etapa.nomeEtapa }}
+      </span>
+      <span *ngIf="!etapa.erroMudancaEtapa">
+        {{ etapa.nomeEtapa }}
+      </span>
       <small *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Futura">
-        <span class="label label-danger pull-right" *ngIf="diasAtrasos > 0">{{ diasAtrasos | number:'1.0-0'}} dias de atraso</span>
+        <span class="label label-danger pull-right" *ngIf="diasAtrasos > 0">{{ diasAtrasos | number:'1.0-0'}} dias de
+          atraso</span>
       </small>
     </h2>
 
@@ -29,12 +36,11 @@
     <p>{{ etapa.descricaoEtapa }}</p>
     <br>
     <div class="row" *ngIf="dimensionamento">
-      <div class="col-sm-12" [ngSwitch]="etapa.etapaObrigatoriaId">
+      <div class="col-sm-12" [ngSwitch]="etapa.etapaObrigatoriaId" *ngIf="etapa.posicaoEtapa !== PosicaoEtapa.Futura">
         <app-etapa-dimensionamento *ngSwitchCase="CodigoEtapaObrigatoria.Inscricao" [dimensionamento]="dimensionamento">
         </app-etapa-dimensionamento>
         <app-etapa-percentual-votos *ngSwitchCase="CodigoEtapaObrigatoria.Votacao" [dimensionamento]="dimensionamento">
         </app-etapa-percentual-votos>
-
       </div>
     </div>
 

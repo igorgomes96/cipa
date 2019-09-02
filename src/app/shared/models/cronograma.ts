@@ -29,6 +29,7 @@ export class EtapaCronograma {
     possuiTemplates: boolean;
     etapaObrigatoria: EtapaObrigatoria;
     ordem: number;
+    erroMudancaEtapa: string;
 }
 
 export class EtapaObrigatoria {

@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { Estabelecimento } from 'src/app/shared/models/estabelecimento';
-import { EmpresasApiService } from 'src/app/core/api/empresas-api.service';
 import { Empresa } from 'src/app/shared/models/empresa';
 import { GruposApiService } from 'src/app/core/api/grupos-api.service';
 import { Grupo } from '../../models/grupo';
@@ -12,7 +11,16 @@ import { Grupo } from '../../models/grupo';
 })
 export class EstabelecimentoSharedFormComponent implements OnInit {
 
-  @Input() estabelecimento = new Estabelecimento({ id: null, empresaId: null, cidade: null, endereco: null, descricao: null });
+  @Input() estabelecimento = new Estabelecimento(
+    {
+      id: null,
+      empresaId: null,
+      cidade: null,
+      endereco: null,
+      descricao: null,
+      grupo: null,
+      grupoId: null
+    });
   @Input() empresas: Empresa[] = [];
   @Output() salvarEstabelecimento = new EventEmitter<Estabelecimento>();
   @Output() cancelarEdicao = new EventEmitter<void>();

@@ -60,6 +60,9 @@ export class EtapaCronogramaComponent implements OnInit {
 
     switch (this.etapa.posicaoEtapa) {
       case PosicaoEtapa.Atual:
+        if (this.etapa.erroMudancaEtapa) {
+          return 'fa-calendar-times-o';
+        }
         return 'fa-calendar';
       case PosicaoEtapa.Passada:
         return 'fa-calendar-check-o';
@@ -78,6 +81,9 @@ export class EtapaCronogramaComponent implements OnInit {
 
     switch (this.etapa.posicaoEtapa) {
       case PosicaoEtapa.Atual:
+        if (this.etapa.erroMudancaEtapa) {
+          return 'bg-danger';
+        }
         return 'blue-bg';
       case PosicaoEtapa.Passada:
         return 'navy-bg';

@@ -2,12 +2,14 @@ import { Empresa } from './empresa';
 
 export class Estabelecimento {
 
-    constructor({id, empresaId, cidade, endereco, descricao}) {
+    constructor({id, empresaId, cidade, endereco, descricao, grupoId, grupo}) {
         this.id = id;
         this.empresaId = empresaId;
         this.cidade = cidade;
         this.endereco = endereco;
         this.descricao = descricao;
+        this.grupo = grupo,
+        this.grupoId = grupoId;
     }
 
     id: number;
@@ -15,6 +17,8 @@ export class Estabelecimento {
     cidade: string;
     endereco: string;
     descricao: string;
+    grupoId: number;
+    grupo: string;
 
     empresa: Empresa;
 

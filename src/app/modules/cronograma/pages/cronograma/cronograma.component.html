@@ -1,10 +1,28 @@
+<app-panel title="Cronograma CIPA">
+  <h4>Sobre a atualização do cronograma</h4>
+  <p>
+    As etapas do cronograma são atualizadas automaticamente, ou seja, o próprio sistema inicia a etapa na data prevista,
+    à
+    1:00 da manhã. Apesar disso, é possível antecipar uma etapa apenas clicando no botão "Próxima Etapa".<br>
+    Caso ocorra algum erro de validação ou sistema ao tentar mudar de etapa (ex.: votação não atingui o quorum
+    mínimo), o cronograma permancerá inalterado, porém a etapa será sinalizada.
+    <app-ajuda-tooltip ajuda="<img src='assets/img/erro-cronograma.jpg'>"></app-ajuda-tooltip>
+  </p>
+</app-panel>
+
+<div class="row m-b-lg">
+  <div class="col-sm-12">
+    <button class="btn btn-primary">Antecipar Início <i class="fa fa-clock-o"></i></button>
+  </div>
+</div>
+
 <div id="vertical-timeline" class="vertical-container light-timeline no-margins">
-    <div etapa-cronograma class="vertical-timeline-block"
-        [class.inactive]="etapa.posicaoEtapa === PosicaoEtapa.Futura" *ngFor="let etapa of eleicao.cronograma"
-        [etapa]="etapa" (proximaEtapa)="proximaEtapa($event)" (atualizarEtapa)="atualizarEtapa($event)" (exibirTemplates)="exibirTemplates($event)"
-        [carregandoProximaEtapa]="carregandoProximaEtapa" [dimensionamento]="dimensionamento"></div>
+  <div etapa-cronograma class="vertical-timeline-block" [class.inactive]="etapa.posicaoEtapa === PosicaoEtapa.Futura"
+    *ngFor="let etapa of eleicao.cronograma" [etapa]="etapa" (proximaEtapa)="proximaEtapa($event)"
+    (atualizarEtapa)="atualizarEtapa($event)" (exibirTemplates)="exibirTemplates($event)"
+    [carregandoProximaEtapa]="carregandoProximaEtapa" [dimensionamento]="dimensionamento"></div>
 </div>
 
 <ng-template #modalTemplates>
-    <app-templates [templates]="templates"></app-templates>
+  <app-templates [templates]="templates"></app-templates>
 </ng-template>
