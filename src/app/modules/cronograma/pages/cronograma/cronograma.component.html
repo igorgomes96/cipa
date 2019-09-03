@@ -10,9 +10,9 @@
   </p>
 </app-panel>
 
-<div class="row m-b-lg">
+<div class="row m-b-lg" *ngIf="!processoIniciado">
   <div class="col-sm-12">
-    <button class="btn btn-primary">Antecipar Início <i class="fa fa-clock-o"></i></button>
+    <button class="btn btn-primary" (click)="anteciparInicio()">Antecipar Início <i class="fa fa-clock-o"></i></button>
   </div>
 </div>
 

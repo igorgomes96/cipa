@@ -21,7 +21,6 @@ export class PaginationComponent implements OnInit {
   set paginationInfo(pageResult: PagedResult<any>) {
     if (pageResult && !pageResult.currentPage) {
       this._paginationInfo.currentPage = 1;
-      //   this._paginationInfo.totalRecords = pageResult.totalRecords;
       return;
     }
     this._paginationInfo = pageResult;
@@ -30,14 +29,14 @@ export class PaginationComponent implements OnInit {
       for (let i = 1; i <= pageResult.pageCount; i++) {
         this.pages.push(i);
       }
-    } else if (pageResult && pageResult.currentPage > pageResult.pageCount) {  // Se a página corrente for maior que a quantidade de páginas
+    }
+
+    if (pageResult && pageResult.pageCount && pageResult.currentPage > pageResult.pageCount) {
+      // Se a página corrente for maior que a quantidade de páginas
       this._paginationInfo.currentPage = pageResult.pageCount;
       this.alteraPagina.emit(this._paginationInfo.currentPage);
     }
-    if (this._paginationInfo.currentPage > this._paginationInfo.pageCount) {
-      this._paginationInfo.currentPage = this._paginationInfo.pageCount;
-      this.alteraPagina.emit(this.paginationInfo.currentPage);
-    }
+
   }
 
   get paginationInfo(): PagedResult<any> {

@@ -65,6 +65,26 @@ export class CronogramaComponent implements OnInit {
         .confirm(`Tem certeza que deseja passar para a próxima etapa?`, 'Essa ação não pode ser desfeita!');
   }
 
+  anteciparInicio() {
+    if (!this.eleicao.cronograma || !this.eleicao.cronograma.length) {
+      return;
+    }
+    this.toasts.confirm(
+      `O ínicio do processo está previsto para o dia ${formatDate(this.eleicao.cronograma[0].dataPrevista, 'dd/MM/yyyy', 'pt-BR')}.
+      Deseja realmente antecipar?`, 'Confirmação')
+      .pipe(
+        filter(confirmacao => confirmacao),
+        switchMap(_ => this.eleicoesApi.postProximaEtapa(this.eleicao.id))
+      ).subscribe(cronograma => {
+        this.eleicao.cronograma = cronograma;
+        this.toasts.showMessage({
+          message: 'Processo iniciado com sucesso!',
+          title: 'Sucesso!',
+          type: ToastType.success
+        });
+      });
+  }
+
   proximaEtapa(etapa: EtapaCronograma) {
     this.confirmacaoProximaEtapa(etapa)
     .pipe(filter(confirmacao => confirmacao))
@@ -89,6 +109,11 @@ export class CronogramaComponent implements OnInit {
         this.templates = arquivos;
         this.modalService.showModal(this.modalTemplates);
       });
+  }
+
+  get processoIniciado(): boolean {
+    return this.eleicao && this.eleicao.cronograma &&
+      !this.eleicao.cronograma.every(e => e.posicaoEtapa === PosicaoEtapa.Futura);
   }
 
   updateCronograma() {
