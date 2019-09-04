@@ -20,17 +20,17 @@ export class ErrorInterceptor implements HttpInterceptor {
           if (event instanceof HttpErrorResponse) {
             if (event.status === 401) {
               this.router.navigate(['autenticacao/login'], { queryParams: { redirectTo: window.location.pathname } });
-              return Observable.create(EMPTY);
+              return of(EMPTY);
             } else if (event.status === 403) {
               this.router.navigate(['forbidden']);
-              return Observable.create(EMPTY);
+              return of(EMPTY);
             }
             this.toast.showMessage({
               message: event.error || event.message,
               title: 'Erro ao processar requisição!',
               type: ToastType.error
             });
-            return Observable.create(EMPTY);
+            return of(EMPTY);
           }
           return of(event);
         })

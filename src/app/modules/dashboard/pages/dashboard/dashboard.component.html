@@ -31,6 +31,6 @@
   </div>
 </div>
 
-<app-panel title="Relação de Votos por Candidato" [options]="optionsCandidatos" (optionClick)="onOptionsCandidatosClick()">
+<app-panel title="Relação de Votos por Candidato" [options]="optionsCandidatos" (optionClick)="onOptionsCandidatosClick()" *ngIf="dimensionamento.qtdaVotos">
   <app-relacao-candidatos [resultado]="resultado" [eleicao]="eleicao" [downloadRelatorio]="donwloadRelatorioCandidatos"></app-relacao-candidatos>
 </app-panel>

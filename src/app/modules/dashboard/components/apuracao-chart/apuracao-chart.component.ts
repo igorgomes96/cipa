@@ -1,3 +1,4 @@
+import { chartOptions } from './../../../../../environments/chart-options';
 import { Apuracao } from './../../../../shared/models/apuracao';
 import { Component, OnInit, Input } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
@@ -11,37 +12,7 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 })
 export class ApuracaoChartComponent implements OnInit {
 
-  barChartOptions: ChartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    // We use these empty structures as placeholders for dynamic theming.
-    scales: {
-      xAxes: [
-        {
-          ticks: {
-            min: 0,
-            max: 10,
-            stepSize: 1
-          }
-        }
-      ],
-      yAxes: [
-        {
-          offset: true,
-          barThickness: 15,
-          gridLines: {
-            offsetGridLines: true
-          },
-        }
-      ]
-    },
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-      }
-    }
-  };
+  barChartOptions = chartOptions;
   barChartLegend = false;
   barChartPlugins = [pluginDataLabels];
   barChartLabels: Label[];

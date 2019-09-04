@@ -36,7 +36,7 @@ export class EtapaCronogramaComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      data: [{ value: this.etapa.dataPrevista, disabled: this.isDateDisabled }]
+      data: [{ value: this.etapa.dataRealizada || this.etapa.dataPrevista, disabled: this.isDateDisabled }]
     });
     this.form.get('data').valueChanges.subscribe((v) => {
       this.etapa.dataPrevista = v;
@@ -98,7 +98,7 @@ export class EtapaCronogramaComponent implements OnInit {
     if (this.layout === 'Cadastro' || this.etapa.posicaoEtapa === PosicaoEtapa.Futura) {
       return 'col-md-12';
     } else {
-      return 'col-lg-8 col-md-7';
+      return 'col-lg-8 col-md-6';
     }
   }
 

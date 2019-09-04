@@ -3,68 +3,72 @@
 </div>
 
 <div class="vertical-timeline-content">
-  <div class="col-sm-12" [ngClass]="tamanhoDescricao">
-    <h2>
-      <span [tooltip]="etapa.erroMudancaEtapa" theme="dark" *ngIf="etapa.erroMudancaEtapa" class="text-danger">
-        <i class="fa fa-exclamation-circle"></i> {{ etapa.nomeEtapa }}
-      </span>
-      <span *ngIf="!etapa.erroMudancaEtapa">
-        {{ etapa.nomeEtapa }}
-      </span>
-      <small *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Futura">
-        <span class="label label-danger pull-right" *ngIf="diasAtrasos > 0">{{ diasAtrasos | number:'1.0-0'}} dias de
-          atraso</span>
-      </small>
-    </h2>
+  <div class="row">
+    <div class="col-sm-12" [ngClass]="tamanhoDescricao">
+      <h2>
+        <span [tooltip]="etapa.erroMudancaEtapa" theme="dark" *ngIf="etapa.erroMudancaEtapa" class="text-danger">
+          <i class="fa fa-exclamation-circle"></i> {{ etapa.nomeEtapa }}
+        </span>
+        <span *ngIf="!etapa.erroMudancaEtapa">
+          {{ etapa.nomeEtapa }}
+        </span>
+        <small *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Futura">
+          <span class="label label-danger pull-right" *ngIf="diasAtrasos > 0">{{ diasAtrasos | number:'1.0-0'}} dias de
+            atraso</span>
+        </small>
+      </h2>
 
-    <div class="row">
-      <div class="col-md-12">
-        <form [formGroup]="form">
-          <span class="vertical-date">
-            <div *ngIf="isDateDisabled" style="font-size: 14px;cursor: not-allowed;color:#676a6c">
-              <span><i class="fa fa-calendar"></i></span> {{ form.get('data').value | date:'dd/MM/yyyy' }}
-            </div>
-            <app-datepicker [name]="'data' + etapa.id" [id]="'data' + etapa.id" formControlName="data"
-              [control]="form.get('data')" *ngIf="!isDateDisabled"></app-datepicker>
-            <small *ngIf="!isDateDisabled">Clique na data acima para alterá-la.</small>
-          </span>
-        </form>
+      <div class="row">
+        <div class="col-md-12">
+          <form [formGroup]="form">
+            <span class="vertical-date">
+              <div *ngIf="isDateDisabled" style="font-size: 14px;cursor: not-allowed;color:#676a6c">
+                <span><i class="fa fa-calendar"></i></span> {{ form.get('data').value | date:'dd/MM/yyyy' }}
+              </div>
+              <app-datepicker [name]="'data' + etapa.id" [id]="'data' + etapa.id" formControlName="data"
+                [control]="form.get('data')" *ngIf="!isDateDisabled"></app-datepicker>
+              <small *ngIf="!isDateDisabled">Clique na data acima para alterá-la.</small>
+            </span>
+          </form>
 
+        </div>
       </div>
-    </div>
 
-    <p>{{ etapa.descricaoEtapa }}</p>
-    <br>
-    <div class="row" *ngIf="dimensionamento">
-      <div class="col-sm-12" [ngSwitch]="etapa.etapaObrigatoriaId" *ngIf="etapa.posicaoEtapa !== PosicaoEtapa.Futura">
-        <app-etapa-dimensionamento *ngSwitchCase="CodigoEtapaObrigatoria.Inscricao" [dimensionamento]="dimensionamento">
-        </app-etapa-dimensionamento>
-        <app-etapa-percentual-votos *ngSwitchCase="CodigoEtapaObrigatoria.Votacao" [dimensionamento]="dimensionamento">
-        </app-etapa-percentual-votos>
+      <p>{{ etapa.descricaoEtapa }}</p>
+      <br>
+      <div class="row" *ngIf="dimensionamento">
+        <div class="col-sm-12" [ngSwitch]="etapa.etapaObrigatoriaId" *ngIf="etapa.posicaoEtapa !== PosicaoEtapa.Futura">
+          <app-etapa-dimensionamento *ngSwitchCase="CodigoEtapaObrigatoria.Inscricao"
+            [dimensionamento]="dimensionamento">
+          </app-etapa-dimensionamento>
+          <app-etapa-percentual-votos *ngSwitchCase="CodigoEtapaObrigatoria.Votacao"
+            [dimensionamento]="dimensionamento">
+          </app-etapa-percentual-votos>
+        </div>
       </div>
+
+
+      <div class="templates" *ngIf="layout === 'Visualização' && etapa.possuiTemplates">
+        <p>Possuímos alguns documentos de exemplo que podem te ajudar. Confira-os e fique à vontade para
+          utilizá-los!</p>
+        <button class="btn btn-success" [disabled]="etapa.posicaoEtapa === PosicaoEtapa.Futura"
+          (click)="onExibirTemplates(etapa.id)"><i class="fa fa-file-text"></i> Templates</button>
+      </div>
+
     </div>
 
+    <div class="col-lg-4 col-md-6 col-sm-12 arquivos"
+      *ngIf="layout === 'Visualização' && etapa.posicaoEtapa !== PosicaoEtapa.Futura">
 
-    <div class="templates" *ngIf="layout === 'Visualização' && etapa.possuiTemplates">
-      <p>Possuímos alguns documentos de exemplo que podem te ajudar. Confira-os e fique à vontade para
-        utilizá-los!</p>
-      <button class="btn btn-success" [disabled]="etapa.posicaoEtapa === PosicaoEtapa.Futura"
-        (click)="onExibirTemplates(etapa.id)"><i class="fa fa-file-text"></i> Templates</button>
-    </div>
-
-  </div>
-
-  <div class="col-lg-4 col-md-5 col-sm-12 arquivos"
-    *ngIf="layout === 'Visualização' && etapa.posicaoEtapa !== PosicaoEtapa.Futura">
-
-    <app-arquivos [arquivos]="arquivos" (upload)="upload($event)" (delete)="deleteArquivo()"></app-arquivos>
+      <app-arquivos [arquivos]="arquivos" (upload)="upload($event)" (delete)="deleteArquivo()"></app-arquivos>
 
 
-    <div class="row m-t-sm" *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Atual">
-      <div class="col-md-12">
-        <button href="#" class="btn btn-primary" style="float: right" [ladda]="carregandoProximaEtapa"
-          (click)="onProximaEtapa()"> Próxima
-          Etapa</button>
+      <div class="row m-t-sm" *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Atual">
+        <div class="col-md-12">
+          <button href="#" class="btn btn-primary" style="float: right" [ladda]="carregandoProximaEtapa"
+            (click)="onProximaEtapa()"> Próxima
+            Etapa</button>
+        </div>
       </div>
     </div>
   </div>

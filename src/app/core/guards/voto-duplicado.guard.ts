@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, empty, EMPTY, of } from 'rxjs';
 import { EleicoesApiService } from '../api/eleicoes-api.service';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { ToastsService } from '../services/toasts.service';
 import { ToastType } from '../components/toasts/toasts.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,12 @@ export class VotoDuplicadoGuard implements CanActivate {
     } else {
       const id = +next.paramMap.get('id');
       return this.eleicoesApi.getVotoUsuario(id)
-        .pipe(map(voto => {
+        .pipe(
+          catchError(_ => {
+            this.router.navigate(['/home']);
+            return of(false);
+          }),
+          map(voto => {
           if (voto) {
             this.toasts.showMessage({
               message: 'Você já votou nessa eleição. Não é permitido votar mais de uma vez.',
