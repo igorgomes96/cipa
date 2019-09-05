@@ -9,13 +9,13 @@
     <div class="row">
         <div class="col-md-6">
             <app-custom-input [(ngModel)]="eleitor.nome" #nome="ngModel" [control]="nome" id="nome" label="Nome"
-                name="nome" required>
+                name="nome" required maxlength="255">
             </app-custom-input>
         </div>
 
         <div class="col-md-6">
             <app-custom-input [(ngModel)]="eleitor.email" #email="ngModel" [control]="email" id="email" label="E-mail"
-                name="email" required>
+                name="email" required maxlength="100">
             </app-custom-input>
         </div>
     </div>
@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-sm-4">
             <app-custom-input [(ngModel)]="eleitor.matricula" #matricula="ngModel" [control]="matricula" id="matricula"
-                label="Matrícula" name="matricula">
+                label="Matrícula" name="matricula" maxlength="50">
             </app-custom-input>
         </div>
 
@@ -41,12 +41,12 @@
     <div class="row">
         <div class="col-md-6">
             <app-custom-input [(ngModel)]="eleitor.cargo" #cargo="ngModel" [control]="cargo" id="cargo" label="Cargo"
-                name="cargo">
+                name="cargo" maxlength="255">
             </app-custom-input>
         </div>
         <div class="col-md-6">
             <app-custom-input [(ngModel)]="eleitor.area" #area="ngModel" [control]="area" id="area" label="Área"
-                name="area">
+                name="area" maxlength="255">
             </app-custom-input>
         </div>
     </div>

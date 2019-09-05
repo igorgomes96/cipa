@@ -1,5 +1,4 @@
-<app-panel title="Cronograma CIPA">
-  <h4>Sobre a atualização do cronograma</h4>
+<ng-template #modalInfoCronograma>
   <p>
     As etapas do cronograma são atualizadas automaticamente, ou seja, o próprio sistema inicia a etapa na data prevista,
     à
@@ -8,11 +7,28 @@
     mínimo), o cronograma permancerá inalterado, porém a etapa será sinalizada.
     <app-ajuda-tooltip ajuda="<img src='assets/img/erro-cronograma.jpg'>"></app-ajuda-tooltip>
   </p>
-</app-panel>
+</ng-template>
 
-<div class="row m-b-lg" *ngIf="!processoIniciado">
-  <div class="col-sm-12">
-    <button class="btn btn-primary" (click)="anteciparInicio()">Antecipar Início <i class="fa fa-clock-o"></i></button>
+<div *ngIf="!processoIniciado">
+  <p>
+    Antes de iniciar o processo eleitoral, faça a cadastro de todos os funcionários da empresa.<br>
+    É importante que o cadastro seja feito agora para que todos os funcionários recebam todos os comunicados via e-mail,
+    ainda que seja possível cadastrar funcionários até a etapa de votação.
+  </p>
+
+  <div class="row m-b-lg">
+    <div class="col-sm-12">
+      <a class="btn btn-success m-r-sm" [routerLink]="['/eleicoes', eleicao.id ,'eleitores']">Cadastrar Funcionários <i
+          class="fa fa-users"></i></a>
+      <button class="btn btn-primary" (click)="anteciparInicio()">Antecipar Início <i
+          class="fa fa-clock-o"></i></button>
+    </div>
+  </div>
+</div>
+
+<div class="row m-b-md">
+  <div class="col-md-12">
+    <a (click)="showModalInfoCronograma()" style="text-decoration: underline">Clique aqui</a> para saber mais sobre a atualização automática do cronograma.
   </div>
 </div>
 

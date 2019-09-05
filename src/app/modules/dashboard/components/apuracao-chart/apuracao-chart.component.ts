@@ -1,7 +1,7 @@
 import { chartOptions } from './../../../../../environments/chart-options';
 import { Apuracao } from './../../../../shared/models/apuracao';
 import { Component, OnInit, Input } from '@angular/core';
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 

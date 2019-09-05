@@ -23,6 +23,7 @@ export class RelatorioEleitoresComponent implements OnInit {
   constructor(private eleicoesApi: EleicoesApiService) { }
 
   ngOnInit() {
+    this.carregaVotos();
   }
 
   alteraPagina(pagina: number) {
@@ -44,9 +45,6 @@ export class RelatorioEleitoresComponent implements OnInit {
 
   get pageParams(): any {
     return { pageSize: this.votos.pageSize, pageNumber: this.votos.currentPage };
-  }
-
-  downloadRelatorio() {
   }
 
 }

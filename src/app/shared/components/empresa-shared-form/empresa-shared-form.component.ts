@@ -11,16 +11,27 @@ export class EmpresaSharedFormComponent implements OnInit {
   @Input() empresa: Empresa = new Empresa();
   @Output() salvarEmpresa = new EventEmitter<Empresa>();
   @Output() cancelarEdicao = new EventEmitter<void>();
+
+  cnpjMask = {
+    mask: [/\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/]
+  };
+
   constructor() { }
 
   ngOnInit() {
   }
 
   salvar() {
+    this.empresa.cnpj = this.getOnlyNumbers(this.empresa.cnpj);
     this.salvarEmpresa.emit(this.empresa);
   }
 
   cancelar() {
     this.cancelarEdicao.emit();
+  }
+
+  private getOnlyNumbers(text: string): string {
+    const numb = text.match(/\d/g);
+    return numb.join('');
   }
 }

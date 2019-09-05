@@ -27,6 +27,7 @@ export class CronogramaComponent implements OnInit {
   carregandoProximaEtapa = false;
   dimensionamento: Dimensionamento;
   @ViewChild('modalTemplates', { static: false }) modalTemplates: TemplateRef<any>;
+  @ViewChild('modalInfoCronograma', { static: false }) modalInfoCronograma: TemplateRef<any>;
 
   constructor(
     private route: ActivatedRoute,
@@ -54,10 +55,10 @@ export class CronogramaComponent implements OnInit {
       });
   }
 
-  confirmacaoProximaEtapa(etapa: EtapaCronograma): Observable<boolean> {
-    if (etapa.dataPrevista < new Date()) {
+  confirmacaoProximaEtapa(proximaEtapa: EtapaCronograma): Observable<boolean> {
+    if (proximaEtapa && new Date(proximaEtapa.dataPrevista) > new Date()) {
       return this.toasts
-        .confirm(`O fim dessa etapa está previsto para o dia ${formatDate(etapa.dataPrevista, 'dd/MM/yyyy', 'pt-BR')}.
+        .confirm(`O fim dessa etapa está previsto para o dia ${formatDate(proximaEtapa.dataPrevista, 'dd/MM/yyyy', 'pt-BR')}.
                   Se não houver nenhuma inconsistência, passaremos para o próxima etapa automaticamente na data prevista.
                   Tem certeza que deseja antecipar a próxima etapa?`, 'Essa ação não pode ser desfeita!');
     }
@@ -85,8 +86,16 @@ export class CronogramaComponent implements OnInit {
       });
   }
 
+  private buscaProximaEtapa(etapa: EtapaCronograma): EtapaCronograma {
+    const indice = this.eleicao.cronograma.indexOf(etapa) + 1;
+    const proximaEtapa = indice >= this.eleicao.cronograma.length ?
+      null :
+      this.eleicao.cronograma[indice];
+    return proximaEtapa;
+  }
+
   proximaEtapa(etapa: EtapaCronograma) {
-    this.confirmacaoProximaEtapa(etapa)
+    this.confirmacaoProximaEtapa(this.buscaProximaEtapa(etapa))
     .pipe(filter(confirmacao => confirmacao))
     .subscribe(_ => {
       this.carregandoProximaEtapa = true;
@@ -109,6 +118,10 @@ export class CronogramaComponent implements OnInit {
         this.templates = arquivos;
         this.modalService.showModal(this.modalTemplates);
       });
+  }
+
+  showModalInfoCronograma() {
+    this.modalService.showModal(this.modalInfoCronograma, 'Sobre a atualização do cronograma');
   }
 
   get processoIniciado(): boolean {

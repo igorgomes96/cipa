@@ -50,12 +50,12 @@ export class VotacaoComponent implements OnInit {
     });
 
     this.form.get('filtro').valueChanges
-    .pipe(
-      tap(_ => this.pesquisando = true),
-      inputPesquisa(),
-      switchMap(value => this.eleicoesApi.getCandidatos(this.eleicao.id, StatusAprovacao.Aprovada, value)),
-      tap(_ => this.pesquisando = false),
-    ).subscribe(candidatos => this.candidatos = candidatos);
+      .pipe(
+        tap(_ => this.pesquisando = true),
+        inputPesquisa(),
+        switchMap(value => this.eleicoesApi.getCandidatos(this.eleicao.id, StatusAprovacao.Aprovada, value)),
+        tap(_ => this.pesquisando = false),
+      ).subscribe(candidatos => this.candidatos = candidatos);
   }
 
   votar(candidato: Candidato) {
@@ -74,7 +74,18 @@ export class VotacaoComponent implements OnInit {
   }
 
   votoBranco() {
-
+    this.toasts.confirm(`Tem certeza que deseja votar em branco? Seu voto não poderá ser revertido.`)
+      .pipe(
+        filter(confirmacao => confirmacao),
+        switchMap(_ => this.eleicoesApi.postVotoBranco(this.eleicao.id))
+      ).subscribe(_ => {
+        this.toasts.showMessage({
+          message: 'Voto registrado com sucesso',
+          title: 'Sucesso',
+          type: ToastType.success
+        });
+        this.router.navigate(['/home']);
+      });
   }
 
 }

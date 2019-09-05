@@ -70,6 +70,10 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
     return this.http.get<Voto[]>(`${this.url}${idEleicao}/votos`, { params: validParams });
   }
 
+  postVotoBranco(idEleicao: number): Observable<Voto> {
+    return this.http.post<Voto>(`${this.url}${idEleicao}/votobranco`, null);
+  }
+
   getVotoEleitor(idEleicao: number, idEleitor: number): Observable<Voto[]> {
     const params: any = {
       eleitorId: idEleitor

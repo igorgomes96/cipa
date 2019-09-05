@@ -19,7 +19,7 @@ export const CUSTOM_VALUE_ACCESSOR: any = {
   selector: 'app-custom-input',
   templateUrl: './custom-input.component.html',
   styleUrls: ['./custom-input.component.css'],
-  providers: [CUSTOM_VALUE_ACCESSOR, { provide: LOCALE_ID, useValue: 'pt-BR' }]
+  providers: [CUSTOM_VALUE_ACCESSOR, { provide: LOCALE_ID, useValue: 'pt-BR', multi: true }]
 })
 export class CustomInputComponent implements OnInit, ControlValueAccessor {
 

@@ -22,7 +22,7 @@
 
     <div class="col-lg-3 col-md-4 col-sm-12">
       <app-custom-input [(ngModel)]="estabelecimento.cidade" #cidade="ngModel" [control]="cidade" id="cidade"
-        label="Cidade" name="cidade" required>
+        label="Cidade" name="cidade" required maxlength="100">
       </app-custom-input>
     </div>
 
@@ -32,7 +32,7 @@
   <div class="row">
     <div class="col-sm-12">
       <app-custom-input [(ngModel)]="estabelecimento.endereco" #endereco="ngModel" [control]="endereco" id="endereco"
-        label="Endereço" name="endereco" required>
+        label="Endereço" name="endereco" required maxlength="255">
       </app-custom-input>
     </div>
   </div>
@@ -55,7 +55,7 @@
       <div class="form-group">
         <label class="control-label">Descrição</label>
         <textarea name="descricao" id="descricao" rows="5" [(ngModel)]="estabelecimento.descricao" #descricao="ngModel"
-          class="form-control"></textarea>
+          class="form-control" maxlength="255"></textarea>
       </div>
     </div>
   </div>

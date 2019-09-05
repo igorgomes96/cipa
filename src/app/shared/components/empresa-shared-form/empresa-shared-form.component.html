@@ -6,11 +6,19 @@
       </app-custom-input>
     </div>
   </div>
-  
+
   <div class="row">
+    <div class="col-lg-2 col-md-4 col-sm-12">
+      <div class="form-group">
+        <label for="cnpj">CNPJ</label>
+        <input type="text" [textMask]="cnpjMask" name="cnpj" class="form-control" [(ngModel)]="empresa.cnpj"
+          placeholder="CNPJ">
+      </div>
+    </div>
+
     <div class="col-lg-4 col-md-6 col-sm-12">
-      <app-custom-input [(ngModel)]="empresa.razaoSocial" #razaoSocial="ngModel" [control]="razaoSocial" id="razaoSocial"
-        label="Razão Social" name="razaoSocial" required>
+      <app-custom-input [(ngModel)]="empresa.razaoSocial" #razaoSocial="ngModel" [control]="razaoSocial"
+        id="razaoSocial" label="Razão Social" name="razaoSocial" required maxlength="255">
       </app-custom-input>
     </div>
   </div>
@@ -19,8 +27,8 @@
     <div class="col-sm-12">
       <div class="form-group">
         <label class="control-label">Informações Gerais</label>
-        <textarea name="informacoesGerais" id="informacoesGerais" rows="5"  [(ngModel)]="empresa.informacoesGerais" 
-          #informacoesGerais="ngModel" class="form-control"></textarea>
+        <textarea name="informacoesGerais" id="informacoesGerais" rows="5" [(ngModel)]="empresa.informacoesGerais"
+          #informacoesGerais="ngModel" class="form-control" maxlength="255"></textarea>
       </div>
     </div>
   </div>
