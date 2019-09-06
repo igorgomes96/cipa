@@ -63,10 +63,17 @@ export class CronogramaComponent implements OnInit {
                   Tem certeza que deseja antecipar a próxima etapa?`, 'Essa ação não pode ser desfeita!');
     }
     return this.toasts
-        .confirm(`Tem certeza que deseja passar para a próxima etapa?`, 'Essa ação não pode ser desfeita!');
+      .confirm(`Tem certeza que deseja passar para a próxima etapa?`, 'Essa ação não pode ser desfeita!');
   }
 
-  anteciparInicio() {
+  get iniciarProcessoText(): string {
+    if (!this.eleicao || !this.eleicao.cronograma || !this.eleicao.cronograma.length) {
+      return '';
+    }
+    return new Date(this.eleicao.cronograma[0].dataPrevista) < new Date() ? 'Iniciar Processo' : 'Antecipar Início';
+  }
+
+  iniciarProcesso() {
     if (!this.eleicao.cronograma || !this.eleicao.cronograma.length) {
       return;
     }
@@ -96,20 +103,20 @@ export class CronogramaComponent implements OnInit {
 
   proximaEtapa(etapa: EtapaCronograma) {
     this.confirmacaoProximaEtapa(this.buscaProximaEtapa(etapa))
-    .pipe(filter(confirmacao => confirmacao))
-    .subscribe(_ => {
-      this.carregandoProximaEtapa = true;
-      this.eleicoesApi.postProximaEtapa(this.eleicao.id)
-        .pipe(finalize(() => this.carregandoProximaEtapa = false))
-        .subscribe((cronograma: EtapaCronograma[]) => {
-          this.eleicao.cronograma = cronograma;
-          this.toasts.showMessage({
-            message: 'Mudança de etapa concluída com sucesso!',
-            title: 'Sucesso!',
-            type: ToastType.success
+      .pipe(filter(confirmacao => confirmacao))
+      .subscribe(_ => {
+        this.carregandoProximaEtapa = true;
+        this.eleicoesApi.postProximaEtapa(this.eleicao.id)
+          .pipe(finalize(() => this.carregandoProximaEtapa = false))
+          .subscribe((cronograma: EtapaCronograma[]) => {
+            this.eleicao.cronograma = cronograma;
+            this.toasts.showMessage({
+              message: 'Mudança de etapa concluída com sucesso!',
+              title: 'Sucesso!',
+              type: ToastType.success
+            });
           });
-        });
-    });
+      });
   }
 
   exibirTemplates(etapa: EtapaCronograma) {

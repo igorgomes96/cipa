@@ -1,8 +1,7 @@
 <ng-template #modalInfoCronograma>
   <p>
     As etapas do cronograma são atualizadas automaticamente, ou seja, o próprio sistema inicia a etapa na data prevista,
-    à
-    1:00 da manhã. Apesar disso, é possível antecipar uma etapa apenas clicando no botão "Próxima Etapa".<br>
+    à 1:00 da manhã. Apesar disso, é possível antecipar uma etapa apenas clicando no botão "Próxima Etapa".<br>
     Caso ocorra algum erro de validação ou sistema ao tentar mudar de etapa (ex.: votação não atingui o quorum
     mínimo), o cronograma permancerá inalterado, porém a etapa será sinalizada.
     <app-ajuda-tooltip ajuda="<img src='assets/img/erro-cronograma.jpg'>"></app-ajuda-tooltip>
@@ -20,7 +19,7 @@
     <div class="col-sm-12">
       <a class="btn btn-success m-r-sm" [routerLink]="['/eleicoes', eleicao.id ,'eleitores']">Cadastrar Funcionários <i
           class="fa fa-users"></i></a>
-      <button class="btn btn-primary" (click)="anteciparInicio()">Antecipar Início <i
+      <button class="btn btn-primary" (click)="iniciarProcesso()">{{ iniciarProcessoText }} <i
           class="fa fa-clock-o"></i></button>
     </div>
   </div>
@@ -28,7 +27,8 @@
 
 <div class="row m-b-md">
   <div class="col-md-12">
-    <a (click)="showModalInfoCronograma()" style="text-decoration: underline">Clique aqui</a> para saber mais sobre a atualização automática do cronograma.
+    <a (click)="showModalInfoCronograma()" style="text-decoration: underline">Clique aqui</a> para saber mais sobre a
+    atualização automática do cronograma.
   </div>
 </div>
 
