@@ -1,10 +1,9 @@
-import { EtapaAnteriorVotacaoGuard } from './../../core/guards/etapa-anterior-votacao.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EleicoesListaComponent } from './pages/eleicoes-lista/eleicoes-lista.component';
-import { EleicoesFormComponent } from './pages/eleicoes-form/eleicoes-form.component';
 import { NavigationType } from '../../app.component';
 import { EleicaoResolverService } from '../../core/resolvers/eleicao-resolver.service';
+import { EleicaoNovaComponent } from './pages/eleicao-nova/eleicao-nova.component';
 
 const routes: Routes = [
   {
@@ -16,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'nova',
-    component: EleicoesFormComponent,
+    component: EleicaoNovaComponent,
     data: {
       navigationType: NavigationType.Top
     }
@@ -24,16 +23,16 @@ const routes: Routes = [
   {
     path: ':id',
     children: [
-      {
-        path: '',
-        component: EleicoesFormComponent,
-        resolve: {
-          eleicao: EleicaoResolverService
-        },
-        data: {
-          navigationType: NavigationType.Top
-        }
-      },
+      // {
+      //   path: '',
+      //   component: EleicoesFormComponent,
+      //   resolve: {
+      //     eleicao: EleicaoResolverService
+      //   },
+      //   data: {
+      //     navigationType: NavigationType.Top
+      //   }
+      // },
       {
         path: 'dashboard',
         loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule),

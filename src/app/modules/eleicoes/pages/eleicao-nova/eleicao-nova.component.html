@@ -11,31 +11,26 @@
     <div [ngSwitch]="currentStepIndex">
 
       <div *ngSwitchCase="1">
-        <form [formGroup]="formGestao">
-          <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12">
-              Data de Início do processo de Eleição
-              <app-datepicker formControlName="dataInicio" inputClasses="input-white"
-                control="formGestao.get('dataInicio')"></app-datepicker>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12">
-              Qual é o tempo de duração dessa gestão? (em anos)
-              <input type="number" formControlName="duracaoGestao" class="form-control">
-            </div>
-          </div>
-        </form>
+        <app-gestao-form [gestao]="gestao" (statusChange)="formGestaoStatusChange($event)"></app-gestao-form>
       </div>
 
       <div *ngSwitchCase="2">
         <div class="row">
           <div class="col-md-12" [hidden]="novaEmpresa">
-            Observamos que você já possui {{ empresas.length }} empresas cadastradas. Escolha uma delas para iniciar a
-            nova
-            eleição, ou
-            cadastre uma nova empresa.
+            <span *ngIf="empresas.length > 1; else empresaUnica">
+              Observamos que você já possui {{ empresas.length }} empresas cadastradas. Escolha uma delas para iniciar a
+              nova eleição, ou cadastre uma nova empresa.
+            </span>
+            <ng-template #empresaUnica>
+              <span *ngIf="empresas.length === 1; else nenhumaEmpresa">
+                Você possui somente 1 empresa cadastrada, a qual já selecionamos pra você. Se não for essa a empresa,
+                clique em "Nova Empresa".
+              </span>
+              <ng-template #nenhumaEmpresa>
+                  Ainda não há nenhuma empresa cadastrado. Clique em "Nova Empresa".
+              </ng-template>
+            </ng-template>
+
 
             <form [formGroup]="formListaEmpresa">
               <div class="row">
@@ -51,6 +46,7 @@
             <button class="btn btn-primary m-t-md" (click)="empresaForm()"><i class="fa fa-plus"></i> Nova
               Empresa</button>
           </div>
+
           <div class="col-md-12" [hidden]="!novaEmpresa">
             <app-empresa-shared-form (cancelarEdicao)="cancelarEmpresa()" (salvarEmpresa)="salvarEmpresa($event)">
             </app-empresa-shared-form>
@@ -66,8 +62,14 @@
               Selecione um deles ou cadastre um novo estabelecimento.
             </div>
             <ng-template #estabelecimentoUnico>
-              A empresa selecionada já possui 1 estabelecimento cadastrado. Já selecionamos ele para você.<br>
-              Se precisar cadastrar um novo estabelecimento, basta clicar no botão abaixo.
+              <span *ngIf="!estabelecimentos.length; else nenhumEstabelecimento">
+                Ainda não há nenhum estabelecimento cadastrado. Clique em "Novo Estabelecimento".
+              </span>
+              <ng-template #nenhumEstabelecimento>
+                A empresa selecionada já possui 1 estabelecimento cadastrado. Já selecionamos ele para você.<br>
+                Se precisar cadastrar um novo estabelecimento, basta clicar no botão abaixo.
+              </ng-template>
+
             </ng-template>
             <form [formGroup]="formListaEstabelecimentos">
               <div class="row">
@@ -75,23 +77,11 @@
                   <select class="form-control m-t-sm" name="lista-estabelecimento" id="lista-estabelecimento"
                     formControlName="estabelecimento">
                     <option value="">(Selecione o estabelecimento)</option>
-                    <option [value]="est.id" *ngFor="let est of estabelecimentos">{{ est.enderecoStr() }}</option>
+                    <option [value]="est.id" *ngFor="let est of estabelecimentos">{{ est.cidade + ', ' + est.endereco }}</option>
                   </select>
                 </div>
               </div>
 
-              <!-- <br>
-              <div class="row">
-                <div class="col-sm-6 col-md-4 col-lg-2">
-                  <div class="form-group">
-                    Grupo
-                    <select class="form-control" name="grupo" id="grupo" formControlName="grupo">
-                      <option value="">(Selecione o grupo)</option>
-                      <option [value]="gr.id" *ngFor="let gr of grupos">{{ gr.codigoGrupo }}</option>
-                    </select>
-                  </div>
-                </div>
-              </div> -->
             </form>
 
             <br>
@@ -116,16 +106,6 @@
         </div>
 
       </div>
-
-      <!-- <div *ngSwitchCase="4">
-
-        <div id="vertical-timeline" class="vertical-container light-timeline no-margins">
-          <div etapa-cronograma class="vertical-timeline-block" *ngFor="let etapa of cronograma" [etapa]="etapa"
-            layout="Cadastro"></div>
-        </div>
-
-        <button class="btn btn-success m-t-md" (click)="salvarEleicao()">Abrir Eleição!</button>
-      </div> -->
 
     </div>
   </app-wizard>

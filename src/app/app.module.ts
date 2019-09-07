@@ -8,12 +8,14 @@ import { CoreModule } from './core/core.module';
 import { NotFoundComponent } from './modules/not-found/pages/not-found/not-found.component';
 import { InterceptorsModule } from './core/interceptors/interceptors.module';
 import { HomeComponent } from './modules/home/home.component';
+import { ForbiddenComponent } from './modules/forbidden/pages/forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,

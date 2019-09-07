@@ -1,3 +1,4 @@
+import { NavigationService } from './../../services/navigation.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ResolveEnd, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { filter, distinctUntilChanged } from 'rxjs/operators';
@@ -18,11 +19,13 @@ export interface MenuItem {
   templateUrl: './leftnav.component.html',
   styleUrls: ['./leftnav.component.css']
 })
-export class LeftnavComponent implements OnInit, AfterViewInit {
+export class LeftnavComponent implements OnInit {
 
   menu: MenuItem[];
   isAdmin = true;
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private router: Router,
+    private navigationService: NavigationService) {
     this.menu = [
       {
         label: 'Dashboard',
@@ -92,20 +95,16 @@ export class LeftnavComponent implements OnInit, AfterViewInit {
       this.updateLinks(event.url);
     });
 
+    this.navigationService.leftNavLinkEmitter
+      .subscribe(_ => this.updateLinks(this.router.url));
     this.updateLinks(this.router.url);
-
-    // this.authService.onUserChanges.subscribe(_ => {
-    //   this.isAdmin = this.authService.isInRole('Administrador');
-    // });
-    // this.isAdmin = this.authService.isInRole('Administrador');
-
-    // this.router.events.pipe(tap(console.log)).subscribe();
   }
 
   private updateLinks(url: string) {
     const paths = url.split('/');
     if (paths.length > 2 && paths[1] === 'eleicoes') {
       const id = paths[2];
+      if (!id.match(/^\d+$/)) { return; } // Se permite números
       this.menu.forEach(item => {
         item.link = item.link.replace(':id', id).replace(/(\d+)/, id);
         if (url.startsWith(item.link)) {
@@ -132,8 +131,5 @@ export class LeftnavComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/login']);
   }
 
-  ngAfterViewInit() {
-    // $('#side-menu').metisMenu();
-  }
 
 }

@@ -33,6 +33,6 @@
     </div>
   </div>
 
-  <button type="submit" class="btn btn-primary m-r-sm"><i class="fa fa-save"></i> Salvar</button>
+  <button type="submit" class="btn btn-primary m-r-sm" [disabled]="form.invalid"><i class="fa fa-save"></i> Salvar</button>
   <button type="button" class="btn btn-default" (click)="cancelar()">Cancelar</button>
 </form>

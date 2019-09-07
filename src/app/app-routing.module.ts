@@ -3,10 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './modules/not-found/pages/not-found/not-found.component';
 import { NavigationType } from './app.component';
 import { HomeComponent } from './modules/home/home.component';
+import { ForbiddenComponent } from './modules/forbidden/pages/forbidden/forbidden.component';
 
 const routes: Routes = [
   {
     path: 'not-found', component: NotFoundComponent,
+    data: {
+      navigationType: NavigationType.None
+    }
+  },
+  {
+    path: 'forbidden', component: ForbiddenComponent,
     data: {
       navigationType: NavigationType.None
     }

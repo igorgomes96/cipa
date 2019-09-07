@@ -57,10 +57,12 @@ input[readonly].input-white {
     background: #eee;
 }
 
-app-custom-input[required] label::after {
+app-custom-input[required] label::after,
+label.required::after  {
     content: " *";
     color: red;
 }
+
 
 #eleitores-form app-datepicker input[readonly] {
   background: white;
