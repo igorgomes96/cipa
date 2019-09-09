@@ -72,7 +72,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
       forceParse: false,
       calendarWeeks: false,
       autoclose: true,
-      language: 'pt-BR'
+      language: 'pt-BR',
     });
     if (this.control.value) {
       this.jDate.datepicker('setDate', formatDate(this.control.value as Date, 'dd/MM/yyyy', 'pt-BR'));

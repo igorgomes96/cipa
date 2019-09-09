@@ -1,12 +1,18 @@
 <form #form="ngForm">
   <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-12">
-      Data de Início do processo de Eleição
-      <app-datepicker #dataInicio="ngModel" required name="dataInicio" [(ngModel)]="gestao.dataInicio" inputClasses="input-white"
-        control="dataInicio"></app-datepicker>
+      Data de Término do mandato Anterior
+      <app-datepicker #terminoMandatoAnterior="ngModel" name="terminoMandatoAnterior" [(ngModel)]="gestao.terminoMandatoAnterior"
+        inputClasses="input-white" control="terminoMandatoAnterior" id="mandatoAnterior"></app-datepicker>
     </div>
   </div>
-  <br>
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      Data de Início do processo de Eleição
+      <app-datepicker #dataInicio="ngModel" required name="dataInicio" [(ngModel)]="gestao.dataInicio"
+        inputClasses="input-white" control="dataInicio" id="inicioProcesso"></app-datepicker>
+    </div>
+  </div>
   <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-12">
       Qual é o tempo de duração dessa gestão? (em anos)

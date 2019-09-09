@@ -28,8 +28,8 @@ export class EtapaAnteriorVotacaoGuard implements CanActivate {
             .find(c => c.posicaoEtapa === PosicaoEtapa.Atual);
           if (!etapaAtual) {
             this.toasts.showMessage({
-              message: 'Etapa atual não encontrada!',
-              title: 'Cronograma inválido',
+              message: 'Processo de eleição ainda não iniciado.',
+              title: 'Aguardando início',
               type: ToastType.error
             });
             return false;

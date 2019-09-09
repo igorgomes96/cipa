@@ -10,6 +10,7 @@ export class Eleicao {
     cronograma: EtapaCronograma[];
     estabelecimento: Estabelecimento;
     eleitores: Eleitor[];
+    terminoMandatoAnterior: Date;
     dataInicio: Date;
     etapaAtual: EtapaCronograma;
     grupoId: number;

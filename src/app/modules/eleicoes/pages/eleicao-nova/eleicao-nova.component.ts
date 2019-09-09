@@ -80,7 +80,7 @@ export class EleicaoNovaComponent implements OnInit {
         }
       }),
         filter((value: any) => value),
-        switchMap((value: any) => this.estabelecimentosApi.getAll({ empresaId: value }))
+        switchMap((value: any) => this.estabelecimentosApi.getAll({ empresaId: value, ativo: true }))
       ).subscribe((estabelecimentos: Estabelecimento[]) => {
         this.estabelecimentos = estabelecimentos;
         if (!this.estabelecimentos.length) {
@@ -187,7 +187,7 @@ export class EleicaoNovaComponent implements OnInit {
           title: 'Sucesso!',
           type: ToastType.success
         });
-        this.router.navigate([`/eleicoes', ${novaEleicao.id}, 'cronograma`]);
+        this.router.navigate([`/eleicoes/${novaEleicao.id}/cronograma`]);
       });
   }
 
