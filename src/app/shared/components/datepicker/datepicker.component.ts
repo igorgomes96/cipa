@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, forwardRef, AfterViewInit } from '@angular/core';
-import { AbstractControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, OnInit, Input, forwardRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { AbstractControl, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 import { LOCALE_ID } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { race } from 'rxjs/operators';
@@ -23,10 +23,11 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
   @Input() name: string;
   @Input() label: string;
   @Input() id: string;
-  @Input() control: AbstractControl;
+  @Input() control: AbstractControl | NgModel;
   @Input() readOnly = true;
   @Input() inputClasses = '';
   @Input() placeholder = '';
+  @Output() change = new EventEmitter<Date>();
 
   // private innerValue: any;  // Valor de fato
   value: any; // Texto exibido no controle
@@ -86,6 +87,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
   pushChanges(valor: any) {
     this.updateValue(valor);
     this.onChange(valor);
+    this.change.emit(valor);
   }
 
 

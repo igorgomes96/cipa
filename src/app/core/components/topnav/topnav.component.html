@@ -1,34 +1,47 @@
-<div class="row border-bottom">
-    <nav class="navbar navbar-static-top navbar-expand-lg" role="navigation">
-        <div class="navbar-header">
+<div class="row border-bottom" [class.white-bg]="!showToggle">
+  <nav class="navbar navbar-static-top navbar-expand-lg" role="navigation">
 
-            <a routerLink="/home" class="navbar-brand" *ngIf="!showToggle">CIPA Online</a>
-            <button class="minimalize-styl-2 btn btn-primary" *ngIf="showToggle" aria-label="Toggle navigation" (click)="toggleNavigation()">
-                <i class="fa fa-bars"></i>
-            </button>
+    <a routerLink="/home" class="navbar-brand" *ngIf="!showToggle">CIPA Online</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+      aria-label="Toggle navigation" *ngIf="!showToggle">
+      <i class="fa fa-reorder"></i>
+    </button>
 
-        </div>
+    <div class="navbar-header"  *ngIf="showToggle">
+      <button class="minimalize-styl-2 btn btn-primary" *ngIf="showToggle" aria-label="Toggle navigation"
+        (click)="toggleNavigation()">
+        <i class="fa fa-bars"></i>
+      </button>
 
-        <div class="navbar-collapse collapse" [ngClass]="!showToggle ? 'white-bg' : ''">
-            <ul class="nav navbar-top-links navbar-right">
-                <li>
-                    <a class="right-sidebar-toggle" routerLink="/home">
-                        <i class="fa fa-home"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="right-sidebar-toggle">
-                        <i class="fa fa-user"></i>
-                    </a>
-                </li>
-                <li>
-                    <a (click)="logout()">
-                        <i class="fa fa-sign-out"></i> Log out
-                    </a>
-                </li>
-            </ul>
-        </div>
 
-    </nav>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav mr-auto" *ngIf="!showToggle">
+        <li routerLinkActive="active" *ngFor="let rota of rotas">
+          <a aria-expanded="false" role="button" [routerLink]="rota.link">{{ rota.label }}</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-top-links navbar-right" [ngClass]="!showToggle ? 'toplinks' : ''">
+        <li>
+          <a class="right-sidebar-toggle" routerLink="/home">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+        <li>
+          <a class="right-sidebar-toggle">
+            <i class="fa fa-user"></i>
+          </a>
+        </li>
+        <li>
+          <a (click)="logout()">
+            <i class="fa fa-sign-out"></i> Log out
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
 </div>
+
 <app-breadcrumb></app-breadcrumb>

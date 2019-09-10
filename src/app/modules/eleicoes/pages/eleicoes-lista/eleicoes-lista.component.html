@@ -1,33 +1,23 @@
+<div class="row m-b-md">
+  <div class="col-md-12">
+    <a routerLink="/eleicoes/nova" class="btn btn-primary">Nova Eleição <i class="fa fa-plus"></i></a>
+  </div>
+</div>
+
 <h4>Eleições Cadastradas</h4>
 <p>
   Estão listadas abaixo as últimas eleições administradas por você.
 </p>
 
 <div class="row flex-row">
-  <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12" *ngFor="let eleicao of eleicoes">
-    <div class="widget white-bg">
-      <div class="row">
-        <div class="col-md-12">
-          <span style="float: right;font-size: 15px;">
-            <a href=""><i class="fa fa-pencil-square-o"></i></a>
-          </span>
-          <h4>{{ eleicao.estabelecimento?.empresa?.razaoSocial }}</h4>
-          {{ eleicao.estabelecimento?.endereco }}<br>
-          <strong>{{ eleicao.estabelecimento?.cidade }}</strong>
-        </div>
-      </div>
-      <br>
-      <div class="row">
-        <div class="col-md-12">
-          <a [routerLink]="'/eleicoes/' + eleicao.id + '/cronograma'"
-            class="btn btn-success btn-outline m-r-sm btn-sm">Cronograma</a>
-          <a href="" class="btn btn-danger btn-outline btn-sm">Excluir</a>
-        </div>
-      </div>
-    </div>
+  <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let eleicao of eleicoes">
+    <app-eleicao-card [eleicao]="eleicao" (editar)="editar($event)"></app-eleicao-card>
   </div>
 </div>
 
 <div *ngIf="paginationInfo.pageCount > 1">
-  <a href="" style="text-decoration: underline;">Exibir todas... </a> <app-ajuda-tooltip ajuda="Exibimos nesta pagína somente as 10 últimas eleições. Clique aqui para consultar as eleições mais antigas."></app-ajuda-tooltip>
+  <a href="" style="text-decoration: underline;">Exibir todas... </a>
+  <app-ajuda-tooltip
+    ajuda="Exibimos nesta pagína somente as 10 últimas eleições. Clique aqui para consultar as eleições mais antigas.">
+  </app-ajuda-tooltip>
 </div>

@@ -1,0 +1,25 @@
+<app-panel>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>{{ eleicao.estabelecimento?.empresa?.razaoSocial }}
+        <span *ngIf="eleicao.etapaAtual"
+          class="label label-success float-right">{{ eleicao.etapaAtual.nomeEtapa }}</span>
+      </h3>
+      <p>
+        {{ eleicao.estabelecimento?.endereco }}<br>
+        <small>{{ eleicao.estabelecimento?.descricao }}</small>
+      </p>
+      <strong>{{ eleicao.estabelecimento?.cidade }}</strong>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <a [routerLink]="'/eleicoes/' + eleicao.id + '/cronograma'"
+        class="btn btn-success btn-outline m-r-sm btn-sm"><span class="fa fa-calendar"></span> Acessar</a>
+
+      <a (click)="onEditar()"
+        class="btn btn-primary btn-outline m-r-sm btn-sm"><span class="fa fa-pencil"></span> Alterar</a>
+    </div>
+  </div>
+</app-panel>

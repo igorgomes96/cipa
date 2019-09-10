@@ -13,6 +13,21 @@ export class TopnavComponent implements OnInit {
 
   @Input() showToggle = true;
 
+  rotas = [
+    {
+      link: '/eleicoes',
+      label: 'Eleições'
+    },
+    {
+      link: '/empresas',
+      label: 'Empresas'
+    },
+    {
+      link: '/estabelecimentos',
+      label: 'Estabelecimentos'
+    }
+  ];
+
   constructor(private router: Router) { }
 
   ngOnInit() {

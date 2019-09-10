@@ -35,7 +35,9 @@ export class EleicoesListaComponent implements OnInit {
       this.eleicoes = eleicoes.result;
     });
   }
-  exibirEleicoes() {
+
+  editar(eleicao: Eleicao) {
+    console.log(eleicao);
   }
 
 }
