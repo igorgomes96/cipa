@@ -35,7 +35,6 @@
       </div>
 
       <p>{{ etapa.descricaoEtapa }}</p>
-      <br>
       <div class="row" *ngIf="dimensionamento">
         <div class="col-sm-12" [ngSwitch]="etapa.etapaObrigatoriaId" *ngIf="etapa.posicaoEtapa !== PosicaoEtapa.Futura">
           <app-etapa-dimensionamento *ngSwitchCase="CodigoEtapaObrigatoria.Inscricao"
@@ -47,11 +46,10 @@
         </div>
       </div>
 
-
       <div class="templates" *ngIf="layout === 'Visualização' && etapa.possuiTemplates">
         <p>Possuímos alguns documentos de exemplo que podem te ajudar. Confira-os e fique à vontade para
           utilizá-los!</p>
-        <button class="btn btn-success" [disabled]="etapa.posicaoEtapa === PosicaoEtapa.Futura"
+        <button class="btn btn-success float-left" [disabled]="etapa.posicaoEtapa === PosicaoEtapa.Futura"
           (click)="onExibirTemplates(etapa.id)"><i class="fa fa-file-text"></i> Templates</button>
       </div>
 

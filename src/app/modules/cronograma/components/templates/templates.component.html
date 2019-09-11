@@ -4,9 +4,6 @@
     <tbody>
         <tr *ngFor="let arquivo of templates">
             <td class="project-status">
-                <button class="btn btn-outline btn-danger btn-xs m-r-xs" (click)="deleteFile(arquivo.id)">
-                    <i class="fa fa-trash"></i>
-                </button>
                 <button class="btn btn-outline btn-primary btn-xs" (click)="download(arquivo)">
                     <i class="fa fa-download"></i>
                 </button>

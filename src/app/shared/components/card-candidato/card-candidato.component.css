@@ -30,7 +30,7 @@
 }
 
 
-@media (max-width: 488px) {
+@media (max-width: 576px) {
     .foto img {
         width: 100%;
         height: initial;

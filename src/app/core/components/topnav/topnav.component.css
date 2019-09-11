@@ -1,7 +1,9 @@
+.navbar-collapse {
+  flex-grow: 0;
+}
 
-/*
-.navbar {
-  margin-bottom: 0;
+.navbar-static-top {
+  justify-content: space-between;
 }
 
 .navbar-brand {
@@ -12,6 +14,36 @@
   margin-right: 1rem;
   white-space: nowrap;
 }
+
+.left-nav-hidden .navbar-collapse {
+  flex-grow: 1;
+}
+
+.left-nav-hidden .navbar-top-links li>a {
+  color: inherit;
+}
+
+.left-nav-hidden .nav > li > a {
+  padding: 15px 10px;
+}
+
+.left-nav-hidden .show .nav > li > a {
+  padding: 15px 20px;
+}
+
+/*
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+
+.navbar {
+  margin-bottom: 0;
+}
+
 
 .navbar-brand {
   background: #1ab394;

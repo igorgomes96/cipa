@@ -9,6 +9,7 @@ import { NotFoundComponent } from './modules/not-found/pages/not-found/not-found
 import { InterceptorsModule } from './core/interceptors/interceptors.module';
 import { HomeComponent } from './modules/home/home.component';
 import { ForbiddenComponent } from './modules/forbidden/pages/forbidden/forbidden.component';
+import { EstabelecimentosModule } from './modules/estabelecimentos/estabelecimentos.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ForbiddenComponent } from './modules/forbidden/pages/forbidden/forbidde
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
-    InterceptorsModule
+    InterceptorsModule,
+    EstabelecimentosModule
   ],
   providers: [],
   bootstrap: [AppComponent]

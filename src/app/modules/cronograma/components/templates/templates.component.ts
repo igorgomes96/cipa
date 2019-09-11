@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Arquivo } from 'src/app/shared/models/arquivo';
+import { ArquivosApiService } from 'src/app/core/api/arquivos-api.service';
 
 @Component({
   selector: 'app-templates',
@@ -9,9 +10,13 @@ import { Arquivo } from 'src/app/shared/models/arquivo';
 export class TemplatesComponent implements OnInit {
 
   @Input() templates: Arquivo[];
-  constructor() { }
+  constructor(private arquivosApi: ArquivosApiService) { }
 
   ngOnInit() {
+  }
+
+  download(arquivo: Arquivo) {
+    this.arquivosApi.download(arquivo.id, arquivo.nome, arquivo.contentType).subscribe();
   }
 
 }

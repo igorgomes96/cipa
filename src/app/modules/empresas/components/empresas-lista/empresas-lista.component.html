@@ -1,0 +1,27 @@
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>CNPJ</th>
+          <th>Razão Social</th>
+          <th>Informações Gerais</th>
+          <th class="text-right"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let empresa of empresas">
+          <td>{{ empresa.cnpj | mask:'00.000.000/0000-00' }}</td>
+          <td>{{ empresa.razaoSocial }}</td>
+          <td>{{ empresa.informacoesGerais }}</td>
+          <td class="text-right">
+            <div>
+              <a class="btn btn-xs btn-outline btn-success m-r-xs" [routerLink]="['./', empresa.id]"><i
+                  class="fa fa-pencil"></i></a>
+              <button class="btn btn-xs btn-outline btn-danger"><i
+                  class="fa fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

@@ -29,7 +29,7 @@ export class GestaoFormComponent implements OnInit {
   }
 
   atualizaDataInicio(data: Date) {
-    if (this.inicioMaximo(data) < this.gestao.dataInicio) {
+    if (this.inicioMaximo(data) > this.gestao.dataInicio) {
       this.gestao.dataInicio = this.inicioMaximo(data);
     }
   }

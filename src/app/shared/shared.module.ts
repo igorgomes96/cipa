@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { ChartsModule } from 'ng2-charts';
 import { TextMaskModule } from 'angular2-text-mask';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 import { PanelComponent } from './components/panel/panel.component';
 import { ArquivosComponent } from './components/arquivos/arquivos.component';
@@ -28,6 +29,7 @@ import { EtapaPercentualVotosComponent } from './components/etapa-percentual-vot
 import { WidgetDashboardComponent } from './components/widget-dashboard/widget-dashboard.component';
 import { CountCharDirective } from './directives/count-char.directive';
 
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({
   declarations: [
@@ -59,7 +61,8 @@ import { CountCharDirective } from './directives/count-char.directive';
     TooltipModule,
     LaddaModule,
     ChartsModule,
-    TextMaskModule
+    TextMaskModule,
+    NgxMaskModule.forRoot(options)
   ],
   exports: [
     CommonModule,
@@ -86,7 +89,8 @@ import { CountCharDirective } from './directives/count-char.directive';
     ChartsModule,
     WidgetDashboardComponent,
     CountCharDirective,
-    TextMaskModule
+    TextMaskModule,
+    NgxMaskModule
   ]
 })
 export class SharedModule { }

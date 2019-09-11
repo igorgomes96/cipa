@@ -11,7 +11,9 @@ declare var $: any;
 })
 export class TopnavComponent implements OnInit {
 
-  @Input() showToggle = true;
+  @Input() showLeftNav = true;
+
+  topCollapsed = true;
 
   rotas = [
     {

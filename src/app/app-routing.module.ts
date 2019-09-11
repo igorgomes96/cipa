@@ -30,6 +30,14 @@ const routes: Routes = [
     loadChildren: () => import('./modules/eleicoes/eleicoes.module').then(m => m.EleicoesModule)
   },
   {
+    path: 'empresas',
+    loadChildren: () => import('./modules/empresas/empresas.module').then(m => m.EmpresasModule)
+  },
+  {
+    path: 'estabelecimentos',
+    loadChildren: () => import('./modules/estabelecimentos/estabelecimentos.module').then(m => m.EstabelecimentosModule)
+  },
+  {
     path: 'home',
     component: HomeComponent,
     data: {

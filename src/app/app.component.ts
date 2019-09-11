@@ -36,8 +36,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     ).subscribe(_ => {
       if (!this.showLeftNav) {
         $('#page-wrapper').css('margin-left', '0px');
+        $('body').addClass('top-navigation');
       } else {
         $('#page-wrapper').css('margin-left', '');
+        $('body').removeClass('top-navigation');
       }
     });
     this.router.events.pipe(

@@ -120,7 +120,7 @@ export class CronogramaComponent implements OnInit {
   }
 
   exibirTemplates(etapa: EtapaCronograma) {
-    this.etapasObrigatoriasApi.getTemplates(etapa.id)
+    this.etapasObrigatoriasApi.getTemplates(etapa.etapaObrigatoriaId)
       .subscribe((arquivos: Arquivo[]) => {
         this.templates = arquivos;
         this.modalService.showModal(this.modalTemplates);

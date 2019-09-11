@@ -1,12 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~bootstrap/dist/css/bootstrap.min.css";
+/* @import "~bootstrap/dist/css/bootstrap.min.css"; */
+@import "./assets/css/bootstrap.min.css";
 @import "~ladda/dist/ladda-themeless.min.css";
 @import "./assets/styles/styles.css";
 @import "~font-awesome/css/font-awesome.css";
 @import "./assets/styles/animate.css";
-@import "./assets/plugins/toastr/toastr.min.css";
-@import "./assets/plugins/css/datepicker3.css";
-@import "./assets/plugins/footable/css/footable.bootstrap.min.css";
+@import "./assets/css/plugins/toastr/toastr.min.css";
+@import "./assets/css/plugins/datapicker/datepicker3.css";
 @import "~daterangepicker/daterangepicker.css";
 @import "~angular-calendar/css/angular-calendar.css";
 
@@ -14,6 +14,10 @@
   .col-xxs-12 {
     width: 100% !important;
   }
+}
+
+body.md-skin {
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 select.form-control.input-sm {
@@ -180,7 +184,7 @@ popover-content .popover {
 }
 
 .wrapper-content {
-  padding: 20px 10px 80px !important;
+  padding-bottom: 60px !important;
 }
 
 .float-right {
@@ -205,6 +209,19 @@ popover-content .popover {
   border-radius: 0.25rem;
 }
 
+
+.navbar {
+  margin-bottom: 0;
+}
+
 .md-skin .navbar-static-top.white-bg {
   background-color: white !important;
+}
+
+label.btn {
+  margin-bottom: 0;
+}
+
+label input.hide {
+  display: none;
 }

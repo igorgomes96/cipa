@@ -2,7 +2,7 @@
   <div class="ibox-title" [hidden]="!title">
     <h5>{{ title }}</h5>
     <div class="ibox-tools">
-      <span class="label" style="float: right;" [ngClass]="labelClass">{{ labelText }}</span>
+      <span class="label" style="float: right;" [ngClass]="labelClass" *ngIf="labelText">{{ labelText }}</span>
       <a *ngFor="let opt of options" (click)="onOptionClick(opt)" class="m-r-xs">
         <i class="fa" [ngClass]="opt.icon"></i>
       </a>

@@ -66,7 +66,7 @@ export class CandidaturasFormComponent implements OnInit {
       return 'Atualizar Inscrição';
     }
     if (this.candidato.statusAprovacao === StatusAprovacao.Reprovada) {
-      return 'Solicitar Aprovação';
+      return 'Submeter a Nova Aprovação';
     }
     return '';
   }
@@ -150,7 +150,7 @@ export class CandidaturasFormComponent implements OnInit {
     if (/^image\/\w+$/.test(file.type)) {
       fileReader.readAsDataURL(file);
       fileReader.onload = ($loaded) => {
-        this.foto = $loaded.target['result'];
+        this.foto = $loaded.target['result'] as string;
       };
     } else {
       this.toasts.showMessage({
@@ -163,7 +163,7 @@ export class CandidaturasFormComponent implements OnInit {
   }
 
   confirmaCandidatura() {
-    if (!this.fileList) {
+    if (!this.foto && !this.fileList) {
       this.toasts.showMessage({
         message: 'Escolha uma foto para se candidatar!',
         title: 'Inválido!',
@@ -171,18 +171,21 @@ export class CandidaturasFormComponent implements OnInit {
       });
       return;
     }
-    let chamada: Observable<Candidato>;
+    let chamada: Observable<{}>;
     if (this.jaInscrito) {
       chamada = this.candidatosApi.put(this.candidato.id, this.candidato) as Observable<Candidato>;
     } else {
       chamada = this.candidatosApi.post(this.candidato);
     }
+    if (this.fileList) { // Alterou a foto
+      chamada = chamada.pipe(
+        switchMap((candidato: Candidato) => {
+          this.candidato = candidato;
+          return this.candidatosApi.postFoto(candidato.id, this.fileList);
+        }),
+        filterResponse());
+    }
     chamada.pipe(
-      switchMap((candidato: Candidato) => {
-        this.candidato = candidato;
-        return this.candidatosApi.postFoto(candidato.id, this.fileList);
-      }),
-      filterResponse(),
       switchMap(_ => {
         return this.candidatosApi.getFoto(this.candidato.id);
       })
