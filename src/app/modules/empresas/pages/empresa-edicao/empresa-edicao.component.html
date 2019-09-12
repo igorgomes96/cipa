@@ -1,5 +1,17 @@
 <div class="container">
   <app-panel title="Edição da Empresa">
-    <app-empresa-shared-form [empresa]="empresa" (cancelarEdicao)="cancelarEdicao()" (salvarEmpresa)="salvar()"></app-empresa-shared-form>
+    <div class="row">
+      <div class="col-sm-12">
+        <app-empresa-shared-form [empresa]="empresa" (cancelarEdicao)="cancelarEdicao()" (salvarEmpresa)="salvar()">
+        </app-empresa-shared-form>
+      </div>
+    </div>
+
+    <div class="row m-t-lg">
+      <div class="col-sm-12">
+        <h4>Estabelecimentos</h4>
+        <app-estabelecimentos-lista [estabelecimentos]="empresa.estabelecimentos"></app-estabelecimentos-lista>
+      </div>
+    </div>
   </app-panel>
 </div>

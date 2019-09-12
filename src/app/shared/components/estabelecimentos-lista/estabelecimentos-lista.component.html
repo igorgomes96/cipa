@@ -19,9 +19,9 @@
           <td>{{ estabelecimento.descricao }}</td>
           <td class="text-right">
             <div>
-              <a class="btn btn-xs btn-outline btn-success m-r-xs" [routerLink]="['./', estabelecimento.id]"><i
+              <a class="btn btn-xs btn-outline btn-success m-r-xs" [routerLink]="['/estabelecimentos', estabelecimento.id]"><i
                   class="fa fa-pencil"></i></a>
-              <button class="btn btn-xs btn-outline btn-danger"><i
+              <button class="btn btn-xs btn-outline btn-danger" (click)="exclui(estabelecimento)"><i
                   class="fa fa-trash"></i></button>
             </div>
           </td>

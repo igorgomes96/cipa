@@ -4,24 +4,24 @@ import { Resolve, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Eleitor } from '../../shared/models/eleitor';
 import { EstabelecimentosApiService } from '../api/estabelecimentos-api.service';
+import { Estabelecimento } from 'src/app/shared/models/estabelecimento';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class EstabelecimentosResolverService implements Resolve<Eleitor> {
+export class EstabelecimentosResolverService implements Resolve<Estabelecimento[]> {
 
   constructor(private api: EstabelecimentosApiService, private router: Router) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Eleitor> {
-      return this.api.getAll().pipe(
-        catchError(_ => {
-          this.router.navigate(['/not-found']);
-          return of(null);
-        })
-      );
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Estabelecimento[]> {
+    return this.api.getAll().pipe(
+      catchError(_ => {
+        this.router.navigate(['/not-found']);
+        return of(null);
+      })
+    );
   }
 
 }

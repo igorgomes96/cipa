@@ -3,7 +3,7 @@ import * as signalR from '@aspnet/signalr';
 import { ProgressoImportacao } from 'src/app/shared/models/importacao';
 import { Observable, Subject } from 'rxjs';
 import { IHttpConnectionOptions } from '@aspnet/signalr';
-import { throttleTime, debounce, debounceTime, merge, auditTime } from 'rxjs/operators';
+import { auditTime } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +18,10 @@ export class SignalRService {
         return token;
       }
     };
-    Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
+    Object.defineProperty(WebSocket, 'OPEN', { value: 1 });
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(url, options)
+      .configureLogging(signalR.LogLevel.Error)
       .build();
 
     this.hubConnection

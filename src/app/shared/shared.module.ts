@@ -28,6 +28,7 @@ import { EtapaAlertComponent } from './components/etapa-dimensionamento/etapa-di
 import { EtapaPercentualVotosComponent } from './components/etapa-percentual-votos/etapa-percentual-votos.component';
 import { WidgetDashboardComponent } from './components/widget-dashboard/widget-dashboard.component';
 import { CountCharDirective } from './directives/count-char.directive';
+import { EstabelecimentosListaComponent } from './components/estabelecimentos-lista/estabelecimentos-lista.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -50,7 +51,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     EtapaAlertComponent,
     EtapaPercentualVotosComponent,
     WidgetDashboardComponent,
-    CountCharDirective
+    CountCharDirective,
+    EstabelecimentosListaComponent
   ],
   imports: [
     CommonModule,
@@ -90,7 +92,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     WidgetDashboardComponent,
     CountCharDirective,
     TextMaskModule,
-    NgxMaskModule
+    NgxMaskModule,
+    EstabelecimentosListaComponent
   ]
 })
 export class SharedModule { }

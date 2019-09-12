@@ -1,0 +1,6 @@
+<div class="container">
+  <app-panel title="Novo Estabelecimento">
+    <app-estabelecimento-shared-form (cancelarEdicao)="cancelarEdicao()"
+      (salvarEstabelecimento)="salvar($event)" [empresas]="empresas"></app-estabelecimento-shared-form>
+  </app-panel>
+</div>

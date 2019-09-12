@@ -8,9 +8,10 @@ import { CandidaturasReprovadasComponent } from './pages/candidaturas-reprovadas
 import { SharedModule } from '../../shared/shared.module';
 import { CandidaturasFormComponent } from './pages/candidaturas-form/candidaturas-form.component';
 import { CandidaturasListaComponent } from './components/candidaturas-lista/candidaturas-lista.component';
+import { ReprovacoesListaComponent } from './components/reprovacoes-lista/reprovacoes-lista.component';
 
 @NgModule({
-  declarations: [CandidaturasPendentesComponent, CandidaturasAprovadasComponent, CandidaturasReprovadasComponent, CandidaturasFormComponent, CandidaturasListaComponent],
+  declarations: [CandidaturasPendentesComponent, CandidaturasAprovadasComponent, CandidaturasReprovadasComponent, CandidaturasFormComponent, CandidaturasListaComponent, ReprovacoesListaComponent],
   imports: [
     SharedModule,
     CandidaturasRoutingModule

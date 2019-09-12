@@ -11,16 +11,6 @@ import { Grupo } from '../../models/grupo';
 })
 export class EstabelecimentoSharedFormComponent implements OnInit {
 
-  // @Input() estabelecimento = new Estabelecimento(
-  //   {
-  //     id: null,
-  //     empresaId: null,
-  //     cidade: null,
-  //     endereco: null,
-  //     descricao: null,
-  //     grupo: null,
-  //     grupoId: null
-  //   });
   @Input() estabelecimento: Estabelecimento = new Estabelecimento();
   @Input() empresas: Empresa[] = [];
   @Output() salvarEstabelecimento = new EventEmitter<Estabelecimento>();

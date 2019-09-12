@@ -47,7 +47,7 @@
                   <dl class="dl-horizontal">
                     <dt>Motivo:</dt>
                     <dd>
-                      <p>
+                      <p class="m-b-sm">
                         {{ ultimaReprovacao.motivoReprovacao }}<br>
                         <small>{{ ultimaReprovacao.horario | date:'dd/MM/yyyy HH:mm' }} -
                           {{ ultimaReprovacao.nomeAprovador }}
@@ -55,7 +55,7 @@
                       </p>
 
                       <small *ngIf="candidato.reprovacoes.length > 1">
-                        <a href="">Exibir Histório de Reprovações</a>
+                        <a (click)="exibirReprovacoes()">Exibir Histório de Reprovações</a>
                       </small>
 
                     </dd>
@@ -63,7 +63,7 @@
                 </div>
               </div>
 
-              <div class="row m-t-md">
+              <div class="row m-t-sm">
                 <div class="col-lg-6">
                   <dl class="dl-horizontal">
                     <dt>Área:</dt>
@@ -115,3 +115,8 @@
     </div>
   </div>
 </div>
+
+<ng-template #reprovacoes>
+  <app-reprovacoes-lista [reprovacoes]="candidato.reprovacoes"></app-reprovacoes-lista>
+</ng-template>
+

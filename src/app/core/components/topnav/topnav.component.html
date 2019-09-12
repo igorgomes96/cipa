@@ -19,7 +19,7 @@
     <div class="navbar-collapse collapse" id="navbar" [class.show]="!topCollapsed">
       <ul class="nav navbar-nav mr-auto" *ngIf="!showLeftNav">
         <li routerLinkActive="active" *ngFor="let rota of rotas">
-          <a aria-expanded="false" role="button" [routerLink]="rota.link">{{ rota.label }}</a>
+          <a aria-expanded="false" role="button" [routerLink]="rota.link" (click)="menuClick(rota)">{{ rota.label }}</a>
         </li>
       </ul>
       <ul class="nav navbar-top-links navbar-right" [ngClass]="!showLeftNav ? 'toplinks' : ''">

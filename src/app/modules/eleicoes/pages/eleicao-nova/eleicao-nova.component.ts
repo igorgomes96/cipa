@@ -80,7 +80,7 @@ export class EleicaoNovaComponent implements OnInit {
         }
       }),
         filter((value: any) => value),
-        switchMap((value: any) => this.estabelecimentosApi.getAll({ empresaId: value, ativo: true }))
+        switchMap((value: any) => this.estabelecimentosApi.getAll({ empresaId: value }))
       ).subscribe((estabelecimentos: Estabelecimento[]) => {
         this.estabelecimentos = estabelecimentos;
         if (!this.estabelecimentos.length) {

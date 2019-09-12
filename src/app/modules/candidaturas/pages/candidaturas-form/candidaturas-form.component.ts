@@ -2,7 +2,7 @@ import { EleicoesApiService } from './../../../../core/api/eleicoes-api.service'
 import { element } from 'protractor';
 import { ActivatedRoute } from '@angular/router';
 import { CandidatosApiService } from 'src/app/core/api/candidatos-api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Candidato, StatusAprovacao, Reprovacao } from 'src/app/shared/models/candidato';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
@@ -10,6 +10,7 @@ import { uploadProgress, filterResponse } from 'src/app/shared/components/rxjs-o
 import { switchMap, filter } from 'rxjs/operators';
 import { Eleicao } from 'src/app/shared/models/eleicao';
 import { Observable } from 'rxjs';
+import { ModalService } from 'src/app/core/services/modal.service';
 
 @Component({
   selector: 'app-candidaturas-form',
@@ -25,11 +26,15 @@ export class CandidaturasFormComponent implements OnInit {
   foto: string;
   eleicao: Eleicao;
   jaInscrito = false;
+
+  @ViewChild('reprovacoes', { static: false }) modalReprovacoes: TemplateRef<any>;
+
   constructor(
     private toasts: ToastsService,
     private candidatosApi: CandidatosApiService,
     private route: ActivatedRoute,
-    private eleicoesApi: EleicoesApiService) { }
+    private eleicoesApi: EleicoesApiService,
+    private modalService: ModalService) { }
 
   ngOnInit() {
     this.candidato = new Candidato();
@@ -206,6 +211,10 @@ export class CandidaturasFormComponent implements OnInit {
         });
       }
     });
+  }
+
+  exibirReprovacoes() {
+    this.modalService.showModal(this.modalReprovacoes, 'Histórico de reprovações');
   }
 
 }

@@ -40,6 +40,12 @@ export class TopnavComponent implements OnInit {
     this.router.navigate(['/autenticacao/login']);
   }
 
+  menuClick(_) {
+    if (!this.topCollapsed) {
+      this.topCollapsed = true;
+    }
+  }
+
   toggleNavigation(): void {
     $('body').toggleClass('mini-navbar');
     smoothlyMenu();
