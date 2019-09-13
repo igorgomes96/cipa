@@ -4,6 +4,8 @@ import { NotFoundComponent } from './modules/not-found/pages/not-found/not-found
 import { NavigationType } from './app.component';
 import { HomeComponent } from './modules/home/home.component';
 import { ForbiddenComponent } from './modules/forbidden/pages/forbidden/forbidden.component';
+import { SesmtGuard } from './core/guards/sesmt.guard';
+import { SesmtCanLoadGuard } from './core/guards/sesmt.canload.guard';
 
 const routes: Routes = [
   {
@@ -31,11 +33,13 @@ const routes: Routes = [
   },
   {
     path: 'empresas',
-    loadChildren: () => import('./modules/empresas/empresas.module').then(m => m.EmpresasModule)
+    loadChildren: () => import('./modules/empresas/empresas.module').then(m => m.EmpresasModule),
+    canLoad: [SesmtCanLoadGuard]
   },
   {
     path: 'estabelecimentos',
-    loadChildren: () => import('./modules/estabelecimentos/estabelecimentos.module').then(m => m.EstabelecimentosModule)
+    loadChildren: () => import('./modules/estabelecimentos/estabelecimentos.module').then(m => m.EstabelecimentosModule),
+    canLoad: [SesmtCanLoadGuard]
   },
   {
     path: 'home',

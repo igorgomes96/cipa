@@ -87,8 +87,16 @@
 
 
               <h4>Objetivos</h4>
-              <textarea name="objetivos" countChar maxChar="255" [disabled]="!confirmacaoButtonText" id="objetivos" cols="30" rows="2" class="form-control"
-                [(ngModel)]="candidato.objetivos" placeholder="Digite aqui seus objetivos como membro da CIPA."></textarea>
+              <textarea name="objetivos" countChar maxChar="255" [disabled]="!confirmacaoButtonText" id="objetivos"
+                cols="30" rows="2" class="form-control" [(ngModel)]="candidato.objetivos"
+                placeholder="Digite aqui seus objetivos como membro da CIPA."></textarea>
+
+              <p class="m-t-md" *ngIf="confirmacaoButtonText">
+                <small class="text-danger">
+                  *Obs.: Você não poderá alterar sua foto e seus objetivos após a aprovação do SESMT.
+                </small>
+              </p>
+
               <hr>
 
               <div class="row" *ngIf="confirmacaoButtonText">
@@ -119,4 +127,3 @@
 <ng-template #reprovacoes>
   <app-reprovacoes-lista [reprovacoes]="candidato.reprovacoes"></app-reprovacoes-lista>
 </ng-template>
-

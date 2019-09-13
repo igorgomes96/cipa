@@ -1,12 +1,10 @@
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { Injectable, NgModule } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, EMPTY } from 'rxjs';
 import { ToastsService } from '../services/toasts.service';
 import { ToastType } from '../../shared/components/toasts/toasts.component';
-import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -38,31 +36,31 @@ export class ErrorInterceptor implements HttpInterceptor {
   }
 }
 
-@Injectable()
-export class TokenInterceptor implements HttpInterceptor {
+// @Injectable()
+// export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService) { }
+//   constructor(private authService: AuthService) { }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!this.authService.token) {
-      return next.handle(req);
-    }
+//   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+//     if (!this.authService.token) {
+//       return next.handle(req);
+//     }
 
-    const dupReq = req.clone({
-      headers: req.headers.set('Authorization', `Bearer ${this.authService.token}`),
-    });
-    return next.handle(dupReq);
-  }
+//     const dupReq = req.clone({
+//       headers: req.headers.set('Authorization', `Bearer ${this.authService.token}`),
+//     });
+//     return next.handle(dupReq);
+//   }
 
-}
+// }
 
 @NgModule({
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true,
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: TokenInterceptor,
+    //   multi: true,
+    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,

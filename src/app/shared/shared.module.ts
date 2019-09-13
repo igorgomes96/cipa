@@ -32,6 +32,7 @@ import { EstabelecimentosListaComponent } from './components/estabelecimentos-li
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
+
 @NgModule({
   declarations: [
     PanelComponent,

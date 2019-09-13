@@ -50,7 +50,7 @@ export class EtapaCronogramaComponent implements OnInit {
   }
 
   get isDateDisabled() {
-    return this.layout === 'Visualização' && this.etapa.posicaoEtapa === PosicaoEtapa.Passada;
+    return this.layout === 'Visualização' && this.etapa.posicaoEtapa !== PosicaoEtapa.Futura;
   }
 
   get calendarIcon(): string {

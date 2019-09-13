@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EleicoesListaComponent } from './pages/eleicoes-lista/eleicoes-lista.component';
 import { NavigationType } from '../../app.component';
-import { EleicaoResolverService } from '../../core/resolvers/eleicao-resolver.service';
 import { EleicaoNovaComponent } from './pages/eleicao-nova/eleicao-nova.component';
+import { SesmtGuard } from 'src/app/core/guards/sesmt.guard';
+import { SesmtCanLoadGuard } from 'src/app/core/guards/sesmt.canload.guard';
 
 const routes: Routes = [
   {
@@ -11,14 +12,16 @@ const routes: Routes = [
     component: EleicoesListaComponent,
     data: {
       navigationType: NavigationType.Top
-    }
+    },
+    canActivate: [SesmtGuard]
   },
   {
     path: 'nova',
     component: EleicaoNovaComponent,
     data: {
       navigationType: NavigationType.Top
-    }
+    },
+    canActivate: [SesmtGuard]
   },
   {
     path: ':id',
@@ -39,7 +42,8 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Eleições',
           title: 'Eleições'
-        }
+        },
+        canLoad: [SesmtCanLoadGuard]
       },
       {
         path: 'cronograma',
@@ -47,7 +51,8 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Eleições',
           title: 'Eleições'
-        }
+        },
+        canLoad: [SesmtCanLoadGuard]
       },
       {
         path: 'eleitores',
@@ -55,7 +60,8 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Eleições',
           title: 'Eleições'
-        }
+        },
+        canLoad: [SesmtCanLoadGuard]
       },
       {
         path: 'candidaturas',

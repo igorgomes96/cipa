@@ -1,12 +1,11 @@
 import { EleicoesApiService } from './../../../../core/api/eleicoes-api.service';
-import { element } from 'protractor';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CandidatosApiService } from 'src/app/core/api/candidatos-api.service';
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Candidato, StatusAprovacao, Reprovacao } from 'src/app/shared/models/candidato';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
-import { uploadProgress, filterResponse } from 'src/app/shared/components/rxjs-operators';
+import { filterResponse } from 'src/app/shared/components/rxjs-operators';
 import { switchMap, filter } from 'rxjs/operators';
 import { Eleicao } from 'src/app/shared/models/eleicao';
 import { Observable } from 'rxjs';
@@ -34,7 +33,8 @@ export class CandidaturasFormComponent implements OnInit {
     private candidatosApi: CandidatosApiService,
     private route: ActivatedRoute,
     private eleicoesApi: EleicoesApiService,
-    private modalService: ModalService) { }
+    private modalService: ModalService,
+    private router: Router) { }
 
   ngOnInit() {
     this.candidato = new Candidato();
@@ -210,6 +210,7 @@ export class CandidaturasFormComponent implements OnInit {
           type: ToastType.success
         });
       }
+      this.router.navigate(['/home']);
     });
   }
 

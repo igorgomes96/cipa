@@ -9,6 +9,7 @@ import { CandidaturasPendentesComponent } from './pages/candidaturas-pendentes/c
 import { CandidaturasFormComponent } from './pages/candidaturas-form/candidaturas-form.component';
 import { EleitorGuard } from 'src/app/core/guards/eleitor.guard';
 import { EtapaCandidaturaGuard } from 'src/app/core/guards/etapa-candidatura.guard';
+import { SesmtGuard } from 'src/app/core/guards/sesmt.guard';
 
 const routes: Routes = [
   {
@@ -38,7 +39,8 @@ const routes: Routes = [
         },
         resolve: {
           eleicao: EleicaoResolverService
-        }
+        },
+        canActivate: [SesmtGuard]
       },
       {
         path: 'reprovadas',
@@ -50,7 +52,8 @@ const routes: Routes = [
         },
         resolve: {
           eleicao: EleicaoResolverService
-        }
+        },
+        canActivate: [SesmtGuard]
       },
       {
         path: 'pendentes',
@@ -62,7 +65,8 @@ const routes: Routes = [
         },
         resolve: {
           eleicao: EleicaoResolverService
-        }
+        },
+        canActivate: [SesmtGuard]
       }
     ]
   }

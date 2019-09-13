@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { smoothlyMenu } from 'src/app.helpers';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { Perfil } from 'src/app/shared/models/usuario';
 
 declare var $: any;
 
@@ -30,9 +32,14 @@ export class TopnavComponent implements OnInit {
     }
   ];
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService) { }
 
   ngOnInit() {
+    if (this.authService.authInfo.perfil === Perfil.Eleitor) {
+      this.rotas = [];
+    }
   }
 
   logout() {

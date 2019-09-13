@@ -4,6 +4,7 @@ import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { Eleicao } from 'src/app/shared/models/eleicao';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { PagedResult } from 'src/app/shared/models/paged-result';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-eleicoes-lista',
@@ -20,8 +21,8 @@ export class EleicoesListaComponent implements OnInit {
     totalRecords: 0
   };
   eleicoes: Eleicao[] = [];
-  constructor(private eleicoesApi: EleicoesApiService,
-              private modalService: ModalService) { }
+  constructor(
+    private eleicoesApi: EleicoesApiService) { }
 
   ngOnInit() {
     this.carregaEleicoes();
