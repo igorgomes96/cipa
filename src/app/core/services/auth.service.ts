@@ -26,13 +26,14 @@ export class AuthService {
 
   get authInfo(): AuthInfo {
     return {
-      conta: +this.decodeToken.accid,
-      contaValida: this.decodeToken.accvalid === 'true',
+      id: +this.decodeToken.accid,
+      contaAtiva: this.decodeToken.accvalid === 'true',
       email: this.decodeToken.unique_name[1],
       expiracao: new Date(this.decodeToken.exp),
       nome: this.decodeToken.unique_name[0],
       qtdaMaxEstabelecimentos: +this.decodeToken.estqty,
-      perfil: this.decodeToken.role
+      perfil: this.decodeToken.role,
+      nomePlano: this.decodeToken.plan
     };
   }
 

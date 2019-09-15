@@ -41,8 +41,8 @@ export class CadastroComponent implements OnInit {
 
   cadastrar(usuario: Usuario) {
     this.loginApi.resetSenha(usuario)
-      .subscribe((authInfo: any) => {
-        this.authService.token = authInfo.accessToken;
+      .subscribe((conta: any) => {
+        this.authService.token = conta.accessToken;
         this.toast.showMessage({
           message: 'Senha cadastrada com sucesso!',
           title: 'Sucesso!',

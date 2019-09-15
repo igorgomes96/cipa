@@ -10,5 +10,6 @@ export const endpoints = {
     etapasObrigatorias: 'etapasobrigatorias/',
     importacoes: 'importacoes/',
     signalr: 'signalr/',
-    grupos: 'grupos/'
+    grupos: 'grupos/',
+    contas: 'contas/'
 };

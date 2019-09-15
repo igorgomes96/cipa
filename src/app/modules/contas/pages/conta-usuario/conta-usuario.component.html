@@ -1,0 +1,24 @@
+<div class="container">
+  <app-panel title="Minha Conta">
+    <div class="row">
+      <div class="col-sm-12">
+
+        <app-conta-info [conta]="conta"></app-conta-info>
+
+        <button class="btn btn-outline-primary btn-lg">Fazer upgrade!</button>
+
+        <hr>
+
+        <h4>Usuários com permissão de acesso</h4>
+
+        <br>
+        <a class="btn btn-primary m-b-sm" routerLink="../usuarios/novo">
+          <span class="fa fa-plus"></span> Adicionar Usuário
+        </a>
+
+        <app-usuarios-lista [usuarios]="conta.usuarios"></app-usuarios-lista>
+
+      </div>
+    </div>
+  </app-panel>
+</div>

@@ -1,0 +1,20 @@
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-md-3 col-sm-8">
+      <app-custom-input formControlName="id" [control]="form.get('id')" name="Id" label="Id"></app-custom-input>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4">
+        <app-custom-input formControlName="email" [control]="form.get('email')" name="Email" label="Email"></app-custom-input>
+    </div>
+
+    <div class="col-lg-8">
+        <app-custom-input formControlName="nome" [control]="form.get('nome')" name="Nome" label="Nome"></app-custom-input>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary m-r-sm" [disabled]="form.invalid"><i class="fa fa-save"></i> Salvar</button>
+  <button type="button" class="btn btn-default" (click)="cancelarEdicao()">Cancelar</button>
+</form>

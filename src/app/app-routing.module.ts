@@ -42,6 +42,11 @@ const routes: Routes = [
     canLoad: [SesmtCanLoadGuard]
   },
   {
+    path: 'contas',
+    loadChildren: () => import('./modules/contas/contas.module').then(m => m.ContasModule),
+    canLoad: [SesmtCanLoadGuard]
+  },
+  {
     path: 'home',
     component: HomeComponent,
     data: {

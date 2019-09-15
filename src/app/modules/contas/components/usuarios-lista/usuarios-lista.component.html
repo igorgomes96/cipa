@@ -1,0 +1,31 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Nome</th>
+        <th>Status</th>
+        <th class="text-right"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.nome }}</td>
+        <td>
+          <span class="label" [ngClass]="usuario.usuarioAtivo ? 'label-primary' : 'label-danger'">
+            {{ usuario.usuarioAtivo ? 'Ativo' : 'Inativo' }}
+          </span>
+        </td>
+        <td class="text-right">
+          <div>
+            <a class="btn btn-xs btn-outline btn-success m-r-xs" [routerLink]="['../usuarios', usuario.id]"><i
+                class="fa fa-pencil"></i></a>
+            <button class="btn btn-xs btn-outline btn-danger" (click)="exclui(usuario)"><i
+                class="fa fa-trash"></i></button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

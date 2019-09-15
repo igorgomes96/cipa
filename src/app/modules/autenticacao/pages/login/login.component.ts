@@ -43,8 +43,8 @@ export class LoginComponent implements OnInit {
     const usuario = this.form.value as Usuario;
     this.loginService.login(usuario)
       .pipe(finalize(() => this.loggingOn = false))
-      .subscribe((authInfo: any) => {
-        this.authService.token = authInfo.accessToken;
+      .subscribe((conta: any) => {
+        this.authService.token = conta.accessToken;
         this.toast.showMessage({
           message: 'Login realizado com Sucesso!',
           title: 'Sucesso!',
