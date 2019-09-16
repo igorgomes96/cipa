@@ -12,7 +12,14 @@ import { UsuarioFormComponent } from './components/usuario-form/usuario-form.com
 
 
 @NgModule({
-  declarations: [ContaUsuarioComponent, ContaInfoComponent, UsuariosListaComponent, UsuarioNovoComponent, UsuarioEdicaoComponent, UsuarioFormComponent],
+  declarations: [
+    ContaUsuarioComponent,
+    ContaInfoComponent,
+    UsuariosListaComponent,
+    UsuarioNovoComponent,
+    UsuarioEdicaoComponent,
+    UsuarioFormComponent
+  ],
   imports: [
     CommonModule,
     ContasRoutingModule,

@@ -11,5 +11,6 @@ export const endpoints = {
     importacoes: 'importacoes/',
     signalr: 'signalr/',
     grupos: 'grupos/',
-    contas: 'contas/'
+    contas: 'contas/',
+    usuarios: 'usuarios/'
 };

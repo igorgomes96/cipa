@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Usuario } from 'src/app/shared/models/usuario';
@@ -14,7 +15,7 @@ export class UsuarioFormComponent implements OnInit {
   @Output() cancelar = new EventEmitter<void>();
 
   form: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private location: Location) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -25,7 +26,12 @@ export class UsuarioFormComponent implements OnInit {
   }
 
   cancelarEdicao() {
+    this.location.back();
+    this.cancelar.emit();
+  }
 
+  salvarUsuario() {
+    this.salvar.emit(this.form.getRawValue());
   }
 
 }

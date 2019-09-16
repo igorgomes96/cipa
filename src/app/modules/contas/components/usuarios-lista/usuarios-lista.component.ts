@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Usuario } from 'src/app/shared/models/usuario';
 
 @Component({
@@ -9,13 +9,15 @@ import { Usuario } from 'src/app/shared/models/usuario';
 export class UsuariosListaComponent implements OnInit {
 
   @Input() usuarios: Usuario[];
+  @Output() excluir = new EventEmitter<Usuario>();
+
   constructor() { }
 
   ngOnInit() {
   }
 
   exclui(usuario: Usuario) {
-
+    this.excluir.emit(usuario);
   }
 
 }
