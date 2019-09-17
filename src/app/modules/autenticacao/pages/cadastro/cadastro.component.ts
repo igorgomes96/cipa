@@ -16,6 +16,7 @@ export class CadastroComponent implements OnInit {
 
   usuario: Usuario;
   redirectTo = '/';
+  codigoRecuperacao = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +34,8 @@ export class CadastroComponent implements OnInit {
         this.usuario = usuario;
       });
 
+    this.route.params.subscribe(params => this.codigoRecuperacao = params.codigo);
+
     this.route.queryParamMap
       .pipe(
         filter(params => params.has('redirectTo'))
@@ -40,6 +43,7 @@ export class CadastroComponent implements OnInit {
   }
 
   cadastrar(usuario: Usuario) {
+    usuario.codigoRecuperacao = this.codigoRecuperacao;
     this.loginApi.resetSenha(usuario)
       .subscribe((conta: any) => {
         this.authService.token = conta.accessToken;

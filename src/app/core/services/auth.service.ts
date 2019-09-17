@@ -28,9 +28,9 @@ export class AuthService {
     return {
       id: +this.decodeToken.accid,
       contaAtiva: this.decodeToken.accvalid === 'true',
-      email: this.decodeToken.unique_name[1],
+      email: this.decodeToken.unique_name,
       expiracao: new Date(this.decodeToken.exp),
-      nome: this.decodeToken.unique_name[0],
+      nome: this.decodeToken.username,
       qtdaMaxEstabelecimentos: +this.decodeToken.estqty,
       perfil: this.decodeToken.role,
       nomePlano: this.decodeToken.plan

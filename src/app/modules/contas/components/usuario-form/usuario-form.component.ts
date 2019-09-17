@@ -21,7 +21,8 @@ export class UsuarioFormComponent implements OnInit {
     this.form = this.fb.group({
       id: [{ value: this.usuario.id, disabled: true }],
       nome: [this.usuario.nome, [Validators.required, Validators.maxLength(255)]],
-      email: [this.usuario.email, [Validators.required, Validators.email, Validators.maxLength(100)]]
+      email: [this.usuario.email, [Validators.required, Validators.email, Validators.maxLength(100)]],
+      cargo: [this.usuario.cargo, [Validators.required, Validators.maxLength(255)]]
     });
   }
 

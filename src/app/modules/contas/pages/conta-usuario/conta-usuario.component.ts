@@ -35,7 +35,7 @@ export class ContaUsuarioComponent implements OnInit {
         switchMap(_ => this.usuariosApi.getAll())
       ).subscribe((usuarios: Usuario[]) => {
         this.toast.showMessage({
-          message: 'Usuário invativado com sucesso!',
+          message: 'Usuário excluído com sucesso!',
           title: 'Sucesso',
           type: ToastType.success
         });

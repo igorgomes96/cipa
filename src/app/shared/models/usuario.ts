@@ -11,7 +11,7 @@ export class Usuario {
   confirmacaoSenha: string;
   perfil: Perfil;
   codigoRecuperacao: string;
-  usuarioAtivo: boolean;
+  cargo: string;
 }
 
 export class AuthInfo {
@@ -33,5 +33,4 @@ export class Conta {
   dataInicio: Date;
   dataFim: Date;
   usuarios: Usuario[];
-
 }
