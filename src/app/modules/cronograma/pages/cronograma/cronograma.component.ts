@@ -7,7 +7,7 @@ import { filter, switchMap, finalize, tap, map } from 'rxjs/operators';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { Arquivo } from 'src/app/shared/models/arquivo';
 import { ToastsService } from 'src/app/core/services/toasts.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { CronogramaApiService } from 'src/app/core/api/cronograma-api.service';
 import { EtapasObrigatoriasApiService } from 'src/app/core/api/etapas-obrigatorias-api.service';

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Perfil } from 'src/app/shared/models/usuario';
 import { ToastsService } from '../services/toasts.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from '../components/toasts/toasts.component';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class SesmtCanLoadGuard implements CanLoad {
         title: 'Sem permissão',
         type: ToastType.warning
       });
-      this.router.navigate(['/home']);
+      this.router.navigate(['/eleicoes']);
       return false;
     }
     return true;

@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
-import { ToastMessage } from 'src/app/shared/components/toasts/toasts.component';
 import { from, Observable } from 'rxjs';
+import { ToastMessage } from '../components/toasts/toasts.component';
 
 declare var swal: any;
 

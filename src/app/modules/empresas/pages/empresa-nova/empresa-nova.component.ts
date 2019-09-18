@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmpresasApiService } from 'src/app/core/api/empresas-api.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 
 @Component({
   selector: 'app-empresa-nova',

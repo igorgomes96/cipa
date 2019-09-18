@@ -9,3 +9,8 @@
         margin: 0;
     }
 }
+
+app-eleicao-card {
+  height: 100%;
+  margin-bottom: 20px;
+}

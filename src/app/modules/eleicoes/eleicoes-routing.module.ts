@@ -28,7 +28,7 @@ const routes: Routes = [
     children: [
       // {
       //   path: '',
-      //   component: EleicoesFormComponent,
+      //   component: EleicaoEdicaoComponent,
       //   resolve: {
       //     eleicao: EleicaoResolverService
       //   },

@@ -13,7 +13,7 @@
           {{ etapa.nomeEtapa }}
         </span>
         <small *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Futura">
-          <span class="label label-danger pull-right" *ngIf="diasAtrasos > 0">{{ diasAtrasos | number:'1.0-0'}} dias de
+          <span class="label label-danger pull-right dias-atraso" *ngIf="diasAtrasos > 0">{{ diasAtrasos | number:'1.0-0'}} dias de
             atraso</span>
         </small>
       </h2>

@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { EleitoresApiService } from 'src/app/core/api/eleitores-api.service';
 import { Eleitor } from 'src/app/shared/models/eleitor';
 import { ToastsService } from 'src/app/core/services/toasts.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { ActivatedRoute } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { Eleicao } from 'src/app/shared/models/eleicao';

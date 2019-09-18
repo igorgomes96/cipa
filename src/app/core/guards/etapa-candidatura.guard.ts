@@ -18,7 +18,7 @@ export class EtapaCandidaturaGuard implements CanActivate {
         private toasts: ToastsService) { }
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
         if (!next.paramMap.has('id')) {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/eleicoes']);
             return false;
         } else {
             const id = +next.paramMap.get('id');
@@ -30,7 +30,7 @@ export class EtapaCandidaturaGuard implements CanActivate {
                             title: 'Inválido!',
                             type: ToastType.error
                         });
-                        this.router.navigate(['/home']);
+                        this.router.navigate(['/eleicoes']);
                         return false;
                     }
                     if (!eleicao.etapaAtual || eleicao.etapaAtual.etapaObrigatoriaId !== CodigoEtapaObrigatoria.Inscricao) {
@@ -39,7 +39,7 @@ export class EtapaCandidaturaGuard implements CanActivate {
                             title: 'Inválido!',
                             type: ToastType.error
                         });
-                        this.router.navigate(['/home']);
+                        this.router.navigate(['/eleicoes']);
                         return false;
                     }
                     return true;

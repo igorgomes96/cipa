@@ -7,7 +7,7 @@ import { filter, switchMap, distinctUntilChanged, debounceTime, tap } from 'rxjs
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { EleitoresApiService } from 'src/app/core/api/eleitores-api.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { Eleicao } from 'src/app/shared/models/eleicao';
 import { PagedResult } from 'src/app/shared/models/paged-result';
 import { ImportacoesApiService } from 'src/app/core/api/importacoes-api.service';

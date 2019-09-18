@@ -5,7 +5,7 @@ import { Usuario } from 'src/app/shared/models/usuario';
 import { LoginApiService } from 'src/app/core/api/login-api.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 
 @Component({
   selector: 'app-reset-senha',

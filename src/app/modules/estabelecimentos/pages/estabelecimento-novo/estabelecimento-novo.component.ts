@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EstabelecimentosApiService } from 'src/app/core/api/estabelecimentos-api.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { Estabelecimento } from 'src/app/shared/models/estabelecimento';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { Empresa } from 'src/app/shared/models/empresa';
 
 @Component({

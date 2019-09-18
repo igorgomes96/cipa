@@ -1,7 +1,7 @@
 <div class="row border-bottom" [class.white-bg]="!showLeftNav">
   <nav class="navbar navbar-static-top navbar-expand-lg" role="navigation" [class.left-nav-hidden]="!showLeftNav">
 
-    <a routerLink="/home" class="navbar-brand" *ngIf="!showLeftNav">CIPA Online</a>
+    <a routerLink="/eleicoes" class="navbar-brand" *ngIf="!showLeftNav">CIPA Online</a>
     <button class="navbar-toggler" type="button" aria-expanded="false" (click)="topCollapsed = !topCollapsed"
       aria-label="Toggle navigation" *ngIf="!showLeftNav">
       <i class="fa fa-reorder"></i>
@@ -24,8 +24,8 @@
       </ul>
       <ul class="nav navbar-top-links navbar-right" [ngClass]="!showLeftNav ? 'toplinks' : ''">
         <li>
-          <a class="right-sidebar-toggle" routerLink="/home">
-            <i class="fa fa-home"></i>
+          <a class="right-sidebar-toggle" routerLink="/eleicoes">
+            <i class="fa fa-eleicoes"></i>
           </a>
         </li>
         <li>

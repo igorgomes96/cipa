@@ -4,7 +4,7 @@ import { Injectable, NgModule } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, EMPTY } from 'rxjs';
 import { ToastsService } from '../services/toasts.service';
-import { ToastType } from '../../shared/components/toasts/toasts.component';
+import { ToastType } from '../components/toasts/toasts.component';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {

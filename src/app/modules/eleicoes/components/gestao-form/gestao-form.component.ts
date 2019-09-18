@@ -1,7 +1,7 @@
 import {  NgForm } from '@angular/forms';
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ToastsService } from 'src/app/core/services/toasts.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { ThemeService } from 'ng2-charts';
 
 @Component({

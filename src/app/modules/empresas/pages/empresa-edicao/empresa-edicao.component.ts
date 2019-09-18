@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Empresa } from 'src/app/shared/models/empresa';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 
 @Component({

@@ -1,13 +1,13 @@
 <form #form="ngForm">
   <div class="row">
-    <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12">
       Data de Término do mandato Anterior
       <app-datepicker #terminoMandatoAnterior="ngModel" name="terminoMandatoAnterior" [(ngModel)]="gestao.terminoMandatoAnterior"
         inputClasses="input-white" [control]="terminoMandatoAnterior" id="mandatoAnterior" (change)="atualizaDataInicio($event)"></app-datepicker>
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12">
       Data de Início do processo de Eleição
       <app-ajuda-tooltip ajuda="O início do processo deve ser no mínimo 60 dias antes do término do mandato anterior."></app-ajuda-tooltip>
       <app-datepicker #dataInicio="ngModel" required name="dataInicio" [(ngModel)]="gestao.dataInicio"
@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12">
       Qual é o tempo de duração dessa gestão? (em anos)
       <input type="number" name="duracaoGestao" required [(ngModel)]="gestao.duracaoGestao" class="form-control">
     </div>

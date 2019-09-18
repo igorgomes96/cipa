@@ -18,7 +18,7 @@ export class EtapaAnteriorVotacaoGuard implements CanActivate {
     private toasts: ToastsService) { }
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (!next.paramMap.has('id')) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/eleicoes']);
       return false;
     } else {
       const id = +next.paramMap.get('id');

@@ -5,7 +5,7 @@ import { Estabelecimento } from 'src/app/shared/models/estabelecimento';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { EstabelecimentosApiService } from 'src/app/core/api/estabelecimentos-api.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 
 @Component({
   selector: 'app-estabelecimento-edicao',

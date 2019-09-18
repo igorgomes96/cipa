@@ -4,7 +4,7 @@ import { LoginApiService } from 'src/app/core/api/login-api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastsService } from 'src/app/core/services/toasts.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { finalize, filter } from 'rxjs/operators';
 

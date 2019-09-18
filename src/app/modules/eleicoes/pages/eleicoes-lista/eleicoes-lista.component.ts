@@ -2,8 +2,10 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { Eleicao } from 'src/app/shared/models/eleicao';
-import { ModalService } from 'src/app/core/services/modal.service';
 import { PagedResult } from 'src/app/shared/models/paged-result';
+import { ToastsService } from 'src/app/core/services/toasts.service';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
+import { AuthInfo, Perfil } from 'src/app/shared/models/usuario';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -21,10 +23,16 @@ export class EleicoesListaComponent implements OnInit {
     totalRecords: 0
   };
   eleicoes: Eleicao[] = [];
+  authInfo: AuthInfo;
+  Perfil = Perfil;
+
   constructor(
-    private eleicoesApi: EleicoesApiService) { }
+    private eleicoesApi: EleicoesApiService,
+    private toast: ToastsService,
+    private authService: AuthService) { }
 
   ngOnInit() {
+    this.authInfo = this.authService.authInfo;
     this.carregaEleicoes();
   }
 
@@ -37,8 +45,17 @@ export class EleicoesListaComponent implements OnInit {
     });
   }
 
-  editar(eleicao: Eleicao) {
-    console.log(eleicao);
+  excluir(eleicao: Eleicao) {
+    this.eleicoesApi.delete(eleicao.id)
+    .subscribe(_ => {
+      this.toast.showMessage({
+        message: 'Eleição excluída com sucesso!',
+        title: 'Sucesso',
+        type: ToastType.success
+      });
+      this.carregaEleicoes();
+    });
   }
+
 
 }

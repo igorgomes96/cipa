@@ -11,7 +11,7 @@ import { EstabelecimentosApiService } from 'src/app/core/api/estabelecimentos-ap
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { EtapaCronograma, PosicaoEtapa } from 'src/app/shared/models/cronograma';
 import { ToastsService } from 'src/app/core/services/toasts.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { Grupo } from 'src/app/shared/models/grupo';
 import { GruposApiService } from 'src/app/core/api/grupos-api.service';
 import { NavigationService } from 'src/app/core/services/navigation.service';

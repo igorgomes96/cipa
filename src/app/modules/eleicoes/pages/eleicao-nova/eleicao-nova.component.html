@@ -1,111 +1,116 @@
-<h2>Abertura de Nova Eleição</h2>
-<p>
-  Para abrir uma nova eleição, basta seguir os passos abaixo.
-</p>
+<div class="container">
+  <h2>Abertura de Nova Eleição</h2>
+  <p>
+    Para abrir uma nova eleição, basta seguir os passos abaixo.
+  </p>
 
-<app-panel>
+  <app-panel>
 
 
-  <app-wizard [steps]="steps" (changeStep)="changeStep($event)" [validNext]="validNext" (finalize)="salvarEleicao()"
-    saveButtonText="Abrir Eleição!">
-    <div [ngSwitch]="currentStepIndex">
+    <app-wizard [steps]="steps" (changeStep)="changeStep($event)" [validNext]="validNext" (finalize)="salvarEleicao()"
+      saveButtonText="Abrir Eleição!">
+      <div [ngSwitch]="currentStepIndex">
 
-      <div *ngSwitchCase="1">
-        <app-gestao-form [gestao]="gestao" (statusChange)="formGestaoStatusChange($event)"></app-gestao-form>
-      </div>
+        <div *ngSwitchCase="1">
+          <app-gestao-form [gestao]="gestao" (statusChange)="formGestaoStatusChange($event)"></app-gestao-form>
+        </div>
 
-      <div *ngSwitchCase="2">
-        <div class="row">
-          <div class="col-md-12" [hidden]="novaEmpresa">
-            <span *ngIf="empresas.length > 1; else empresaUnica">
-              Observamos que você já possui {{ empresas.length }} empresas cadastradas. Escolha uma delas para iniciar a
-              nova eleição, ou cadastre uma nova empresa.
-            </span>
-            <ng-template #empresaUnica>
-              <span *ngIf="empresas.length === 1; else nenhumaEmpresa">
-                Você possui somente 1 empresa cadastrada, a qual já selecionamos pra você. Se não for essa a empresa,
-                clique em "Nova Empresa".
+        <div *ngSwitchCase="2">
+          <div class="row">
+            <div class="col-md-12" [hidden]="novaEmpresa">
+              <span *ngIf="empresas.length > 1; else empresaUnica">
+                Observamos que você já possui {{ empresas.length }} empresas cadastradas. Escolha uma delas para iniciar
+                a
+                nova eleição, ou cadastre uma nova empresa.
               </span>
-              <ng-template #nenhumaEmpresa>
+              <ng-template #empresaUnica>
+                <span *ngIf="empresas.length === 1; else nenhumaEmpresa">
+                  Você possui somente 1 empresa cadastrada, a qual já selecionamos pra você. Se não for essa a empresa,
+                  clique em "Nova Empresa".
+                </span>
+                <ng-template #nenhumaEmpresa>
                   Ainda não há nenhuma empresa cadastrado. Clique em "Nova Empresa".
-              </ng-template>
-            </ng-template>
-
-
-            <form [formGroup]="formListaEmpresa">
-              <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                  <select class="form-control m-t-sm" name="lista-empresa" id="lista-empresa" formControlName="empresa">
-                    <option value="">(Selecione a empresa)</option>
-                    <option [value]="emp.id" *ngFor="let emp of empresas">{{ emp.razaoSocial }}</option>
-                  </select>
-                </div>
-              </div>
-            </form>
-
-            <button class="btn btn-primary m-t-md" (click)="empresaForm()"><i class="fa fa-plus"></i> Nova
-              Empresa</button>
-          </div>
-
-          <div class="col-md-12" [hidden]="!novaEmpresa">
-            <app-empresa-shared-form (cancelarEdicao)="cancelarEmpresa()" (salvarEmpresa)="salvarEmpresa($event)">
-            </app-empresa-shared-form>
-          </div>
-        </div>
-      </div>
-
-      <div *ngSwitchCase="3">
-        <div class="row">
-          <div class="col-md-12" [hidden]="novoEstabelecimento">
-            <div *ngIf="estabelecimentos.length > 1; else estabelecimentoUnico">
-              A empresa selecionada possui {{ estabelecimentos.length }} estabelecimentos.
-              Selecione um deles ou cadastre um novo estabelecimento.
-            </div>
-            <ng-template #estabelecimentoUnico>
-              <span *ngIf="!estabelecimentos.length; else nenhumEstabelecimento">
-                Ainda não há nenhum estabelecimento cadastrado. Clique em "Novo Estabelecimento".
-              </span>
-              <ng-template #nenhumEstabelecimento>
-                A empresa selecionada já possui 1 estabelecimento cadastrado. Já selecionamos ele para você.<br>
-                Se precisar cadastrar um novo estabelecimento, basta clicar no botão abaixo.
+                </ng-template>
               </ng-template>
 
-            </ng-template>
-            <form [formGroup]="formListaEstabelecimentos">
-              <div class="row">
-                <div class="col-lg-6 col-md-8 col-sm-12">
-                  <select class="form-control m-t-sm" name="lista-estabelecimento" id="lista-estabelecimento"
-                    formControlName="estabelecimento">
-                    <option value="">(Selecione o estabelecimento)</option>
-                    <option [value]="est.id" *ngFor="let est of estabelecimentos">{{ est.cidade + ', ' + est.endereco }}</option>
-                  </select>
-                </div>
-              </div>
 
-            </form>
-
-            <div class="row m-t-md" *ngIf="estabelecimentoSelecionado">
-              <div class="col-sm-12 col-md-4 col-lg-3">
-                <div class="alert alert-info">
-                  Grupo: <strong>{{ estabelecimentoSelecionado?.grupo }}</strong>
+              <form [formGroup]="formListaEmpresa">
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <select class="form-control m-t-sm" name="lista-empresa" id="lista-empresa"
+                      formControlName="empresa">
+                      <option value="">(Selecione a empresa)</option>
+                      <option [value]="emp.id" *ngFor="let emp of empresas">{{ emp.razaoSocial }}</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
+              </form>
+
+              <button class="btn btn-primary m-t-md" (click)="empresaForm()"><i class="fa fa-plus"></i> Nova
+                Empresa</button>
             </div>
 
-
-            <button class="btn btn-primary m-t-md" (click)="estabelecimentoForm()"><i class="fa fa-plus"></i> Novo
-              Estabelecimento</button>
-          </div>
-          <div class="col-md-12" [hidden]="!novoEstabelecimento">
-            <app-estabelecimento-shared-form [empresas]="[empresaSelecionada]" [estabelecimento]="estabelecimento"
-              (cancelarEdicao)="cancelarEstabelecimento()" (salvarEstabelecimento)="salvarEstabelecimento($event)">
-            </app-estabelecimento-shared-form>
+            <div class="col-md-12" [hidden]="!novaEmpresa">
+              <app-empresa-shared-form (cancelarEdicao)="cancelarEmpresa()" (salvarEmpresa)="salvarEmpresa($event)">
+              </app-empresa-shared-form>
+            </div>
           </div>
         </div>
 
+        <div *ngSwitchCase="3">
+          <div class="row">
+            <div class="col-md-12" [hidden]="novoEstabelecimento">
+              <div *ngIf="estabelecimentos.length > 1; else estabelecimentoUnico">
+                A empresa selecionada possui {{ estabelecimentos.length }} estabelecimentos.
+                Selecione um deles ou cadastre um novo estabelecimento.
+              </div>
+              <ng-template #estabelecimentoUnico>
+                <span *ngIf="!estabelecimentos.length; else nenhumEstabelecimento">
+                  Ainda não há nenhum estabelecimento cadastrado. Clique em "Novo Estabelecimento".
+                </span>
+                <ng-template #nenhumEstabelecimento>
+                  A empresa selecionada já possui 1 estabelecimento cadastrado. Já selecionamos ele para você.<br>
+                  Se precisar cadastrar um novo estabelecimento, basta clicar no botão abaixo.
+                </ng-template>
+
+              </ng-template>
+              <form [formGroup]="formListaEstabelecimentos">
+                <div class="row">
+                  <div class="col-lg-6 col-md-8 col-sm-12">
+                    <select class="form-control m-t-sm" name="lista-estabelecimento" id="lista-estabelecimento"
+                      formControlName="estabelecimento">
+                      <option value="">(Selecione o estabelecimento)</option>
+                      <option [value]="est.id" *ngFor="let est of estabelecimentos">
+                        {{ est.cidade + ', ' + est.endereco }}</option>
+                    </select>
+                  </div>
+                </div>
+
+              </form>
+
+              <div class="row m-t-md" *ngIf="estabelecimentoSelecionado">
+                <div class="col-sm-12 col-md-4 col-lg-3">
+                  <div class="alert alert-info">
+                    Grupo: <strong>{{ estabelecimentoSelecionado?.grupo }}</strong>
+                  </div>
+                </div>
+              </div>
+
+
+              <button class="btn btn-primary m-t-md" (click)="estabelecimentoForm()"><i class="fa fa-plus"></i> Novo
+                Estabelecimento</button>
+            </div>
+            <div class="col-md-12" [hidden]="!novoEstabelecimento">
+              <app-estabelecimento-shared-form [empresas]="[empresaSelecionada]" [estabelecimento]="estabelecimento"
+                (cancelarEdicao)="cancelarEstabelecimento()" (salvarEstabelecimento)="salvarEstabelecimento($event)">
+              </app-estabelecimento-shared-form>
+            </div>
+          </div>
+
+        </div>
+
       </div>
+    </app-wizard>
 
-    </div>
-  </app-wizard>
-
-</app-panel>
+  </app-panel>
+</div>

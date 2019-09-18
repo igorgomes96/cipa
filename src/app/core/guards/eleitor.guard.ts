@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { EleicoesApiService } from '../api/eleicoes-api.service';
 import { map } from 'rxjs/operators';
 import { ToastsService } from '../services/toasts.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from '../components/toasts/toasts.component';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +17,7 @@ export class EleitorGuard implements CanActivate {
         private toasts: ToastsService) { }
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
         if (!next.paramMap.has('id')) {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/eleicoes']);
             return false;
         } else {
             const id = +next.paramMap.get('id');
@@ -29,7 +29,7 @@ export class EleitorGuard implements CanActivate {
                             title: 'Inválido',
                             type: ToastType.error
                         });
-                        this.router.navigate(['/home']);
+                        this.router.navigate(['/eleicoes']);
                         return false;
                     }
                     return true;

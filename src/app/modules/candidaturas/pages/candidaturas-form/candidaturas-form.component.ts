@@ -4,7 +4,7 @@ import { CandidatosApiService } from 'src/app/core/api/candidatos-api.service';
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Candidato, StatusAprovacao, Reprovacao } from 'src/app/shared/models/candidato';
 import { ToastsService } from 'src/app/core/services/toasts.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { filterResponse } from 'src/app/shared/components/rxjs-operators';
 import { switchMap, filter } from 'rxjs/operators';
 import { Eleicao } from 'src/app/shared/models/eleicao';
@@ -210,7 +210,7 @@ export class CandidaturasFormComponent implements OnInit {
           type: ToastType.success
         });
       }
-      this.router.navigate(['/home']);
+      this.router.navigate(['/eleicoes']);
     });
   }
 

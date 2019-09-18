@@ -18,14 +18,14 @@ export class VotoDuplicadoGuard implements CanActivate {
     private toasts: ToastsService) { }
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (!next.paramMap.has('id')) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/eleicoes']);
       return false;
     } else {
       const id = +next.paramMap.get('id');
       return this.eleicoesApi.getVotoUsuario(id)
         .pipe(
           catchError(_ => {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/eleicoes']);
             return of(false);
           }),
           map(voto => {
@@ -35,7 +35,7 @@ export class VotoDuplicadoGuard implements CanActivate {
               title: 'Inválido!',
               type: ToastType.error
             });
-            this.router.navigate(['/home']);
+            this.router.navigate(['/eleicoes']);
             return false;
           }
           return true;

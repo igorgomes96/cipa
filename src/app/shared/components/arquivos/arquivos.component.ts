@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { ToastType } from '../toasts/toasts.component';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { Arquivo } from 'src/app/shared/models/arquivo';
 import { ArquivosApiService } from 'src/app/core/api/arquivos-api.service';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 
 @Component({
   selector: 'app-arquivos',

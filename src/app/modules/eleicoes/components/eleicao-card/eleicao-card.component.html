@@ -1,25 +1,34 @@
-<app-panel>
-  <div class="row">
-    <div class="col-md-12">
-      <h3>{{ eleicao.estabelecimento?.empresa?.razaoSocial }}
-        <span *ngIf="eleicao.etapaAtual"
-          class="label label-success float-right">{{ eleicao.etapaAtual.nomeEtapa }}</span>
-      </h3>
+<div class="ibox">
+  <div class="ibox-content product-box">
+    <div class="product-desc">
+
+      <h4>{{ eleicao.estabelecimento?.empresa?.razaoSocial }}
+        <small *ngIf="eleicao.etapaAtual"
+          class="label label-success float-right">{{ eleicao.etapaAtual.nomeEtapa }}</small>
+      </h4>
       <p>
         {{ eleicao.estabelecimento?.endereco }}<br>
-        <small>{{ eleicao.estabelecimento?.descricao }}</small>
+        {{ eleicao.estabelecimento?.descricao }}
       </p>
       <strong>{{ eleicao.estabelecimento?.cidade }}</strong>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-md-12">
-      <a [routerLink]="'/eleicoes/' + eleicao.id + '/cronograma'"
-        class="btn btn-success btn-outline m-r-sm btn-sm"><span class="fa fa-calendar"></span> Acessar</a>
 
-      <a (click)="onEditar()"
-        class="btn btn-primary btn-outline m-r-sm btn-sm"><span class="fa fa-pencil"></span> Alterar</a>
+
+    </div>
+
+    <div class="actions">
+      <div *ngIf="perfilSESMT; else actionsEleitor">
+        <a [routerLink]="'/eleicoes/' + eleicao.id + '/cronograma'" class="btn btn-success btn-outline m-r-sm"><span
+            class="fa fa-calendar"></span> Acessar</a>
+
+        <button *ngIf="!eleicao.etapaAtual" class="btn btn-outline-danger" (click)="excluirEleicao()"><span
+            class="fa fa-trash"></span>
+          Excluir</button>
+      </div>
+
+      <ng-template #actionsEleitor>
+
+      </ng-template>
+
     </div>
   </div>
-</app-panel>
+</div>

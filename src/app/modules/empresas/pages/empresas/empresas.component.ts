@@ -5,7 +5,7 @@ import { Empresa } from 'src/app/shared/models/empresa';
 import { EmpresasApiService } from 'src/app/core/api/empresas-api.service';
 import { filter, switchMap, map } from 'rxjs/operators';
 import { ToastsService } from 'src/app/core/services/toasts.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 
 @Component({
   selector: 'app-empresas',

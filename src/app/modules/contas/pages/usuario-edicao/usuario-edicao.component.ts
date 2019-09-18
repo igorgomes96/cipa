@@ -5,7 +5,7 @@ import { Usuario } from 'src/app/shared/models/usuario';
 import { filter, map, tap } from 'rxjs/operators';
 import { UsuariosApiService } from 'src/app/core/api/usuarios-api.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 
 @Component({
   selector: 'app-usuario-edicao',

@@ -4,7 +4,7 @@ import { TipoCardEleitor } from 'src/app/shared/components/card-candidato/card-c
 import { Candidato, Reprovacao, StatusAprovacao } from 'src/app/shared/models/candidato';
 import { CandidatosApiService } from 'src/app/core/api/candidatos-api.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { filter, switchMap } from 'rxjs/operators';

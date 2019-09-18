@@ -8,7 +8,7 @@ import { StatusAprovacao, Candidato } from 'src/app/shared/models/candidato';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { CandidatosApiService } from 'src/app/core/api/candidatos-api.service';
-import { ToastType } from 'src/app/shared/components/toasts/toasts.component';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { inputPesquisa } from 'src/app/shared/rxjs-operators';
 
 @Component({
@@ -69,7 +69,7 @@ export class VotacaoComponent implements OnInit {
           title: 'Sucesso',
           type: ToastType.success
         });
-        this.router.navigate(['/home']);
+        this.router.navigate(['/eleicoes']);
       });
   }
 
@@ -84,7 +84,7 @@ export class VotacaoComponent implements OnInit {
           title: 'Sucesso',
           type: ToastType.success
         });
-        this.router.navigate(['/home']);
+        this.router.navigate(['/eleicoes']);
       });
   }
 
