@@ -12,8 +12,7 @@ const routes: Routes = [
     component: EleicoesListaComponent,
     data: {
       navigationType: NavigationType.Top
-    },
-    canActivate: [SesmtGuard]
+    }
   },
   {
     path: 'nova',

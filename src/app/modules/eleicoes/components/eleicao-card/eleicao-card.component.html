@@ -12,6 +12,35 @@
       </p>
       <strong>{{ eleicao.estabelecimento?.cidade }}</strong>
 
+      <div *ngIf="!perfilSESMT">
+        <span *ngIf="!eleicao.inscricoesFinalizadas">
+          <br>
+          <span class="fa fa-calendar"></span> Inscrições: de
+          <strong>{{ eleicao.inicioInscricao | date:'dd/MMM' }}</strong> a
+          <strong>{{ eleicao.terminoInscricao | date:'dd/MMM' }}</strong>
+        </span>
+
+        <span *ngIf="!eleicao.votacaoFinalizada">
+          <br>
+          <span class="fa fa-calendar"></span> Votação: de <strong>{{ eleicao.inicioVotacao | date:'dd/MMM' }}</strong>
+          a <strong>{{ eleicao.terminoVotacao | date:'dd/MMM' }}</strong>
+        </span>
+
+        <div *ngIf="eleicao.voto; else naoVotou">
+          <br>
+          Seu voto foi registrado em <strong>{{ eleicao.voto.horario | date:'dd/MMM HH:mm' }}</strong>.
+        </div>
+
+        <ng-template #naoVotou>
+          <div *ngIf="eleicao.candidato">
+            <br>
+            Status da Inscrição: <span class="label"
+              [ngClass]="labelStatusClass">{{ eleicao.candidato.statusAprovacao }}</span>
+          </div>
+        </ng-template>
+
+
+      </div>
 
     </div>
 
@@ -26,6 +55,33 @@
       </div>
 
       <ng-template #actionsEleitor>
+
+        <div *ngIf="eleicao.inscricoesFinalizadas; else inscricaoNaoFinalizada">
+          <div *ngIf="!eleicao.voto && eleicao.etapaAtual.etapaObrigatoriaId === CodigoEtapaObrigatoria.Votacao">
+            <a [routerLink]="'/eleicoes/' + eleicao.id + '/votacao'" class="btn btn-lg btn-outline-success m-r-sm">
+              <span class="fa fa-thumbs-up"></span> Votar
+            </a>
+          </div>
+        </div>
+
+        <ng-template #inscricaoNaoFinalizada>
+          <div *ngIf="eleicao.candidato; else naoInscrito">
+            <a [routerLink]="'/eleicoes/' + eleicao.id + '/candidaturas/nova'"
+              class="btn btn-lg btn-outline-success m-r-sm">
+              <span class="fa fa-user"></span> Minha Inscrição
+            </a>
+          </div>
+
+          <ng-template #naoInscrito>
+            <div *ngIf="eleicao.etapaAtual.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao">
+              <a [routerLink]="'/eleicoes/' + eleicao.id + '/candidaturas/nova'"
+                class="btn btn-lg btn-outline-primary m-r-sm">
+                <span class="fa fa-user"></span> Inscreva-se!
+              </a>
+            </div>
+          </ng-template>
+
+        </ng-template>
 
       </ng-template>
 

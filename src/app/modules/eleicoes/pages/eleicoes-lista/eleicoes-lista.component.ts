@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { Eleicao } from 'src/app/shared/models/eleicao';
@@ -7,6 +7,9 @@ import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { AuthInfo, Perfil } from 'src/app/shared/models/usuario';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { CodigoEtapaObrigatoria } from 'src/app/shared/models/cronograma';
+import { tap, filter, switchMap } from 'rxjs/operators';
+import { from, forkJoin, of } from 'rxjs';
 
 @Component({
   selector: 'app-eleicoes-lista',
@@ -38,23 +41,47 @@ export class EleicoesListaComponent implements OnInit {
 
 
   carregaEleicoes() {
-    this.eleicoesApi.getAll({ pageSize: this.paginationInfo.pageSize, pageNumber: this.paginationInfo.currentPage })
-    .subscribe((eleicoes: PagedResult<Eleicao>) => {
-      this.paginationInfo = eleicoes;
-      this.eleicoes = eleicoes.result;
-    });
+    const http = this.eleicoesApi.getAll({ pageSize: this.paginationInfo.pageSize, pageNumber: this.paginationInfo.currentPage });
+    http.pipe(
+      tap((eleicoes: PagedResult<Eleicao>) => {
+        this.paginationInfo = eleicoes;
+        this.eleicoes = eleicoes.result;
+      })).subscribe(_ => {
+        if (this.authInfo.perfil === Perfil.Eleitor) {
+          from(this.eleicoesEtapaSuperiorInscricoes)
+            .pipe(
+              switchMap(eleicao => forkJoin({
+                eleicao: of(eleicao),
+                candidato: this.eleicoesApi.getCandidato(eleicao.id),
+                voto: this.eleicoesApi.getVotoUsuario(eleicao.id)
+              }))).subscribe(dados => {
+                dados.eleicao.candidato = dados.candidato;
+                dados.eleicao.voto = dados.voto;
+              });
+        }
+      });
+  }
+
+  buscaEleicao(id: number): Eleicao {
+    return this.eleicoes.find(e => e.id === id);
   }
 
   excluir(eleicao: Eleicao) {
     this.eleicoesApi.delete(eleicao.id)
-    .subscribe(_ => {
-      this.toast.showMessage({
-        message: 'Eleição excluída com sucesso!',
-        title: 'Sucesso',
-        type: ToastType.success
+      .subscribe(_ => {
+        this.toast.showMessage({
+          message: 'Eleição excluída com sucesso!',
+          title: 'Sucesso',
+          type: ToastType.success
+        });
+        this.carregaEleicoes();
       });
-      this.carregaEleicoes();
-    });
+  }
+
+
+  get eleicoesEtapaSuperiorInscricoes(): Eleicao[] {
+    if (!this.eleicoes || !this.eleicoes.length) { return []; }
+    return this.eleicoes.filter(e => e.inscricoesFinalizadas || e.etapaAtual.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao);
   }
 
 

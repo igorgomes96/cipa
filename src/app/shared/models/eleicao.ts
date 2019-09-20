@@ -1,6 +1,8 @@
+import { Voto } from './voto';
 import { Estabelecimento } from './estabelecimento';
 import { EtapaCronograma } from './cronograma';
 import { Eleitor } from './eleitor';
+import { Candidato } from './candidato';
 
 export class Eleicao {
     id: number;
@@ -17,6 +19,16 @@ export class Eleicao {
     grupo: string;
     qtdaEfetivos: number;
     qtdaSuplentes: number;
+    inscricoesFinalizadas: boolean;
+    votacaoFinalizada: boolean;
+    inicioInscricao: Date;
+    terminoInscricao: Date;
+    inicioVotacao: Date;
+    terminoVotacao: Date;
+    dataVotoEleitor: Date;
+
+    candidato: Candidato;
+    voto: Voto;
 
     public nomeGestao(): string {
         const fimGestao = this.gestao + this.duracaoGestao - 1;

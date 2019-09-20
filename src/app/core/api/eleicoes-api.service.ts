@@ -81,8 +81,8 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
     return this.http.get<Voto[]>(`${this.url}${idEleicao}/voto`, { params });
   }
 
-  getVotoUsuario(idEleicao: number): Observable<Voto[]> {
-    return this.http.get<Voto[]>(`${this.url}${idEleicao}/voto`);
+  getVotoUsuario(idEleicao: number): Observable<Voto> {
+    return this.http.get<Voto>(`${this.url}${idEleicao}/voto`);
   }
 
   getDimensionamento(idEleicao: number): Observable<Dimensionamento> {
