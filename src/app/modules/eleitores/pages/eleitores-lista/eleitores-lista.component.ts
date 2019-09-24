@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Eleitor } from 'src/app/shared/models/eleitor';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { ActivatedRoute } from '@angular/router';
-import { filter, switchMap, distinctUntilChanged, debounceTime, tap } from 'rxjs/operators';
+import { filter, switchMap, distinctUntilChanged, debounceTime, tap, finalize } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { EleitoresApiService } from 'src/app/core/api/eleitores-api.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';
@@ -122,10 +122,14 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
         title: 'Inválido!',
         type: ToastType.error
       });
+      $event.target['value'] = '';
       return;
     }
     try {
       this.eleicoesApi.postImportacao(this.eleicao.id, files)
+        .pipe(finalize(() => {
+          $event.target['value'] = '';
+        }))
         .subscribe((importacao: Importacao) => {
           this.ultimaImportacao = importacao;
           this.toasts.showMessage({

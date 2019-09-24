@@ -81,7 +81,8 @@ export class EleicoesListaComponent implements OnInit {
 
   get eleicoesEtapaSuperiorInscricoes(): Eleicao[] {
     if (!this.eleicoes || !this.eleicoes.length) { return []; }
-    return this.eleicoes.filter(e => e.inscricoesFinalizadas || e.etapaAtual.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao);
+    return this.eleicoes.filter(e => e.inscricoesFinalizadas ||
+      (e.etapaAtual && e.etapaAtual.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao));
   }
 
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-solicitar-reset',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SolicitarResetComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      email: [null, [Validators.email, Validators.required]]
+    });
+  }
+
+  solicitarReset() {
+
   }
 
 }

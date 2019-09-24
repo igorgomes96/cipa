@@ -15,6 +15,7 @@ export class Eleicao {
     terminoMandatoAnterior: Date;
     dataInicio: Date;
     etapaAtual: EtapaCronograma;
+    horarioFinalizacao: Date;
     grupoId: number;
     grupo: string;
     qtdaEfetivos: number;

@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <div class="ibox-content">
 
-                <h2 class="font-bold text-center">Solicitar nova senha</h2>
+                <h2 class="font-bold text-center">Solicitar Reset de Senha</h2>
 
                 <p>
                     Informe seu e-mail e enviaremos um link para você recuperar seus acessos.
@@ -13,12 +13,12 @@
                 <div class="row">
 
                     <div class="col-lg-12">
-                        <form class="m-t" role="form" action="index.html">
+                        <form class="m-t" role="form" (submit)="solicitarReset()" [formGroup]="form">
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email" required="">
+                                <input type="email" class="form-control" placeholder="Email" formControlName="email">
                             </div>
 
-                            <button type="submit" class="btn btn-primary block full-width m-b">Enviar Email de Recuperação</button>
+                            <button type="submit" class="btn btn-primary block full-width m-b" [disabled]="form.invalid">Enviar Email de Recuperação</button>
 
                         </form>
                     </div>
