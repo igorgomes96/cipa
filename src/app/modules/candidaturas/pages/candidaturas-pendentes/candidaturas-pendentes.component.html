@@ -1,6 +1,6 @@
 <app-candidaturas-lista
-    titulo="Candidaturas Pendentes"
-    descricao="Abaixo, segue a relação de candidaturas que estão pendentes de aprovação."
+    titulo="Inscrições Pendentes"
+    [descricao]="candidatos && candidatos.length ? 'Abaixo, segue a relação de inscrições que estão pendentes de aprovação.' : 'Nenhuma inscrição pendente.'"
     [candidatos]="candidatos"
     [tipoCard]="TipoCardEleitor.Aprovacao"
     (aprovacao)="aprovacao($event)"

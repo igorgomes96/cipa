@@ -1,6 +1,6 @@
 <app-candidaturas-lista
-    titulo="Candidaturas Reprovadas"
-    descricao="Abaixo, segue a relação de candidaturas reprovadas."
+    titulo="Inscrições Reprovadas"
+    [descricao]="candidatos && candidatos.length ? 'Abaixo, segue a relação de inscrições reprovadas.' : 'Nenhuma inscrição reprovada.'"
     [candidatos]="candidatos"
     [tipoCard]="TipoCardEleitor.Visualizacao"
 ></app-candidaturas-lista>

@@ -17,7 +17,7 @@ export class CandidaturasAprovadasComponent implements OnInit {
   TipoCardEleitor: typeof TipoCardEleitor = TipoCardEleitor;
   candidatos: Candidato[];
   eleicao: Eleicao;
-  
+
   constructor(
     private candidatosApi: CandidatosApiService,
     private eleicoesApi: EleicoesApiService,

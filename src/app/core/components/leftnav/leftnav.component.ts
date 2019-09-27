@@ -52,7 +52,7 @@ export class LeftnavComponent implements OnInit {
         active: false
       },
       {
-        label: 'Candidaturas',
+        label: 'Inscrições',
         link: '/eleicoes/:id/candidaturas',
         icon: 'fa fa-vcard',
         visible: true,
