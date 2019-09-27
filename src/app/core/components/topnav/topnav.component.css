@@ -31,6 +31,10 @@
   padding: 15px 20px;
 }
 
+.navbar-top-links li {
+  display: inline;
+}
+
 /*
 .row {
   display: -ms-flexbox;

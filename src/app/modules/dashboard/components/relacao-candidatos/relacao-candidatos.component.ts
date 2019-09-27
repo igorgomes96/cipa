@@ -17,6 +17,7 @@ export class RelacaoCandidatosComponent implements OnInit {
 
   ngOnInit() {
     this.downloadRelatorio.subscribe(_ => this.download());
+    console.log(this.resultado);
   }
 
   get candidatos(): Apuracao[] {
