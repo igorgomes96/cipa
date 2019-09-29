@@ -8,7 +8,7 @@ import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { AuthInfo, Perfil } from 'src/app/shared/models/usuario';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CodigoEtapaObrigatoria } from 'src/app/shared/models/cronograma';
-import { tap, filter, switchMap } from 'rxjs/operators';
+import { tap, switchMap, filter } from 'rxjs/operators';
 import { from, forkJoin, of } from 'rxjs';
 
 @Component({
@@ -47,18 +47,18 @@ export class EleicoesListaComponent implements OnInit {
         this.paginationInfo = eleicoes;
         this.eleicoes = eleicoes.result;
       })).subscribe(_ => {
-        if (this.authInfo.perfil === Perfil.Eleitor) {
-          from(this.eleicoesEtapaSuperiorInscricoes)
-            .pipe(
-              switchMap(eleicao => forkJoin({
-                eleicao: of(eleicao),
-                candidato: this.eleicoesApi.getCandidato(eleicao.id),
-                voto: this.eleicoesApi.getVotoUsuario(eleicao.id)
-              }))).subscribe(dados => {
-                dados.eleicao.candidato = dados.candidato;
-                dados.eleicao.voto = dados.voto;
-              });
-        }
+        from(this.eleicoesEtapaSuperiorInscricoes)
+          .pipe(
+            filter((eleicao: Eleicao) => eleicao.usuarioEleitor),
+            switchMap(eleicao => forkJoin({
+              eleicao: of(eleicao),
+              candidato: this.eleicoesApi.getCandidato(eleicao.id),
+              voto: this.eleicoesApi.getVotoUsuario(eleicao.id)
+            }))).subscribe(dados => {
+              console.log(dados);
+              dados.eleicao.candidato = dados.candidato;
+              dados.eleicao.voto = dados.voto;
+            });
       });
   }
 

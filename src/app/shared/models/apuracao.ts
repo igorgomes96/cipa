@@ -17,6 +17,7 @@ export class Apuracao {
   cargo: string;
   votos: number;
   foto: string;
+  dataAdmissao: string;
   candidatoId: number;
   resultadoApuracao: Resultado;
 }

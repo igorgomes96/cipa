@@ -11,7 +11,7 @@
 
 <div class="row flex-row">
   <div class="col-lg-4 col-md-6 col-xs-12" *ngFor="let eleicao of eleicoes">
-    <app-eleicao-card [eleicao]="eleicao" (excluir)="excluir($event)" [perfilSESMT]="authInfo.perfil === Perfil.SESMT"></app-eleicao-card>
+    <app-eleicao-card [eleicao]="eleicao" (excluir)="excluir($event)"></app-eleicao-card>
   </div>
 </div>
 

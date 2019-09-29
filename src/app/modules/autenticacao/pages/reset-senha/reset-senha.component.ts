@@ -15,6 +15,7 @@ import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 export class ResetSenhaComponent implements OnInit {
 
   usuario: Usuario;
+  codigoRecuperacao = '';
   constructor(
     private route: ActivatedRoute,
     private loginApi: LoginApiService,
@@ -30,9 +31,12 @@ export class ResetSenhaComponent implements OnInit {
       ).subscribe(usuario => {
         this.usuario = usuario;
       });
+
+    this.route.params.subscribe(params => this.codigoRecuperacao = params.codigo);
   }
 
   resetar(usuario: Usuario) {
+    usuario.codigoRecuperacao = this.codigoRecuperacao;
     this.loginApi.resetSenha(usuario)
       .subscribe((conta: any) => {
         this.authService.token = conta.accessToken;

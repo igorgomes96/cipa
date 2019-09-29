@@ -3,14 +3,25 @@
     <div class="product-desc">
 
       <h4>{{ eleicao.estabelecimento?.empresa?.razaoSocial }}
-        <small *ngIf="eleicao.etapaAtual"
-          class="label label-success float-right">{{ eleicao.etapaAtual.nomeEtapa }}</small>
+        <span *ngIf="eleicao.etapaAtual" class="label label-success float-right">
+          {{ eleicao.etapaAtual.nomeEtapa }}
+        </span>
+        <span *ngIf="!eleicao.etapaAtual && eleicao.horarioFinalizacao" class="label label-primary float-right">
+          Finalizada em {{ eleicao.horarioFinalizacao | date:'dd/MMM' }}
+        </span>
       </h4>
       <p>
-        {{ eleicao.estabelecimento?.endereco }}<br>
-        {{ eleicao.estabelecimento?.descricao }}
+        <span class="fa fa-map-marker"></span> {{ eleicao.estabelecimento?.endereco }}<br>
+        <span [hidden]="!eleicao.estabelecimento?.descricao">
+          <span class="fa fa-info"></span> {{ eleicao.estabelecimento?.descricao }}<br>
+        </span>
+        <span class="fa fa-home"></span> {{ eleicao.estabelecimento?.cidade }}
       </p>
-      <strong>{{ eleicao.estabelecimento?.cidade }}</strong>
+
+      <div *ngIf="perfilSESMT">
+        Grupo: <strong class="label label-warning">{{ eleicao.grupo }}</strong>
+        <a (click)="alterarGrupo()" class="m-l-sm"><span class="fa fa-pencil"></span></a>
+      </div>
 
       <div *ngIf="!perfilSESMT">
         <span *ngIf="!eleicao.inscricoesFinalizadas">
@@ -25,6 +36,9 @@
           <span class="fa fa-calendar"></span> Votação: de <strong>{{ eleicao.inicioVotacao | date:'dd/MMM' }}</strong>
           a <strong>{{ eleicao.terminoVotacao | date:'dd/MMM' }}</strong>
         </span>
+      </div>
+
+      <div *ngIf="eleicao.usuarioEleitor">
 
         <div *ngIf="eleicao.voto; else naoVotou">
           <br>
@@ -39,52 +53,53 @@
           </div>
         </ng-template>
 
-
       </div>
 
     </div>
 
     <div class="actions">
-      <div *ngIf="perfilSESMT; else actionsEleitor">
+      <span *ngIf="perfilSESMT">
         <a [routerLink]="'/eleicoes/' + eleicao.id + '/cronograma'" class="btn btn-success btn-outline m-r-sm"><span
             class="fa fa-calendar"></span> Acessar</a>
 
-        <button *ngIf="!eleicao.etapaAtual && !eleicao.horarioFinalizacao" class="btn btn-outline-danger" (click)="excluirEleicao()"><span
-            class="fa fa-trash"></span>
+        <button *ngIf="!eleicao.etapaAtual && !eleicao.horarioFinalizacao" class="btn btn-outline-danger"
+          (click)="excluirEleicao()"><span class="fa fa-trash"></span>
           Excluir</button>
-      </div>
 
-      <ng-template #actionsEleitor>
+      </span>
+      <span *ngIf="eleicao.usuarioEleitor">
 
-        <div *ngIf="eleicao.inscricoesFinalizadas; else inscricaoNaoFinalizada">
-          <div *ngIf="!eleicao.voto && eleicao.etapaAtual?.etapaObrigatoriaId === CodigoEtapaObrigatoria.Votacao">
-            <a [routerLink]="'/eleicoes/' + eleicao.id + '/votacao'" class="btn btn-lg btn-outline-success m-r-sm">
+        <span *ngIf="eleicao.inscricoesFinalizadas; else inscricaoNaoFinalizada">
+          <span *ngIf="!eleicao.voto && eleicao.etapaAtual?.etapaObrigatoriaId === CodigoEtapaObrigatoria.Votacao">
+            <a [routerLink]="'/eleicoes/' + eleicao.id + '/votacao'" class="btn btn-outline-success m-r-sm">
               <span class="fa fa-thumbs-up"></span> Votar
             </a>
-          </div>
-        </div>
+          </span>
+        </span>
 
         <ng-template #inscricaoNaoFinalizada>
-          <div *ngIf="eleicao.candidato; else naoInscrito">
-            <a [routerLink]="'/eleicoes/' + eleicao.id + '/candidaturas/nova'"
-              class="btn btn-lg btn-outline-success m-r-sm">
+          <span *ngIf="eleicao.candidato; else naoInscrito">
+            <a [routerLink]="'/eleicoes/' + eleicao.id + '/candidaturas/nova'" class="btn btn-outline-success m-r-sm">
               <span class="fa fa-user"></span> Minha Inscrição
             </a>
-          </div>
+          </span>
 
           <ng-template #naoInscrito>
-            <div *ngIf="eleicao.etapaAtual?.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao">
-              <a [routerLink]="'/eleicoes/' + eleicao.id + '/candidaturas/nova'"
-                class="btn btn-lg btn-outline-primary m-r-sm">
+            <span *ngIf="eleicao.etapaAtual?.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao">
+              <a [routerLink]="'/eleicoes/' + eleicao.id + '/candidaturas/nova'" class="btn btn-outline-primary m-r-sm">
                 <span class="fa fa-user"></span> Inscreva-se!
               </a>
-            </div>
+            </span>
           </ng-template>
 
         </ng-template>
 
-      </ng-template>
+      </span>
 
     </div>
   </div>
 </div>
+
+<ng-template #modalAlteracaoGrupo>
+    <app-alteracao-grupo [codigoGrupo]="eleicao.grupo" (selecionarGrupo)="salvarGrupo($event)"></app-alteracao-grupo>
+</ng-template>

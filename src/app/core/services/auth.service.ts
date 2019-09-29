@@ -25,6 +25,9 @@ export class AuthService {
   }
 
   get authInfo(): AuthInfo {
+    if (!this.decodeToken) {
+      return null;
+    }
     return {
       id: +this.decodeToken.accid,
       contaAtiva: this.decodeToken.accvalid === 'true',
@@ -39,5 +42,9 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+  }
+
+  get tokenValido(): boolean {
+    return this.token && !this.jwtHelper.isTokenExpired();
   }
 }

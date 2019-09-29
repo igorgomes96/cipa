@@ -37,7 +37,7 @@ export class TopnavComponent implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit() {
-    if (this.authService.authInfo.perfil === Perfil.Eleitor) {
+    if (!this.authService.authInfo || this.authService.authInfo.perfil === Perfil.Eleitor) {
       this.rotas = [];
     }
   }

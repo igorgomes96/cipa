@@ -30,6 +30,7 @@ export class Eleicao {
 
     candidato: Candidato;
     voto: Voto;
+    usuarioEleitor: boolean;
 
     public nomeGestao(): string {
         const fimGestao = this.gestao + this.duracaoGestao - 1;

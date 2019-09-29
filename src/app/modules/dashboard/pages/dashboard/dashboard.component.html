@@ -1,6 +1,15 @@
-<div *ngIf="!dimensionamento.qtdaVotos" class="alert alert-warning">
+<div *ngIf="!dimensionamento.qtdaVotos else templateAtualizar" class="alert alert-warning">
   <strong>Não temos nada para mostrar!</strong> Ainda não houve nenhum voto nesta eleição.
 </div>
+
+<ng-template #templateAtualizar>
+  <!-- <div class="row">
+    <div class="col-md-12">
+      <a class="float-right" (click)="atualizar()"><span class="fa fa-refresh"></span> Atualizar</a>
+    </div>
+  </div> -->
+</ng-template>
+
 
 <div *ngIf="dimensionamento.qtdaVotos">
   <app-widgets [dimensionamento]="dimensionamento"></app-widgets>
@@ -12,7 +21,8 @@
     <app-apuracao-chart [apuracao]="apuracao" barChartType="horizontalBar"></app-apuracao-chart>
   </app-panel>
 
-  <app-panel title="Relatório de eleitores" [options]="optionsEleitoresVotantes" (optionClick)="onOptionsEleitoresVotantesClick($event)">
+  <app-panel title="Relatório de eleitores" [options]="optionsEleitoresVotantes"
+    (optionClick)="onOptionsEleitoresVotantesClick($event)">
     <app-relatorio-eleitores [eleicao]="eleicao"></app-relatorio-eleitores>
   </app-panel>
 
@@ -31,6 +41,8 @@
   </div>
 </div>
 
-<app-panel title="Relação de Votos por Candidato" [options]="optionsCandidatos" (optionClick)="onOptionsCandidatosClick()" *ngIf="dimensionamento.qtdaVotos">
-  <app-relacao-candidatos [resultado]="resultado" [eleicao]="eleicao" [downloadRelatorio]="donwloadRelatorioCandidatos"></app-relacao-candidatos>
+<app-panel title="Relação de Votos por Candidato" [options]="optionsCandidatos"
+  (optionClick)="onOptionsCandidatosClick()" *ngIf="dimensionamento.qtdaVotos">
+  <app-relacao-candidatos [resultado]="resultado" [eleicao]="eleicao" [downloadRelatorio]="donwloadRelatorioCandidatos">
+  </app-relacao-candidatos>
 </app-panel>

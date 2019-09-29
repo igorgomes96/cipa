@@ -8,7 +8,10 @@
         <small>{{ ap.votos }} Votos</small>
       </span>
       <span class="nome">{{ i + 1 }}º - {{ ap.nome }}</span><br>
-      <p class="text-muted">{{ ap.cargo || 'N/D' }}</p>
+      <p class="text-muted">
+        {{ ap.cargo || 'N/D' }}<br>
+        Admitido em {{ ap.dataAdmissao | date:'dd/MM/yyyy' }}
+      </p>
     </div>
   </div>
 </div>

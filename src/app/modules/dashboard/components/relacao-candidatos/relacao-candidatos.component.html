@@ -6,6 +6,7 @@
         <th>Nome</th>
         <th>Cargo</th>
         <th>Área</th>
+        <th>Admissão</th>
         <th class="text-center">Votos</th>
       </tr>
     </thead>
@@ -22,6 +23,7 @@
         <td>{{ candidato.nome }}</td>
         <td>{{ candidato.cargo }}</td>
         <td>{{ candidato.area }}</td>
+        <td>{{ candidato.dataAdmissao | date:'dd/MM/yyyy' }}</td>
         <td class="text-center">{{ candidato.votos }}</td>
       </tr>
     </tbody>

@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './modules/not-found/pages/not-found/not-found.component';
 import { NavigationType } from './app.component';
-import { HomeComponent } from './modules/home/home.component';
 import { ForbiddenComponent } from './modules/forbidden/pages/forbidden/forbidden.component';
-import { SesmtGuard } from './core/guards/sesmt.guard';
 import { SesmtCanLoadGuard } from './core/guards/sesmt.canload.guard';
+import { AuthCanLoadGuard } from './core/guards/auth.canload.guard';
 
 const routes: Routes = [
   {
@@ -29,22 +28,23 @@ const routes: Routes = [
   },
   {
     path: 'eleicoes',
-    loadChildren: () => import('./modules/eleicoes/eleicoes.module').then(m => m.EleicoesModule)
+    loadChildren: () => import('./modules/eleicoes/eleicoes.module').then(m => m.EleicoesModule),
+    canLoad: [AuthCanLoadGuard]
   },
   {
     path: 'empresas',
     loadChildren: () => import('./modules/empresas/empresas.module').then(m => m.EmpresasModule),
-    canLoad: [SesmtCanLoadGuard]
+    canLoad: [AuthCanLoadGuard, SesmtCanLoadGuard]
   },
   {
     path: 'estabelecimentos',
     loadChildren: () => import('./modules/estabelecimentos/estabelecimentos.module').then(m => m.EstabelecimentosModule),
-    canLoad: [SesmtCanLoadGuard]
+    canLoad: [AuthCanLoadGuard, SesmtCanLoadGuard]
   },
   {
     path: 'contas',
     loadChildren: () => import('./modules/contas/contas.module').then(m => m.ContasModule),
-    canLoad: [SesmtCanLoadGuard]
+    canLoad: [AuthCanLoadGuard, SesmtCanLoadGuard]
   },
   // {
   //   path: 'home',

@@ -26,4 +26,8 @@ export class LoginApiService {
     return this.http.post(`${this.url}reset`, usuario);
   }
 
+  solicitaReset(email: string): Observable<void> {
+    return this.http.post<void>(`${this.url}solicitacaoreset`, { email });
+  }
+
 }

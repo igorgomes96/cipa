@@ -16,6 +16,11 @@
   }
 }
 
+.ibox .label {
+  font-size: 11px;
+  font-weight: 400;
+}
+
 body.md-skin {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

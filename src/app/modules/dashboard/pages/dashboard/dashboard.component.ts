@@ -1,9 +1,11 @@
+import { Location } from '@angular/common';
 import { EleicoesApiService } from './../../../../core/api/eleicoes-api.service';
 import { Dimensionamento } from 'src/app/shared/models/dimensionamento';
 import { Apuracao, ResultadoApuracao } from './../../../../shared/models/apuracao';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Eleicao } from 'src/app/shared/models/eleicao';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,6 +27,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
+    private location: Location,
     private eleicoesApi: EleicoesApiService) { }
 
   ngOnInit() {

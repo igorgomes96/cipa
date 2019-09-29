@@ -1,0 +1,14 @@
+<form (submit)="salvar()">
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <div class="form-group">
+        <label class="control-label required">Grupo</label>
+        <select required name="grupo" id="grupo" class="form-control" [(ngModel)]="grupoId">
+          <option value="">(Selecione)</option>
+          <option *ngFor="let grupo of grupos" [value]="grupo.id">{{ grupo.codigoGrupo }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Alterar</button>
+</form>

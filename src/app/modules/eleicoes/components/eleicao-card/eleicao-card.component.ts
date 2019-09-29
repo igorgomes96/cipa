@@ -1,9 +1,13 @@
 import { Eleicao } from 'src/app/shared/models/eleicao';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { filter } from 'rxjs/operators';
 import { StatusAprovacao } from 'src/app/shared/models/candidato';
 import { CodigoEtapaObrigatoria } from 'src/app/shared/models/cronograma';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Perfil } from 'src/app/shared/models/usuario';
+import { Grupo } from 'src/app/shared/models/grupo';
+import { ModalService } from 'src/app/core/services/modal.service';
 
 @Component({
   selector: 'app-eleicao-card',
@@ -13,17 +17,24 @@ import { CodigoEtapaObrigatoria } from 'src/app/shared/models/cronograma';
 export class EleicaoCardComponent implements OnInit {
 
   @Input() eleicao: Eleicao;
-  @Input() perfilSESMT = false;
   @Output() excluir = new EventEmitter<Eleicao>();
+
+  @ViewChild('modalAlteracaoGrupo', { static: false }) modalAlteracaoGrupo: TemplateRef<any>;
 
   StatusAprovacao = StatusAprovacao;
   CodigoEtapaObrigatoria = CodigoEtapaObrigatoria;
 
   constructor(
-    private toast: ToastsService
+    private toast: ToastsService,
+    private authService: AuthService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit() {
+  }
+
+  get perfilSESMT() {
+    return this.authService.authInfo.perfil === Perfil.SESMT;
   }
 
   excluirEleicao() {
@@ -43,5 +54,13 @@ export class EleicaoCardComponent implements OnInit {
       default:
         return '';
     }
+  }
+
+  alterarGrupo() {
+    this.modalService.showModal(this.modalAlteracaoGrupo, 'Alterar Grupo da Eleição');
+  }
+
+  salvarGrupo(grupo: Grupo) {
+    console.log(grupo);
   }
 }

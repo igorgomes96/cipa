@@ -14,10 +14,11 @@
         inputClasses="input-white" [control]="dataInicio" id="inicioProcesso" (change)="validaDataInicio($event)"></app-datepicker>
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-6 col-sm-12">
       Qual é o tempo de duração dessa gestão? (em anos)
       <input type="number" name="duracaoGestao" required [(ngModel)]="gestao.duracaoGestao" class="form-control">
     </div>
-  </div>
+  </div> -->
+  <input type="hidden" name="duracaoGestao" [(ngModel)]="gestao.duracaoGestao">
 </form>
