@@ -26,11 +26,17 @@ export class EtapaAnteriorVotacaoGuard implements CanActivate {
         .pipe(map(cronograma => {
           const etapaAtual = cronograma
             .find(c => c.posicaoEtapa === PosicaoEtapa.Atual);
+
+          // Eleição finalizada
+          if (cronograma.every(e => e.posicaoEtapa === PosicaoEtapa.Passada)) {
+            return true;
+          }
+
           if (!etapaAtual) {
             this.toasts.showMessage({
               message: 'Processo de eleição ainda não iniciado.',
               title: 'Aguardando início',
-              type: ToastType.error
+              type: ToastType.warning
             });
             return false;
           }

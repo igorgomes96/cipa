@@ -20,7 +20,7 @@
 
       <div *ngIf="perfilSESMT">
         Grupo: <strong class="label label-warning">{{ eleicao.grupo }}</strong>
-        <a (click)="alterarGrupo()" class="m-l-sm"><span class="fa fa-pencil"></span></a>
+        <a (click)="alterarGrupo()" class="m-l-sm" *ngIf="!eleicao.horarioFinalizacao"><span class="fa fa-pencil"></span></a>
       </div>
 
       <div *ngIf="!perfilSESMT">
@@ -101,5 +101,5 @@
 </div>
 
 <ng-template #modalAlteracaoGrupo>
-    <app-alteracao-grupo [codigoGrupo]="eleicao.grupo" (selecionarGrupo)="salvarGrupo($event)"></app-alteracao-grupo>
+    <app-alteracao-grupo [codigoGrupo]="eleicao.grupo" [salvandoGrupo]="salvandoGrupo" (selecionarGrupo)="salvarGrupo($event)"></app-alteracao-grupo>
 </ng-template>

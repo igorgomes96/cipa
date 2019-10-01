@@ -3554,9 +3554,9 @@ a.forum-item-title:hover {
   width: 4px;
   background: #f1f1f1;
 }
-.vertical-timeline-content .btn {
+/* .vertical-timeline-content .btn {
   float: right;
-}
+} */
 #vertical-timeline.light-timeline:before {
   background: #e7eaec;
 }

@@ -29,6 +29,7 @@ export class EtapaCronogramaComponent implements OnInit {
   form: FormGroup;
   CodigoEtapaObrigatoria = CodigoEtapaObrigatoria;
   ultimaAtualizacao: Date;
+  editando = false;
 
   constructor(
     private formBuilder: FormBuilder,

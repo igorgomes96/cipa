@@ -10,6 +10,7 @@ import { GruposApiService } from 'src/app/core/api/grupos-api.service';
 export class AlteracaoGrupoComponent implements OnInit {
 
   @Input() codigoGrupo: string;
+  @Input() salvandoGrupo = false;
   @Output() selecionarGrupo = new EventEmitter<Grupo>();
 
   grupos: Grupo[];

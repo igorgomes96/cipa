@@ -24,5 +24,66 @@
 
 .dias-atraso {
   font-size: 12px;
+  font-weight: 400;
 }
 
+:host ::ng-deep app-custom-input .form-group {
+  margin-bottom: 8px;
+}
+
+:host ::ng-deep app-datepicker .input-group-addon {
+  line-height: initial;
+}
+
+:host ::ng-deep app-custom-input input, textarea {
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+:host ::ng-deep app-custom-input input[readonly] {
+  background-color: transparent;
+}
+
+h2 {
+  margin: 0;
+  display: flex;
+}
+
+span.nome-etapa {
+  flex-grow: 1;
+}
+
+span.dias-atraso {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+  margin-left: 10px;
+}
+
+.editando .btn-editar {
+  display: none;
+}
+
+.btn-salvar {
+  display: none;
+}
+
+.btn-cancelar {
+  display: none;
+}
+
+.editando .btn-salvar {
+  display: inline;
+}
+
+.editando .btn-cancelar {
+  display: inline;
+}
+
+:host .editando ::ng-deep app-custom-input input,
+:host .editando textarea {
+  border: 1px solid #e5e6e7;
+  padding: 6px 12px;
+  color: #676a6c;
+}

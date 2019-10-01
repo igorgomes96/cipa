@@ -149,7 +149,7 @@ export class CronogramaComponent implements OnInit {
         this.updateCronograma();
       })).subscribe(_ => {
         this.toasts.showMessage({
-          message: 'Data atualizada com sucesso!',
+          message: 'Etapa atualizada com sucesso!',
           title: 'Sucesso!',
           type: ToastType.success
         });

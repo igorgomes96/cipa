@@ -2,18 +2,20 @@
   <i class="fa" [ngClass]="calendarIcon"></i>
 </div>
 
-<div class="vertical-timeline-content">
+<div class="vertical-timeline-content" [class.editando]="editando">
   <div class="row">
     <div class="col-sm-12" [ngClass]="tamanhoDescricao">
       <h2>
         <span [tooltip]="etapa.erroMudancaEtapa" theme="dark" *ngIf="etapa.erroMudancaEtapa" class="text-danger">
           <i class="fa fa-exclamation-circle"></i> {{ etapa.nomeEtapa }}
         </span>
-        <span *ngIf="!etapa.erroMudancaEtapa">
-          {{ etapa.nomeEtapa }}
+        <span *ngIf="!etapa.erroMudancaEtapa" class="nome-etapa">
+          <app-custom-input required [(ngModel)]="etapa.nomeEtapa" name="nomeEtapa" label="Nome da Etapa" [readOnly]="!editando" #nomeEtapa="ngModel"
+            [showLabel]="false" [control]="nomeEtapa"></app-custom-input>
         </span>
-        <small *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Futura">
-          <span class="label label-danger pull-right dias-atraso" *ngIf="diasAtrasos > 0">{{ diasAtrasos | number:'1.0-0'}} dias de
+        <small *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Futura" class="dias-atraso">
+          <span class="label label-danger pull-right dias-atraso"
+            *ngIf="diasAtrasos > 0">{{ diasAtrasos | number:'1.0-0'}} dias de
             atraso</span>
         </small>
       </h2>
@@ -34,7 +36,26 @@
         </div>
       </div>
 
-      <p>{{ etapa.descricaoEtapa }}</p>
+
+      <p>
+        <span *ngIf="!editando">{{ etapa.descricaoEtapa }}</span>
+        <textarea *ngIf="editando" [(ngModel)]="etapa.descricaoEtapa" [readonly]="!editando" class="form-control"
+          rows="4"></textarea>
+      </p>
+
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-outline-primary btn-sm btn-editar m-r-sm m-b-sm" (click)="editando = true"><span
+              class="fa fa-pencil"></span></button>
+
+          <button class="btn btn-outline-success btn-sm btn-salvar m-r-sm m-b-sm" (click)="onAtualizarEtapa(); editando = false"><span
+              class="fa fa-floppy-o"></span></button>
+
+          <button class="btn btn-outline-primary btn-sm btn-cancelar m-r-sm m-b-sm" (click)="editando = false">
+            <span class="fa fa-ban"></span> Cancelar</button>
+        </div>
+      </div>
+
       <div class="row" *ngIf="dimensionamento">
         <div class="col-sm-12" [ngSwitch]="etapa.etapaObrigatoriaId" *ngIf="etapa.posicaoEtapa !== PosicaoEtapa.Futura">
           <app-etapa-dimensionamento *ngSwitchCase="CodigoEtapaObrigatoria.Inscricao"

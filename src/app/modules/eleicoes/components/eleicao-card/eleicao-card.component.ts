@@ -1,13 +1,15 @@
 import { Eleicao } from 'src/app/shared/models/eleicao';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 import { ToastsService } from 'src/app/core/services/toasts.service';
-import { filter } from 'rxjs/operators';
+import { filter, finalize } from 'rxjs/operators';
 import { StatusAprovacao } from 'src/app/shared/models/candidato';
 import { CodigoEtapaObrigatoria } from 'src/app/shared/models/cronograma';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Perfil } from 'src/app/shared/models/usuario';
 import { Grupo } from 'src/app/shared/models/grupo';
 import { ModalService } from 'src/app/core/services/modal.service';
+import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
+import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 
 @Component({
   selector: 'app-eleicao-card',
@@ -23,11 +25,13 @@ export class EleicaoCardComponent implements OnInit {
 
   StatusAprovacao = StatusAprovacao;
   CodigoEtapaObrigatoria = CodigoEtapaObrigatoria;
+  salvandoGrupo = false;
 
   constructor(
     private toast: ToastsService,
     private authService: AuthService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private eleicoesApi: EleicoesApiService
   ) { }
 
   ngOnInit() {
@@ -61,6 +65,20 @@ export class EleicaoCardComponent implements OnInit {
   }
 
   salvarGrupo(grupo: Grupo) {
-    console.log(grupo);
+    this.salvandoGrupo = true;
+    this.eleicao.grupoId = grupo.id;
+    this.eleicoesApi.put(this.eleicao.id, this.eleicao)
+      .pipe(finalize(() => this.salvandoGrupo = false))
+      .subscribe(_ => {
+        this.eleicao.grupoId = grupo.id;
+        this.eleicao.grupo = grupo.codigoGrupo;
+        this.toast.showMessage({
+          message: 'Grupo alterado com sucesso!',
+          title: 'Sucesso',
+          type: ToastType.success
+        });
+        this.modalService.closeModal();
+      });
+
   }
 }
