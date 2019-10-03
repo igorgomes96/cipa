@@ -1,4 +1,4 @@
-import { Dimensionamento } from './../../models/dimensionamento';
+import { Dimensionamento } from '../../../../shared/models/dimensionamento';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({

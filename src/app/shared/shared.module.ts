@@ -15,7 +15,6 @@ import { CustomInputComponent } from './components/custom-input/custom-input.com
 import { ValidatorMessageComponent } from './components/validator-message/validator-message.component';
 import { DateValidatorDirective } from './directives/date-validator.directive';
 import { CardCandidatoComponent } from './components/card-candidato/card-candidato.component';
-import { EtapaCronogramaComponent } from './components/etapa-cronograma/etapa-cronograma.component';
 import { WizardComponent } from './components/wizard/wizard.component';
 import { EmpresaSharedFormComponent } from './components/empresa-shared-form/empresa-shared-form.component';
 import { EstabelecimentoSharedFormComponent } from './components/estabelecimento-shared-form/estabelecimento-shared-form.component';
@@ -24,11 +23,11 @@ import { AjudaTooltipComponent } from './components/ajuda-tooltip/ajuda-tooltip.
 import { LaddaModule } from 'angular2-ladda';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { EqualsToValidatorDirective } from './directives/equasto-validator.directive';
-import { EtapaAlertComponent } from './components/etapa-dimensionamento/etapa-dimensionamento.component';
-import { EtapaPercentualVotosComponent } from './components/etapa-percentual-votos/etapa-percentual-votos.component';
 import { WidgetDashboardComponent } from './components/widget-dashboard/widget-dashboard.component';
 import { CountCharDirective } from './directives/count-char.directive';
 import { EstabelecimentosListaComponent } from './components/estabelecimentos-lista/estabelecimentos-lista.component';
+import { EqualsValidatorDirective } from './directives/equas-validator.directive';
+import { TimelineItemComponent } from './components/timeline-item/timeline-item.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -41,19 +40,18 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     ValidatorMessageComponent,
     DateValidatorDirective,
     EqualsToValidatorDirective,
+    EqualsValidatorDirective,
     CardCandidatoComponent,
-    EtapaCronogramaComponent,
     WizardComponent,
     EmpresaSharedFormComponent,
     EstabelecimentoSharedFormComponent,
     DatepickerComponent,
     AjudaTooltipComponent,
     PaginationComponent,
-    EtapaAlertComponent,
-    EtapaPercentualVotosComponent,
     WidgetDashboardComponent,
     CountCharDirective,
-    EstabelecimentosListaComponent
+    EstabelecimentosListaComponent,
+    TimelineItemComponent
   ],
   imports: [
     CommonModule,
@@ -79,8 +77,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     ValidatorMessageComponent,
     DateValidatorDirective,
     EqualsToValidatorDirective,
+    EqualsValidatorDirective,
     CardCandidatoComponent,
-    EtapaCronogramaComponent,
     WizardComponent,
     EmpresaSharedFormComponent,
     EstabelecimentoSharedFormComponent,
@@ -94,7 +92,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     CountCharDirective,
     TextMaskModule,
     NgxMaskModule,
-    EstabelecimentosListaComponent
+    EstabelecimentosListaComponent,
+    TimelineItemComponent
   ]
 })
 export class SharedModule { }

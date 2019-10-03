@@ -55,6 +55,15 @@ export class CronogramaComponent implements OnInit {
       });
   }
 
+  recarregaCronograma() {
+    if (this.eleicao) {
+      this.eleicoesApi.getCronograma(this.eleicao.id)
+      .subscribe((cronograma: EtapaCronograma[]) => {
+        this.eleicao.cronograma = cronograma;
+      });
+    }
+  }
+
   confirmacaoProximaEtapa(proximaEtapa: EtapaCronograma): Observable<boolean> {
     if (proximaEtapa && new Date(proximaEtapa.dataPrevista) > new Date()) {
       return this.toasts

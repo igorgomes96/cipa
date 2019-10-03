@@ -8,4 +8,6 @@ export class Eleitor {
     dataNascimento: Date;
     dataAdmissao: Date;
     eleicaoId: number;
+    nomeGestor: string;
+    emailGestor: string;
 }

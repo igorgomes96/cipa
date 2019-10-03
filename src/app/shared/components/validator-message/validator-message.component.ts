@@ -32,6 +32,8 @@ export class ValidatorMessageComponent implements OnInit {
             return 'Email inválido!';
           case 'equalsTo':
             return 'Os valores não correspondem!';
+          case 'equals':
+            return 'O valor digitado não corresponde ao esperado.';
           case 'date':
             return 'Data em formato inválido! Use o formato "dd/mm/aaaa".';
           default:

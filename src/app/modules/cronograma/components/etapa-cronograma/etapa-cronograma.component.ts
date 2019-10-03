@@ -4,7 +4,7 @@ import { Arquivo } from 'src/app/shared/models/arquivo';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CronogramaApiService } from 'src/app/core/api/cronograma-api.service';
 import { finalize, switchMap } from 'rxjs/operators';
-import { Dimensionamento } from '../../models/dimensionamento';
+import { Dimensionamento } from 'src/app/shared/models/dimensionamento';
 
 declare var $: any;
 
@@ -22,6 +22,7 @@ export class EtapaCronogramaComponent implements OnInit {
   @Output() proximaEtapa: EventEmitter<EtapaCronograma> = new EventEmitter<EtapaCronograma>();
   @Output() exibirTemplates: EventEmitter<EtapaCronograma> = new EventEmitter<EtapaCronograma>();
   @Output() atualizarEtapa: EventEmitter<EtapaCronograma> = new EventEmitter<EtapaCronograma>();
+  @Output() edicaoCancelada: EventEmitter<void> = new EventEmitter<void>();
 
   PosicaoEtapa = PosicaoEtapa;
   carregandoArquivos = false;
@@ -114,6 +115,11 @@ export class EtapaCronogramaComponent implements OnInit {
 
     // To calculate the no. of days between two dates
     return diffTime / (1000 * 3600 * 24);
+  }
+
+  onCancelarEdicao() {
+    this.edicaoCancelada.emit();
+    this.editando = false;
   }
 
 

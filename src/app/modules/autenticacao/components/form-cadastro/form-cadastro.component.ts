@@ -12,6 +12,7 @@ export class FormCadastroComponent implements OnInit {
   @Input() descricao = '';
   @Input() botaoSalvar = '';
   @Input() usuario: Usuario;
+  @Input() emailValidacao = '';
   @Output() enviar = new EventEmitter<Usuario>();
 
   constructor() { }

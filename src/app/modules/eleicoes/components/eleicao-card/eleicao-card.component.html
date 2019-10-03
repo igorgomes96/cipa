@@ -4,7 +4,7 @@
 
       <h4>{{ eleicao.estabelecimento?.empresa?.razaoSocial }}
         <span *ngIf="eleicao.etapaAtual" class="label label-success float-right">
-          {{ eleicao.etapaAtual.nomeEtapa }}
+          {{ eleicao.etapaAtual.nome }}
         </span>
         <span *ngIf="!eleicao.etapaAtual && eleicao.horarioFinalizacao" class="label label-primary float-right">
           Finalizada em {{ eleicao.horarioFinalizacao | date:'dd/MMM' }}

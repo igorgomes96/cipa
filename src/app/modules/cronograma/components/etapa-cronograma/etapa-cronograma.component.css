@@ -7,12 +7,8 @@
     font-size: 80%;
 }
 
-.vertical-timeline-content {
-  padding: 1.5em;
-}
-
 @media (min-width: 992px) {
-    .vertical-timeline-content .arquivos {
+    .arquivos {
         border-left: 1px solid #ddd;
         margin-top: inherit;
     }
@@ -61,8 +57,10 @@ span.dias-atraso {
   margin-left: 10px;
 }
 
-.editando .btn-editar {
-  display: none;
+
+.btn-editar span {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .btn-salvar {

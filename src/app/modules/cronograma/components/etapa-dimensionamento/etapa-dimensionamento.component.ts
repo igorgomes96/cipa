@@ -1,12 +1,12 @@
-import { Dimensionamento } from '../../models/dimensionamento';
 import { Component, OnInit, Input } from '@angular/core';
+import { Dimensionamento } from 'src/app/shared/models/dimensionamento';
 
 @Component({
   selector: 'app-etapa-dimensionamento',
   templateUrl: './etapa-dimensionamento.component.html',
   styleUrls: ['./etapa-dimensionamento.component.css']
 })
-export class EtapaAlertComponent implements OnInit {
+export class EtapaDimensionamentoComponent implements OnInit {
 
   @Input() dimensionamento: Dimensionamento;
   ultimaAtualizacao: Date;

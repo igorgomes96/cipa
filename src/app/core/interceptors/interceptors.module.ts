@@ -36,31 +36,8 @@ export class ErrorInterceptor implements HttpInterceptor {
   }
 }
 
-// @Injectable()
-// export class TokenInterceptor implements HttpInterceptor {
-
-//   constructor(private authService: AuthService) { }
-
-//   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-//     if (!this.authService.token) {
-//       return next.handle(req);
-//     }
-
-//     const dupReq = req.clone({
-//       headers: req.headers.set('Authorization', `Bearer ${this.authService.token}`),
-//     });
-//     return next.handle(dupReq);
-//   }
-
-// }
-
 @NgModule({
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: TokenInterceptor,
-    //   multi: true,
-    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,

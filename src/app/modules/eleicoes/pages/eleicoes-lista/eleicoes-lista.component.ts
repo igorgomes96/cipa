@@ -55,7 +55,6 @@ export class EleicoesListaComponent implements OnInit {
               candidato: this.eleicoesApi.getCandidato(eleicao.id),
               voto: this.eleicoesApi.getVotoUsuario(eleicao.id)
             }))).subscribe(dados => {
-              console.log(dados);
               dados.eleicao.candidato = dados.candidato;
               dados.eleicao.voto = dados.voto;
             });

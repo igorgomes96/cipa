@@ -1,13 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-
-import { Observable } from 'rxjs';
 
 import { Eleitor } from 'src/app/shared/models/eleitor';
-import { EleitoresApiService } from 'src/app/core/api/eleitores-api.service';
-import { ToastsService } from 'src/app/core/services/toasts.service';
-import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 
 @Component({
   selector: 'app-eleitores-form',
@@ -20,10 +13,7 @@ export class EleitoresFormComponent implements OnInit {
   @Output() salvar = new EventEmitter<Eleitor>();
   @Output() cancelar = new EventEmitter<void>();
 
-  constructor(private route: ActivatedRoute,
-              private eleitoresApi: EleitoresApiService,
-              private toasts: ToastsService,
-              private location: Location) { }
+  constructor() { }
 
   ngOnInit() {
     if (!this.eleitor) {

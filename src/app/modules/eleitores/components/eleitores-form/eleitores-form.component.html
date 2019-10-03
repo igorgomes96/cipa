@@ -15,7 +15,7 @@
 
         <div class="col-md-6">
             <app-custom-input [(ngModel)]="eleitor.email" #email="ngModel" [control]="email" id="email" label="E-mail"
-                name="email" required maxlength="100">
+                name="email" required maxlength="100" email>
             </app-custom-input>
         </div>
     </div>
@@ -50,6 +50,19 @@
             </app-custom-input>
         </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-6">
+          <app-custom-input [(ngModel)]="eleitor.nomeGestor" #nomeGestor="ngModel" [control]="nomeGestor" id="nomeGestor" label="Nome do Gestor"
+              name="nomeGestor" maxlength="255">
+          </app-custom-input>
+      </div>
+      <div class="col-md-6">
+          <app-custom-input [(ngModel)]="eleitor.emailGestor" email #emailGestor="ngModel" [control]="emailGestor" id="emailGestor" label="Email do Gestor"
+              name="emailGestor" maxlength="100">
+          </app-custom-input>
+      </div>
+  </div>
 
     <button type="submit" class="btn btn-primary m-r-sm" [disabled]="form.invalid"><i class="fa fa-save"></i>
         Salvar</button>

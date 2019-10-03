@@ -9,6 +9,8 @@ import { UsuariosListaComponent } from './components/usuarios-lista/usuarios-lis
 import { UsuarioNovoComponent } from './pages/usuario-novo/usuario-novo.component';
 import { UsuarioEdicaoComponent } from './pages/usuario-edicao/usuario-edicao.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
+import { CronogramaPadraoComponent } from './components/cronograma-padrao/cronograma-padrao.component';
+import { EtapaPadraoComponent } from './components/etapa-padrao/etapa-padrao.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { UsuarioFormComponent } from './components/usuario-form/usuario-form.com
     UsuariosListaComponent,
     UsuarioNovoComponent,
     UsuarioEdicaoComponent,
-    UsuarioFormComponent
+    UsuarioFormComponent,
+    CronogramaPadraoComponent,
+    EtapaPadraoComponent,
   ],
   imports: [
     CommonModule,

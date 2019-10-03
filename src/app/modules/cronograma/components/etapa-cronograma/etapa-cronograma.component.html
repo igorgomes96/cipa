@@ -1,17 +1,13 @@
-<div class="vertical-timeline-icon" [ngClass]="calendarClass">
-  <i class="fa" [ngClass]="calendarIcon"></i>
-</div>
-
-<div class="vertical-timeline-content" [class.editando]="editando">
-  <div class="row">
+<div timeline-item [calendarIcon]="calendarIcon" [calendarClass]="calendarClass" class="vertical-timeline-block">
+  <div class="row" [class.editando]="editando">
     <div class="col-sm-12" [ngClass]="tamanhoDescricao">
       <h2>
         <span [tooltip]="etapa.erroMudancaEtapa" theme="dark" *ngIf="etapa.erroMudancaEtapa" class="text-danger">
-          <i class="fa fa-exclamation-circle"></i> {{ etapa.nomeEtapa }}
+          <i class="fa fa-exclamation-circle"></i> {{ etapa.nome }}
         </span>
         <span *ngIf="!etapa.erroMudancaEtapa" class="nome-etapa">
-          <app-custom-input required [(ngModel)]="etapa.nomeEtapa" name="nomeEtapa" label="Nome da Etapa" [readOnly]="!editando" #nomeEtapa="ngModel"
-            [showLabel]="false" [control]="nomeEtapa"></app-custom-input>
+          <app-custom-input required [(ngModel)]="etapa.nome" name="Nome" label="Nome da Etapa" [readOnly]="!editando"
+            #Nome="ngModel" [showLabel]="false" [control]="Nome"></app-custom-input>
         </span>
         <small *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Futura" class="dias-atraso">
           <span class="label label-danger pull-right dias-atraso"
@@ -38,20 +34,20 @@
 
 
       <p>
-        <span *ngIf="!editando">{{ etapa.descricaoEtapa }}</span>
-        <textarea *ngIf="editando" [(ngModel)]="etapa.descricaoEtapa" [readonly]="!editando" class="form-control"
+        <span *ngIf="!editando">
+          {{ etapa.descricao }}
+          <a class="btn-editar" (click)="editando = true"> <span class="fa fa-pencil"></span></a>
+        </span>
+        <textarea *ngIf="editando" [(ngModel)]="etapa.descricao" [readonly]="!editando" class="form-control"
           rows="4"></textarea>
       </p>
 
       <div class="row">
         <div class="col-md-12">
-          <button class="btn btn-outline-primary btn-sm btn-editar m-r-sm m-b-sm" (click)="editando = true"><span
-              class="fa fa-pencil"></span></button>
+          <button class="btn btn-outline-success btn-sm btn-salvar m-r-sm m-b-sm"
+            (click)="onAtualizarEtapa(); editando = false"><span class="fa fa-floppy-o"></span></button>
 
-          <button class="btn btn-outline-success btn-sm btn-salvar m-r-sm m-b-sm" (click)="onAtualizarEtapa(); editando = false"><span
-              class="fa fa-floppy-o"></span></button>
-
-          <button class="btn btn-outline-primary btn-sm btn-cancelar m-r-sm m-b-sm" (click)="editando = false">
+          <button class="btn btn-outline-primary btn-sm btn-cancelar m-r-sm m-b-sm" (click)="onCancelarEdicao()">
             <span class="fa fa-ban"></span> Cancelar</button>
         </div>
       </div>
