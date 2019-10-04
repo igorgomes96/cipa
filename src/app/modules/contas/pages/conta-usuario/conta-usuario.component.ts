@@ -50,5 +50,12 @@ export class ContaUsuarioComponent implements OnInit {
       });
   }
 
+  recarregaCronograma() {
+    this.contasApi.getCronogramaPadrao(this.conta.id)
+      .subscribe(cronograma => {
+        this.cronograma = cronograma;
+      });
+  }
+
 
 }

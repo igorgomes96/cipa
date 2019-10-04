@@ -1,0 +1,57 @@
+.btn-no-borders {
+  border: 0;
+}
+
+.fa-lock {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+:host ::ng-deep app-custom-input .form-group {
+  margin-bottom: 8px;
+}
+
+:host ::ng-deep app-datepicker .input-group-addon {
+  line-height: initial;
+}
+
+:host ::ng-deep app-custom-input input, textarea {
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+:host ::ng-deep app-custom-input label {
+  margin-bottom: 0;
+}
+
+:host ::ng-deep app-custom-input input[readonly] {
+  background-color: transparent;
+}
+
+:host .editando ::ng-deep app-custom-input input,
+:host .editando textarea {
+  border: 1px solid #e5e6e7;
+  padding: 6px 12px;
+  color: #676a6c;
+}
+
+:host .editando ::ng-deep app-custom-input label {
+  margin-bottom: initial;
+}
+
+.btn-cancelar,
+.btn-salvar  {
+  display: none;
+}
+
+.editando .btn-editar,
+.editando .btn-excluir,
+.editando .fa-lock {
+  display: none;
+}
+
+.editando .btn-cancelar,
+.editando .btn-salvar {
+  display: inline;
+}

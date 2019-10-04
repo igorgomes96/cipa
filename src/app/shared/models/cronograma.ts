@@ -41,6 +41,6 @@ export class EtapaObrigatoria extends EtapaBase {
 
 export class EtapaPadraoConta extends EtapaBase {
   contaId: number;
-  etapaObrigtoriaId: number;
+  etapaObrigatoriaId: number;
   duracaoPadrao: number;
 }

@@ -21,4 +21,16 @@ export class ContasApiService extends GenericApi<AuthInfo> {
     return this.http.get<EtapaPadraoConta[]>(`${this.url}${contaId}/cronograma`);
   }
 
+  postEtapaCronogramaPadrao(contaId: number, etapaPadrao: EtapaPadraoConta): Observable<EtapaPadraoConta> {
+    return this.http.post<EtapaPadraoConta>(`${this.url}${contaId}/cronograma`, etapaPadrao);
+  }
+
+  putEtapaCronogramaPadrao(contaId: number, etapaPadrao: EtapaPadraoConta): Observable<EtapaPadraoConta> {
+    return this.http.put<EtapaPadraoConta>(`${this.url}${contaId}/cronograma/${etapaPadrao.id}`, etapaPadrao);
+  }
+
+  deleteEtapaCronogramaPadrao(contaId: number, id: number): Observable<EtapaPadraoConta> {
+    return this.http.delete<EtapaPadraoConta>(`${this.url}${contaId}/cronograma/${id}`);
+  }
+
 }

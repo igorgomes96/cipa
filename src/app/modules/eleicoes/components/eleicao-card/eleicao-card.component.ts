@@ -38,7 +38,7 @@ export class EleicaoCardComponent implements OnInit {
   }
 
   get perfilSESMT() {
-    return this.authService.authInfo.perfil === Perfil.SESMT;
+    return this.authService.tokenValido && this.authService.authInfo.perfil === Perfil.SESMT;
   }
 
   excluirEleicao() {

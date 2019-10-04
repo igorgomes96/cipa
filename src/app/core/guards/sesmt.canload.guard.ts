@@ -17,7 +17,7 @@ export class SesmtCanLoadGuard implements CanLoad {
     private toast: ToastsService) { }
 
   canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.authService.authInfo.perfil !== Perfil.SESMT) {
+    if (!this.authService.tokenValido || this.authService.authInfo.perfil !== Perfil.SESMT) {
       this.toast.showMessage({
         message: 'Usuário sem permissão de acesso',
         title: 'Sem permissão',

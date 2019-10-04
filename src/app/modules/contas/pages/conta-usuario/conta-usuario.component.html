@@ -24,7 +24,12 @@
 
         <p>Adicione, exclua ou edite as etapas padrões do cronograma, utilizadas no momento de criação de cada eleição.</p>
 
-        <app-cronograma-padrao></app-cronograma-padrao>
+        <div class="row m-b-sm">
+          <div class="col-md-12">
+            <app-cronograma-padrao [etapas]="cronograma" [conta]="conta" (recarregaCronograma)="recarregaCronograma()"></app-cronograma-padrao>
+          </div>
+        </div>
+
       </div>
     </div>
   </app-panel>

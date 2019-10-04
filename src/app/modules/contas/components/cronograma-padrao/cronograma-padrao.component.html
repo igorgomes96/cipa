@@ -1,6 +1,6 @@
 <div id="vertical-timeline" class="vertical-container dark-timeline no-margins">
   <div timeline-item class="vertical-timeline-block" *ngFor="let etapa of etapas">
-    <h2>{{ etapa.titulo }}</h2>
-    <p>{{ etapa.descricao }}</p>
+    <app-etapa-padrao [etapa]="etapa" (adicionar)="adicionar($event)" (cancelar)="cancelar($event)"
+      (excluir)="excluir($event)" (salvar)="salvar($event)"></app-etapa-padrao>
   </div>
 </div>

@@ -1,1 +1,52 @@
-<p>etapa-padrao works!</p>
+<div [class.editando]="editando">
+  <h2>
+    <app-custom-input required [(ngModel)]="etapa.nome" name="Nome" label="Nome da Etapa" [readOnly]="!editando"
+      #Nome="ngModel" [showLabel]="false" [control]="Nome"></app-custom-input>
+  </h2>
+  <p>
+    <span *ngIf="!editando">
+      {{ etapa.descricao }}
+      <span class="fa fa-lock" *ngIf="etapa.etapaObrigatoriaId"
+        tooltip="Essa etapa é obrigatória, portanto não pode ser excluída."></span>
+    </span>
+    <textarea *ngIf="editando" [(ngModel)]="etapa.descricao" [readonly]="!editando" class="form-control"
+      rows="4"></textarea>
+
+  </p>
+
+  <div class="row m-b-sm">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <app-custom-input style="font-weight: bold;" required [(ngModel)]="etapa.duracaoPadrao" name="duracaoPadrao"
+        label="Duração padrão (dias)" [readOnly]="!editando" #duracaoPadrao="ngModel" [showLabel]="true"
+        [control]="duracaoPadrao"></app-custom-input>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <button class="btn btn-outline-primary btn-editar btn-sm m-r-sm" (click)="habilitarEdicao()">
+        <span class="fa fa-pencil"></span> Editar
+      </button>
+
+      <button class="btn btn-outline-danger btn-excluir btn-sm m-r-sm" (click)="onExcluir()"
+        *ngIf="!etapa.etapaObrigatoriaId">
+        <span class="fa fa-trash"></span> Remover
+      </button>
+
+      <button class="btn btn-outline-success btn-sm btn-salvar m-r-sm" (click)="onAtualizarEtapa()">
+        <span class="fa fa-floppy-o"></span> Salvar
+      </button>
+
+      <button class="btn btn-outline-primary btn-sm btn-cancelar m-r-sm" (click)="onCancelarEdicao()">
+        <span class="fa fa-ban"></span> Cancelar
+      </button>
+
+      <button class="btn btn-outline-success btn-no-borders btn-adicionar btn-sm float-right"
+        tooltip="Adicione uma nova etapa posterior a esta." (click)="onAdicionar()">
+        <span class="fa fa-plus"></span>
+      </button>
+
+    </div>
+  </div>
+</div>
