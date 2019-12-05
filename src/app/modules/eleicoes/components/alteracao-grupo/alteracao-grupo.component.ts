@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Grupo } from 'src/app/shared/models/grupo';
+import { Grupo } from '@shared/models/grupo';
 import { GruposApiService } from 'src/app/core/api/grupos-api.service';
 
 @Component({

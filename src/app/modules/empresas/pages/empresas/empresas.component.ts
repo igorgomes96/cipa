@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-import { Empresa } from 'src/app/shared/models/empresa';
+import { Empresa } from '@shared/models/empresa';
 import { EmpresasApiService } from 'src/app/core/api/empresas-api.service';
 import { filter, switchMap, map } from 'rxjs/operators';
 import { ToastsService } from 'src/app/core/services/toasts.service';

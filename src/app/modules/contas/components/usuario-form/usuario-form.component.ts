@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Usuario } from 'src/app/shared/models/usuario';
+import { Usuario } from '@shared/models/usuario';
 
 @Component({
   selector: 'app-usuario-form',

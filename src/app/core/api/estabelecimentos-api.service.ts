@@ -4,15 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { GenericApi } from './generic-api';
 import { environment } from 'src/environments/environment';
 import { endpoints } from 'src/environments/endpoints';
-import { Estabelecimento } from '../../shared/models/estabelecimento';
+import { Estabelecimento } from '@shared/models/estabelecimento';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class EstabelecimentosApiService extends GenericApi<Estabelecimento> {
 
-    constructor(private http: HttpClient) {
-        super(http, environment.api + endpoints.estabelecimentos);
-    }
+  constructor(private http: HttpClient) {
+    super(http, environment.api + endpoints.estabelecimentos);
+  }
 
 }

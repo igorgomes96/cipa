@@ -1,12 +1,12 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
-import { Conta, Usuario } from 'src/app/shared/models/usuario';
+import { Conta, Usuario } from '@shared/models/usuario';
 import { UsuariosApiService } from 'src/app/core/api/usuarios-api.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { ContasApiService } from 'src/app/core/api/contas-api.service';
-import { EtapaPadraoConta } from 'src/app/shared/models/cronograma';
+import { EtapaPadraoConta } from '@shared/models/cronograma';
 
 @Component({
   selector: 'app-conta-usuario',

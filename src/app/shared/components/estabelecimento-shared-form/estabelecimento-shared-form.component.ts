@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { Estabelecimento } from 'src/app/shared/models/estabelecimento';
-import { Empresa } from 'src/app/shared/models/empresa';
+import { Estabelecimento } from '@shared/models/estabelecimento';
+import { Empresa } from '@shared/models/empresa';
 import { GruposApiService } from 'src/app/core/api/grupos-api.service';
 import { Grupo } from '../../models/grupo';
 

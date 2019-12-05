@@ -1,6 +1,6 @@
-import { EmpresasApiService } from './../../../../core/api/empresas-api.service';
+import { EmpresasApiService } from '@core/api/empresas-api.service';
 import { Component, OnInit } from '@angular/core';
-import { Empresa } from 'src/app/shared/models/empresa';
+import { Empresa } from '@shared/models/empresa';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { ToastType } from 'src/app/core/components/toasts/toasts.component';

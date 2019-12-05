@@ -1,5 +1,5 @@
-import { UsuarioResolverService } from './../../core/resolvers/usuario-resolver.service';
-import { ContaResolverService } from './../../core/resolvers/conta-resolver.service';
+import { UsuarioResolverService } from '@core/resolvers/usuario-resolver.service';
+import { ContaResolverService } from '@core/resolvers/conta-resolver.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

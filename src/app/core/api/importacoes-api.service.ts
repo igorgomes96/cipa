@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GenericApi } from './generic-api';
-import { Importacao, ProgressoImportacao } from 'src/app/shared/models/importacao';
+import { Importacao, ProgressoImportacao } from '@shared/models/importacao';
 import { environment } from 'src/environments/environment';
 import { endpoints } from 'src/environments/endpoints';
 import { HttpClient } from '@angular/common/http';
@@ -8,7 +8,7 @@ import { SignalRService } from '../services/signalr.service';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { debounceTime, map } from 'rxjs/operators';
-import { Inconsistencia } from 'src/app/shared/models/inconsistencias';
+import { Inconsistencia } from '@shared/models/inconsistencias';
 
 @Injectable({
   providedIn: 'root'

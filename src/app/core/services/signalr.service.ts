@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
-import { ProgressoImportacao } from 'src/app/shared/models/importacao';
+import { ProgressoImportacao } from '@shared/models/importacao';
 import { Observable, Subject } from 'rxjs';
 import { IHttpConnectionOptions } from '@aspnet/signalr';
 import { auditTime } from 'rxjs/operators';

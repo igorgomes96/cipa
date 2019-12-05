@@ -3,7 +3,7 @@ import { Resolve, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Conta } from 'src/app/shared/models/usuario';
+import { Conta } from '@shared/models/usuario';
 import { ContasApiService } from '../api/contas-api.service';
 import { AuthService } from '../services/auth.service';
 

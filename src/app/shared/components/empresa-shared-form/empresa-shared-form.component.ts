@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Empresa } from 'src/app/shared/models/empresa';
+import { Empresa } from '@shared/models/empresa';
 
 @Component({
   selector: 'app-empresa-shared-form',

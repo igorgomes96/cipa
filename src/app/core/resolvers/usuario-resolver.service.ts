@@ -4,7 +4,7 @@ import { Resolve, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Usuario } from 'src/app/shared/models/usuario';
+import { Usuario } from '@shared/models/usuario';
 import { UsuariosApiService } from '../api/usuarios-api.service';
 
 

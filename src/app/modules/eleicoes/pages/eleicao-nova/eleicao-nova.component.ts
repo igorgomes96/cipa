@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Eleicao } from 'src/app/shared/models/eleicao';
-import { Empresa } from 'src/app/shared/models/empresa';
+import { Eleicao } from '@shared/models/eleicao';
+import { Empresa } from '@shared/models/empresa';
 import { EmpresasApiService } from 'src/app/core/api/empresas-api.service';
-import { Estabelecimento } from 'src/app/shared/models/estabelecimento';
+import { Estabelecimento } from '@shared/models/estabelecimento';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { tap, filter, switchMap } from 'rxjs/operators';
 import { EstabelecimentosApiService } from 'src/app/core/api/estabelecimentos-api.service';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
-import { EtapaCronograma, PosicaoEtapa } from 'src/app/shared/models/cronograma';
+import { EtapaCronograma, PosicaoEtapa } from '@shared/models/cronograma';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/core/components/toasts/toasts.component';
-import { Grupo } from 'src/app/shared/models/grupo';
+import { Grupo } from '@shared/models/grupo';
 import { GruposApiService } from 'src/app/core/api/grupos-api.service';
 import { NavigationService } from 'src/app/core/services/navigation.service';
 
@@ -177,7 +177,8 @@ export class EleicaoNovaComponent implements OnInit {
     const eleicao = {
       ...this.gestao,
       gestao: this.gestao.dataInicio.getFullYear(),
-      estabelecimentoId: this.formListaEstabelecimentos.get('estabelecimento').value as number
+      estabelecimentoId: this.formListaEstabelecimentos.get('estabelecimento').value as number,
+      grupoId: this.estabelecimentoSelecionado.grupoId
     } as any;
 
     this.eleicoesApi.post(eleicao)

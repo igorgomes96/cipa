@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
-import { Usuario } from 'src/app/shared/models/usuario';
+import { Usuario } from '@shared/models/usuario';
 import { LoginApiService } from 'src/app/core/api/login-api.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';

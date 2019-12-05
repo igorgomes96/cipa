@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
-import { Eleicao } from 'src/app/shared/models/eleicao';
-import { PagedResult } from 'src/app/shared/models/paged-result';
+import { Eleicao } from '@shared/models/eleicao';
+import { PagedResult } from '@shared/models/paged-result';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/core/components/toasts/toasts.component';
-import { AuthInfo, Perfil } from 'src/app/shared/models/usuario';
+import { AuthInfo, Perfil } from '@shared/models/usuario';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { CodigoEtapaObrigatoria } from 'src/app/shared/models/cronograma';
+import { CodigoEtapaObrigatoria } from '@shared/models/cronograma';
 import { tap, switchMap, filter } from 'rxjs/operators';
 import { from, forkJoin, of } from 'rxjs';
 
@@ -52,7 +52,7 @@ export class EleicoesListaComponent implements OnInit {
             filter((eleicao: Eleicao) => eleicao.usuarioEleitor),
             switchMap(eleicao => forkJoin({
               eleicao: of(eleicao),
-              candidato: this.eleicoesApi.getCandidato(eleicao.id),
+              candidato: this.eleicoesApi.getInscricaoUsuario(eleicao.id),
               voto: this.eleicoesApi.getVotoUsuario(eleicao.id)
             }))).subscribe(dados => {
               dados.eleicao.candidato = dados.candidato;
@@ -80,8 +80,7 @@ export class EleicoesListaComponent implements OnInit {
 
   get eleicoesEtapaSuperiorInscricoes(): Eleicao[] {
     if (!this.eleicoes || !this.eleicoes.length) { return []; }
-    return this.eleicoes.filter(e => e.inscricoesFinalizadas ||
-      (e.etapaAtual && e.etapaAtual.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao));
+    return this.eleicoes.filter(e => e.inscricoesFinalizadas);
   }
 
 

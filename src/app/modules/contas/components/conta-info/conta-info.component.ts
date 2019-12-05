@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Conta } from 'src/app/shared/models/usuario';
+import { Conta } from '@shared/models/usuario';
 
 @Component({
   selector: 'app-conta-info',

@@ -5,7 +5,7 @@ import { Resolve, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Eleitor } from '../../shared/models/eleitor';
+import { Eleitor } from '@shared/models/eleitor';
 
 
 @Injectable({

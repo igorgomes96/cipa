@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/shared/models/usuario';
+import { Usuario } from '@shared/models/usuario';
 import { LoginApiService } from 'src/app/core/api/login-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';

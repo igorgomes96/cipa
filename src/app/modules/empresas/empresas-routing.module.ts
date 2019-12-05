@@ -1,4 +1,4 @@
-import { EmpresaResolverService } from './../../core/resolvers/empresa-resolver.service';
+import { EmpresaResolverService } from '@core/resolvers/empresa-resolver.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EmpresasComponent } from './pages/empresas/empresas.component';

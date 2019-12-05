@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ContasRoutingModule } from './contas-routing.module';
 import { ContaUsuarioComponent } from './pages/conta-usuario/conta-usuario.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { ContaInfoComponent } from './components/conta-info/conta-info.component';
 import { UsuariosListaComponent } from './components/usuarios-lista/usuarios-lista.component';
 import { UsuarioNovoComponent } from './pages/usuario-novo/usuario-novo.component';

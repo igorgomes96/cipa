@@ -21,7 +21,7 @@ export class EleitorGuard implements CanActivate {
             return false;
         } else {
             const id = +next.paramMap.get('id');
-            return this.eleicoesApi.getEleitor(id)
+            return this.eleicoesApi.getEleitorUsuario(id)
                 .pipe(map(eleitor => {
                     if (!eleitor) {
                         this.toasts.showMessage({

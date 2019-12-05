@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { endpoints } from '../../../environments/endpoints';
-import { Usuario } from '../../shared/models/usuario';
+import { endpoints } from '@env/endpoints';
+import { Usuario } from '@shared/models/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class LoginApiService {
   private url = environment.api + endpoints.login;
 
   login(usuario: Usuario): Observable<any> {
-    return this.http.post<any>(this.url, usuario);
+    return this.http.post<any>(`${this.url}login`, usuario);
   }
 
   buscaPeloCodigoRecuperacao(codigo: string): Observable<Usuario> {

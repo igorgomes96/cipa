@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { GenericApi } from './generic-api';
 import { environment } from 'src/environments/environment';
 import { endpoints } from 'src/environments/endpoints';
-import { AuthInfo } from 'src/app/shared/models/usuario';
-import { EtapaPadraoConta } from 'src/app/shared/models/cronograma';
+import { AuthInfo } from '@shared/models/usuario';
+import { EtapaPadraoConta } from '@shared/models/cronograma';
 import { Observable } from 'rxjs';
 
 @Injectable({

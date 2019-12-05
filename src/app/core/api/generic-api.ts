@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { PagedResult } from '../../shared/models/paged-result';
+import { PagedResult } from '@shared/models/paged-result';
 
 export class GenericApi<T> {
 

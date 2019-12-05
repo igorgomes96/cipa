@@ -13,11 +13,13 @@ export class ResultadoApuracao {
 export class Apuracao {
   nome: string;
   email: string;
-  area: string;
+  matricula: string;
   cargo: string;
+  area: string;
   votos: number;
   foto: string;
-  dataAdmissao: string;
+  dataAdmissao: Date;
+  dataNascimento: Date;
   candidatoId: number;
   resultadoApuracao: Resultado;
 }

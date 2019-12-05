@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { EtapaPadraoConta } from 'src/app/shared/models/cronograma';
+import { EtapaPadraoConta } from '@shared/models/cronograma';
 import { ContasApiService } from 'src/app/core/api/contas-api.service';
-import { Conta } from 'src/app/shared/models/usuario';
+import { Conta } from '@shared/models/usuario';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 

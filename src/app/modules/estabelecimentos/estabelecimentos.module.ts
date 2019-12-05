@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { EstabelecimentosRoutingModule } from './estabelecimentos-routing.module';
 import { EstabelecimentosComponent } from './pages/estabelecimentos/estabelecimentos.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { EstabelecimentoNovoComponent } from './pages/estabelecimento-novo/estabelecimento-novo.component';
 import { EstabelecimentoEdicaoComponent } from './pages/estabelecimento-edicao/estabelecimento-edicao.component';
 

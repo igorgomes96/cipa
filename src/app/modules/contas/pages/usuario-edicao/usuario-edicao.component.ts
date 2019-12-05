@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/shared/models/usuario';
+import { Usuario } from '@shared/models/usuario';
 import { filter, map, tap } from 'rxjs/operators';
 import { UsuariosApiService } from 'src/app/core/api/usuarios-api.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';

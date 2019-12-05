@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EmpresasRoutingModule } from './empresas-routing.module';
 import { EmpresasComponent } from './pages/empresas/empresas.component';
 import { EmpresasListaComponent } from './components/empresas-lista/empresas-lista.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { EmpresaNovaComponent } from './pages/empresa-nova/empresa-nova.component';
 import { EmpresaEdicaoComponent } from './pages/empresa-edicao/empresa-edicao.component';
 

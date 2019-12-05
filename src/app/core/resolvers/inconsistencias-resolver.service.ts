@@ -4,8 +4,7 @@ import { Resolve, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { EleitoresApiService } from '../api/eleitores-api.service';
-import { Eleitor } from '../../shared/models/eleitor';
+import { Eleitor } from '@shared/models/eleitor';
 import { ImportacoesApiService } from '../api/importacoes-api.service';
 
 

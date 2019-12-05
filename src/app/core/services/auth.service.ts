@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { AuthInfo, Perfil } from 'src/app/shared/models/usuario';
+import { AuthInfo, Perfil } from '@shared/models/usuario';
 
 @Injectable({
   providedIn: 'root'

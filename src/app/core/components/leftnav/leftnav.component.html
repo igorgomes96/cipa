@@ -4,8 +4,8 @@
           <li class="nav-header">
               <div class="dropdown profile-element">
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                      <span class="block m-t-xs"> <strong class="font-bold">Usuário</strong> </span>
-                      <span class="text-muted text-xs block">Administrador <b class="caret"></b> </span>
+                      <span class="block m-t-xs"> <strong class="font-bold">{{ authInfo?.nome }}</strong> </span>
+                      <span class="text-muted text-xs block">{{ authInfo?.perfil }} </span> <!--b class="caret"></!--b> </span!-->
                   </a>
                   <ul class="dropdown-menu animated fadeInRight m-t-xs">
                       <li><a (click)="logout()">Logout</a></li>

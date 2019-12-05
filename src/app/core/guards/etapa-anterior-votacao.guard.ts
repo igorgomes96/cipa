@@ -5,7 +5,7 @@ import { EleicoesApiService } from '../api/eleicoes-api.service';
 import { map } from 'rxjs/operators';
 import { ToastsService } from '../services/toasts.service';
 import { ToastType } from '../components/toasts/toasts.component';
-import { CodigoEtapaObrigatoria, PosicaoEtapa } from 'src/app/shared/models/cronograma';
+import { CodigoEtapaObrigatoria, PosicaoEtapa } from '@shared/models/cronograma';
 
 @Injectable({
   providedIn: 'root'

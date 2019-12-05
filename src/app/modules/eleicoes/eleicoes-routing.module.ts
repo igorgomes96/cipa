@@ -25,19 +25,9 @@ const routes: Routes = [
   {
     path: ':id',
     children: [
-      // {
-      //   path: '',
-      //   component: EleicaoEdicaoComponent,
-      //   resolve: {
-      //     eleicao: EleicaoResolverService
-      //   },
-      //   data: {
-      //     navigationType: NavigationType.Top
-      //   }
-      // },
       {
         path: 'dashboard',
-        loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule),
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
         data: {
           breadcrumb: 'Eleições',
           title: 'Eleições'
@@ -46,7 +36,7 @@ const routes: Routes = [
       },
       {
         path: 'cronograma',
-        loadChildren: () => import('../cronograma/cronograma.module').then(m => m.CronogramaModule),
+        loadChildren: () => import('./cronograma/cronograma.module').then(m => m.CronogramaModule),
         data: {
           breadcrumb: 'Eleições',
           title: 'Eleições'
@@ -55,7 +45,7 @@ const routes: Routes = [
       },
       {
         path: 'eleitores',
-        loadChildren: () => import('../eleitores/eleitores.module').then(m => m.EleitoresModule),
+        loadChildren: () => import('./eleitores/eleitores.module').then(m => m.EleitoresModule),
         data: {
           breadcrumb: 'Eleições',
           title: 'Eleições'
@@ -63,12 +53,12 @@ const routes: Routes = [
         canLoad: [SesmtCanLoadGuard]
       },
       {
-        path: 'candidaturas',
-        loadChildren: () => import('../candidaturas/candidaturas.module').then(m => m.CandidaturasModule)
+        path: 'inscricoes',
+        loadChildren: () => import('./inscricoes/inscricoes.module').then(m => m.InscricoesModule)
       },
       {
         path: 'votacao',
-        loadChildren: () => import('../votacoes/votacoes.module').then(m => m.VotacoesModule)
+        loadChildren: () => import('./votacoes/votacoes.module').then(m => m.VotacoesModule)
       }
     ]
   }

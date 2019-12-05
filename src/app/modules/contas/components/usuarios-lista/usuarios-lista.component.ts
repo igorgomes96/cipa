@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Usuario } from 'src/app/shared/models/usuario';
+import { Usuario } from '@shared/models/usuario';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { filter, tap } from 'rxjs/operators';
 

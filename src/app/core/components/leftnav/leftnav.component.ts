@@ -2,6 +2,8 @@ import { NavigationService } from './../../services/navigation.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ResolveEnd, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { filter, distinctUntilChanged } from 'rxjs/operators';
+import { AuthService } from '../../services/auth.service';
+import { AuthInfo } from '@shared/models/usuario';
 
 declare var $: any;
 
@@ -25,7 +27,8 @@ export class LeftnavComponent implements OnInit {
   isAdmin = true;
   constructor(
     private router: Router,
-    private navigationService: NavigationService) {
+    private navigationService: NavigationService,
+    private authInfoService: AuthService) {
     this.menu = [
       {
         label: 'Dashboard',
@@ -53,7 +56,7 @@ export class LeftnavComponent implements OnInit {
       },
       {
         label: 'Inscrições',
-        link: '/eleicoes/:id/candidaturas',
+        link: '/eleicoes/:id/inscricoes',
         icon: 'fa fa-vcard',
         visible: true,
         children: [
@@ -129,6 +132,10 @@ export class LeftnavComponent implements OnInit {
   logout() {
     // this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  get authInfo(): AuthInfo  {
+    return this.authInfoService.authInfo;
   }
 
 

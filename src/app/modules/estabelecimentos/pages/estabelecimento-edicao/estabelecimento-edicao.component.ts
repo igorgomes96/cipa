@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
-import { Empresa } from './../../../../shared/models/empresa';
+import { Empresa } from '@shared/models/empresa';
 import { Component, OnInit } from '@angular/core';
-import { Estabelecimento } from 'src/app/shared/models/estabelecimento';
+import { Estabelecimento } from '@shared/models/estabelecimento';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { EstabelecimentosApiService } from 'src/app/core/api/estabelecimentos-api.service';

@@ -1,4 +1,4 @@
-import { Apuracao } from 'src/app/shared/models/apuracao';
+import { Apuracao } from '@shared/models/apuracao';
 import { Injectable } from '@angular/core';
 import { Resolve, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 

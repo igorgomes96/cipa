@@ -1,8 +1,0 @@
-<app-candidaturas-lista
-    titulo="Inscrições Pendentes"
-    [descricao]="candidatos && candidatos.length ? 'Abaixo, segue a relação de inscrições que estão pendentes de aprovação.' : 'Nenhuma inscrição pendente.'"
-    [candidatos]="candidatos"
-    [tipoCard]="TipoCardEleitor.Aprovacao"
-    (aprovacao)="aprovacao($event)"
-    (reprovacao)="reprovacao($event)"
-></app-candidaturas-lista>

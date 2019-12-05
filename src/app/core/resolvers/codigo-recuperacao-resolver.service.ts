@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Usuario } from 'src/app/shared/models/usuario';
+import { Usuario } from '@shared/models/usuario';
 import { LoginApiService } from '../api/login-api.service';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';

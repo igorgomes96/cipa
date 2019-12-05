@@ -1,4 +1,4 @@
-import { Empresa } from 'src/app/shared/models/empresa';
+import { Empresa } from '@shared/models/empresa';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmpresasApiService } from 'src/app/core/api/empresas-api.service';

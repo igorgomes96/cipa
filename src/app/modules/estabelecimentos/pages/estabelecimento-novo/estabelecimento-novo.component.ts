@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EstabelecimentosApiService } from 'src/app/core/api/estabelecimentos-api.service';
 import { ToastsService } from 'src/app/core/services/toasts.service';
-import { Estabelecimento } from 'src/app/shared/models/estabelecimento';
+import { Estabelecimento } from '@shared/models/estabelecimento';
 import { ToastType } from 'src/app/core/components/toasts/toasts.component';
-import { Empresa } from 'src/app/shared/models/empresa';
+import { Empresa } from '@shared/models/empresa';
 
 @Component({
   selector: 'app-estabelecimento-novo',

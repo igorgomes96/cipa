@@ -46,13 +46,6 @@ const routes: Routes = [
     loadChildren: () => import('./modules/contas/contas.module').then(m => m.ContasModule),
     canLoad: [AuthCanLoadGuard, SesmtCanLoadGuard]
   },
-  // {
-  //   path: 'home',
-  //   component: HomeComponent,
-  //   data: {
-  //     navigationType: NavigationType.Top
-  //   }
-  // },
   { path: '', redirectTo: 'eleicoes', pathMatch: 'full' },
   { path: '**', redirectTo: '/not-found' }
 ];

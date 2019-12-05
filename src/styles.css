@@ -89,7 +89,7 @@ label.required::after {
   flex-direction: column;
 }
 
-app-card-candidato {
+app-card-inscricao {
   flex-grow: 1;
   margin-bottom: 25px;
 }

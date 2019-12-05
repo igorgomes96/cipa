@@ -6,11 +6,12 @@
         <span *ngIf="eleicao.etapaAtual" class="label label-success float-right">
           {{ eleicao.etapaAtual.nome }}
         </span>
-        <span *ngIf="!eleicao.etapaAtual && eleicao.horarioFinalizacao" class="label label-primary float-right">
-          Finalizada em {{ eleicao.horarioFinalizacao | date:'dd/MMM' }}
+        <span *ngIf="!eleicao.etapaAtual && eleicao.dataFinalizacao" class="label label-primary float-right">
+          Finalizada em {{ eleicao.dataFinalizacao | date:'dd/MMM' }}
         </span>
       </h4>
       <p>
+        <span class="fa fa-calendar"></span> <strong> {{ eleicao.gestao }}</strong> <br>
         <span class="fa fa-map-marker"></span> {{ eleicao.estabelecimento?.endereco }}<br>
         <span [hidden]="!eleicao.estabelecimento?.descricao">
           <span class="fa fa-info"></span> {{ eleicao.estabelecimento?.descricao }}<br>
@@ -20,7 +21,7 @@
 
       <div *ngIf="perfilSESMT">
         Grupo: <strong class="label label-warning">{{ eleicao.grupo }}</strong>
-        <a (click)="alterarGrupo()" class="m-l-sm" *ngIf="!eleicao.horarioFinalizacao"><span class="fa fa-pencil"></span></a>
+        <a (click)="alterarGrupo()" class="m-l-sm" *ngIf="!eleicao.dataFinalizacao"><span class="fa fa-pencil"></span></a>
       </div>
 
       <div *ngIf="!perfilSESMT">
@@ -62,7 +63,7 @@
         <a [routerLink]="'/eleicoes/' + eleicao.id + '/cronograma'" class="btn btn-success btn-outline m-r-sm"><span
             class="fa fa-calendar"></span> Acessar</a>
 
-        <button *ngIf="!eleicao.etapaAtual && !eleicao.horarioFinalizacao" class="btn btn-outline-danger"
+        <button *ngIf="!eleicao.etapaAtual && !eleicao.dataFinalizacao" class="btn btn-outline-danger"
           (click)="excluirEleicao()"><span class="fa fa-trash"></span>
           Excluir</button>
 
@@ -71,7 +72,7 @@
 
         <span *ngIf="eleicao.inscricoesFinalizadas; else inscricaoNaoFinalizada">
           <span *ngIf="!eleicao.voto && eleicao.etapaAtual?.etapaObrigatoriaId === CodigoEtapaObrigatoria.Votacao">
-            <a [routerLink]="'/eleicoes/' + eleicao.id + '/votacao'" class="btn btn-outline-success m-r-sm">
+            <a [routerLink]="'/eleicoes/' + eleicao.id + '/votacao'" class="btn btn-outline btn-success m-r-sm">
               <span class="fa fa-thumbs-up"></span> Votar
             </a>
           </span>
@@ -79,14 +80,14 @@
 
         <ng-template #inscricaoNaoFinalizada>
           <span *ngIf="eleicao.candidato; else naoInscrito">
-            <a [routerLink]="'/eleicoes/' + eleicao.id + '/candidaturas/nova'" class="btn btn-outline-success m-r-sm">
+            <a [routerLink]="'/eleicoes/' + eleicao.id + '/inscricoes/nova'" class="btn btn-outline btn-success m-r-sm">
               <span class="fa fa-user"></span> Minha Inscrição
             </a>
           </span>
 
           <ng-template #naoInscrito>
             <span *ngIf="eleicao.etapaAtual?.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao">
-              <a [routerLink]="'/eleicoes/' + eleicao.id + '/candidaturas/nova'" class="btn btn-outline-primary m-r-sm">
+              <a [routerLink]="'/eleicoes/' + eleicao.id + '/inscricoes/nova'" class="btn btn-outline btn-primary m-r-sm">
                 <span class="fa fa-user"></span> Inscreva-se!
               </a>
             </span>

@@ -6,8 +6,8 @@ import { Resolve, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 import { Observable, of, forkJoin } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { Eleicao } from '../../shared/models/eleicao';
-import { Empresa } from 'src/app/shared/models/empresa';
+import { Eleicao } from '@shared/models/eleicao';
+import { Empresa } from '@shared/models/empresa';
 
 
 @Injectable({

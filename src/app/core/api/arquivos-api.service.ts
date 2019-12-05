@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpEvent, HttpRequest, HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { endpoints } from '../../../environments/endpoints';
-import { downloadArquivo } from 'src/app/shared/rxjs-operators';
+import { endpoints } from '@env/endpoints';
+import { downloadArquivo } from '@shared/rxjs-operators';
 
 @Injectable({
   providedIn: 'root'

@@ -1,0 +1,103 @@
+<app-panel title="Eleitores" [labelText]="eleitores?.totalRecords + ' eleitores'" [collapsible]="false">
+  <p>Importação em massa de eleitores.
+    <app-ajuda-tooltip ajuda="Para facilitar o cadastro, você pode fazer a importação de um arquivo Excel com os dados dos funcionários.
+    Baixe o template, preencha os dados e faça a importação.">
+    </app-ajuda-tooltip>
+  </p>
+  <button class="btn btn-success m-r-sm m-t-xs" (click)="downloadTemplate()"><i class="fa fa-download"></i> Baixar Template</button>
+  <label for="upload" class="btn btn-primary m-t-xs">
+    <input type="file" name="upload" id="upload" class="hide" (change)="onUploadArquivo($event)">
+    <i class="fa fa-upload"></i> Importar Dados
+  </label>
+
+  <div class="project-list table-responsive m-t-md" *ngIf="ultimaImportacao">
+
+    <table class="table table-hover">
+      <tbody>
+        <tr>
+          <td class="project-title">
+            <strong>{{ ultimaImportacao.arquivo.nome }}</strong>
+            <br />
+            <small>Upload: {{ ultimaImportacao.arquivo.dataUpload | date:'dd/MM/yyyy HH:mm' }}, {{ (ultimaImportacao.arquivo.tamanho / 1024) |
+              number:'1.0-1' }}k</small>
+          </td>
+          <td class="project-completion" *ngIf="progresso">
+            <small>Progresso da Importação: {{ progresso?.progresso | number:'1.1-1' }}%</small>
+            <div class="progress progress-mini">
+              <div [style.width]="progresso?.progresso + '%'" class="progress-bar"></div>
+            </div>
+          </td>
+          <td class="project-status text-right">
+            <span class="label" [ngClass]="labelStatusImportacao">{{ ultimaImportacao?.status }}</span>
+          </td>
+          <td class="text-right" *ngIf="ultimaImportacao?.status === StatusImportacao.FinalizadoComFalha">
+            <a [routerLink]="['importacoes', ultimaImportacao.id, 'inconsistencias']">Detalhes</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr *ngIf="!ultimaImportacao">
+
+  <h4>
+    Lista de Eleitores
+    <app-ajuda-tooltip ajuda="A tabela abaixo exibe todos os eleitores cadastrados nessa eleição. Para procurar um eleitor específico, basta
+        começar a digitar o nome dele na campo abaixo. À medida que você digita a tabela vai sendo filtrada.">
+    </app-ajuda-tooltip>
+  </h4>
+  <p></p>
+  <form [formGroup]="form">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <i class="fa fa-search"></i>
+      </span>
+      <input type="text" id="filtro" formControlName="filtro" placeholder="Pesquise pelo nome"
+        class="input form-control">
+    </div>
+  </form>
+  <br>
+  <div class="row m-t-md m-b-lg">
+    <div class="col-sm-12">
+      <a routerLink="novo" class="btn btn-primary m-r-sm"><i class="fa fa-plus"></i> Cadastrar Novo</a>
+      <button class="btn btn-danger" (click)="excluirTodos()"><i class="fa fa-trash"></i> Excluir todos</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <app-pagination [paginationInfo]="eleitores" (alteraPagina)="alteraPagina($event)"
+        (alteraTamanhoPagina)="alteraTamanhoPagina($event)"></app-pagination>
+    </div>
+  </div>
+
+
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>E-mail</th>
+          <th>Admissão</th>
+          <th class="text-right"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let eleitor of eleitores.result">
+          <td>{{ eleitor.nome }}</td>
+          <td>{{ eleitor.email }}</td>
+          <td>{{ eleitor.dataAdmissao | date:'dd/MM/yyyy' }}</td>
+          <td class="text-right">
+            <div>
+              <a class="btn btn-xs btn-outline btn-success m-r-xs" [routerLink]="['./', eleitor.id]"><i
+                  class="fa fa-pencil"></i></a>
+              <button class="btn btn-xs btn-outline btn-danger" (click)="excluir(eleitor.id)"><i
+                  class="fa fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</app-panel>

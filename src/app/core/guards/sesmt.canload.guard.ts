@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, CanLoad, Route, UrlSegment } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { Perfil } from 'src/app/shared/models/usuario';
+import { Perfil } from '@shared/models/usuario';
 import { ToastsService } from '../services/toasts.service';
 import { ToastType } from '../components/toasts/toasts.component';
 

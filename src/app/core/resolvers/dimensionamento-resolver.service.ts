@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { EleicoesApiService } from '../api/eleicoes-api.service';
-import { Dimensionamento } from 'src/app/shared/models/dimensionamento';
+import { Dimensionamento } from '@shared/models/dimensionamento';
 
 
 @Injectable({

@@ -1,0 +1,90 @@
+<div timeline-item [calendarIcon]="calendarIcon" [calendarClass]="calendarClass" class="vertical-timeline-block">
+  <div class="row" [class.editando]="editando">
+    <div class="col-sm-12" [ngClass]="tamanhoDescricao">
+      <h2>
+        <span [tooltip]="etapa.erroMudancaEtapa" theme="dark" *ngIf="etapa.erroMudancaEtapa" class="text-danger">
+          <i class="fa fa-exclamation-circle"></i> {{ etapa.nome }}
+        </span>
+        <span *ngIf="!etapa.erroMudancaEtapa" class="nome-etapa">
+          <app-custom-input required [(ngModel)]="etapa.nome" name="Nome" label="Nome da Etapa" [readOnly]="!editando"
+            #Nome="ngModel" [showLabel]="false" [control]="Nome"></app-custom-input>
+        </span>
+        <small *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Futura" class="dias-atraso">
+          <span class="label label-danger pull-right dias-atraso"
+            *ngIf="diasAtrasos > 0">{{ diasAtrasos | number:'1.0-0'}} dias de
+            atraso</span>
+        </small>
+      </h2>
+
+      <div class="row">
+        <div class="col-md-12">
+          <form [formGroup]="form">
+            <span class="vertical-date">
+              <div *ngIf="isDateDisabled" style="font-size: 14px;cursor: not-allowed;color:#676a6c">
+                <span><i class="fa fa-calendar"></i></span> {{ form.get('data').value | date:'dd/MM/yyyy' }}
+              </div>
+              <app-datepicker [name]="'data' + etapa.id" [id]="'data' + etapa.id" formControlName="data"
+                [control]="form.get('data')" *ngIf="!isDateDisabled"></app-datepicker>
+              <small *ngIf="!isDateDisabled">Clique na data acima para alterá-la.</small>
+            </span>
+          </form>
+
+        </div>
+      </div>
+
+
+      <p>
+        <span *ngIf="!editando">
+          {{ etapa.descricao }}
+          <a class="btn-editar" (click)="editando = true"> <span class="fa fa-pencil"></span></a>
+        </span>
+        <textarea *ngIf="editando" [(ngModel)]="etapa.descricao" [readonly]="!editando" class="form-control"
+          rows="4"></textarea>
+      </p>
+
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-outline-success btn-sm btn-salvar m-r-sm m-b-sm"
+            (click)="onAtualizarEtapa(); editando = false"><span class="fa fa-floppy-o"></span> Salvar</button>
+
+          <button class="btn btn-outline-primary btn-sm btn-cancelar m-r-sm m-b-sm" (click)="onCancelarEdicao()">
+            <span class="fa fa-ban"></span> Cancelar</button>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="dimensionamento">
+        <div class="col-sm-12" [ngSwitch]="etapa.etapaObrigatoriaId" *ngIf="etapa.posicaoEtapa !== PosicaoEtapa.Futura">
+          <app-etapa-dimensionamento *ngSwitchCase="CodigoEtapaObrigatoria.Inscricao"
+            [dimensionamento]="dimensionamento" [codigoGrupo]="codigoGrupo">
+          </app-etapa-dimensionamento>
+          <app-etapa-percentual-votos *ngSwitchCase="CodigoEtapaObrigatoria.Votacao"
+            [dimensionamento]="dimensionamento">
+          </app-etapa-percentual-votos>
+        </div>
+      </div>
+
+      <div class="templates" *ngIf="layout === 'Visualização' && etapa.possuiTemplates">
+        <p>Possuímos alguns documentos de exemplo que podem te ajudar. Confira-os e fique à vontade para
+          utilizá-los!</p>
+        <button class="btn btn-success float-left" [disabled]="etapa.posicaoEtapa === PosicaoEtapa.Futura"
+          (click)="onExibirTemplates(etapa.id)"><i class="fa fa-file-text"></i> Templates</button>
+      </div>
+
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-sm-12 arquivos"
+      *ngIf="layout === 'Visualização' && etapa.posicaoEtapa !== PosicaoEtapa.Futura">
+
+      <app-arquivos [arquivos]="arquivos" (upload)="upload($event)" (delete)="deleteArquivo()"></app-arquivos>
+
+
+      <div class="row m-t-sm" *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Atual">
+        <div class="col-md-12">
+          <button href="#" class="btn btn-primary" style="float: right" [ladda]="carregandoProximaEtapa"
+            (click)="onProximaEtapa()"> Próxima
+            Etapa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

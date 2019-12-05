@@ -1,5 +1,5 @@
 import { EstabelecimentosApiService } from 'src/app/core/api/estabelecimentos-api.service';
-import { Estabelecimento } from 'src/app/shared/models/estabelecimento';
+import { Estabelecimento } from '@shared/models/estabelecimento';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { filter, switchMap } from 'rxjs/operators';

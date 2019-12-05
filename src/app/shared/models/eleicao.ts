@@ -1,8 +1,9 @@
+import { Dimensionamento } from './dimensionamento';
 import { Voto } from './voto';
 import { Estabelecimento } from './estabelecimento';
 import { EtapaCronograma } from './cronograma';
 import { Eleitor } from './eleitor';
-import { Candidato } from './candidato';
+import { Inscricao } from './inscricao';
 
 export class Eleicao {
     id: number;
@@ -11,24 +12,25 @@ export class Eleicao {
     estabelecimentoId: number;
     cronograma: EtapaCronograma[];
     estabelecimento: Estabelecimento;
-    eleitores: Eleitor[];
-    terminoMandatoAnterior: Date;
     dataInicio: Date;
-    etapaAtual: EtapaCronograma;
-    horarioFinalizacao: Date;
+    dataCadastro: Date;
+    dataFinalizacao: Date;
     grupoId: number;
     grupo: string;
-    qtdaEfetivos: number;
-    qtdaSuplentes: number;
+    eleitores: Eleitor[];
+    terminoMandatoAnterior: Date;
+    etapaAtual: EtapaCronograma;
+    // qtdaEfetivos: number;
+    // qtdaSuplentes: number;
     inscricoesFinalizadas: boolean;
     votacaoFinalizada: boolean;
     inicioInscricao: Date;
     terminoInscricao: Date;
     inicioVotacao: Date;
     terminoVotacao: Date;
-    dataVotoEleitor: Date;
+    dimensionamento: Dimensionamento;
 
-    candidato: Candidato;
+    candidato: Inscricao;
     voto: Voto;
     usuarioEleitor: boolean;
 

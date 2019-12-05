@@ -1,12 +1,12 @@
-import { Eleicao } from 'src/app/shared/models/eleicao';
+import { Eleicao } from '@shared/models/eleicao';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { filter, finalize } from 'rxjs/operators';
-import { StatusAprovacao } from 'src/app/shared/models/candidato';
-import { CodigoEtapaObrigatoria } from 'src/app/shared/models/cronograma';
+import { StatusAprovacao } from '@shared/models/inscricao';
+import { CodigoEtapaObrigatoria } from '@shared/models/cronograma';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Perfil } from 'src/app/shared/models/usuario';
-import { Grupo } from 'src/app/shared/models/grupo';
+import { Perfil } from '@shared/models/usuario';
+import { Grupo } from '@shared/models/grupo';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { ToastType } from 'src/app/core/components/toasts/toasts.component';

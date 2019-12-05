@@ -14,7 +14,7 @@ import { ArquivosComponent } from './components/arquivos/arquivos.component';
 import { CustomInputComponent } from './components/custom-input/custom-input.component';
 import { ValidatorMessageComponent } from './components/validator-message/validator-message.component';
 import { DateValidatorDirective } from './directives/date-validator.directive';
-import { CardCandidatoComponent } from './components/card-candidato/card-candidato.component';
+import { CardInscricaoComponent } from './components/card-inscricao/card-inscricao.component';
 import { WizardComponent } from './components/wizard/wizard.component';
 import { EmpresaSharedFormComponent } from './components/empresa-shared-form/empresa-shared-form.component';
 import { EstabelecimentoSharedFormComponent } from './components/estabelecimento-shared-form/estabelecimento-shared-form.component';
@@ -41,7 +41,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     DateValidatorDirective,
     EqualsToValidatorDirective,
     EqualsValidatorDirective,
-    CardCandidatoComponent,
+    CardInscricaoComponent,
     WizardComponent,
     EmpresaSharedFormComponent,
     EstabelecimentoSharedFormComponent,
@@ -78,7 +78,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     DateValidatorDirective,
     EqualsToValidatorDirective,
     EqualsValidatorDirective,
-    CardCandidatoComponent,
+    CardInscricaoComponent,
     WizardComponent,
     EmpresaSharedFormComponent,
     EstabelecimentoSharedFormComponent,

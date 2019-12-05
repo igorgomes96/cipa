@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { smoothlyMenu } from 'src/app.helpers';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Perfil } from 'src/app/shared/models/usuario';
+import { Perfil } from '@shared/models/usuario';
 
 declare var $: any;
 

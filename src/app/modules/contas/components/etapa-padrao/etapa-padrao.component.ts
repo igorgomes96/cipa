@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { EtapaPadraoConta } from 'src/app/shared/models/cronograma';
+import { EtapaPadraoConta } from '@shared/models/cronograma';
 import { ToastsService } from 'src/app/core/services/toasts.service';
 import { filter, finalize } from 'rxjs/operators';
 

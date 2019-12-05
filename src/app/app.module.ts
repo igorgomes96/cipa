@@ -37,7 +37,7 @@ registerLocaleData(localePt);
     JwtModule.forRoot({
       config: {
         tokenGetter,
-        whitelistedDomains: ['localhost:5050'],
+        whitelistedDomains: ['localhost:5000'],
       }
     })
   ],
