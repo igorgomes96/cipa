@@ -1,4 +1,4 @@
-<div *ngIf="!dimensionamento.qtdaVotos else templateAtualizar" class="alert alert-warning">
+<div *ngIf="!eleicao.dimensionamento.qtdaVotos else templateAtualizar" class="alert alert-warning">
   <strong>Não temos nada para mostrar!</strong> Ainda não houve nenhum voto nesta eleição.
 </div>
 
@@ -11,8 +11,8 @@
 </ng-template>
 
 
-<div *ngIf="dimensionamento.qtdaVotos">
-  <app-widgets [dimensionamento]="dimensionamento"></app-widgets>
+<div *ngIf="eleicao.dimensionamento.qtdaVotos">
+  <app-widgets [dimensionamento]="eleicao.dimensionamento"></app-widgets>
 
   <app-panel title="Apuração dos votos" [collapsible]="false">
     <h2 class="text-center">Qtda. de Votos</h2>
@@ -26,7 +26,7 @@
     <app-relatorio-eleitores [eleicao]="eleicao"></app-relatorio-eleitores>
   </app-panel>
 
-  <div class="row">
+  <div class="row" *ngIf="eleicao.dimensionamento.qtdaVotos >= eleicao.dimensionamento.qtdaMinimaVotos">
     <div class="col-md-6 col-sm-12">
       <app-panel title="Resultado da Apuração" labelText="Efetivos" labelClass="label-primary" [collapsible]="false">
         <app-resultado-apuracao [apuracao]="resultado.efetivos"></app-resultado-apuracao>
@@ -42,7 +42,7 @@
 </div>
 
 <app-panel title="Relação de Votos por Candidato" [options]="optionsCandidatos"
-  (optionClick)="onOptionsCandidatosClick()" *ngIf="dimensionamento.qtdaVotos">
+  (optionClick)="onOptionsCandidatosClick()" *ngIf="eleicao.dimensionamento.qtdaVotos">
   <app-relacao-candidatos [resultado]="resultado" [eleicao]="eleicao" [downloadRelatorio]="donwloadRelatorioCandidatos">
   </app-relacao-candidatos>
 </app-panel>

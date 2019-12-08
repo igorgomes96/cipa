@@ -63,6 +63,14 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
 
 
   // Inscrições
+  postInscricao(idEleicao: number, inscricao: Inscricao): Observable<Inscricao> {
+    return this.http.post<Inscricao>(`${this.url}${idEleicao}/inscricoes`, inscricao);
+  }
+
+  putInscricao(idEleicao: number, inscricao: Inscricao): Observable<Inscricao> {
+    return this.http.put<Inscricao>(`${this.url}${idEleicao}/inscricoes`, inscricao);
+  }
+
   getInscricaoUsuario(idEleicao: number): Observable<Inscricao> {
     return this.http.get<Inscricao>(`${this.url}${idEleicao}/inscricao`);
   }
@@ -72,11 +80,11 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
       { params: { status: StatusAprovacao[status], eleitorNome: pesquisa || '' } });
   }
 
-  postFotoInscricao(id: number, foto: FileList): Observable<HttpEvent<{}>> {
-    return this.arquivosApiService.uploadFiles(`${this.url}${id}/foto`, foto);
+  postFotoInscricao(idEleicao: number, foto: FileList): Observable<HttpEvent<{}>> {
+    return this.arquivosApiService.uploadFiles(`${this.url}${idEleicao}/inscricoes/foto`, foto);
   }
 
-  getFotoInscrito(id: number): Observable<any> {
+  getFotoInscrito(idEleicao: number, id: number): Observable<any> {
     const readFoto = (foto: Blob) => {
       return new Promise(resolve => {
         const fileReader = new FileReader();
@@ -87,11 +95,12 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
       });
     };
 
-    return this.http.get(`${this.url}${id}/foto`, { headers: { 'Content-Type': 'image/jpeg' }, responseType: 'blob' })
+    return this.http.get(`${this.url}${idEleicao}/inscricoes/${id}/foto`,
+      { headers: { 'Content-Type': 'image/jpeg' }, responseType: 'blob' })
       .pipe(switchMap((foto) => readFoto(foto)));
   }
 
-  putAprovarInscricao(idEleicao: number, idInscricao: number): Observable<Inscricao>  {
+  putAprovarInscricao(idEleicao: number, idInscricao: number): Observable<Inscricao> {
     return this.http.put<Inscricao>(`${this.url}${idEleicao}/inscricoes/${idInscricao}/aprovar`, null);
   }
 
@@ -173,15 +182,15 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
   //     return this.http.get<Arquivo[]>(`${this.url}${idEtapa}/arquivos`);
   //   }
 
-  //   uploadArquivos(idEtapa: number, files: FileList): Observable<HttpEvent<{}>> {
-  //     const formData: FormData = new FormData();
+  // uploadArquivos(idEtapa: number, files: FileList): Observable<HttpEvent<{}>> {
+  //   const formData: FormData = new FormData();
 
-  //     for (let i = 0; i < files.length; i++) {
-  //       formData.append(`file${i}`, files[i]);
-  //     }
-
-  //     const req = new HttpRequest('POST', `${this.url}${idEtapa}/arquivos`, formData);
-  //     return this.http.request(req);
+  //   for (let i = 0; i < files.length; i++) {
+  //     formData.append(`file${i}`, files[i]);
   //   }
+
+  //   const req = new HttpRequest('POST', `${this.url}${idEtapa}/arquivos`, formData);
+  //   return this.http.request(req);
+  // }
 
 }

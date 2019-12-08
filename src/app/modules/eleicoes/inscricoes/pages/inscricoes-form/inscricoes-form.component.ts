@@ -18,7 +18,7 @@ import { ModalService } from 'src/app/core/services/modal.service';
 export class InscricoesFormComponent implements OnInit {
 
   StatusAprovacao = StatusAprovacao;
-  candidato: Inscricao;
+  inscricao: Inscricao;
   horario = new Date();
   fileList: FileList = null;
   foto: string;
@@ -35,7 +35,7 @@ export class InscricoesFormComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.candidato = new Inscricao();
+    this.inscricao = new Inscricao();
     this.route.data
       .pipe(
         filter(routeData => routeData.hasOwnProperty('eleicao')),
@@ -43,19 +43,19 @@ export class InscricoesFormComponent implements OnInit {
           this.eleicao = routeData.eleicao;
           return this.eleicoesApi.getInscricaoUsuario(routeData.eleicao.id);
         })
-      ).subscribe(candidato => {
-        if (candidato) {
+      ).subscribe(inscricao => {
+        if (inscricao) {
           this.jaInscrito = true;
-          this.candidato = candidato;
-          // this.candidatosApi.getFoto(this.candidato.id)
-          //   .subscribe((foto: string) => {
-          //     this.foto = foto;
-          //   });
+          this.inscricao = inscricao;
+          this.eleicoesApi.getFotoInscrito(this.eleicao.id, this.inscricao.id)
+            .subscribe((foto: string) => {
+              this.foto = foto;
+            });
         } else {
           this.eleicoesApi.getEleitorUsuario(this.eleicao.id)
             .subscribe((eleitor) => {
-              this.candidato.eleitor = eleitor;
-              this.candidato.eleitorId = eleitor.id;
+              this.inscricao.eleitor = eleitor;
+              this.inscricao.eleitorId = eleitor.id;
             });
         }
       });
@@ -65,20 +65,20 @@ export class InscricoesFormComponent implements OnInit {
     if (!this.jaInscrito) {
       return 'Confirmar Inscrição';
     }
-    if (this.candidato.statusAprovacao === StatusAprovacao.Pendente) {
+    if (this.inscricao.statusAprovacao === StatusAprovacao.Pendente) {
       return 'Atualizar Inscrição';
     }
-    if (this.candidato.statusAprovacao === StatusAprovacao.Reprovada) {
+    if (this.inscricao.statusAprovacao === StatusAprovacao.Reprovada) {
       return 'Submeter a Nova Aprovação';
     }
     return '';
   }
 
   get ultimaReprovacao(): Reprovacao {
-    if (!this.candidato || !this.candidato.reprovacoes || !this.candidato.reprovacoes.length) {
+    if (!this.inscricao || !this.inscricao.reprovacoes || !this.inscricao.reprovacoes.length) {
       return null;
     }
-    this.candidato.reprovacoes.sort((a, b) => {
+    this.inscricao.reprovacoes.sort((a, b) => {
       if (a.horario < b.horario) {
         return 1;
       }
@@ -87,14 +87,14 @@ export class InscricoesFormComponent implements OnInit {
       }
       return 0;
     });
-    return this.candidato.reprovacoes[0];
+    return this.inscricao.reprovacoes[0];
   }
 
   get statusAprovacaoClass(): string {
-    if (!this.jaInscrito || !this.candidato) {
+    if (!this.jaInscrito || !this.inscricao) {
       return '';
     }
-    const status = StatusAprovacao[this.candidato.statusAprovacao];
+    const status = StatusAprovacao[this.inscricao.statusAprovacao];
     switch (status) {
       case StatusAprovacao.Aprovada:
         return 'label-primary';
@@ -108,10 +108,10 @@ export class InscricoesFormComponent implements OnInit {
   }
 
   get statusAprovacao(): string {
-    if (!this.jaInscrito || !this.candidato) {
+    if (!this.jaInscrito || !this.inscricao) {
       return '';
     }
-    const status = StatusAprovacao[this.candidato.statusAprovacao];
+    const status = StatusAprovacao[this.inscricao.statusAprovacao];
     switch (status) {
       case StatusAprovacao.Aprovada:
         return 'Aprovada';
@@ -166,51 +166,51 @@ export class InscricoesFormComponent implements OnInit {
   }
 
   confirmaCandidatura() {
-    // if (!this.foto && !this.fileList) {
-    //   this.toasts.showMessage({
-    //     message: 'Escolha uma foto para se candidatar!',
-    //     title: 'Inválido!',
-    //     type: ToastType.error
-    //   });
-    //   return;
-    // }
-    // let chamada: Observable<{}>;
-    // if (this.jaInscrito) {
-    //   chamada = this.candidatosApi.put(this.candidato.id, this.candidato) as Observable<Inscricao>;
-    // } else {
-    //   chamada = this.candidatosApi.post(this.candidato);
-    // }
-    // if (this.fileList) { // Alterou a foto
-    //   chamada = chamada.pipe(
-    //     switchMap((candidato: Inscricao) => {
-    //       this.candidato = candidato;
-    //       return this.candidatosApi.postFoto(candidato.id, this.fileList);
-    //     }),
-    //     filterResponse());
-    // }
+    if (!this.foto && !this.fileList) {
+      this.toasts.showMessage({
+        message: 'Escolha uma foto para se candidatar!',
+        title: 'Inválido!',
+        type: ToastType.error
+      });
+      return;
+    }
+    let chamada: Observable<{}>;
+    if (this.jaInscrito) {
+      chamada = this.eleicoesApi.putInscricao(this.eleicao.id, this.inscricao) as Observable<Inscricao>;
+    } else {
+      chamada = this.eleicoesApi.postInscricao(this.eleicao.id, this.inscricao);
+    }
+    if (this.fileList) { // Alterou a foto
+      chamada = chamada.pipe(
+        switchMap((candidato: Inscricao) => {
+          this.inscricao = candidato;
+          return this.eleicoesApi.postFotoInscricao(this.eleicao.id, this.fileList);
+        }),
+        filterResponse());
+    }
 
-    // chamada.pipe(
-    //   // switchMap(_ => {
-    //   //   return this.candidatosApi.getFoto(this.candidato.id);
-    //   // })
-    // ).subscribe((foto: string) => {
-    //   this.foto = foto;
-    //   this.jaInscrito = true;
-    //   if (this.jaInscrito) {
-    //     this.toasts.showMessage({
-    //       message: 'Inscrição atualizada com sucesso!',
-    //       title: 'Sucesso!',
-    //       type: ToastType.success
-    //     });
-    //   } else {
-    //     this.toasts.showMessage({
-    //       message: 'Inscrição realizada com sucesso!',
-    //       title: 'Sucesso!',
-    //       type: ToastType.success
-    //     });
-    //   }
-    //   this.router.navigate(['/eleicoes']);
-    // });
+    chamada.pipe(
+      switchMap(_ => {
+        return this.eleicoesApi.getFotoInscrito(this.eleicao.id, this.inscricao.id);
+      })
+    ).subscribe((foto: string) => {
+      this.foto = foto;
+      this.jaInscrito = true;
+      if (this.jaInscrito) {
+        this.toasts.showMessage({
+          message: 'Inscrição atualizada com sucesso!',
+          title: 'Sucesso!',
+          type: ToastType.success
+        });
+      } else {
+        this.toasts.showMessage({
+          message: 'Inscrição realizada com sucesso!',
+          title: 'Sucesso!',
+          type: ToastType.success
+        });
+      }
+      this.router.navigate(['/eleicoes']);
+    });
   }
 
   exibirReprovacoes() {

@@ -7,7 +7,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NavigationType } from 'src/app/app.component';
 import { EleicaoResolverService } from '@core/resolvers/eleicao-resolver.service';
-import { DimensionamentoResolverService } from 'src/app/core/resolvers/dimensionamento-resolver.service';
 import { EtapaAnteriorVotacaoGuard } from 'src/app/core/guards/etapa-anterior-votacao.guard';
 
 const routes: Routes = [
@@ -22,7 +21,7 @@ const routes: Routes = [
     resolve: {
       eleicao: EleicaoResolverService,
       apuracao: ApuracaoResolverService,
-      dimensionamento: DimensionamentoResolverService,
+      // dimensionamento: DimensionamentoResolverService,
       resultado: ResultadoApuracaoResolverService
     },
     canActivate: [EtapaAnteriorVotacaoGuard]

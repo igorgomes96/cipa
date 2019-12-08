@@ -14,11 +14,10 @@ export class ContaResolverService implements Resolve<Conta> {
 
   constructor(
     private api: ContasApiService,
-    private authService: AuthService,
     private router: Router) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Conta> {
-    return this.api.get(this.authService.authInfo.id).pipe(
+    return this.api.getContaUsuario().pipe(
       catchError(_ => {
         this.router.navigate(['/not-found']);
         return of(null);

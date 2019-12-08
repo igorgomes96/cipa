@@ -30,7 +30,7 @@ export class ContaUsuarioComponent implements OnInit {
         filter(routeData => routeData.hasOwnProperty('conta')),
         map(routeData => routeData.conta),
         tap(conta => this.conta = conta),
-        switchMap(conta => this.contasApi.getCronogramaPadrao(conta.id))
+        switchMap(conta => this.contasApi.getCronogramaPadrao())
       ).subscribe(cronograma => {
         this.cronograma = cronograma;
       });
@@ -51,7 +51,7 @@ export class ContaUsuarioComponent implements OnInit {
   }
 
   recarregaCronograma() {
-    this.contasApi.getCronogramaPadrao(this.conta.id)
+    this.contasApi.getCronogramaPadrao()
       .subscribe(cronograma => {
         this.cronograma = cronograma;
       });

@@ -7,7 +7,7 @@ import { ToastsService } from 'src/app/core/services/toasts.service';
 import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { AuthInfo, Perfil } from '@shared/models/usuario';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { CodigoEtapaObrigatoria } from '@shared/models/cronograma';
+import { CodigoEtapaObrigatoria, EtapaObrigatoria } from '@shared/models/cronograma';
 import { tap, switchMap, filter } from 'rxjs/operators';
 import { from, forkJoin, of } from 'rxjs';
 
@@ -47,7 +47,7 @@ export class EleicoesListaComponent implements OnInit {
         this.paginationInfo = eleicoes;
         this.eleicoes = eleicoes.result;
       })).subscribe(_ => {
-        from(this.eleicoesEtapaSuperiorInscricoes)
+        from(this.eleicoesInscricoesOuSuperior)
           .pipe(
             filter((eleicao: Eleicao) => eleicao.usuarioEleitor),
             switchMap(eleicao => forkJoin({
@@ -78,9 +78,9 @@ export class EleicoesListaComponent implements OnInit {
   }
 
 
-  get eleicoesEtapaSuperiorInscricoes(): Eleicao[] {
+  get eleicoesInscricoesOuSuperior(): Eleicao[] {
     if (!this.eleicoes || !this.eleicoes.length) { return []; }
-    return this.eleicoes.filter(e => e.inscricoesFinalizadas);
+    return this.eleicoes.filter(e => e.inscricoesFinalizadas || e.etapaAtual.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao);
   }
 
 

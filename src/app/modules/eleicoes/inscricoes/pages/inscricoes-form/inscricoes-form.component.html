@@ -28,9 +28,9 @@
             <div class="col-lg-8 col-md-7 col-sm-12">
 
               <h2 class="font-bold m-b-xs">
-                {{ candidato.eleitor?.nome }}
+                {{ inscricao.eleitor?.nome }}
               </h2>
-              <small>{{ candidato.eleitor?.cargo }}</small>
+              <small>{{ inscricao.eleitor?.cargo }}</small>
               <hr>
 
               <div class="row" *ngIf="jaInscrito">
@@ -42,7 +42,7 @@
                 </div>
               </div>
 
-              <div class="row" *ngIf="candidato.statusAprovacao == StatusAprovacao.Reprovada && ultimaReprovacao">
+              <div class="row" *ngIf="inscricao.statusAprovacao == StatusAprovacao.Reprovada && ultimaReprovacao">
                 <div class="col-lg-12">
                   <dl class="dl-horizontal">
                     <dt>Motivo:</dt>
@@ -54,7 +54,7 @@
                           ({{ ultimaReprovacao.emailAprovador }})</small>
                       </p>
 
-                      <small *ngIf="candidato.reprovacoes.length > 1">
+                      <small *ngIf="inscricao.reprovacoes.length > 1">
                         <a (click)="exibirReprovacoes()">Exibir Histório de Reprovações</a>
                       </small>
 
@@ -67,20 +67,20 @@
                 <div class="col-lg-6">
                   <dl class="dl-horizontal">
                     <dt>Área:</dt>
-                    <dd>{{ candidato.eleitor?.area }}</dd>
+                    <dd>{{ inscricao.eleitor?.area }}</dd>
                     <dt>Matrícula:</dt>
-                    <dd>{{ candidato.eleitor?.matricula }}</dd>
+                    <dd>{{ inscricao.eleitor?.matricula }}</dd>
                     <dt>Email:</dt>
-                    <dd>{{ candidato.eleitor?.email }}</dd>
+                    <dd>{{ inscricao.eleitor?.email }}</dd>
                   </dl>
                 </div>
 
                 <div class="col-lg-6">
                   <dl class="dl-horizontal">
                     <dt>Data de Admissão:</dt>
-                    <dd>{{ candidato.eleitor?.dataAdmissao | date:'dd/MM/yyyy' }}</dd>
+                    <dd>{{ inscricao.eleitor?.dataAdmissao | date:'dd/MM/yyyy' }}</dd>
                     <dt>Data de Nascimento:</dt>
-                    <dd>{{ candidato.eleitor?.dataNascimento | date:'dd/MM/yyyy' }}</dd>
+                    <dd>{{ inscricao.eleitor?.dataNascimento | date:'dd/MM/yyyy' }}</dd>
                   </dl>
                 </div>
               </div>
@@ -88,7 +88,7 @@
 
               <h4>Objetivos</h4>
               <textarea name="objetivos" countChar maxChar="255" [disabled]="!confirmacaoButtonText" id="objetivos"
-                cols="30" rows="2" class="form-control" [(ngModel)]="candidato.objetivos"
+                cols="30" rows="2" class="form-control" [(ngModel)]="inscricao.objetivos"
                 placeholder="Digite aqui seus objetivos como membro da CIPA."></textarea>
 
               <p class="m-t-md" *ngIf="confirmacaoButtonText">
@@ -125,5 +125,5 @@
 </div>
 
 <ng-template #reprovacoes>
-  <app-reprovacoes-lista [reprovacoes]="candidato.reprovacoes"></app-reprovacoes-lista>
+  <app-reprovacoes-lista [reprovacoes]="inscricao.reprovacoes"></app-reprovacoes-lista>
 </ng-template>

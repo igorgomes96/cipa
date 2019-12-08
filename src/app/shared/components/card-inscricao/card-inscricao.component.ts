@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, TemplateRef,
 
 import { Inscricao, Reprovacao } from '@shared/models/inscricao';
 import { ModalService } from 'src/app/core/services/modal.service';
+import { EleicoesApiService } from '@core/api/eleicoes-api.service';
 
 export enum TipoCardEleitor {
   Votacao,
@@ -29,16 +30,16 @@ export class CardInscricaoComponent implements OnInit, AfterViewInit {
   motivoReprovacao: string = null;
   foto: string = null;
 
-  constructor(private modalService: ModalService) { }
+  constructor(private modalService: ModalService, private eleicoesApi: EleicoesApiService) { }
 
   ngOnInit() { }
 
   ngAfterViewInit() {
     if (this.candidato) {
-      // this.candidatosApi.getFoto(this.candidato.id)
-      //   .subscribe((foto: string) => {
-      //     this.foto = foto;
-      //   });
+      this.eleicoesApi.getFotoInscrito(this.candidato.eleitor.eleicaoId, this.candidato.id)
+        .subscribe((foto: string) => {
+          this.foto = foto;
+        });
     }
   }
 

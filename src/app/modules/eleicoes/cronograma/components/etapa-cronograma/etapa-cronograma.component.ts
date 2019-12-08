@@ -7,6 +7,7 @@ import { Dimensionamento } from '@shared/models/dimensionamento';
 declare var $: any;
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: '[etapa-cronograma]',
   templateUrl: './etapa-cronograma.component.html',
   styleUrls: ['./etapa-cronograma.component.css']

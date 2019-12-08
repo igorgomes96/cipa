@@ -11,6 +11,7 @@ export class ResultadoApuracao {
 }
 
 export class Apuracao {
+  eleicaoId: number;
   nome: string;
   email: string;
   matricula: string;
@@ -20,6 +21,6 @@ export class Apuracao {
   foto: string;
   dataAdmissao: Date;
   dataNascimento: Date;
-  candidatoId: number;
+  inscricaoId: number;
   resultadoApuracao: Resultado;
 }

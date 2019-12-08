@@ -25,7 +25,7 @@ export class CronogramaPadraoComponent implements OnInit {
   }
 
   adicionar(etapa: EtapaPadraoConta) {
-    this.contasApi.postEtapaCronogramaPadrao(this.conta.id, etapa)
+    this.contasApi.postEtapaCronogramaPadrao(etapa)
     .subscribe(_ => {
       this.recarregaCronograma.emit();
       this.toast.showMessage({
@@ -41,7 +41,7 @@ export class CronogramaPadraoComponent implements OnInit {
   }
 
   excluir(etapa: EtapaPadraoConta) {
-    this.contasApi.deleteEtapaCronogramaPadrao(this.conta.id, etapa.id)
+    this.contasApi.deleteEtapaCronogramaPadrao(etapa.id)
     .subscribe(_ => {
       this.recarregaCronograma.emit();
       this.toast.showMessage({
@@ -53,7 +53,7 @@ export class CronogramaPadraoComponent implements OnInit {
   }
 
   salvar(etapa: EtapaPadraoConta) {
-    this.contasApi.putEtapaCronogramaPadrao(this.conta.id, etapa)
+    this.contasApi.putEtapaCronogramaPadrao(etapa)
     .subscribe(_ => {
       this.recarregaCronograma.emit();
       this.toast.showMessage({

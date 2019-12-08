@@ -16,7 +16,6 @@ export class DashboardComponent implements OnInit {
 
   eleicao: Eleicao;
   apuracao: Apuracao[];
-  dimensionamento: Dimensionamento;
   ultimaAtualizacao: Date;
   resultado: ResultadoApuracao;
 
@@ -27,16 +26,13 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private location: Location,
     private eleicoesApi: EleicoesApiService) { }
 
   ngOnInit() {
     this.route.data.subscribe((routeData: any) => {
       this.eleicao = routeData.eleicao;
       this.ultimaAtualizacao = new Date();
-      this.dimensionamento = routeData.dimensionamento;
-      if (this.dimensionamento.qtdaVotos) {
+      if (routeData.eleicao.dimensionamento.qtdaVotos) {
         this.eleicao = routeData.eleicao;
         this.resultado = routeData.resultado;
         this.apuracao = routeData.apuracao;
