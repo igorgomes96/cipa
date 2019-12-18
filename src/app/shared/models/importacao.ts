@@ -8,10 +8,16 @@ export enum StatusImportacao {
 }
 
 export class ProgressoImportacao {
-    etapa: string;
-    etapaAtual: number;
+    totalLinhas: number;
+    linhasProcessadas: number;
     totalEtapas: number;
+    etapaAtual: number;
     progresso: number;
+}
+
+export class FinalizacaoImportacaoStatus {
+  status: StatusImportacao;
+  qtdaErros: number;
 }
 
 export class Importacao {

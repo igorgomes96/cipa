@@ -37,6 +37,7 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
   filtro: string;
   StatusImportacao = StatusImportacao;
   progressoSubscriber: Subscription;
+  importacaoFinalizadaSubscriber: Subscription;
 
   constructor(
     private eleicoesApi: EleicoesApiService,
@@ -74,13 +75,14 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
         if (!this.progresso) {
           this.carregaUltimaImportacao();
         }
-        if (valor.progresso === 100) {
-          this.progresso = null;
-          this.carregaUltimaImportacao();
-          this.carregaEleitores();
-        } else {
-          this.progresso = valor;
-        }
+        this.progresso = valor;
+      });
+
+    this.importacaoFinalizadaSubscriber = this.importacoesApi.importacaoFinalizada()
+      .subscribe(_ => {
+        this.progresso = null;
+        this.carregaUltimaImportacao();
+        this.carregaEleitores();
       });
   }
 
@@ -90,22 +92,6 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
 
   downloadTemplate() {
     this.arquivosApi.downloadTemplateImportacao('Importacao CIPA.xlsx').subscribe();
-  }
-
-  get labelStatusImportacao(): string {
-    if (!this.ultimaImportacao) { return ''; }
-    switch (this.ultimaImportacao.status) {
-      case StatusImportacao.Aguardando:
-        return 'label-warning';
-      case StatusImportacao.Processando:
-        return 'label-success';
-      case StatusImportacao.FinalizadoComFalha:
-        return 'label-danger';
-      case StatusImportacao.FinalizadoComSucesso:
-        return 'label-primary';
-      default:
-        return '';
-    }
   }
 
   // tslint:disable: no-string-literal
@@ -142,10 +128,10 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
   }
 
   carregaUltimaImportacao() {
-    // this.importacoesApi.getUltimaImportacao(this.eleicao.id)
-    //   .subscribe(importacao => {
-    //     this.ultimaImportacao = importacao;
-    //   });
+    this.eleicoesApi.getUltimaImportacao(this.eleicao.id)
+      .subscribe(importacao => {
+        this.ultimaImportacao = importacao;
+      });
   }
 
   get pageParams(): any {

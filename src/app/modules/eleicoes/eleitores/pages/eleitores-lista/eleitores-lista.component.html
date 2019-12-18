@@ -4,39 +4,13 @@
     Baixe o template, preencha os dados e faça a importação.">
     </app-ajuda-tooltip>
   </p>
-  <button class="btn btn-success m-r-sm m-t-xs" (click)="downloadTemplate()"><i class="fa fa-download"></i> Baixar Template</button>
+  <button class="btn btn-success m-r-sm m-t-xs" (click)="downloadTemplate()"><em class="fa fa-download"></em> Baixar Template</button>
   <label for="upload" class="btn btn-primary m-t-xs">
     <input type="file" name="upload" id="upload" class="hide" (change)="onUploadArquivo($event)">
-    <i class="fa fa-upload"></i> Importar Dados
+    <em class="fa fa-upload"></em> Importar Dados
   </label>
 
-  <div class="project-list table-responsive m-t-md" *ngIf="ultimaImportacao">
-
-    <table class="table table-hover">
-      <tbody>
-        <tr>
-          <td class="project-title">
-            <strong>{{ ultimaImportacao.arquivo.nome }}</strong>
-            <br />
-            <small>Upload: {{ ultimaImportacao.arquivo.dataUpload | date:'dd/MM/yyyy HH:mm' }}, {{ (ultimaImportacao.arquivo.tamanho / 1024) |
-              number:'1.0-1' }}k</small>
-          </td>
-          <td class="project-completion" *ngIf="progresso">
-            <small>Progresso da Importação: {{ progresso?.progresso | number:'1.1-1' }}%</small>
-            <div class="progress progress-mini">
-              <div [style.width]="progresso?.progresso + '%'" class="progress-bar"></div>
-            </div>
-          </td>
-          <td class="project-status text-right">
-            <span class="label" [ngClass]="labelStatusImportacao">{{ ultimaImportacao?.status }}</span>
-          </td>
-          <td class="text-right" *ngIf="ultimaImportacao?.status === StatusImportacao.FinalizadoComFalha">
-            <a [routerLink]="['importacoes', ultimaImportacao.id, 'inconsistencias']">Detalhes</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <app-importacao-alert [ultimaImportacao]="ultimaImportacao" [progresso]="progresso"></app-importacao-alert>
 
   <hr *ngIf="!ultimaImportacao">
 

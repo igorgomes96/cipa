@@ -3,6 +3,8 @@ import { EtapaCronograma, PosicaoEtapa, CodigoEtapaObrigatoria } from '@shared/m
 import { Arquivo } from '@shared/models/arquivo';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Dimensionamento } from '@shared/models/dimensionamento';
+import { EleicoesApiService } from '@core/api/eleicoes-api.service';
+import { switchMap, finalize } from 'rxjs/operators';
 
 declare var $: any;
 
@@ -33,7 +35,8 @@ export class EtapaCronogramaComponent implements OnInit {
   editando = false;
 
   constructor(
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private eleicoesApi: EleicoesApiService) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -43,10 +46,10 @@ export class EtapaCronogramaComponent implements OnInit {
       this.etapa.dataPrevista = v;
       this.onAtualizarEtapa();
     });
-    // this.cronogramaApi.getArquivos(this.etapa.id)
-    //   .subscribe((arquivos: Arquivo[]) => {
-    //     this.arquivos = arquivos;
-    //   });
+    this.eleicoesApi.getArquivos(this.etapa.eleicaoId, this.etapa.id)
+      .subscribe((arquivos: Arquivo[]) => {
+        this.arquivos = arquivos;
+      });
     this.ultimaAtualizacao = new Date();
   }
 
@@ -54,44 +57,23 @@ export class EtapaCronogramaComponent implements OnInit {
     return this.layout === 'Visualização' && this.etapa.posicaoEtapa !== PosicaoEtapa.Futura;
   }
 
-  get calendarIcon(): string {
+  get calendarStyle(): { icon: string, class: string } {
     if (this.layout === 'Cadastro') {
-      return 'fa-calendar';
+      return { icon: 'fa-calendar', class: 'blue-bg' };
     }
 
     switch (this.etapa.posicaoEtapa) {
       case PosicaoEtapa.Atual:
         if (this.etapa.erroMudancaEtapa) {
-          return 'fa-calendar-times-o';
+          return { icon: 'fa-calendar-times-o', class: 'bg-danger' };
         }
-        return 'fa-calendar';
+        return { icon: 'fa-calendar', class: 'blue-bg' };
       case PosicaoEtapa.Passada:
-        return 'fa-calendar-check-o';
+        return { icon: 'fa-calendar-check-o', class: 'navy-bg' };
       case PosicaoEtapa.Futura:
-        return 'fa-calendar-o';
+        return { icon: 'fa-calendar-o', class: 'bg-muted' };
       default:
-        return '';
-    }
-  }
-
-  get calendarClass(): string {
-
-    if (this.layout === 'Cadastro') {
-      return 'blue-bg';
-    }
-
-    switch (this.etapa.posicaoEtapa) {
-      case PosicaoEtapa.Atual:
-        if (this.etapa.erroMudancaEtapa) {
-          return 'bg-danger';
-        }
-        return 'blue-bg';
-      case PosicaoEtapa.Passada:
-        return 'navy-bg';
-      case PosicaoEtapa.Futura:
-        return 'bg-muted';
-      default:
-        return '';
+        return { icon: '', class: '' };
     }
   }
 
@@ -124,20 +106,20 @@ export class EtapaCronogramaComponent implements OnInit {
 
   upload(files: FileList) {
     this.carregandoArquivos = true;
-    // this.cronogramaApi.uploadArquivos(this.etapa.id, files)
-    //   .pipe(
-    //     switchMap(_ => this.cronogramaApi.getArquivos(this.etapa.id)),
-    //     finalize(() => this.carregandoArquivos = false)
-    //   ).subscribe((arquivos: Arquivo[]) => {
-    //     this.arquivos = arquivos;
-    //   });
+    this.eleicoesApi.uploadArquivos(this.etapa.eleicaoId, this.etapa.id, files)
+      .pipe(
+        switchMap(_ => this.eleicoesApi.getArquivos(this.etapa.eleicaoId, this.etapa.id)),
+        finalize(() => this.carregandoArquivos = false)
+      ).subscribe((arquivos: Arquivo[]) => {
+        this.arquivos = arquivos;
+      });
   }
 
   deleteArquivo() {
-    // this.cronogramaApi.getArquivos(this.etapa.id)
-    //   .subscribe((arquivos: Arquivo[]) => {
-    //     this.arquivos = arquivos;
-    //   });
+    this.eleicoesApi.getArquivos(this.etapa.eleicaoId, this.etapa.id)
+      .subscribe((arquivos: Arquivo[]) => {
+        this.arquivos = arquivos;
+      });
   }
 
   onProximaEtapa() {

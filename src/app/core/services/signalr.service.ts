@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
 import { ProgressoImportacao } from '@shared/models/importacao';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Scheduler, SchedulerLike, asyncScheduler } from 'rxjs';
 import { IHttpConnectionOptions } from '@aspnet/signalr';
-import { auditTime } from 'rxjs/operators';
+import { auditTime, throttleTime, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -44,13 +44,14 @@ export class SignalRService {
     }
   }
 
-  on(event: string): Observable<ProgressoImportacao> {
-    const subject = new Subject<ProgressoImportacao>();
+  on<T>(event: string): Observable<T> {
+    const subject = new Subject<any>();
     this.hubConnection.on(event, (data) => {
       subject.next(data);
     });
+
     return subject.asObservable()
-      .pipe(auditTime(1000));
+      .pipe(throttleTime(1000, asyncScheduler, { leading: false, trailing: true }));
 
   }
 }

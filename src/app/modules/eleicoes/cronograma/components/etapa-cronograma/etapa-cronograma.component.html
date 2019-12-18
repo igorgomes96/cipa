@@ -1,13 +1,13 @@
-<div timeline-item [calendarIcon]="calendarIcon" [calendarClass]="calendarClass" class="vertical-timeline-block">
+<div timeline-item [calendarIcon]="calendarStyle.icon" [calendarClass]="calendarStyle.class" class="vertical-timeline-block">
   <div class="row" [class.editando]="editando">
     <div class="col-sm-12" [ngClass]="tamanhoDescricao">
       <h2>
         <span [tooltip]="etapa.erroMudancaEtapa" theme="dark" *ngIf="etapa.erroMudancaEtapa" class="text-danger">
-          <i class="fa fa-exclamation-circle"></i> {{ etapa.nome }}
+          <em class="fa fa-exclamation-circle"></em> {{ etapa.nome }}
         </span>
         <span *ngIf="!etapa.erroMudancaEtapa" class="nome-etapa">
           <app-custom-input required [(ngModel)]="etapa.nome" name="Nome" label="Nome da Etapa" [readOnly]="!editando"
-            #Nome="ngModel" [showLabel]="false" [control]="Nome"></app-custom-input>
+            #nome="ngModel" [showLabel]="false" [control]="nome"></app-custom-input>
         </span>
         <small *ngIf="etapa.posicaoEtapa === PosicaoEtapa.Futura" class="dias-atraso">
           <span class="label label-danger pull-right dias-atraso"
@@ -21,7 +21,7 @@
           <form [formGroup]="form">
             <span class="vertical-date">
               <div *ngIf="isDateDisabled" style="font-size: 14px;cursor: not-allowed;color:#676a6c">
-                <span><i class="fa fa-calendar"></i></span> {{ form.get('data').value | date:'dd/MM/yyyy' }}
+                <span><em class="fa fa-calendar"></em></span> {{ form.get('data').value | date:'dd/MM/yyyy' }}
               </div>
               <app-datepicker [name]="'data' + etapa.id" [id]="'data' + etapa.id" formControlName="data"
                 [control]="form.get('data')" *ngIf="!isDateDisabled"></app-datepicker>
@@ -67,7 +67,7 @@
         <p>Possuímos alguns documentos de exemplo que podem te ajudar. Confira-os e fique à vontade para
           utilizá-los!</p>
         <button class="btn btn-success float-left" [disabled]="etapa.posicaoEtapa === PosicaoEtapa.Futura"
-          (click)="onExibirTemplates(etapa.id)"><i class="fa fa-file-text"></i> Templates</button>
+          (click)="onExibirTemplates(etapa.id)"><em class="fa fa-file-text"></em> Templates</button>
       </div>
 
     </div>

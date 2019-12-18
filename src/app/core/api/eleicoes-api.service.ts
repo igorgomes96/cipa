@@ -1,7 +1,7 @@
 import { Eleicao } from '@shared/models/eleicao';
 import { ResultadoApuracao } from '@shared/models/apuracao';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 
 import { GenericApi } from './generic-api';
 import { environment } from 'src/environments/environment';
@@ -19,6 +19,8 @@ import { Dimensionamento } from '@shared/models/dimensionamento';
 import { Apuracao } from '@shared/models/apuracao';
 import { downloadArquivo } from '@shared/rxjs-operators';
 import { switchMap } from 'rxjs/operators';
+import { Arquivo } from '@shared/models/arquivo';
+import { Inconsistencia } from '@shared/models/inconsistencias';
 
 @Injectable({
   providedIn: 'root'
@@ -123,10 +125,18 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
   }
 
 
-
+  // Importação
   postImportacao(idEleicao: number, arquivo: FileList): Observable<any> {
-    return this.arquivosApiService.uploadFiles(`${this.url}${idEleicao}/importacao`, arquivo)
+    return this.arquivosApiService.uploadFiles(`${this.url}${idEleicao}/importacoes`, arquivo)
       .pipe(filterResponse());
+  }
+
+  getUltimaImportacao(idEleicao: number): Observable<Importacao> {
+    return this.http.get<Importacao>(`${this.url}${idEleicao}/importacoes/ultima`);
+  }
+
+  public getInconsistencias(idEleicao: number, id: number): Observable<Inconsistencia> {
+    return this.http.get<Inconsistencia>(`${this.url}${idEleicao}/importacoes/${id}/inconsistencias`);
   }
 
 
@@ -178,19 +188,19 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
   }
 
   // Arquivos
-  //   getArquivos(idEtapa: number): Observable<Arquivo[]> {
-  //     return this.http.get<Arquivo[]>(`${this.url}${idEtapa}/arquivos`);
-  //   }
+  getArquivos(idEleicao: number, idEtapa: number): Observable<Arquivo[]> {
+    return this.http.get<Arquivo[]>(`${this.url}${idEleicao}/cronograma/${idEtapa}/arquivos`);
+  }
 
-  // uploadArquivos(idEtapa: number, files: FileList): Observable<HttpEvent<{}>> {
-  //   const formData: FormData = new FormData();
+  uploadArquivos(idEleicao: number, idEtapa: number, files: FileList): Observable<HttpEvent<{}>> {
+    const formData: FormData = new FormData();
 
-  //   for (let i = 0; i < files.length; i++) {
-  //     formData.append(`file${i}`, files[i]);
-  //   }
+    for (let i = 0; i < files.length; i++) {
+      formData.append(`file${i}`, files[i]);
+    }
 
-  //   const req = new HttpRequest('POST', `${this.url}${idEtapa}/arquivos`, formData);
-  //   return this.http.request(req);
-  // }
+    const req = new HttpRequest('POST', `${this.url}${idEleicao}/cronograma/${idEtapa}/arquivos`, formData);
+    return this.http.request(req);
+  }
 
 }
