@@ -50,8 +50,7 @@ export class SignalRService {
       subject.next(data);
     });
 
-    return subject.asObservable()
-      .pipe(throttleTime(1000, asyncScheduler, { leading: false, trailing: true }));
+    return subject.asObservable();
 
   }
 }

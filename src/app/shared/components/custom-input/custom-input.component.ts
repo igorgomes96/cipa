@@ -25,7 +25,15 @@ export class CustomInputComponent implements OnInit, ControlValueAccessor {
 
   @Input() name: string;
   @Input() label: string;
-  @Input() id: string;
+  private _id = this.randomId;
+  @Input() set id(value: string) {
+    if (value && value !== 'undefined') {
+      this._id = value;
+    }
+  }
+  get id(): string {
+    return this._id;
+  }
   @Input() placeholder: string;
   @Input() type = 'text';
   @Input() control: AbstractControl;
@@ -44,6 +52,7 @@ export class CustomInputComponent implements OnInit, ControlValueAccessor {
   constructor() { }
 
   ngOnInit() {
+
     if (!this.placeholder) {
       this.placeholder = this.label;
     }
@@ -75,6 +84,10 @@ export class CustomInputComponent implements OnInit, ControlValueAccessor {
     } catch {
       return 0;
     }
+  }
+
+  private get randomId(): string {
+    return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10);
   }
 
   updateValue(valor: any) {

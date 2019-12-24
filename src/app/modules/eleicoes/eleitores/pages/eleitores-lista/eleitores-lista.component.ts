@@ -72,8 +72,8 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
 
     this.progressoSubscriber = this.importacoesApi.progressoImportacao()
       .subscribe(valor => {
-        if (!this.progresso) {
-          this.carregaUltimaImportacao();
+        if (valor && valor.progresso < 100) {
+          this.ultimaImportacao.status = StatusImportacao.Processando;
         }
         this.progresso = valor;
       });
@@ -88,6 +88,7 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.progressoSubscriber.unsubscribe();
+    this.importacaoFinalizadaSubscriber.unsubscribe();
   }
 
   downloadTemplate() {

@@ -19,7 +19,7 @@ import { ToastType, ToastMessage } from '@core/components/toasts/toasts.componen
 export class ImportacoesApiService extends GenericApi<Importacao>  {
 
   constructor(
-    private http: HttpClient,
+    http: HttpClient,
     private signalRService: SignalRService,
     private authService: AuthService,
     private toast: ToastsService) {
