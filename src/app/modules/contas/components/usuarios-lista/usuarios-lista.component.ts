@@ -21,7 +21,7 @@ export class UsuariosListaComponent implements OnInit {
   }
 
   exclui(usuario: Usuario) {
-    this.toast.confirm('Deseja mesmo excluir esse usuário? Essa ação não poderá ser defeita.', 'Confirmação')
+    this.toast.confirmModal('Deseja mesmo excluir esse usuário? Essa ação não poderá ser defeita.', 'Confirmação')
       .pipe(filter(confirmacao => confirmacao), tap(_ => this.excluir.emit(usuario))).subscribe();
   }
 

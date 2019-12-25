@@ -40,7 +40,7 @@ export class EtapaPadraoComponent implements OnInit {
   }
 
   onExcluir() {
-    this.toasts.confirm('Tem certeza que deseja excluir essa etapa do cronograma padrão?', 'Confirmação')
+    this.toasts.confirmModal('Tem certeza que deseja excluir essa etapa do cronograma padrão?', 'Confirmação')
       .pipe(filter(confirmacao => confirmacao))
       .subscribe(_ => this.excluir.emit(this.etapa));
   }
@@ -55,7 +55,7 @@ export class EtapaPadraoComponent implements OnInit {
       id: undefined,
       ordem: this.etapa.ordem + 1
     };
-    this.toasts.confirm(`Tem certeza que deseja adicionar ao cronograma padrão uma nova etapa depois da etapa ${this.etapa.nome}?`,
+    this.toasts.confirmModal(`Tem certeza que deseja adicionar ao cronograma padrão uma nova etapa depois da etapa ${this.etapa.nome}?`,
       'Confirmação').pipe(filter(confirmacao => confirmacao))
       .subscribe(_ => this.adicionar.emit(novaEtapa));
   }

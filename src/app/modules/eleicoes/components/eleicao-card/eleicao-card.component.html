@@ -33,7 +33,6 @@
         </span>
 
         <span *ngIf="!eleicao.votacaoFinalizada">
-          <br>
           <span class="fa fa-calendar"></span> Votação: de <strong>{{ eleicao.inicioVotacao | date:'dd/MMM' }}</strong>
           a <strong>{{ eleicao.terminoVotacao | date:'dd/MMM' }}</strong>
         </span>

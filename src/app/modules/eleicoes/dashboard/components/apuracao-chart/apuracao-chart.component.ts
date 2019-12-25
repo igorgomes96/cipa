@@ -1,6 +1,6 @@
 import { chartOptions } from '@env/chart-options';
 import { Apuracao } from '@shared/models/apuracao';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
 import { ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
@@ -17,6 +17,7 @@ export class ApuracaoChartComponent implements OnInit {
   barChartPlugins = [pluginDataLabels];
   barChartLabels: Label[];
   barChartData: ChartDataSets[];
+  chartHeight = 500;
 
   @Input() apuracao: Apuracao[];
   @Input() barChartType: ChartType = 'bar';
@@ -44,6 +45,7 @@ export class ApuracaoChartComponent implements OnInit {
         hoverBorderColor: 'rgb(124, 181, 236)'
       }
     ];
+    this.chartHeight = this.votos.length * 25;
     this.barChartLabels = this.nomes;
   }
 

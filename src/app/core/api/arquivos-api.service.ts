@@ -32,6 +32,11 @@ export class ArquivosApiService {
       .pipe(downloadArquivo('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', arquivo));
   }
 
+  downloadNR5() {
+    return this.http.get(`${this.url}nr5`, { responseType: 'arraybuffer' })
+      .pipe(downloadArquivo('application/pdf', 'NR-5.pdf'));
+  }
+
   download(id: string, arquivo: string, contentType: string) {
     return this.http.get(`${this.url}${id}/download`, { responseType: 'arraybuffer' })
       .pipe(downloadArquivo(contentType, arquivo));

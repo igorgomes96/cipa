@@ -44,7 +44,7 @@ export class CadastroComponent implements OnInit {
 
   cadastrar(usuario: Usuario) {
     usuario.codigoRecuperacao = this.codigoRecuperacao;
-    this.loginApi.resetSenha(usuario)
+    this.loginApi.cadastrarSenha(usuario)
       .subscribe((conta: any) => {
         this.authService.token = conta.accessToken;
         this.toast.showMessage({

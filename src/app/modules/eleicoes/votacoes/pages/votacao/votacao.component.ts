@@ -57,7 +57,7 @@ export class VotacaoComponent implements OnInit {
   }
 
   votar(candidato: Inscricao) {
-    this.toasts.confirm(`Tem certeza que deseja votar para ${candidato.eleitor.nome}? Seu voto não poderá ser revertido.`)
+    this.toasts.confirmModal(`Tem certeza que deseja votar para ${candidato.eleitor.nome}? Seu voto não poderá ser revertido.`)
       .pipe(
         filter(confirmacao => confirmacao),
         switchMap(_ => this.eleicoesApi.postVotar(this.eleicao.id, candidato.id))
@@ -72,7 +72,7 @@ export class VotacaoComponent implements OnInit {
   }
 
   votoBranco() {
-    this.toasts.confirm(`Tem certeza que deseja votar em branco? Seu voto não poderá ser revertido.`)
+    this.toasts.confirmModal(`Tem certeza que deseja votar em branco? Seu voto não poderá ser revertido.`)
       .pipe(
         filter(confirmacao => confirmacao),
         switchMap(_ => this.eleicoesApi.postVotoBranco(this.eleicao.id))

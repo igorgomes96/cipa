@@ -4,13 +4,13 @@
     <a routerLink="/eleicoes" class="navbar-brand" *ngIf="!showLeftNav">CIPA Online</a>
     <button class="navbar-toggler" type="button" aria-expanded="false" (click)="topCollapsed = !topCollapsed"
       aria-label="Toggle navigation" *ngIf="!showLeftNav">
-      <i class="fa fa-reorder"></i>
+      <em class="fa fa-reorder"></em>
     </button>
 
     <div class="navbar-header"  *ngIf="showLeftNav">
       <button class="minimalize-styl-2 btn btn-primary" *ngIf="showLeftNav" aria-label="Toggle navigation"
         (click)="toggleNavigation()">
-        <i class="fa fa-bars"></i>
+        <em class="fa fa-bars"></em>
       </button>
 
 
@@ -24,18 +24,23 @@
       </ul>
       <ul class="nav navbar-top-links navbar-right" [ngClass]="!showLeftNav ? 'toplinks' : ''">
         <li>
+          <a class="right-sidebar-toggle" (click)="downloadNR5()">
+            NR-5
+          </a>
+        </li>
+        <li>
           <a class="right-sidebar-toggle" routerLink="/eleicoes">
-            <i class="fa fa-home"></i>
+            <em class="fa fa-home"></em>
           </a>
         </li>
         <li>
           <a class="right-sidebar-toggle" routerLink="/contas/minha-conta">
-            <i class="fa fa-user"></i>
+            <em class="fa fa-user"></em>
           </a>
         </li>
         <li>
           <a (click)="logout()">
-            <i class="fa fa-sign-out"></i> Log out
+            <em class="fa fa-sign-out"></em> Log out
           </a>
         </li>
       </ul>

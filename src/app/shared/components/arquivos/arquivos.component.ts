@@ -28,7 +28,7 @@ export class ArquivosComponent implements OnInit {
   }
 
   deleteFile(id: string) {
-    this.toast.confirm('Essa ação não poderá ser desfeita!', 'Confirma exlusão?')
+    this.toast.confirmModal('Essa ação não poderá ser desfeita!', 'Confirma exlusão?')
       .subscribe((confirmacao: boolean) => {
         if (confirmacao) {
           this.service.delete(id).subscribe(_ => {

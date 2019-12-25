@@ -19,15 +19,15 @@ export class LoginApiService {
   }
 
   buscaPeloCodigoRecuperacao(codigo: string): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.url}recuperacao/${codigo}`);
+    return this.http.get<Usuario>(`${this.url}codigorecuperacao/${codigo}`);
   }
 
-  resetSenha(usuario: Usuario): Observable<any> {
-    return this.http.post(`${this.url}reset`, usuario);
+  cadastrarSenha(usuario: Usuario): Observable<any> {
+    return this.http.put(`${this.url}cadastrarsenha`, usuario);
   }
 
-  solicitaReset(email: string): Observable<void> {
-    return this.http.post<void>(`${this.url}solicitacaoreset`, { email });
+  resetarSenha(email: string): Observable<void> {
+    return this.http.put<void>(`${this.url}resetarsenha`, { email });
   }
 
 }

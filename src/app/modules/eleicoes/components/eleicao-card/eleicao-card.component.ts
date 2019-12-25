@@ -35,6 +35,13 @@ export class EleicaoCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.eleicao && (this.eleicao.etapaAtual && (this.eleicao.etapaAtual.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao ||
+      this.eleicao.etapaAtual.etapaObrigatoriaId === CodigoEtapaObrigatoria.Votacao))) {
+        this.eleicoesApi.getUsuarioEhEleitor(this.eleicao.id)
+          .subscribe(usuarioEhEleitor => {
+            this.eleicao.usuarioEleitor = usuarioEhEleitor;
+          });
+      }
   }
 
   get perfilSESMT() {
@@ -42,7 +49,7 @@ export class EleicaoCardComponent implements OnInit {
   }
 
   excluirEleicao() {
-    this.toast.confirm('Tem certeza que deseja excluir essa eleição? Essa ação não poderá ser desfeita', 'Confirmação')
+    this.toast.confirmModal('Tem certeza que deseja excluir essa eleição? Essa ação não poderá ser desfeita', 'Confirmação')
       .pipe(filter(confirmacao => confirmacao)).subscribe(_ => this.excluir.emit(this.eleicao));
   }
 

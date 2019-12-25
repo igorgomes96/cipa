@@ -31,7 +31,7 @@ export class GenericApi<T> {
     validParams(params: any = {}): any {
         const newParams: any = {};
         for (const param in params) {
-            if (params[param] !== undefined && params[param] !== undefined) {
+            if (params[param] !== undefined) {
                 newParams[param] = params[param];
             }
         }

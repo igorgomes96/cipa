@@ -20,7 +20,7 @@ export class EmpresasListaComponent implements OnInit {
   }
 
   exclui(empresa: Empresa) {
-    this.toast.confirm('Deseja relamente excluir essa empresa? Essa ação não poderá ser desfeita.', 'Confirmação de Exclusão')
+    this.toast.confirmModal('Deseja relamente excluir essa empresa? Essa ação não poderá ser desfeita.', 'Confirmação de Exclusão')
       .pipe(filter(confirmacao => confirmacao))
       .subscribe(_ => this.excluir.emit(empresa));
   }

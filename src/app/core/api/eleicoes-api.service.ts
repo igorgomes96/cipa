@@ -63,6 +63,9 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
     return this.http.delete(`${this.url}${idEleicao}/eleitores/${idEleitor}`);
   }
 
+  getUsuarioEhEleitor(idEleicao: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.url}${idEleicao}/usuarioeleitor`);
+  }
 
   // Inscrições
   postInscricao(idEleicao: number, inscricao: Inscricao): Observable<Inscricao> {
@@ -182,8 +185,8 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
       .pipe(downloadArquivo('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', arquivo));
   }
 
-  downloadRelatorioCandidatos(idEleicao: number, arquivo: string) {
-    return this.http.get(`${this.url}${idEleicao}/relatorios/candidatos`, { responseType: 'arraybuffer' })
+  downloadRelatorioInscricoes(idEleicao: number, arquivo: string) {
+    return this.http.get(`${this.url}${idEleicao}/relatorios/inscricoes`, { responseType: 'arraybuffer' })
       .pipe(downloadArquivo('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', arquivo));
   }
 

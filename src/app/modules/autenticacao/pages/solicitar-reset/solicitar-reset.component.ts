@@ -26,7 +26,7 @@ export class SolicitarResetComponent implements OnInit {
   }
 
   solicitarReset() {
-    this.loginApi.solicitaReset(this.form.get('email').value)
+    this.loginApi.resetarSenha(this.form.get('email').value)
     .subscribe(_ => {
       this.toast.showMessage({
         message: 'Enviamos para seu e-mail um link para reset da senha.',

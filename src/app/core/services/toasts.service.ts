@@ -10,7 +10,7 @@ declare var swal: any;
 })
 export class ToastsService {
 
-// tslint:disable-next-line: variable-name
+  // tslint:disable-next-line: variable-name
   private _messageEmitter: EventEmitter<ToastMessage> = new EventEmitter<ToastMessage>();
   constructor() { }
 
@@ -22,13 +22,21 @@ export class ToastsService {
     this._messageEmitter.emit(message);
   }
 
-  confirm(message: string, title = 'Tem certeza?'): Observable<any> {
+  confirmModal(message: string, title = 'Tem certeza?'): Observable<any> {
     return from(swal({
       title,
       text: message,
       icon: 'warning',
       buttons: true,
       dangerMode: true,
+    }));
+  }
+
+  errorModal(message: string, title = 'Ação inválida!'): Observable<any> {
+    return from(swal({
+      title,
+      text: message,
+      icon: 'warning'
     }));
   }
 

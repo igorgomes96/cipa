@@ -37,7 +37,7 @@ export class RelacaoCandidatosComponent implements OnInit {
   }
 
   private download() {
-    this.eleicoesApi.downloadRelatorioCandidatos(this.eleicao.id, 'Candidatos.xlsx').subscribe();
+    this.eleicoesApi.downloadRelatorioInscricoes(this.eleicao.id, 'Inscricoes.xlsx').subscribe();
   }
 
 }

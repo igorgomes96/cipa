@@ -3,6 +3,7 @@ import { smoothlyMenu } from 'src/app.helpers';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Perfil } from '@shared/models/usuario';
+import { ArquivosApiService } from '@core/api/arquivos-api.service';
 
 declare var $: any;
 
@@ -34,7 +35,8 @@ export class TopnavComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private arquivosApi: ArquivosApiService) { }
 
   ngOnInit() {
     if (!this.authService.authInfo || this.authService.authInfo.perfil === Perfil.Eleitor) {
@@ -56,6 +58,10 @@ export class TopnavComponent implements OnInit {
   toggleNavigation(): void {
     $('body').toggleClass('mini-navbar');
     smoothlyMenu();
+  }
+
+  downloadNR5() {
+    this.arquivosApi.downloadNR5().subscribe();
   }
 
 }

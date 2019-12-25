@@ -67,20 +67,20 @@
                 <div class="col-lg-6">
                   <dl class="dl-horizontal">
                     <dt>Área:</dt>
-                    <dd>{{ inscricao.eleitor?.area }}</dd>
+                    <dd>{{ inscricao.eleitor?.area || 'N/D' }}</dd>
                     <dt>Matrícula:</dt>
-                    <dd>{{ inscricao.eleitor?.matricula }}</dd>
+                    <dd>{{ inscricao.eleitor?.matricula || 'N/D' }}</dd>
                     <dt>Email:</dt>
-                    <dd>{{ inscricao.eleitor?.email }}</dd>
+                    <dd>{{ inscricao.eleitor?.email || 'N/D' }}</dd>
                   </dl>
                 </div>
 
                 <div class="col-lg-6">
                   <dl class="dl-horizontal">
                     <dt>Data de Admissão:</dt>
-                    <dd>{{ inscricao.eleitor?.dataAdmissao | date:'dd/MM/yyyy' }}</dd>
+                    <dd>{{ (inscricao.eleitor?.dataAdmissao | date:'dd/MM/yyyy') || 'N/D' }}</dd>
                     <dt>Data de Nascimento:</dt>
-                    <dd>{{ inscricao.eleitor?.dataNascimento | date:'dd/MM/yyyy' }}</dd>
+                    <dd>{{ (inscricao.eleitor?.dataNascimento | date:'dd/MM/yyyy') || 'N/D' }}</dd>
                   </dl>
                 </div>
               </div>
@@ -102,7 +102,7 @@
               <div class="row" *ngIf="confirmacaoButtonText">
                 <div class="col-md-12">
                   <div class="btn-group float-right">
-                    <button class="btn btn-primary" (click)="confirmaCandidatura()"><i class="fa fa-vcard"></i>
+                    <button class="btn btn-primary" (click)="confirmaCandidatura()"><em class="fa fa-vcard"></em>
                       {{ confirmacaoButtonText }}</button>
                   </div>
                 </div>
@@ -114,7 +114,7 @@
         </div>
         <div class="ibox-footer">
           <span class="pull-right">
-            <i class="fa fa-clock-o"></i> {{ horario | date:'dd/MMM/yyyy HH:mm' }}
+            <em class="fa fa-clock-o"></em> {{ horario | date:'dd/MMM/yyyy HH:mm' }}
           </span>
           Incrição para a CIPA
         </div>

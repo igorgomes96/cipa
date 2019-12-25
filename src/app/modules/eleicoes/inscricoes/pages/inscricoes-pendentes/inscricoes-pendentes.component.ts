@@ -43,7 +43,7 @@ export class InscricoesPendentesComponent implements OnInit {
   }
 
   aprovacao(candidato: Inscricao) {
-    this.toasts.confirm('Uma vez aprovada, não será possível reverter essa inscrição.', 'Confirma aprovação?')
+    this.toasts.confirmModal('Uma vez aprovada, não será possível reverter essa inscrição.', 'Confirma aprovação?')
       .subscribe((confirmacao: boolean) => {
         if (confirmacao) {
           this.eleicoesApi.putAprovarInscricao(this.eleicao.id, candidato.id)

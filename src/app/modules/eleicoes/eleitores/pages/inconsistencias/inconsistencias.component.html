@@ -11,8 +11,8 @@
             </thead>
             <tbody>
                 <tr *ngFor="let inconsistencia of inconsistencias">
-                    <td>{{ inconsistencia.linha }}</td>
-                    <td>{{ inconsistencia.coluna }}</td>
+                    <td>{{ inconsistencia.linha ? inconsistencia.linha : 'N/D' }}</td>
+                    <td>{{ inconsistencia.coluna ? inconsistencia.coluna : 'N/D' }}</td>
                     <td>{{ inconsistencia.mensagem }}</td>
                 </tr>
             </tbody>

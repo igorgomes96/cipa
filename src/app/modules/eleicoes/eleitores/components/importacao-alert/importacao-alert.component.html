@@ -2,13 +2,20 @@
   Status da última Importação: <strong>{{ ultimaImportacao?.status }}</strong><br>
   Upload do arquivo de importação realizado em <strong>{{ ultimaImportacao.arquivo.dataUpload | date:'dd/MM/yyyy HH:mm' }}</strong>.<br>
   Arquivo: <strong>{{ ultimaImportacao.arquivo.nome }}</strong><br>
+
   <div *ngIf="ultimaImportacao?.status === StatusImportacao.Processando" class="m-t-sm">
     <small>{{ progresso?.progresso === 100 ? 'Salvando registros no banco de dados...' : 'Lendo o arquivo e validando os dados...' }}</small>
     <div class="progress progress-mini">
-      <div [style.width]="progresso?.progresso + '%'" class="progress-bar"></div>
+      <div [style.width]="progresso?.progresso + '%'" class="progress-bar progress-bar-striped progress-bar-animated active"></div>
     </div>
     <small>Progresso da Importação: <strong>{{ progresso?.progresso | number:'1.1-1' }}%</strong></small>
   </div>
+
+  <div class="progress progress-mini m-t-sm" *ngIf="ultimaImportacao?.status === StatusImportacao.Aguardando">
+    <div class="progress-bar progress-bar-striped progress-bar-animated active" role="progressbar" style="width: 100%">
+    </div>
+  </div>
+
   <div *ngIf="ultimaImportacao?.status === StatusImportacao.FinalizadoComFalha" class="m-t-sm">
     <a [routerLink]="['importacoes', ultimaImportacao.id, 'inconsistencias']">Visualizar Erros</a>
   </div>

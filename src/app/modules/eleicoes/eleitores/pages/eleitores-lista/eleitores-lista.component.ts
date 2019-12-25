@@ -13,6 +13,7 @@ import { ImportacoesApiService } from 'src/app/core/api/importacoes-api.service'
 import { Importacao, ProgressoImportacao, StatusImportacao } from '@shared/models/importacao';
 import { Subscription } from 'rxjs';
 import { downloadArquivo, inputPesquisa } from '@shared/rxjs-operators';
+import { CodigoEtapaObrigatoria } from '@shared/models/cronograma';
 
 declare var $: any;
 
@@ -38,6 +39,7 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
   StatusImportacao = StatusImportacao;
   progressoSubscriber: Subscription;
   importacaoFinalizadaSubscriber: Subscription;
+  CodigoEtapaObrigatoria = CodigoEtapaObrigatoria;
 
   constructor(
     private eleicoesApi: EleicoesApiService,
@@ -110,22 +112,18 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
       $event.target['value'] = '';
       return;
     }
-    try {
-      this.eleicoesApi.postImportacao(this.eleicao.id, files)
-        .pipe(finalize(() => {
-          $event.target['value'] = '';
-        }))
-        .subscribe((importacao: Importacao) => {
-          this.ultimaImportacao = importacao;
-          this.toasts.showMessage({
-            message: 'O arquivo foi colocado na fila de processamento!',
-            title: 'Sucesso!',
-            type: ToastType.success
-          });
+    this.eleicoesApi.postImportacao(this.eleicao.id, files)
+      .pipe(finalize(() => {
+        $event.target['value'] = '';
+      }))
+      .subscribe((importacao: Importacao) => {
+        this.ultimaImportacao = importacao;
+        this.toasts.showMessage({
+          message: 'O arquivo foi colocado na fila de processamento!',
+          title: 'Sucesso!',
+          type: ToastType.success
         });
-    } catch (err) {
-      console.error(err);
-    }
+      });
   }
 
   carregaUltimaImportacao() {
@@ -157,7 +155,7 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
   }
 
   excluir(id: number) {
-    this.toasts.confirm('Deseja mesmo excluir esse eleitor?')
+    this.toasts.confirmModal('Deseja mesmo excluir esse eleitor?')
       .subscribe((confirmacao: boolean) => {
         if (confirmacao) {
           this.eleicoesApi.deleteEleitor(this.eleicao.id, id)
@@ -174,7 +172,7 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
   }
 
   excluirTodos() {
-    this.toasts.confirm('Deseja mesmo excluir todos os eleitores dessa eleição?')
+    this.toasts.confirmModal('Deseja mesmo excluir todos os eleitores dessa eleição?\nEssa ação não pode ser desfeita.')
       .pipe(
         filter(confimacao => confimacao),
         switchMap(_ => this.eleicoesApi.deleteEleitores(this.eleicao.id))
@@ -187,6 +185,7 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
         });
       });
   }
+
 
 
 }

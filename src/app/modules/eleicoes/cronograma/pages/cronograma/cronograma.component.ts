@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EtapaCronograma, PosicaoEtapa } from '@shared/models/cronograma';
 import { Eleicao } from '@shared/models/eleicao';
 import { filter, switchMap, finalize, tap, map, catchError } from 'rxjs/operators';
@@ -28,6 +28,7 @@ export class CronogramaComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private eleicoesApi: EleicoesApiService,
     private toasts: ToastsService,
     private modalService: ModalService,
@@ -57,12 +58,12 @@ export class CronogramaComponent implements OnInit {
   confirmacaoProximaEtapa(proximaEtapa: EtapaCronograma): Observable<boolean> {
     if (proximaEtapa && new Date(proximaEtapa.dataPrevista) > new Date()) {
       return this.toasts
-        .confirm(`O fim dessa etapa está previsto para o dia ${formatDate(proximaEtapa.dataPrevista, 'dd/MM/yyyy', 'pt-BR')}.
+        .confirmModal(`O fim dessa etapa está previsto para o dia ${formatDate(proximaEtapa.dataPrevista, 'dd/MM/yyyy', 'pt-BR')}.
                   Se não houver nenhuma inconsistência, passaremos para o próxima etapa automaticamente na data prevista.
                   Tem certeza que deseja antecipar a próxima etapa?`, 'Essa ação não pode ser desfeita!');
     }
     return this.toasts
-      .confirm(`Tem certeza que deseja passar para a próxima etapa?`, 'Essa ação não pode ser desfeita!');
+      .confirmModal(`Tem certeza que deseja passar para a próxima etapa?`, 'Essa ação não pode ser desfeita!');
   }
 
   get iniciarProcessoText(): string {
@@ -76,20 +77,31 @@ export class CronogramaComponent implements OnInit {
     if (!this.eleicao.cronograma || !this.eleicao.cronograma.length) {
       return;
     }
-    this.toasts.confirm(
+
+    if (!this.eleicao.dimensionamento.qtdaEleitores) {
+      this.toasts.errorModal(
+        `Verificamos que ainda não há nenhum eleitor cadastrado.
+        Direcionaremos você para a tela de eleitores para a realização do cadastro.
+        Lembrando que você pode fazer o cadastro em massa via importação de planilha e/ou cadastrar manualmente.`)
+        .subscribe(_ => this.router.navigate(['../eleitores'], { relativeTo: this.route.parent }));
+      return;
+    }
+
+    if (!(this.eleicao.dimensionamento.qtdaEfetivos + this.eleicao.dimensionamento.qtdaSuplentes)) {
+      this.toasts.errorModal(
+        `Verificamos que há somente ${this.eleicao.dimensionamento.qtdaEleitores} eleitores cadastrados.
+        Para estabelecimentos com esse número de funcionários não há necessidade de haverem representantes da CIPA.
+        Consulte a tabela de dimensionamento na NR-5.`);
+      return;
+    }
+
+    this.toasts.confirmModal(
       `O ínicio do processo está previsto para o dia ${formatDate(this.eleicao.cronograma[0].dataPrevista, 'dd/MM/yyyy', 'pt-BR')}.
       Deseja realmente antecipar?`, 'Confirmação')
       .pipe(
         filter(confirmacao => confirmacao),
         switchMap(_ => this.eleicoesApi.postProximaEtapa(this.eleicao.id))
-      ).subscribe(cronograma => {
-        this.eleicao.cronograma = cronograma;
-        this.toasts.showMessage({
-          message: 'Processo iniciado com sucesso!',
-          title: 'Sucesso!',
-          type: ToastType.success
-        });
-      });
+      ).subscribe(cronograma => this.alteracaoCronograma(cronograma, 'Processo iniciado com sucesso!'));
   }
 
   private buscaProximaEtapa(etapa: EtapaCronograma): EtapaCronograma {
@@ -107,15 +119,17 @@ export class CronogramaComponent implements OnInit {
         this.carregandoProximaEtapa = true;
         this.eleicoesApi.postProximaEtapa(this.eleicao.id)
           .pipe(finalize(() => this.carregandoProximaEtapa = false))
-          .subscribe((cronograma: EtapaCronograma[]) => {
-            this.eleicao.cronograma = cronograma;
-            this.toasts.showMessage({
-              message: 'Mudança de etapa concluída com sucesso!',
-              title: 'Sucesso!',
-              type: ToastType.success
-            });
-          });
+          .subscribe(cronograma => this.alteracaoCronograma(cronograma, 'Mudança de etapa concluída com sucesso!'));
       });
+  }
+
+  private alteracaoCronograma(cronograma: EtapaCronograma[], mensagem: string): void {
+    this.eleicao.cronograma = cronograma;
+    this.toasts.showMessage({
+      message: mensagem,
+      title: 'Sucesso!',
+      type: ToastType.success
+    });
   }
 
   exibirTemplates(etapa: EtapaCronograma) {

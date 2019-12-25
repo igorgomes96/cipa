@@ -49,7 +49,6 @@ export class EleicoesListaComponent implements OnInit {
       })).subscribe(_ => {
         from(this.eleicoesInscricoesOuSuperior)
           .pipe(
-            filter((eleicao: Eleicao) => eleicao.usuarioEleitor),
             switchMap(eleicao => forkJoin({
               eleicao: of(eleicao),
               candidato: this.eleicoesApi.getInscricaoUsuario(eleicao.id),
@@ -80,7 +79,8 @@ export class EleicoesListaComponent implements OnInit {
 
   get eleicoesInscricoesOuSuperior(): Eleicao[] {
     if (!this.eleicoes || !this.eleicoes.length) { return []; }
-    return this.eleicoes.filter(e => e.inscricoesFinalizadas || e.etapaAtual.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao);
+    return this.eleicoes.filter(e => e.inscricoesFinalizadas ||
+      (e.etapaAtual && e.etapaAtual.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao));
   }
 
 

@@ -22,7 +22,7 @@ export class EstabelecimentosListaComponent implements OnInit {
   }
 
   exclui(estabelecimento: Estabelecimento) {
-    this.toast.confirm('Deseja realmente excluir esse estabelecimento? Essa ação não poderá ser desfeita.', 'Confirmação de Exclusão')
+    this.toast.confirmModal('Deseja realmente excluir esse estabelecimento? Essa ação não poderá ser desfeita.', 'Confirmação de Exclusão')
     .pipe(
       filter(confirmacao => confirmacao),
       switchMap(_ => this.estabelecimentosApi.delete(estabelecimento.id))
