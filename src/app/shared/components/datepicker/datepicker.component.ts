@@ -33,7 +33,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
   value: any; // Texto exibido no controle
   public hasError = false;
 
-  private isDisabled = false;
+  isDisabled = false;
   private jDate: any;
 
   constructor() { }

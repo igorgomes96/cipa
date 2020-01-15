@@ -1,7 +1,7 @@
 import { Eleicao } from '@shared/models/eleicao';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 import { ToastsService } from 'src/app/core/services/toasts.service';
-import { filter, finalize } from 'rxjs/operators';
+import { filter, finalize, tap, switchMap } from 'rxjs/operators';
 import { StatusAprovacao } from '@shared/models/inscricao';
 import { CodigoEtapaObrigatoria } from '@shared/models/cronograma';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -10,6 +10,7 @@ import { Grupo } from '@shared/models/grupo';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { ToastType } from 'src/app/core/components/toasts/toasts.component';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-eleicao-card',
@@ -35,13 +36,20 @@ export class EleicaoCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.eleicao && (this.eleicao.etapaAtual && (this.eleicao.etapaAtual.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao ||
-      this.eleicao.etapaAtual.etapaObrigatoriaId === CodigoEtapaObrigatoria.Votacao))) {
-        this.eleicoesApi.getUsuarioEhEleitor(this.eleicao.id)
-          .subscribe(usuarioEhEleitor => {
-            this.eleicao.usuarioEleitor = usuarioEhEleitor;
+    if (this.eleicao) {
+
+      this.eleicoesApi.getUsuarioEhEleitor(this.eleicao.id)
+        .pipe(
+          tap(usuarioEhEleitor => this.eleicao.usuarioEleitor = usuarioEhEleitor),
+          filter(usuarioEhEleitor => usuarioEhEleitor && this.eleicaoJaPassouDasInscricoes),
+          switchMap(_ => forkJoin({
+            candidato: this.eleicoesApi.getInscricaoUsuario(this.eleicao.id),
+            voto: this.eleicoesApi.getVotoUsuario(this.eleicao.id)
+          }))).subscribe(dados => {
+            this.eleicao.candidato = dados.candidato;
+            this.eleicao.voto = dados.voto;
           });
-      }
+    }
   }
 
   get perfilSESMT() {
@@ -86,6 +94,11 @@ export class EleicaoCardComponent implements OnInit {
         });
         this.modalService.closeModal();
       });
-
   }
+
+  private get eleicaoJaPassouDasInscricoes() {
+    return this.eleicao.inscricoesFinalizadas ||
+      (this.eleicao.etapaAtual && this.eleicao.etapaAtual.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao);
+  }
+
 }

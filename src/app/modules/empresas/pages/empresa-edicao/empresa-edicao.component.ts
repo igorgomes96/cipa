@@ -1,3 +1,4 @@
+import { Estabelecimento } from '@shared/models/estabelecimento';
 import { EmpresasApiService } from '@core/api/empresas-api.service';
 import { Component, OnInit } from '@angular/core';
 import { Empresa } from '@shared/models/empresa';
@@ -46,4 +47,13 @@ export class EmpresaEdicaoComponent implements OnInit {
       });
   }
 
+  removerEstabelecimento(estabelecimentoRemovido: Estabelecimento) {
+    const index = this.empresa.estabelecimentos.findIndex(e => e.id === estabelecimentoRemovido.id);
+    this.empresa.estabelecimentos.splice(index, 1);
+    this.toast.showMessage({
+      message: 'Estabelecimento excluído com sucesso!',
+      title: 'Sucesso',
+      type: ToastType.success
+    });
+  }
 }

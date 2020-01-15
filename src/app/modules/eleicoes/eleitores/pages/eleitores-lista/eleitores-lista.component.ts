@@ -12,7 +12,7 @@ import { PagedResult } from '@shared/models/paged-result';
 import { ImportacoesApiService } from 'src/app/core/api/importacoes-api.service';
 import { Importacao, ProgressoImportacao, StatusImportacao } from '@shared/models/importacao';
 import { Subscription } from 'rxjs';
-import { downloadArquivo, inputPesquisa } from '@shared/rxjs-operators';
+import { inputPesquisa } from '@shared/rxjs-operators';
 import { CodigoEtapaObrigatoria } from '@shared/models/cronograma';
 
 declare var $: any;

@@ -46,18 +46,7 @@ export class EleicoesListaComponent implements OnInit {
       tap((eleicoes: PagedResult<Eleicao>) => {
         this.paginationInfo = eleicoes;
         this.eleicoes = eleicoes.result;
-      })).subscribe(_ => {
-        from(this.eleicoesInscricoesOuSuperior)
-          .pipe(
-            switchMap(eleicao => forkJoin({
-              eleicao: of(eleicao),
-              candidato: this.eleicoesApi.getInscricaoUsuario(eleicao.id),
-              voto: this.eleicoesApi.getVotoUsuario(eleicao.id)
-            }))).subscribe(dados => {
-              dados.eleicao.candidato = dados.candidato;
-              dados.eleicao.voto = dados.voto;
-            });
-      });
+      })).subscribe();
   }
 
   buscaEleicao(id: number): Eleicao {
@@ -74,13 +63,6 @@ export class EleicoesListaComponent implements OnInit {
         });
         this.carregaEleicoes();
       });
-  }
-
-
-  get eleicoesInscricoesOuSuperior(): Eleicao[] {
-    if (!this.eleicoes || !this.eleicoes.length) { return []; }
-    return this.eleicoes.filter(e => e.inscricoesFinalizadas ||
-      (e.etapaAtual && e.etapaAtual.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao));
   }
 
 

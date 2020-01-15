@@ -10,7 +10,7 @@
     <div class="row m-t-lg">
       <div class="col-sm-12">
         <h4>Estabelecimentos</h4>
-        <app-estabelecimentos-lista [estabelecimentos]="empresa.estabelecimentos"></app-estabelecimentos-lista>
+        <app-estabelecimentos-lista [estabelecimentos]="empresa.estabelecimentos" (estabelecimentoExcluido)="removerEstabelecimento($event)"></app-estabelecimentos-lista>
       </div>
     </div>
   </app-panel>
