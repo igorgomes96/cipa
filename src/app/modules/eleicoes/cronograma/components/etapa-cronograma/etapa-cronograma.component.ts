@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { EtapaCronograma, PosicaoEtapa, CodigoEtapaObrigatoria } from '@shared/models/cronograma';
 import { Arquivo } from '@shared/models/arquivo';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Dimensionamento } from '@shared/models/dimensionamento';
 import { EleicoesApiService } from '@core/api/eleicoes-api.service';
-import { switchMap, finalize } from 'rxjs/operators';
+import { switchMap, finalize, tap } from 'rxjs/operators';
+import { Subscription, pipe } from 'rxjs';
 
 declare var $: any;
 
@@ -14,9 +15,19 @@ declare var $: any;
   templateUrl: './etapa-cronograma.component.html',
   styleUrls: ['./etapa-cronograma.component.css']
 })
-export class EtapaCronogramaComponent implements OnInit {
+export class EtapaCronogramaComponent implements OnInit, OnDestroy {
 
-  @Input() etapa: EtapaCronograma;
+  // tslint:disable-next-line: variable-name
+  private _etapa: EtapaCronograma;
+  @Input() set etapa(valor: EtapaCronograma) {
+    this._etapa = valor;
+    if (valor.posicaoEtapa !== PosicaoEtapa.Futura && !this.arquivos.length) {
+      this.atualizarArquivos$.emit();
+    }
+  }
+  get etapa(): EtapaCronograma {
+    return this._etapa;
+  }
   @Input() layout = 'Visualização';
   @Input() carregandoProximaEtapa = false;
   @Input() dimensionamento: Dimensionamento;
@@ -27,6 +38,7 @@ export class EtapaCronogramaComponent implements OnInit {
   @Output() edicaoCancelada: EventEmitter<void> = new EventEmitter<void>();
   @Output() atualizarDimensionamento = new EventEmitter<void>();
 
+  subscriptions = new Subscription();
   PosicaoEtapa = PosicaoEtapa;
   carregandoArquivos = false;
   arquivos: Arquivo[] = [];
@@ -34,6 +46,7 @@ export class EtapaCronogramaComponent implements OnInit {
   CodigoEtapaObrigatoria = CodigoEtapaObrigatoria;
   ultimaAtualizacao: Date;
   editando = false;
+  private atualizarArquivos$ = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,16 +56,21 @@ export class EtapaCronogramaComponent implements OnInit {
     this.form = this.formBuilder.group({
       data: [{ value: this.etapa.dataRealizada || this.etapa.dataPrevista, disabled: this.isDateDisabled }]
     });
-    this.form.get('data').valueChanges.subscribe((v) => {
+    this.subscriptions.add(this.form.get('data').valueChanges.subscribe((v) => {
       this.etapa.dataPrevista = v;
       this.onAtualizarEtapa();
-    });
-    this.eleicoesApi.getArquivos(this.etapa.eleicaoId, this.etapa.id)
+    }));
+    this.subscriptions.add(this.atualizarArquivos$
+      .pipe(switchMap(_ => this.eleicoesApi.getArquivos(this.etapa.eleicaoId, this.etapa.id)))
       .subscribe((arquivos: Arquivo[]) => {
         this.arquivos = arquivos;
-      });
+      }));
+    if (this.etapa && this.etapa.posicaoEtapa !== PosicaoEtapa.Futura) {
+      this.atualizarArquivos$.emit();
+    }
     this.ultimaAtualizacao = new Date();
   }
+
 
   get isDateDisabled() {
     return this.layout === 'Visualização' && this.etapa.posicaoEtapa !== PosicaoEtapa.Futura;
@@ -107,13 +125,13 @@ export class EtapaCronogramaComponent implements OnInit {
 
   upload(files: FileList) {
     this.carregandoArquivos = true;
-    this.eleicoesApi.uploadArquivos(this.etapa.eleicaoId, this.etapa.id, files)
+    this.subscriptions.add(this.eleicoesApi.uploadArquivos(this.etapa.eleicaoId, this.etapa.id, files)
       .pipe(
         switchMap(_ => this.eleicoesApi.getArquivos(this.etapa.eleicaoId, this.etapa.id)),
         finalize(() => this.carregandoArquivos = false)
       ).subscribe((arquivos: Arquivo[]) => {
         this.arquivos = arquivos;
-      });
+      }));
   }
 
   deleteArquivo() {
@@ -137,6 +155,10 @@ export class EtapaCronogramaComponent implements OnInit {
 
   onAtualizarDimensionamento() {
     this.atualizarDimensionamento.emit();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
 }

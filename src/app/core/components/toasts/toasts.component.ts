@@ -1,4 +1,5 @@
-import { Component, OnInit, EventEmitter, Input } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, EventEmitter, Input, OnDestroy } from '@angular/core';
 
 declare var toastr: any;
 
@@ -20,15 +21,16 @@ export class ToastMessage {
   template: '',
   styleUrls: ['./toasts.component.css']
 })
-export class ToastsComponent implements OnInit {
-
+export class ToastsComponent implements OnInit, OnDestroy {
   @Input() mensagem: EventEmitter<ToastMessage>;
+
+  subscription = new Subscription();
 
   constructor() {
   }
 
   ngOnInit() {
-    this.mensagem.subscribe((m: ToastMessage) => this.showMessage(m));
+    this.subscription.add(this.mensagem.subscribe((m: ToastMessage) => this.showMessage(m)));
   }
 
   showMessage(message: ToastMessage) {
@@ -40,5 +42,8 @@ export class ToastsComponent implements OnInit {
     toastr[ToastType[message.type]](message.message, message.title);
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
 }

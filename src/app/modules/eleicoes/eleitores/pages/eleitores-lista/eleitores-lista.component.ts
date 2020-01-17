@@ -37,8 +37,7 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
   progresso: ProgressoImportacao;
   filtro: string;
   StatusImportacao = StatusImportacao;
-  progressoSubscriber: Subscription;
-  importacaoFinalizadaSubscriber: Subscription;
+  subscriptions = new Subscription();
   CodigoEtapaObrigatoria = CodigoEtapaObrigatoria;
 
   constructor(
@@ -72,25 +71,24 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
         this.carregaEleitores();
       });
 
-    this.progressoSubscriber = this.importacoesApi.progressoImportacao()
+    this.subscriptions.add(this.importacoesApi.progressoImportacao()
       .subscribe(valor => {
         if (valor && valor.progresso < 100) {
           this.ultimaImportacao.status = StatusImportacao.Processando;
         }
         this.progresso = valor;
-      });
+      }));
 
-    this.importacaoFinalizadaSubscriber = this.importacoesApi.importacaoFinalizada()
+    this.subscriptions.add(this.importacoesApi.importacaoFinalizada()
       .subscribe(_ => {
         this.progresso = null;
         this.carregaUltimaImportacao();
         this.carregaEleitores();
-      });
+      }));
   }
 
   ngOnDestroy(): void {
-    this.progressoSubscriber.unsubscribe();
-    this.importacaoFinalizadaSubscriber.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   downloadTemplate() {

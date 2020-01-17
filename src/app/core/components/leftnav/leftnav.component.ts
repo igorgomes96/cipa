@@ -1,9 +1,10 @@
 import { NavigationService } from './../../services/navigation.service';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router, ResolveEnd, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { filter, distinctUntilChanged } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { AuthInfo } from '@shared/models/usuario';
+import { Subscription } from 'rxjs';
 
 declare var $: any;
 
@@ -21,10 +22,11 @@ export interface MenuItem {
   templateUrl: './leftnav.component.html',
   styleUrls: ['./leftnav.component.css']
 })
-export class LeftnavComponent implements OnInit {
+export class LeftnavComponent implements OnInit, OnDestroy {
 
   menu: MenuItem[];
   isAdmin = true;
+  subscription = new Subscription();
   constructor(
     private router: Router,
     private navigationService: NavigationService,
@@ -98,8 +100,8 @@ export class LeftnavComponent implements OnInit {
       this.updateLinks(event.url);
     });
 
-    this.navigationService.leftNavLinkEmitter
-      .subscribe(_ => this.updateLinks(this.router.url));
+    this.subscription.add(this.navigationService.leftNavLinkEmitter
+      .subscribe(_ => this.updateLinks(this.router.url)));
     this.updateLinks(this.router.url);
   }
 
@@ -138,5 +140,8 @@ export class LeftnavComponent implements OnInit {
     return this.authInfoService.authInfo;
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
 }

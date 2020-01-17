@@ -6,6 +6,7 @@ import { GenericApi } from './generic-api';
 import { environment } from 'src/environments/environment';
 import { endpoints } from 'src/environments/endpoints';
 import { Usuario } from '@shared/models/usuario';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class UsuariosApiService extends GenericApi<Usuario> {
   }
 
   getUsuarioLogado(): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.url}logado`);
+    return this.http.get<Usuario>(`${this.url}logado`).pipe(take(1));
   }
 
 }

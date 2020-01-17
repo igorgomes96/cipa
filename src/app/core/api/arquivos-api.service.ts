@@ -4,6 +4,7 @@ import { HttpEvent, HttpRequest, HttpClient, HttpResponse } from '@angular/commo
 import { environment } from 'src/environments/environment';
 import { endpoints } from '@env/endpoints';
 import { downloadArquivo } from '@shared/rxjs-operators';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -29,21 +30,21 @@ export class ArquivosApiService {
 
   downloadTemplateImportacao(arquivo: string) {
     return this.http.get(`${this.url}templateimportacao`, { responseType: 'arraybuffer' })
-      .pipe(downloadArquivo('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', arquivo));
+      .pipe(downloadArquivo('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', arquivo), take(1));
   }
 
   downloadNR5() {
     return this.http.get(`${this.url}nr5`, { responseType: 'arraybuffer' })
-      .pipe(downloadArquivo('application/pdf', 'NR-5.pdf'));
+      .pipe(downloadArquivo('application/pdf', 'NR-5.pdf'), take(1));
   }
 
   download(id: string, arquivo: string, contentType: string) {
     return this.http.get(`${this.url}${id}/download`, { responseType: 'arraybuffer' })
-      .pipe(downloadArquivo(contentType, arquivo));
+      .pipe(downloadArquivo(contentType, arquivo), take(1));
   }
 
   delete(id: string) {
-    return this.http.delete(`${this.url}${id}`);
+    return this.http.delete(`${this.url}${id}`).pipe(take(1));
   }
 
 }

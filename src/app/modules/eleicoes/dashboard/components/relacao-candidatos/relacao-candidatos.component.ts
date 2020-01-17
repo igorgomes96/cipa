@@ -1,7 +1,9 @@
+import { ToastsService } from 'src/app/core/services/toasts.service';
 import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { ResultadoApuracao, Apuracao, Resultado } from '@shared/models/apuracao';
 import { EleicoesApiService } from 'src/app/core/api/eleicoes-api.service';
 import { Eleicao } from '@shared/models/eleicao';
+import { ToastType } from '@core/components/toasts/toasts.component';
 
 @Component({
   selector: 'app-relacao-candidatos',
@@ -13,7 +15,7 @@ export class RelacaoCandidatosComponent implements OnInit {
   @Input() eleicao: Eleicao;
   @Input() resultado: ResultadoApuracao;
   @Input() downloadRelatorio = new EventEmitter<{}>();
-  constructor(private eleicoesApi: EleicoesApiService) { }
+  constructor(private eleicoesApi: EleicoesApiService, private toast: ToastsService) { }
 
   ngOnInit() {
     this.downloadRelatorio.subscribe(_ => this.download());
@@ -34,6 +36,15 @@ export class RelacaoCandidatosComponent implements OnInit {
       default:
         return '';
     }
+  }
+
+  registrarResultadoApuracao() {
+    this.eleicoesApi.postRegistrarResultado(this.eleicao.id)
+      .subscribe(_ => this.toast.showMessage({
+        message: 'Resultado da apuração registrado!',
+        title: 'Sucesso',
+        type: ToastType.success
+      }));
   }
 
   private download() {

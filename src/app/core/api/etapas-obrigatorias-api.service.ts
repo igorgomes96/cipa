@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { endpoints } from 'src/environments/endpoints';
 import { Observable } from 'rxjs';
 import { Arquivo } from '@shared/models/arquivo';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class EtapasObrigatoriasApiService extends GenericApi<EtapaObrigatoria> {
   }
 
   getTemplates(idEtapa: number): Observable<Arquivo[]> {
-    return this.http.get<Arquivo[]>(`${this.url}${idEtapa}/templates`);
+    return this.http.get<Arquivo[]>(`${this.url}${idEtapa}/templates`).pipe(take(1));
   }
 
 }

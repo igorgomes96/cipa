@@ -39,7 +39,7 @@
       <a routerLink="novo" class="btn btn-primary m-r-sm" *ngIf="!eleicao.votacaoFinalizada">
         <em class="fa fa-plus"></em> Cadastrar Novo
       </a>
-      <button class="btn btn-danger" (click)="excluirTodos()" *ngIf="!eleicao.etapaAtual">
+      <button class="btn btn-danger" (click)="excluirTodos()" *ngIf="!eleicao.etapaAtual && !eleicao.dataFinalizacao">
         <em class="fa fa-trash"></em> Excluir todos
       </button>
     </div>

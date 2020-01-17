@@ -7,6 +7,7 @@ import { endpoints } from 'src/environments/endpoints';
 import { AuthInfo, Conta } from '@shared/models/usuario';
 import { EtapaPadraoConta } from '@shared/models/cronograma';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,23 +19,23 @@ export class ContasApiService extends GenericApi<AuthInfo> {
   }
 
   getContaUsuario(): Observable<Conta> {
-    return this.http.get<Conta>(`${this.url}`);
+    return this.http.get<Conta>(`${this.url}`).pipe(take(1));
   }
 
   getCronogramaPadrao(): Observable<EtapaPadraoConta[]> {
-    return this.http.get<EtapaPadraoConta[]>(`${this.url}cronograma`);
+    return this.http.get<EtapaPadraoConta[]>(`${this.url}cronograma`).pipe(take(1));
   }
 
   postEtapaCronogramaPadrao(etapaPadrao: EtapaPadraoConta): Observable<EtapaPadraoConta> {
-    return this.http.post<EtapaPadraoConta>(`${this.url}cronograma`, etapaPadrao);
+    return this.http.post<EtapaPadraoConta>(`${this.url}cronograma`, etapaPadrao).pipe(take(1));
   }
 
   putEtapaCronogramaPadrao(etapaPadrao: EtapaPadraoConta): Observable<EtapaPadraoConta> {
-    return this.http.put<EtapaPadraoConta>(`${this.url}cronograma/${etapaPadrao.id}`, etapaPadrao);
+    return this.http.put<EtapaPadraoConta>(`${this.url}cronograma/${etapaPadrao.id}`, etapaPadrao).pipe(take(1));
   }
 
   deleteEtapaCronogramaPadrao(id: number): Observable<EtapaPadraoConta> {
-    return this.http.delete<EtapaPadraoConta>(`${this.url}cronograma/${id}`);
+    return this.http.delete<EtapaPadraoConta>(`${this.url}cronograma/${id}`).pipe(take(1));
   }
 
 }

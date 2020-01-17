@@ -1,11 +1,8 @@
-import { Location } from '@angular/common';
 import { EleicoesApiService } from '@core/api/eleicoes-api.service';
-import { Dimensionamento } from '@shared/models/dimensionamento';
 import { Apuracao, ResultadoApuracao } from '@shared/models/apuracao';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Eleicao } from '@shared/models/eleicao';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -41,7 +38,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onOptionsEleitoresVotantesClick() {
-    this.eleicoesApi.downloadRelatorioVotos(this.eleicao.id, 'Votos.xlsx').subscribe();
+    this.eleicoesApi.downloadRelatorioVotos(this.eleicao.id, 'Eleitores.xlsx').subscribe();
   }
 
   onOptionsCandidatosClick() {
