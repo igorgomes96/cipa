@@ -1,6 +1,4 @@
 export class Dimensionamento {
-    // grupoId: number;
-    // codigoGrupo: string;
     minimo: number;
     maximo: number;
     qtdaEfetivos: number;

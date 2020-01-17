@@ -33,6 +33,10 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
     super(http, environment.api + endpoints.eleicoes);
   }
 
+  postAtualizarDimensionamento(idEleicao: number): Observable<void> {
+    return this.http.post<void>(`${this.url}${idEleicao}/atualizardimensionamento`, null);
+  }
+
   // Eleitores
   getEleitores(idEleicao: number, params: any): Observable<Eleitor[] | PagedResult<Eleitor>> {
     const validParams = this.validParams(params);

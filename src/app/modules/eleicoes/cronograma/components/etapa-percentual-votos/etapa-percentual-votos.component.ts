@@ -1,5 +1,5 @@
 import { Dimensionamento } from '@shared/models/dimensionamento';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-etapa-percentual-votos',
@@ -9,6 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class EtapaPercentualVotosComponent implements OnInit {
 
   @Input() dimensionamento: Dimensionamento;
+  @Output() atualizar = new EventEmitter<void>();
   ultimaAtualizacao: Date;
   constructor() { }
 
@@ -18,6 +19,10 @@ export class EtapaPercentualVotosComponent implements OnInit {
 
   get possuiQtdaMinimaVotos(): boolean {
     return this.dimensionamento.qtdaVotos >= this.dimensionamento.qtdaMinimaVotos;
+  }
+
+  onAtualizar() {
+    this.atualizar.emit();
   }
 
 }

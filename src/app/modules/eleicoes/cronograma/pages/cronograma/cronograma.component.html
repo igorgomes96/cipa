@@ -31,7 +31,7 @@
     *ngFor="let etapa of eleicao.cronograma" [etapa]="etapa" [codigoGrupo]="eleicao.grupo" (proximaEtapa)="proximaEtapa($event)"
     (atualizarEtapa)="atualizarEtapa($event)" (exibirTemplates)="exibirTemplates($event)"
     [carregandoProximaEtapa]="carregandoProximaEtapa" [dimensionamento]="eleicao.dimensionamento"
-    (edicaoCancelada)="recarregaCronograma()"></div>
+    (edicaoCancelada)="recarregaCronograma()" (atualizarDimensionamento)="atualizarDimensionamento()"></div>
 </div>
 
 <ng-template #modalTemplates>

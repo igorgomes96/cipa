@@ -1,15 +1,6 @@
-<div *ngIf="!eleicao.dimensionamento.qtdaVotos else templateAtualizar" class="alert alert-warning">
+<div *ngIf="!eleicao.dimensionamento.qtdaVotos" class="alert alert-warning">
   <strong>Não temos nada para mostrar!</strong> Ainda não houve nenhum voto nesta eleição.
 </div>
-
-<ng-template #templateAtualizar>
-  <!-- <div class="row">
-    <div class="col-md-12">
-      <a class="float-right" (click)="atualizar()"><span class="fa fa-refresh"></span> Atualizar</a>
-    </div>
-  </div> -->
-</ng-template>
-
 
 <div *ngIf="eleicao.dimensionamento.qtdaVotos">
   <app-widgets [dimensionamento]="eleicao.dimensionamento"></app-widgets>
@@ -19,11 +10,6 @@
     <h5 class="text-center">Ultima atualização: {{ ultimaAtualizacao | date:'dd/MMM/yyyy HH:mm:ss' }}</h5>
     <br>
     <app-apuracao-chart [apuracao]="apuracao" barChartType="horizontalBar"></app-apuracao-chart>
-  </app-panel>
-
-  <app-panel title="Relatório de eleitores" [options]="optionsEleitoresVotantes"
-    (optionClick)="onOptionsEleitoresVotantesClick($event)">
-    <app-relatorio-eleitores [eleicao]="eleicao"></app-relatorio-eleitores>
   </app-panel>
 
   <div class="row" *ngIf="eleicao.dimensionamento.qtdaVotos >= eleicao.dimensionamento.qtdaMinimaVotos">
@@ -39,6 +25,13 @@
       </app-panel>
     </div>
   </div>
+
+  <!-- <app-panel title="Relatório de eleitores" [options]="optionsEleitoresVotantes"
+    (optionClick)="onOptionsEleitoresVotantesClick($event)">
+    <app-relatorio-eleitores [eleicao]="eleicao"></app-relatorio-eleitores>
+  </app-panel> -->
+
+
 </div>
 
 <app-panel title="Relação de Votos por Candidato" [options]="optionsCandidatos"

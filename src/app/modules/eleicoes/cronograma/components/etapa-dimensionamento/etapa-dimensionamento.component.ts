@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Dimensionamento } from '@shared/models/dimensionamento';
 
 @Component({
@@ -10,6 +10,7 @@ export class EtapaDimensionamentoComponent implements OnInit {
 
   @Input() dimensionamento: Dimensionamento;
   @Input() codigoGrupo: string;
+  @Output() atualizar = new EventEmitter<void>();
   ultimaAtualizacao: Date;
   constructor() { }
 
@@ -20,6 +21,10 @@ export class EtapaDimensionamentoComponent implements OnInit {
   get possuiQtdaMinimaInscricoes() {
     return this.dimensionamento &&
       this.dimensionamento.qtdaInscricoesAprovadas >= (this.dimensionamento.qtdaEfetivos + this.dimensionamento.qtdaSuplentes);
+  }
+
+  onAtualizar() {
+    this.atualizar.emit();
   }
 
 }

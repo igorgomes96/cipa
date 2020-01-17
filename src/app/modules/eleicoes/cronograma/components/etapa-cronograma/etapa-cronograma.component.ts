@@ -25,6 +25,7 @@ export class EtapaCronogramaComponent implements OnInit {
   @Output() exibirTemplates: EventEmitter<EtapaCronograma> = new EventEmitter<EtapaCronograma>();
   @Output() atualizarEtapa: EventEmitter<EtapaCronograma> = new EventEmitter<EtapaCronograma>();
   @Output() edicaoCancelada: EventEmitter<void> = new EventEmitter<void>();
+  @Output() atualizarDimensionamento = new EventEmitter<void>();
 
   PosicaoEtapa = PosicaoEtapa;
   carregandoArquivos = false;
@@ -132,6 +133,10 @@ export class EtapaCronogramaComponent implements OnInit {
 
   onAtualizarEtapa() {
     this.atualizarEtapa.emit(this.etapa);
+  }
+
+  onAtualizarDimensionamento() {
+    this.atualizarDimensionamento.emit();
   }
 
 }

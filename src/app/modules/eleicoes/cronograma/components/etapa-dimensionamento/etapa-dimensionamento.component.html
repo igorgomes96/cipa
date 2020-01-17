@@ -17,5 +17,8 @@
       {{ dimensionamento.qtdaEfetivos + dimensionamento.qtdaSuplentes }} inscrições aprovadas</strong>.</span>
   <span style="display: block; margin-bottom: 8px;" *ngIf="possuiQtdaMinimaInscricoes">A quantidade mínima de
     inscrições já foi alcançada.</span>
-  <small>Última atualização: {{ ultimaAtualizacao | date:'dd/MM/yyyy HH:mm'}}</small>
+  <small>
+    Última atualização: {{ ultimaAtualizacao | date:'dd/MM/yyyy HH:mm'}} -
+    <a><span class="fa fa-refresh" (click)="onAtualizar()"></span></a>
+  </small>
 </div>

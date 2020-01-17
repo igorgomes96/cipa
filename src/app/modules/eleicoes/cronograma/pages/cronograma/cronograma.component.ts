@@ -156,6 +156,16 @@ export class CronogramaComponent implements OnInit {
       });
   }
 
+  atualizarDimensionamento() {
+    this.eleicoesApi.postAtualizarDimensionamento(this.eleicao.id)
+      .pipe(switchMap(_ => this.eleicoesApi.get(this.eleicao.id)))
+      .subscribe(eleicao => {
+        eleicao.cronograma = this.eleicao.cronograma;
+        this.eleicao = eleicao;
+      });
+  }
+
+
   atualizarEtapa(etapa: EtapaCronograma) {
     this.eleicoesApi.putAtualizaEtapaCronograma(this.eleicao.id, etapa)
       .pipe(catchError(err => {
