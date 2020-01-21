@@ -1,6 +1,7 @@
 export enum Perfil {
   SESMT = 'SESMT',
-  Eleitor = 'Eleitor'
+  Eleitor = 'Eleitor',
+  Administrador = 'Administrador'
 }
 
 export class Usuario {
@@ -28,6 +29,7 @@ export class AuthInfo {
 export class Conta {
   id: number;
   planoId: number;
+  planoDescricao: string;
   ativa: boolean;
   qtdaEstabelecimentos: number;
   dataInicio: Date;

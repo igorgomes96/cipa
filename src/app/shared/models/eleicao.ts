@@ -20,8 +20,6 @@ export class Eleicao {
     eleitores: Eleitor[];
     terminoMandatoAnterior: Date;
     etapaAtual: EtapaCronograma;
-    // qtdaEfetivos: number;
-    // qtdaSuplentes: number;
     inscricoesFinalizadas: boolean;
     votacaoFinalizada: boolean;
     inicioInscricao: Date;
@@ -29,13 +27,15 @@ export class Eleicao {
     inicioVotacao: Date;
     terminoVotacao: Date;
     dimensionamento: Dimensionamento;
+    configuracao: ConfiguracaoEleicao;
 
     candidato: Inscricao;
     voto: Voto;
     usuarioEleitor: boolean;
+}
 
-    public nomeGestao(): string {
-        const fimGestao = this.gestao + this.duracaoGestao - 1;
-        return `${this.gestao} - ${fimGestao}`;
-    }
+export class ConfiguracaoEleicao {
+  envioEditalConvocao: boolean;
+  envioConviteInscricao: boolean;
+  envioConviteVotacao: boolean;
 }

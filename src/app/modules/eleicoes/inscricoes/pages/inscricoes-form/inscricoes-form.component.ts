@@ -90,37 +90,20 @@ export class InscricoesFormComponent implements OnInit {
     return this.inscricao.reprovacoes[0];
   }
 
-  get statusAprovacaoClass(): string {
+  get statusAprovacao(): { label: string, class: string } {
     if (!this.jaInscrito || !this.inscricao) {
-      return '';
+      return { label: '', class: '' };
     }
     const status = StatusAprovacao[this.inscricao.statusAprovacao];
     switch (status) {
       case StatusAprovacao.Aprovada:
-        return 'label-primary';
+        return { label: 'Aprovada', class: 'label-primary' };
       case StatusAprovacao.Pendente:
-        return 'label-warning';
+        return { label: 'Pendente', class: 'label-warning' };
       case StatusAprovacao.Reprovada:
-        return 'label-danger';
+        return { label: 'Reprovada', class: 'label-danger' };
       default:
-        return '';
-    }
-  }
-
-  get statusAprovacao(): string {
-    if (!this.jaInscrito || !this.inscricao) {
-      return '';
-    }
-    const status = StatusAprovacao[this.inscricao.statusAprovacao];
-    switch (status) {
-      case StatusAprovacao.Aprovada:
-        return 'Aprovada';
-      case StatusAprovacao.Pendente:
-        return 'Pendente';
-      case StatusAprovacao.Reprovada:
-        return 'Reprovada';
-      default:
-        return '';
+        return { label: '', class: '' };
     }
   }
 
@@ -176,7 +159,7 @@ export class InscricoesFormComponent implements OnInit {
     }
     let chamada: Observable<{}>;
     if (this.jaInscrito) {
-      chamada = this.eleicoesApi.putInscricao(this.eleicao.id, this.inscricao) as Observable<Inscricao>;
+      chamada = this.eleicoesApi.putInscricao(this.eleicao.id, this.inscricao);
     } else {
       chamada = this.eleicoesApi.postInscricao(this.eleicao.id, this.inscricao);
     }
@@ -185,8 +168,7 @@ export class InscricoesFormComponent implements OnInit {
         switchMap((candidato: Inscricao) => {
           this.inscricao = candidato;
           return this.eleicoesApi.postFotoInscricao(this.eleicao.id, this.fileList);
-        }),
-        filterResponse());
+        }), filterResponse());
     }
 
     chamada.pipe(

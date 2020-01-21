@@ -36,7 +36,7 @@ export class EleicaoCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.eleicao) {
+    if (this.eleicao && !this.eleicao.dataFinalizacao) {
 
       this.eleicoesApi.getUsuarioEhEleitor(this.eleicao.id)
         .pipe(
@@ -52,8 +52,9 @@ export class EleicaoCardComponent implements OnInit {
     }
   }
 
-  get perfilSESMT() {
-    return this.authService.tokenValido && this.authService.authInfo.perfil === Perfil.SESMT;
+  get perfilComAcesso() {
+    return this.authService.tokenValido &&
+      (this.authService.authInfo.perfil === Perfil.SESMT || this.authService.authInfo.perfil === Perfil.Administrador);
   }
 
   excluirEleicao() {

@@ -24,6 +24,7 @@ export class Inscricao {
     emailAprovador: string;
     nomeAprovador: string;
     horarioAprovacao: Date;
+    horarioInscricao: Date;
 
     eleitor: Eleitor;
     reprovacoes: Reprovacao[];

@@ -19,20 +19,21 @@
         <span class="fa fa-home"></span> {{ eleicao.estabelecimento?.cidade }}
       </p>
 
-      <div *ngIf="perfilSESMT">
+      <div *ngIf="perfilComAcesso">
         Grupo: <strong class="label label-warning">{{ eleicao.grupo }}</strong>
-        <a (click)="alterarGrupo()" class="m-l-sm" *ngIf="!eleicao.dataFinalizacao"><span class="fa fa-pencil"></span></a>
+        <a (click)="alterarGrupo()" class="m-l-sm" *ngIf="!eleicao.dataFinalizacao"><span
+            class="fa fa-pencil"></span></a>
       </div>
 
-      <div *ngIf="!perfilSESMT">
+      <div *ngIf="!perfilComAcesso">
         <span *ngIf="!eleicao.inscricoesFinalizadas">
-          <br>
           <span class="fa fa-calendar"></span> Inscrições: de
           <strong>{{ eleicao.inicioInscricao | date:'dd/MMM' }}</strong> a
           <strong>{{ eleicao.terminoInscricao | date:'dd/MMM' }}</strong>
         </span>
 
         <span *ngIf="!eleicao.votacaoFinalizada">
+          <br>
           <span class="fa fa-calendar"></span> Votação: de <strong>{{ eleicao.inicioVotacao | date:'dd/MMM' }}</strong>
           a <strong>{{ eleicao.terminoVotacao | date:'dd/MMM' }}</strong>
         </span>
@@ -58,9 +59,12 @@
     </div>
 
     <div class="actions">
-      <span *ngIf="perfilSESMT">
+      <span *ngIf="perfilComAcesso">
         <a [routerLink]="'/eleicoes/' + eleicao.id + '/cronograma'" class="btn btn-success btn-outline m-r-sm"><span
             class="fa fa-calendar"></span> Acessar</a>
+
+        <a [routerLink]="'/eleicoes/' + eleicao.id + '/configuracao'" *ngIf="!eleicao.dataFinalizacao" class="btn btn-primary btn-outline m-r-sm"><span
+            class="fa fa-cogs"></span> Configurar</a>
 
         <button *ngIf="!eleicao.etapaAtual && !eleicao.dataFinalizacao" class="btn btn-outline-danger"
           (click)="excluirEleicao()"><span class="fa fa-trash"></span>
@@ -86,7 +90,8 @@
 
           <ng-template #naoInscrito>
             <span *ngIf="eleicao.etapaAtual?.etapaObrigatoriaId === CodigoEtapaObrigatoria.Inscricao">
-              <a [routerLink]="'/eleicoes/' + eleicao.id + '/inscricoes/nova'" class="btn btn-outline btn-primary m-r-sm">
+              <a [routerLink]="'/eleicoes/' + eleicao.id + '/inscricoes/nova'"
+                class="btn btn-outline btn-primary m-r-sm">
                 <span class="fa fa-user"></span> Inscreva-se!
               </a>
             </span>
@@ -101,5 +106,8 @@
 </div>
 
 <ng-template #modalAlteracaoGrupo>
-    <app-alteracao-grupo [codigoGrupo]="eleicao.grupo" [salvandoGrupo]="salvandoGrupo" (selecionarGrupo)="salvarGrupo($event)"></app-alteracao-grupo>
+  <app-alteracao-grupo [codigoGrupo]="eleicao.grupo" [salvandoGrupo]="salvandoGrupo"
+    (selecionarGrupo)="salvarGrupo($event)"></app-alteracao-grupo>
 </ng-template>
+
+<router-outlet></router-outlet>

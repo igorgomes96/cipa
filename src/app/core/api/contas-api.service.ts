@@ -8,6 +8,7 @@ import { AuthInfo, Conta } from '@shared/models/usuario';
 import { EtapaPadraoConta } from '@shared/models/cronograma';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { PagedResult } from '@shared/models/paged-result';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,10 @@ export class ContasApiService extends GenericApi<AuthInfo> {
 
   constructor(private http: HttpClient) {
     super(http, environment.api + endpoints.contas);
+  }
+
+  getList(): Observable<Conta[]> {
+    return this.http.get<Conta[]>(`${this.url}list`).pipe(take(1));
   }
 
   getContaUsuario(): Observable<Conta> {

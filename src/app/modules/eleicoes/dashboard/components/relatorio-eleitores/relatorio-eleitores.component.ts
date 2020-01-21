@@ -16,7 +16,7 @@ export class RelatorioEleitoresComponent implements OnInit {
   votos: PagedResult<Voto> = {
     currentPage: 1,
     pageCount: 0,
-    pageSize: 50,
+    pageSize: 10,
     result: [],
     totalRecords: 0
   };

@@ -11,6 +11,8 @@ import { UsuarioEdicaoComponent } from './pages/usuario-edicao/usuario-edicao.co
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
 import { CronogramaPadraoComponent } from './components/cronograma-padrao/cronograma-padrao.component';
 import { EtapaPadraoComponent } from './components/etapa-padrao/etapa-padrao.component';
+import { ContasListaComponent } from './pages/contas-lista/contas-lista.component';
+import { CardContaComponent } from './components/card-conta/card-conta.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { EtapaPadraoComponent } from './components/etapa-padrao/etapa-padrao.com
     UsuarioFormComponent,
     CronogramaPadraoComponent,
     EtapaPadraoComponent,
+    ContasListaComponent,
+    CardContaComponent,
   ],
   imports: [
     CommonModule,

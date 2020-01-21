@@ -8,7 +8,7 @@ import { ToastType } from 'src/app/core/components/toasts/toasts.component';
 import { AuthInfo, Perfil } from '@shared/models/usuario';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CodigoEtapaObrigatoria, EtapaObrigatoria } from '@shared/models/cronograma';
-import { tap, switchMap, filter } from 'rxjs/operators';
+import { tap, switchMap, filter, delay } from 'rxjs/operators';
 import { from, forkJoin, of } from 'rxjs';
 
 @Component({
@@ -18,14 +18,15 @@ import { from, forkJoin, of } from 'rxjs';
 })
 export class EleicoesListaComponent implements OnInit {
 
-  paginationInfo: PagedResult<Eleicao> = {
-    currentPage: 1,
-    pageSize: 10,
-    pageCount: 0,
-    result: [],
-    totalRecords: 0
-  };
-  eleicoes: Eleicao[] = [];
+  // paginationInfo: PagedResult<Eleicao> = {
+  //   currentPage: 1,
+  //   pageSize: 100,
+  //   pageCount: 0,
+  //   result: [],
+  //   totalRecords: 0
+  // };
+  eleicoes: Eleicao[];
+  eleicoesFinalizadas: Eleicao[];
   authInfo: AuthInfo;
   Perfil = Perfil;
 
@@ -41,12 +42,20 @@ export class EleicoesListaComponent implements OnInit {
 
 
   carregaEleicoes() {
-    const http = this.eleicoesApi.getAll({ pageSize: this.paginationInfo.pageSize, pageNumber: this.paginationInfo.currentPage });
+    const http = this.eleicoesApi.getAll({
+      status: 'aberta'
+    });
     http.pipe(
-      tap((eleicoes: PagedResult<Eleicao>) => {
-        this.paginationInfo = eleicoes;
-        this.eleicoes = eleicoes.result;
-      })).subscribe();
+      tap((eleicoes: Eleicao[]) => {
+        this.eleicoes = eleicoes;
+        // this.paginationInfo = eleicoes;
+        // this.eleicoes = eleicoes.result;
+      }),
+      delay(1000),
+      switchMap(_ => this.eleicoesApi.getAll({ status: 'finalizada' }))
+    ).subscribe((eleicoesFinalizadas: Eleicao[]) => {
+      this.eleicoesFinalizadas = eleicoesFinalizadas;
+    });
   }
 
   buscaEleicao(id: number): Eleicao {
@@ -63,6 +72,10 @@ export class EleicoesListaComponent implements OnInit {
         });
         this.carregaEleicoes();
       });
+  }
+
+  get perfilComAcessoCriacao(): boolean {
+    return this.authInfo && (this.authInfo.perfil === Perfil.SESMT || this.authInfo.perfil === Perfil.Administrador);
   }
 
 

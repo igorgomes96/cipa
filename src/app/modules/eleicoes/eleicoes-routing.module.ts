@@ -5,6 +5,8 @@ import { NavigationType } from '../../app.component';
 import { EleicaoNovaComponent } from './pages/eleicao-nova/eleicao-nova.component';
 import { SesmtGuard } from 'src/app/core/guards/sesmt.guard';
 import { SesmtCanLoadGuard } from 'src/app/core/guards/sesmt.canload.guard';
+import { EleicaoConfiguracaoComponent } from './pages/eleicao-configuracao/eleicao-configuracao.component';
+import { EleicaoResolverService } from '@core/resolvers/eleicao-resolver.service';
 
 const routes: Routes = [
   {
@@ -12,7 +14,16 @@ const routes: Routes = [
     component: EleicoesListaComponent,
     data: {
       navigationType: NavigationType.Top
-    }
+    },
+    children: [
+      {
+        path: ':id/configuracao',
+        component: EleicaoConfiguracaoComponent,
+        resolve: {
+          eleicao: EleicaoResolverService
+        }
+      }
+    ]
   },
   {
     path: 'nova',

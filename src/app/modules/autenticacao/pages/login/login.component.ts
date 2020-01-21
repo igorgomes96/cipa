@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from '@shared/models/usuario';
+import { Usuario, Perfil } from '@shared/models/usuario';
 import { LoginApiService } from 'src/app/core/api/login-api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -50,7 +50,11 @@ export class LoginComponent implements OnInit {
           title: 'Sucesso!',
           type: ToastType.success
         });
-        this.router.navigate([this.redirectTo]);
+        if (this.authService.authInfo.perfil === Perfil.Administrador) {
+          this.router.navigate(['/contas']);
+        } else {
+          this.router.navigate([this.redirectTo]);
+        }
       });
   }
 

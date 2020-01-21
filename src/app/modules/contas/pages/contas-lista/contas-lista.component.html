@@ -1,0 +1,11 @@
+<h1>Cipa Online</h1>
+<h2>Acesso Administrador</h2>
+
+<p>Escolha a conta que deseja acessar:</p>
+
+<div class="row flex-row">
+  <div class="col-lg-3 col-md-4 col-xs-12" *ngFor="let conta of contas">
+    <app-card-conta [conta]="conta" (acessar)="acessarConta($event)"></app-card-conta>
+  </div>
+</div>
+

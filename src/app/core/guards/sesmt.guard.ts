@@ -17,7 +17,8 @@ export class SesmtGuard implements CanActivate {
     private toast: ToastsService) { }
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
-    if (!this.authService.tokenValido || this.authService.authInfo.perfil !== Perfil.SESMT) {
+    if (!this.authService.tokenValido ||
+      (this.authService.authInfo.perfil !== Perfil.SESMT && this.authService.authInfo.perfil !== Perfil.Administrador)) {
       this.toast.showMessage({
         message: 'Usuário sem permissão de acesso',
         title: 'Sem permissão',

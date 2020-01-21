@@ -7,9 +7,10 @@ import { SharedModule } from '@shared/shared.module';
 import { GestaoFormComponent } from './components/gestao-form/gestao-form.component';
 import { EleicaoCardComponent } from './components/eleicao-card/eleicao-card.component';
 import { AlteracaoGrupoComponent } from './components/alteracao-grupo/alteracao-grupo.component';
+import { EleicaoConfiguracaoComponent } from './pages/eleicao-configuracao/eleicao-configuracao.component';
 
 @NgModule({
-  declarations: [EleicoesListaComponent, EleicaoNovaComponent, GestaoFormComponent, EleicaoCardComponent, AlteracaoGrupoComponent],
+  declarations: [EleicoesListaComponent, EleicaoNovaComponent, GestaoFormComponent, EleicaoCardComponent, AlteracaoGrupoComponent, EleicaoConfiguracaoComponent],
   imports: [
     SharedModule,
     EleicoesRoutingModule

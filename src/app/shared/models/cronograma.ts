@@ -31,7 +31,6 @@ export class EtapaCronograma extends EtapaBase {
   posicaoEtapa: PosicaoEtapa;
   templates: Arquivo[];
   possuiTemplates: boolean;
-  // etapaObrigatoria: EtapaObrigatoria;
   erroMudancaEtapa: string;
 }
 

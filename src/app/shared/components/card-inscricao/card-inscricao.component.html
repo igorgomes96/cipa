@@ -12,7 +12,9 @@
         <a class="product-name">{{ candidato.eleitor.nome }}</a>
 
         <span class="m-t-xs">
-          <span *ngIf="candidato.eleitor.dataAdmissao"><strong>Data Admissão: </strong>{{ candidato.eleitor.dataAdmissao | date:'dd/MM/yyyy' }}<br></span>
+          <span><strong>Data Inscrição: </strong> {{ candidato.horarioInscricao | date:'dd/MM/yy HH:mm' }}</span><br>
+          <span *ngIf="candidato.eleitor.dataAdmissao"><strong>Data Admissão:
+            </strong>{{ candidato.eleitor.dataAdmissao | date:'dd/MM/yy' }}<br></span>
           <span *ngIf="candidato.eleitor.area"><strong>Área: </strong>{{ candidato.eleitor.area }}<br /></span>
           <strong>Objetivos: </strong> {{ candidato.objetivos }}
         </span>

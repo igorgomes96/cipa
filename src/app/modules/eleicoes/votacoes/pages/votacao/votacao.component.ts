@@ -17,6 +17,8 @@ import { inputPesquisa } from '@shared/rxjs-operators';
 })
 export class VotacaoComponent implements OnInit {
 
+  private seedOrder;
+
   TipoCardEleitor = TipoCardEleitor;
   eleicao: Eleicao;
   candidatos: Inscricao[];
@@ -32,12 +34,13 @@ export class VotacaoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.seedOrder = Math.floor(Math.random() * 100) + 1;
     this.route.data
       .pipe(
         filter(routeData => routeData.hasOwnProperty('eleicao')),
         switchMap(routeData => {
           this.eleicao = routeData.eleicao;
-          return this.eleicoesApi.getInscricoes(routeData.eleicao.id, StatusAprovacao.Aprovada);
+          return this.eleicoesApi.getInscricoes(routeData.eleicao.id, StatusAprovacao.Aprovada, '', this.seedOrder);
         })
       ).subscribe((candidatos: Inscricao[]) => {
         this.candidatos = candidatos;
@@ -51,7 +54,7 @@ export class VotacaoComponent implements OnInit {
       .pipe(
         tap(_ => this.pesquisando = true),
         inputPesquisa(),
-        switchMap(value => this.eleicoesApi.getInscricoes(this.eleicao.id, StatusAprovacao.Aprovada, value)),
+        switchMap(value => this.eleicoesApi.getInscricoes(this.eleicao.id, StatusAprovacao.Aprovada, value, this.seedOrder)),
         tap(_ => this.pesquisando = false),
       ).subscribe(candidatos => this.candidatos = candidatos);
   }
@@ -61,14 +64,7 @@ export class VotacaoComponent implements OnInit {
       .pipe(
         filter(confirmacao => confirmacao),
         switchMap(_ => this.eleicoesApi.postVotar(this.eleicao.id, candidato.id))
-      ).subscribe(_ => {
-        this.toasts.showMessage({
-          message: 'Voto registrado com sucesso',
-          title: 'Sucesso',
-          type: ToastType.success
-        });
-        this.router.navigate(['/eleicoes']);
-      });
+      ).subscribe(_ => this.mostrarMensagemSair());
   }
 
   votoBranco() {
@@ -76,14 +72,18 @@ export class VotacaoComponent implements OnInit {
       .pipe(
         filter(confirmacao => confirmacao),
         switchMap(_ => this.eleicoesApi.postVotoBranco(this.eleicao.id))
-      ).subscribe(_ => {
-        this.toasts.showMessage({
-          message: 'Voto registrado com sucesso',
-          title: 'Sucesso',
-          type: ToastType.success
-        });
-        this.router.navigate(['/eleicoes']);
+      ).subscribe(_ => this.mostrarMensagemSair());
+  }
+
+  private mostrarMensagemSair() {
+    {
+      this.toasts.showMessage({
+        message: 'Voto registrado com sucesso',
+        title: 'Sucesso',
+        type: ToastType.success
       });
+      this.router.navigate(['/eleicoes']);
+    }
   }
 
 }

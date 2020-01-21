@@ -19,6 +19,10 @@ export class LoginApiService {
     return this.http.post<any>(`${this.url}login`, usuario).pipe(take(1));
   }
 
+  postAlterarContaTokenAdministrador(contaId: number) {
+    return this.http.post<any>(`${this.url}alterarconta/${contaId}`, null).pipe(take(1));
+  }
+
   buscaPeloCodigoRecuperacao(codigo: string): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.url}codigorecuperacao/${codigo}`).pipe(take(1));
   }

@@ -1,4 +1,4 @@
-import { Eleicao } from '@shared/models/eleicao';
+import { Eleicao, ConfiguracaoEleicao } from '@shared/models/eleicao';
 import { ResultadoApuracao } from '@shared/models/apuracao';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
@@ -27,6 +27,7 @@ import { Inconsistencia } from '@shared/models/inconsistencias';
 })
 export class EleicoesApiService extends GenericApi<Eleicao> {
 
+  private seedOrderInscricoes;
   constructor(
     private http: HttpClient,
     private arquivosApiService: ArquivosApiService) {
@@ -71,6 +72,10 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
     return this.http.get<boolean>(`${this.url}${idEleicao}/usuarioeleitor`).pipe(take(1));
   }
 
+  postConfiguracoes(idEleicao: number, configuracao: ConfiguracaoEleicao) {
+    return this.http.post<void>(`${this.url}${idEleicao}/configuracoes`, configuracao).pipe(take(1));
+  }
+
   // Inscrições
   postInscricao(idEleicao: number, inscricao: Inscricao): Observable<Inscricao> {
     return this.http.post<Inscricao>(`${this.url}${idEleicao}/inscricoes`, inscricao).pipe(take(1));
@@ -84,13 +89,16 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
     return this.http.get<Inscricao>(`${this.url}${idEleicao}/inscricao`).pipe(take(1));
   }
 
-  getInscricoes(idEleicao: number, status: StatusAprovacao, pesquisa: string = ''): Observable<Inscricao[]> {
-    return this.http.get<Inscricao[]>(`${this.url}${idEleicao}/inscricoes`,
-      { params: { status: StatusAprovacao[status], eleitorNome: pesquisa || '' } }).pipe(take(1));
+  getInscricoes(idEleicao: number, status: StatusAprovacao, pesquisa: string = '', seedOrder: number = null): Observable<Inscricao[]> {
+    const params: any = { status: StatusAprovacao[status], eleitorNome: pesquisa || '' };
+    if (seedOrder) {
+      params.seedOrder = seedOrder;
+    }
+    return this.http.get<Inscricao[]>(`${this.url}${idEleicao}/inscricoes`, { params }).pipe(take(1));
   }
 
   postFotoInscricao(idEleicao: number, foto: FileList): Observable<HttpEvent<{}>> {
-    return this.arquivosApiService.uploadFiles(`${this.url}${idEleicao}/inscricoes/foto`, foto).pipe(take(1));
+    return this.arquivosApiService.uploadFiles(`${this.url}${idEleicao}/inscricoes/foto`, foto);
   }
 
   getFotoInscrito(idEleicao: number, id: number): Observable<any> {

@@ -185,5 +185,22 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
   }
 
 
+  get alertStatusImportacao(): string {
+    if (!this.ultimaImportacao) { return ''; }
+    switch (this.ultimaImportacao.status) {
+      case StatusImportacao.Aguardando:
+        return 'alert-primary';
+      case StatusImportacao.Processando:
+        return 'alert-warning';
+      case StatusImportacao.FinalizadoComFalha:
+        return 'alert-danger';
+      case StatusImportacao.FinalizadoComSucesso:
+        return 'alert-success';
+      default:
+        return '';
+    }
+  }
+
+
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, CanLoad, Route, UrlSegment } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Perfil } from '@shared/models/usuario';
@@ -9,16 +9,15 @@ import { ToastType } from '../components/toasts/toasts.component';
 @Injectable({
   providedIn: 'root'
 })
-export class SesmtCanLoadGuard implements CanLoad {
+export class AdminGuard implements CanActivate {
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private toast: ToastsService) { }
 
-  canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-    if (!this.authService.tokenValido ||
-      (this.authService.authInfo.perfil !== Perfil.SESMT && this.authService.authInfo.perfil !== Perfil.Administrador)) {
+  canActivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (!this.authService.tokenValido || this.authService.authInfo.perfil !== Perfil.Administrador) {
       this.toast.showMessage({
         message: 'Usuário sem permissão de acesso',
         title: 'Sem permissão',
@@ -29,5 +28,4 @@ export class SesmtCanLoadGuard implements CanLoad {
     }
     return true;
   }
-
 }

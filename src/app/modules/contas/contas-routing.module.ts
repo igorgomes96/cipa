@@ -1,12 +1,16 @@
+import { SesmtGuard } from 'src/app/core/guards/sesmt.guard';
 import { UsuarioResolverService } from '@core/resolvers/usuario-resolver.service';
 import { ContaResolverService } from '@core/resolvers/conta-resolver.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminGuard } from '@core/guards/admin.guard';
 
 import { ContaUsuarioComponent } from './pages/conta-usuario/conta-usuario.component';
 import { NavigationType } from 'src/app/app.component';
 import { UsuarioNovoComponent } from './pages/usuario-novo/usuario-novo.component';
 import { UsuarioEdicaoComponent } from './pages/usuario-edicao/usuario-edicao.component';
+import { ContasListaComponent } from './pages/contas-lista/contas-lista.component';
+import { ContasResolverService } from '@core/resolvers/contas-resolver.service';
 
 const routes: Routes = [
   {
@@ -15,6 +19,17 @@ const routes: Routes = [
       navigationType: NavigationType.Top
     },
     children: [
+      {
+        path: '',
+        component: ContasListaComponent,
+        canActivate: [AdminGuard],
+        resolve: {
+          contas: ContasResolverService
+        },
+        data: {
+          navigationType: NavigationType.None
+        }
+      },
       {
         path: 'minha-conta',
         component: ContaUsuarioComponent,
