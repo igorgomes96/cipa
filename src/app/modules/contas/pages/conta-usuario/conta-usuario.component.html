@@ -16,7 +16,7 @@
           <span class="fa fa-plus"></span> Adicionar Usuário
         </a>
 
-        <app-usuarios-lista [usuarios]="conta.usuarios" (excluir)="excluir($event)"></app-usuarios-lista>
+        <app-usuarios-lista [usuarios]="conta.usuarios" (excluir)="excluir($event)" (editar)="editarUsuario($event)"></app-usuarios-lista>
 
         <hr>
 

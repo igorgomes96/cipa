@@ -1,16 +1,18 @@
-import { SesmtGuard } from 'src/app/core/guards/sesmt.guard';
-import { UsuarioResolverService } from '@core/resolvers/usuario-resolver.service';
-import { ContaResolverService } from '@core/resolvers/conta-resolver.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { UsuarioResolverService } from '@core/resolvers/usuario-resolver.service';
+import { ContaResolverService } from '@core/resolvers/conta-resolver.service';
 import { AdminGuard } from '@core/guards/admin.guard';
+import { ContasResolverService } from '@core/resolvers/contas-resolver.service';
 
 import { ContaUsuarioComponent } from './pages/conta-usuario/conta-usuario.component';
 import { NavigationType } from 'src/app/app.component';
 import { UsuarioNovoComponent } from './pages/usuario-novo/usuario-novo.component';
 import { UsuarioEdicaoComponent } from './pages/usuario-edicao/usuario-edicao.component';
 import { ContasListaComponent } from './pages/contas-lista/contas-lista.component';
-import { ContasResolverService } from '@core/resolvers/contas-resolver.service';
+import { AdministradoresComponent } from './pages/administradores/administradores.component';
+import { UsuarioAdminNovoComponent } from './pages/usuario-admin-novo/usuario-admin-novo.component';
+import { UsuarioAdminEdicaoComponent } from './pages/usuario-admin-edicao/usuario-admin-edicao.component';
 
 const routes: Routes = [
   {
@@ -27,7 +29,7 @@ const routes: Routes = [
           contas: ContasResolverService
         },
         data: {
-          navigationType: NavigationType.None
+          navigationType: NavigationType.Top
         }
       },
       {
@@ -36,6 +38,34 @@ const routes: Routes = [
         resolve: {
           conta: ContaResolverService
         }
+      },
+      {
+        path: 'administradores',
+        children: [
+          {
+            path: '',
+            component: AdministradoresComponent,
+            canActivate: [AdminGuard]
+          },
+          {
+            path: 'usuarios',
+            children: [
+              {
+                path: 'novo',
+                component: UsuarioAdminNovoComponent,
+                canActivate: [AdminGuard]
+              },
+              {
+                path: ':id',
+                component: UsuarioAdminEdicaoComponent,
+                resolve: {
+                  usuario: UsuarioResolverService
+                },
+                canActivate: [AdminGuard]
+              }
+            ]
+          }
+        ]
       },
       {
         path: 'usuarios',

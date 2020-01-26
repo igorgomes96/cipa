@@ -11,7 +11,9 @@ import { filter, tap } from 'rxjs/operators';
 export class UsuariosListaComponent implements OnInit {
 
   @Input() usuarios: Usuario[];
+  @Input() permitirExclusao = true;
   @Output() excluir = new EventEmitter<Usuario>();
+  @Output() editar = new EventEmitter<Usuario>();
 
   constructor(
     private toast: ToastsService
@@ -23,6 +25,10 @@ export class UsuariosListaComponent implements OnInit {
   exclui(usuario: Usuario) {
     this.toast.confirmModal('Deseja mesmo excluir esse usuário? Essa ação não poderá ser defeita.', 'Confirmação')
       .pipe(filter(confirmacao => confirmacao), tap(_ => this.excluir.emit(usuario))).subscribe();
+  }
+
+  editarUsuario(usuario: Usuario) {
+    this.editar.emit(usuario);
   }
 
 }

@@ -13,6 +13,9 @@ import { CronogramaPadraoComponent } from './components/cronograma-padrao/cronog
 import { EtapaPadraoComponent } from './components/etapa-padrao/etapa-padrao.component';
 import { ContasListaComponent } from './pages/contas-lista/contas-lista.component';
 import { CardContaComponent } from './components/card-conta/card-conta.component';
+import { AdministradoresComponent } from './pages/administradores/administradores.component';
+import { UsuarioAdminNovoComponent } from './pages/usuario-admin-novo/usuario-admin-novo.component';
+import { UsuarioAdminEdicaoComponent } from './pages/usuario-admin-edicao/usuario-admin-edicao.component';
 
 
 @NgModule({
@@ -27,6 +30,9 @@ import { CardContaComponent } from './components/card-conta/card-conta.component
     EtapaPadraoComponent,
     ContasListaComponent,
     CardContaComponent,
+    AdministradoresComponent,
+    UsuarioAdminNovoComponent,
+    UsuarioAdminEdicaoComponent,
   ],
   imports: [
     CommonModule,

@@ -13,16 +13,11 @@
         <td>{{ usuario.email }}</td>
         <td>{{ usuario.nome }}</td>
         <td>{{ usuario.cargo }}</td>
-        <!-- <td>
-          <span class="label" [ngClass]="usuario.usuarioAtivo ? 'label-primary' : 'label-danger'">
-            {{ usuario.usuarioAtivo ? 'Ativo' : 'Inativo' }}
-          </span>
-        </td> -->
         <td class="text-right">
           <div>
-            <a class="btn btn-xs btn-outline btn-success m-r-xs" [routerLink]="['../usuarios', usuario.id]"><i
+            <a class="btn btn-xs btn-outline btn-success m-r-xs" (click)="editarUsuario(usuario)"><i
                 class="fa fa-pencil"></i></a>
-            <button class="btn btn-xs btn-outline btn-danger" (click)="exclui(usuario)"><i
+            <button class="btn btn-xs btn-outline btn-danger" *ngIf="permitirExclusao" (click)="exclui(usuario)"><i
                 class="fa fa-trash"></i></button>
           </div>
         </td>

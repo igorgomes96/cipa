@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Router, NavigationEnd, ActivationEnd, ActivationStart } from '@angular/router';
+import { Router, NavigationEnd, ActivationStart } from '@angular/router';
 
 import { filter, distinctUntilChanged } from 'rxjs/operators';
 import { correctHeight, detectBody } from '../app.helpers';

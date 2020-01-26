@@ -1,0 +1,15 @@
+<div class="container">
+  <app-panel title="Usuário Administradores">
+    <div class="row">
+      <div class="col-sm-12">
+
+        <a class="btn btn-primary m-b-sm" routerLink="usuarios/novo">
+          <span class="fa fa-plus"></span> Adicionar Usuário
+        </a>
+
+        <app-usuarios-lista [usuarios]="usuarios" [permitirExclusao]="false" (editar)="editar($event)"></app-usuarios-lista>
+
+      </div>
+    </div>
+  </app-panel>
+</div>

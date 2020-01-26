@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { Conta, Usuario } from '@shared/models/usuario';
@@ -22,7 +22,8 @@ export class ContaUsuarioComponent implements OnInit {
     private route: ActivatedRoute,
     private usuariosApi: UsuariosApiService,
     private toast: ToastsService,
-    private contasApi: ContasApiService) { }
+    private contasApi: ContasApiService,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.data
@@ -48,6 +49,10 @@ export class ContaUsuarioComponent implements OnInit {
         });
         this.conta.usuarios = usuarios;
       });
+  }
+
+  editarUsuario(usuario: Usuario) {
+    this.router.navigate(['contas', 'usuarios', usuario.id]);
   }
 
   recarregaCronograma() {

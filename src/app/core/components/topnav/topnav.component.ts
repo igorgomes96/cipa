@@ -1,3 +1,4 @@
+import { NavigationService } from 'src/app/core/services/navigation.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { smoothlyMenu } from 'src/app.helpers';
 import { Router } from '@angular/router';
@@ -18,31 +19,13 @@ export class TopnavComponent implements OnInit {
 
   topCollapsed = true;
 
-  rotas = [
-    {
-      link: '/eleicoes',
-      label: 'Eleições'
-    },
-    {
-      link: '/empresas',
-      label: 'Empresas'
-    },
-    {
-      link: '/estabelecimentos',
-      label: 'Estabelecimentos'
-    }
-  ];
-
   constructor(
     private router: Router,
     private authService: AuthService,
+    public navigationService: NavigationService,
     private arquivosApi: ArquivosApiService) { }
 
-  ngOnInit() {
-    if (!this.authService.authInfo || this.authService.authInfo.perfil === Perfil.Eleitor) {
-      this.rotas = [];
-    }
-  }
+  ngOnInit() {}
 
   logout() {
     this.authService.logout();

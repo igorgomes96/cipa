@@ -18,7 +18,7 @@
 
     <div class="navbar-collapse collapse" id="navbar" [class.show]="!topCollapsed">
       <ul class="nav navbar-nav mr-auto" *ngIf="!showLeftNav">
-        <li routerLinkActive="active" *ngFor="let rota of rotas">
+        <li routerLinkActive="active" *ngFor="let rota of navigationService.topnavRotas">
           <a aria-expanded="false" role="button" [routerLink]="rota.link" (click)="menuClick(rota)">{{ rota.label }}</a>
         </li>
       </ul>
@@ -29,12 +29,12 @@
           </a>
         </li>
         <li>
-          <a class="right-sidebar-toggle" routerLink="/eleicoes">
+          <a class="right-sidebar-toggle" (click)="navigationService.navigateToHome()">
             <em class="fa fa-home"></em>
           </a>
         </li>
         <li>
-          <a class="right-sidebar-toggle" routerLink="/contas/minha-conta">
+          <a class="right-sidebar-toggle" (click)="navigationService.navigateToConta()">
             <em class="fa fa-user"></em>
           </a>
         </li>

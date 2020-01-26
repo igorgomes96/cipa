@@ -21,4 +21,16 @@ export class UsuariosApiService extends GenericApi<Usuario> {
     return this.http.get<Usuario>(`${this.url}logado`).pipe(take(1));
   }
 
+  getUsuariosAdministradores(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.url}administradores`).pipe(take(1));
+  }
+
+  postUsuarioAdministrador(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(`${this.url}administradores`, usuario).pipe(take(1));
+  }
+
+  putUsuarioAdministrador(id: number, usuario: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.url}${id}/administradores`, usuario).pipe(take(1));
+  }
+
 }
