@@ -3,7 +3,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { Perfil } from '@shared/models/usuario';
-import { Router } from '@angular/router';
+import { Router, UrlSegment } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,8 @@ export class NavigationService {
 
   toggleNavigationEmitter = new EventEmitter<void>();
   leftNavLinkEmitter = new EventEmitter<void>();
-  private urlsAdmin = ['/contas', '/contas/administradores'];
+  private urlsAdmin = ['/contas'];
+  private urlsAdminStartsWith = ['/contas/administradores'];
 
   toggleNavigation() {
     this.toggleNavigationEmitter.emit();
@@ -43,7 +44,8 @@ export class NavigationService {
   }
 
   private get isUrlAdmin(): boolean {
-    return this.urlsAdmin.indexOf(this.location.path()) >= 0;
+    return this.urlsAdmin.indexOf(this.location.path()) >= 0 ||
+      this.urlsAdminStartsWith.some(url => this.location.path().startsWith(url));
   }
 
 

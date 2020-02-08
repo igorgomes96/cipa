@@ -5,14 +5,14 @@
 <div *ngIf="eleicao.dimensionamento.qtdaVotos">
   <app-widgets [dimensionamento]="eleicao.dimensionamento"></app-widgets>
 
-  <app-panel title="Apuração dos votos" [collapsible]="false">
+  <app-panel title="Apuração dos votos" [collapsible]="false" *ngIf="apuracao">
     <h2 class="text-center">Qtda. de Votos</h2>
     <h5 class="text-center">Ultima atualização: {{ ultimaAtualizacao | date:'dd/MMM/yyyy HH:mm:ss' }}</h5>
     <br>
     <app-apuracao-chart [apuracao]="apuracao" barChartType="horizontalBar"></app-apuracao-chart>
   </app-panel>
 
-  <div class="row" *ngIf="eleicao.dimensionamento.qtdaVotos >= eleicao.dimensionamento.qtdaMinimaVotos">
+  <div class="row" *ngIf="resultado && eleicao.dimensionamento.qtdaVotos >= eleicao.dimensionamento.qtdaMinimaVotos">
     <div class="col-md-6 col-sm-12">
       <app-panel title="Resultado da Apuração" labelText="Efetivos" labelClass="label-primary" [collapsible]="false">
         <app-resultado-apuracao [apuracao]="resultado.efetivos"></app-resultado-apuracao>
@@ -35,7 +35,7 @@
 </div>
 
 <app-panel title="Relação de Votos por Candidato" [options]="optionsCandidatos"
-  (optionClick)="onOptionsCandidatosClick()" *ngIf="eleicao.dimensionamento.qtdaVotos">
+  (optionClick)="onOptionsCandidatosClick()" *ngIf="eleicao.dimensionamento.qtdaVotos && resultado">
   <app-relacao-candidatos [resultado]="resultado" [eleicao]="eleicao" [downloadRelatorio]="donwloadRelatorioCandidatos">
   </app-relacao-candidatos>
 </app-panel>

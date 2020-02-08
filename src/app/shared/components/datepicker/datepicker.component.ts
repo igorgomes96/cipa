@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, forwardRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, AfterViewInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { AbstractControl, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 import { LOCALE_ID } from '@angular/core';
 import { formatDate } from '@angular/common';
-import { race } from 'rxjs/operators';
 
 declare var $: any;
 
@@ -18,7 +17,7 @@ export const CUSTOM_VALUE_ACCESSOR: any = {
   styleUrls: ['./datepicker.component.css'],
   providers: [CUSTOM_VALUE_ACCESSOR, { provide: LOCALE_ID, useValue: 'pt-BR' }]
 })
-export class DatepickerComponent implements OnInit, AfterViewInit {
+export class DatepickerComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() name: string;
   @Input() label: string;
@@ -29,7 +28,6 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
   @Input() placeholder = '';
   @Output() change = new EventEmitter<Date>();
 
-  // private innerValue: any;  // Valor de fato
   value: any; // Texto exibido no controle
   public hasError = false;
 
@@ -67,7 +65,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
     }
   }
 
-  updateDatePicker(isDisabled = false) {
+  updateDatePicker() {
     this.jDate = $(`#${this.id}`).datepicker({
       keyboardNavigation: false,
       forceParse: false,
@@ -81,7 +79,6 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
     this.jDate.on('changeDate', (e: { date: any; }) => {
       this.pushChanges(e.date);
     });
-
   }
 
   pushChanges(valor: any) {
@@ -112,7 +109,10 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
 
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
-    this.updateDatePicker(isDisabled);
+  }
+
+  ngOnDestroy() {
+    this.jDate.datepicker('destroy');
   }
 
 }

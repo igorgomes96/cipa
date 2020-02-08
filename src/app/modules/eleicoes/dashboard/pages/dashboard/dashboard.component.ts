@@ -30,9 +30,8 @@ export class DashboardComponent implements OnInit {
       this.eleicao = routeData.eleicao;
       this.ultimaAtualizacao = new Date();
       if (routeData.eleicao.dimensionamento.qtdaVotos) {
-        this.eleicao = routeData.eleicao;
-        this.resultado = routeData.resultado;
-        this.apuracao = routeData.apuracao;
+        this.eleicoesApi.getApuracao(this.eleicao.id).subscribe(apuracao => this.apuracao = apuracao);
+        this.eleicoesApi.getResultado(this.eleicao.id).subscribe(resultado => this.resultado = resultado);
       }
     });
   }

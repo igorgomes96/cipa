@@ -48,10 +48,8 @@ export class EleicoesListaComponent implements OnInit {
     http.pipe(
       tap((eleicoes: Eleicao[]) => {
         this.eleicoes = eleicoes;
-        // this.paginationInfo = eleicoes;
-        // this.eleicoes = eleicoes.result;
       }),
-      delay(1000),
+      delay(500),
       switchMap(_ => this.eleicoesApi.getAll({ status: 'finalizada' }))
     ).subscribe((eleicoesFinalizadas: Eleicao[]) => {
       this.eleicoesFinalizadas = eleicoesFinalizadas;

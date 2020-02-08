@@ -20,9 +20,8 @@ const routes: Routes = [
     },
     resolve: {
       eleicao: EleicaoResolverService,
-      apuracao: ApuracaoResolverService,
-      // dimensionamento: DimensionamentoResolverService,
-      resultado: ResultadoApuracaoResolverService
+      // apuracao: ApuracaoResolverService,
+      // resultado: ResultadoApuracaoResolverService
     },
     canActivate: [EtapaAnteriorVotacaoGuard]
   }

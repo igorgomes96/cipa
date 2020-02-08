@@ -23,7 +23,7 @@
               <div *ngIf="isDateDisabled" style="font-size: 14px;cursor: not-allowed;color:#676a6c">
                 <span><em class="fa fa-calendar"></em></span> {{ form.get('data').value | date:'dd/MM/yyyy' }}
               </div>
-              <app-datepicker [name]="'data' + etapa.id" [id]="'data' + etapa.id" formControlName="data"
+              <app-datepicker [name]="'data' + etapa.id + randomId" [id]="'data' + etapa.id + randomId" formControlName="data"
                 [control]="form.get('data')" *ngIf="!isDateDisabled"></app-datepicker>
               <small *ngIf="!isDateDisabled">Clique na data acima para alterá-la.</small>
             </span>

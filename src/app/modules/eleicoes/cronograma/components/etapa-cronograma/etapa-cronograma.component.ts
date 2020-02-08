@@ -46,6 +46,7 @@ export class EtapaCronogramaComponent implements OnInit, OnDestroy {
   CodigoEtapaObrigatoria = CodigoEtapaObrigatoria;
   ultimaAtualizacao: Date;
   editando = false;
+  randomId: number;
   private atualizarArquivos$ = new EventEmitter();
 
   constructor(
@@ -53,6 +54,7 @@ export class EtapaCronogramaComponent implements OnInit, OnDestroy {
     private eleicoesApi: EleicoesApiService) { }
 
   ngOnInit() {
+    this.randomId = Math.floor(Math.random() * 9999);
     this.form = this.formBuilder.group({
       data: [{ value: this.etapa.dataRealizada || this.etapa.dataPrevista, disabled: this.isDateDisabled }]
     });
