@@ -33,7 +33,7 @@ export class SolicitarResetComponent implements OnInit {
         title: 'Sucesso',
         type: ToastType.success
       });
-      this.router.navigate(['/autenticacao/login']);
+      this.router.navigate(['/autenticacao/verifiqueemail']);
     });
   }
 

@@ -6,10 +6,12 @@ import { SolicitarResetComponent } from './pages/solicitar-reset/solicitar-reset
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { ResetSenhaComponent } from './pages/reset-senha/reset-senha.component';
 import { CodigoRecuperacaoResolverService } from 'src/app/core/resolvers/codigo-recuperacao-resolver.service';
+import { VerifiqueEmailComponent } from './pages/verifique-email/verifique-email.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, data: { showFooter: false } },
   { path: 'recuperacao', component: SolicitarResetComponent, data: { showFooter: false } },
+  { path: 'verifiqueemail', component: VerifiqueEmailComponent, data: { showFooter: false } },
   {
     path: 'reset/:codigo',
     component: ResetSenhaComponent,
