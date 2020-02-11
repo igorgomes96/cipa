@@ -16,7 +16,6 @@ declare var $: any;
 export class TopnavComponent implements OnInit {
 
   @Input() showLeftNav = true;
-
   topCollapsed = true;
 
   constructor(
