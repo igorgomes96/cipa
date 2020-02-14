@@ -43,13 +43,13 @@ export class ImportacoesApiService extends GenericApi<Importacao>  {
     if (status.status === StatusImportacao.FinalizadoComSucesso) {
       return {
         title: 'Importação de funcionários finalizada com Sucesso!',
-        message: 'Todos funcionário foram salvos em nosso banco de dados!',
+        message: 'Todos os funcionários foram salvos em nosso banco de dados!',
         type: ToastType.success
       };
     } else {
       return {
         title: 'Importação de funcionários finalizada com Erros!',
-        message: `Foram encontrados ${status.qtdaErros} erros no arquivo. Veja os detalhes na página de eleitores.`,
+        message: `Foram encontrados ${status.qtdaErros} erros no arquivo. Veja os detalhes na página de inconsistências.`,
         type: ToastType.error
       };
     }
