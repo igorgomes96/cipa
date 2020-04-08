@@ -5,7 +5,7 @@
     </app-widget-dashboard>
   </div>
   <div class="col-lg-3 col-md-6 col-xs-12">
-    <app-widget-dashboard titulo="Qtda de Votantes" icone="fa-address-book" [valor]="dimensionamento.qtdaVotos"
+    <app-widget-dashboard titulo="Votantes" icone="fa-address-book" [valor]="dimensionamento.qtdaVotos"
       estilo="lazur-bg">
     </app-widget-dashboard>
   </div>
@@ -14,7 +14,7 @@
     </app-widget-dashboard>
   </div>
   <div class="col-lg-3 col-md-6 col-xs-12">
-    <app-widget-dashboard titulo="Perc. de Votos" [icone]="possuiQtdaMinimaVotos ? 'fa-check' : 'fa-times'"
+    <app-widget-dashboard titulo="% de Votos" [icone]="possuiQtdaMinimaVotos ? 'fa-check' : 'fa-times'"
       [valor]="percentualVotos | percent:'1.0-2'" [estilo]="possuiQtdaMinimaVotos ? 'navy-bg' : 'red-bg'">
     </app-widget-dashboard>
   </div>
