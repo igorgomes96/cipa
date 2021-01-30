@@ -47,10 +47,11 @@ export class InscricoesFormComponent implements OnInit {
         if (inscricao) {
           this.jaInscrito = true;
           this.inscricao = inscricao;
-          this.eleicoesApi.getFotoInscrito(this.eleicao.id, this.inscricao.id)
-            .subscribe((foto: string) => {
-              this.foto = foto;
-            });
+          this.foto = this.inscricao.foto;
+          // this.eleicoesApi.getFotoInscrito(this.eleicao.id, this.inscricao.id)
+          //   .subscribe((foto: string) => {
+          //     this.foto = foto;
+          //   });
         } else {
           this.eleicoesApi.getEleitorUsuario(this.eleicao.id)
             .subscribe((eleitor) => {
@@ -171,12 +172,8 @@ export class InscricoesFormComponent implements OnInit {
         }), filterResponse());
     }
 
-    chamada.pipe(
-      switchMap(_ => {
-        return this.eleicoesApi.getFotoInscrito(this.eleicao.id, this.inscricao.id);
-      })
-    ).subscribe((foto: string) => {
-      this.foto = foto;
+    chamada.subscribe((inscricao: Inscricao) => {
+      this.foto = inscricao.foto;
       this.jaInscrito = true;
       if (this.jaInscrito) {
         this.toasts.showMessage({

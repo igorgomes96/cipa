@@ -101,21 +101,21 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
     return this.arquivosApiService.uploadFiles(`${this.url}${idEleicao}/inscricoes/foto`, foto);
   }
 
-  getFotoInscrito(idEleicao: number, id: number): Observable<any> {
-    const readFoto = (foto: Blob) => {
-      return new Promise(resolve => {
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(foto);
-        fileReader.onload = ($loaded) => {
-          resolve(($loaded.target as any).result);
-        };
-      });
-    };
+  // getFotoInscrito(idEleicao: number, id: number): Observable<any> {
+  //   const readFoto = (foto: Blob) => {
+  //     return new Promise(resolve => {
+  //       const fileReader = new FileReader();
+  //       fileReader.readAsDataURL(foto);
+  //       fileReader.onload = ($loaded) => {
+  //         resolve(($loaded.target as any).result);
+  //       };
+  //     });
+  //   };
 
-    return this.http.get(`${this.url}${idEleicao}/inscricoes/${id}/foto`,
-      { headers: { 'Content-Type': 'image/jpeg' }, responseType: 'blob' })
-      .pipe(switchMap((foto) => readFoto(foto)), take(1));
-  }
+  //   return this.http.get(`${this.url}${idEleicao}/inscricoes/${id}/foto`,
+  //     { headers: { 'Content-Type': 'image/jpeg' }, responseType: 'blob' })
+  //     .pipe(switchMap((foto) => readFoto(foto)), take(1));
+  // }
 
   putAprovarInscricao(idEleicao: number, idInscricao: number): Observable<Inscricao> {
     return this.http.put<Inscricao>(`${this.url}${idEleicao}/inscricoes/${idInscricao}/aprovar`, null).pipe(take(1));

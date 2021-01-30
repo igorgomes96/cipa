@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, TemplateRef } from '@angular/core';
 
 import { Inscricao, Reprovacao } from '@shared/models/inscricao';
 import { ModalService } from 'src/app/core/services/modal.service';
-import { EleicoesApiService } from '@core/api/eleicoes-api.service';
 
 export enum TipoCardEleitor {
   Votacao,
@@ -15,7 +14,7 @@ export enum TipoCardEleitor {
   templateUrl: './card-inscricao.component.html',
   styleUrls: ['./card-inscricao.component.css']
 })
-export class CardInscricaoComponent implements OnInit, AfterViewInit {
+export class CardInscricaoComponent implements OnInit {
 
   TipoCardEleitor: typeof TipoCardEleitor = TipoCardEleitor;
 
@@ -28,20 +27,10 @@ export class CardInscricaoComponent implements OnInit, AfterViewInit {
   @ViewChild('modalReprovacao', { static: false }) modalReprovacao: TemplateRef<any>;
 
   motivoReprovacao: string = null;
-  foto: string = null;
 
-  constructor(private modalService: ModalService, private eleicoesApi: EleicoesApiService) { }
+  constructor(private modalService: ModalService) { }
 
   ngOnInit() { }
-
-  ngAfterViewInit() {
-    if (this.candidato) {
-      this.eleicoesApi.getFotoInscrito(this.candidato.eleitor.eleicaoId, this.candidato.id)
-        .subscribe((foto: string) => {
-          this.foto = foto;
-        });
-    }
-  }
 
   aprovar() {
     this.aprovacao.emit(this.candidato);

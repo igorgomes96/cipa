@@ -22,11 +22,6 @@ export class ArquivosComponent implements OnInit {
   ngOnInit() {
   }
 
-  download(arquivo: Arquivo) {
-    this.service.download(arquivo.id, arquivo.nome, arquivo.contentType).subscribe();
-
-  }
-
   deleteFile(id: string) {
     this.toast.confirmModal('Essa ação não poderá ser desfeita!', 'Confirma exlusão?')
       .subscribe((confirmacao: boolean) => {

@@ -4,7 +4,7 @@ import { HttpEvent, HttpRequest, HttpClient, HttpResponse } from '@angular/commo
 import { environment } from 'src/environments/environment';
 import { endpoints } from '@env/endpoints';
 import { downloadArquivo } from '@shared/rxjs-operators';
-import { take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +42,10 @@ export class ArquivosApiService {
     return this.http.get(`${this.url}${id}/download`, { responseType: 'arraybuffer' })
       .pipe(downloadArquivo(contentType, arquivo), take(1));
   }
+
+  // downloadArquivo(id: string): Observable<string> {
+  //   return this.http.get(`${this.url}${id}/download`, { responseType: 'text' }).pipe(tap(url => window.open(url, '_blank')));
+  // }
 
   delete(id: string) {
     return this.http.delete(`${this.url}${id}`).pipe(take(1));

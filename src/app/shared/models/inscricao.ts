@@ -25,6 +25,7 @@ export class Inscricao {
     nomeAprovador: string;
     horarioAprovacao: Date;
     horarioInscricao: Date;
+    foto: string;
 
     eleitor: Eleitor;
     reprovacoes: Reprovacao[];
