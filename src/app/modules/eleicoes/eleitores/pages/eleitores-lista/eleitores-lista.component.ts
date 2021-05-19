@@ -14,6 +14,7 @@ import { Importacao, ProgressoImportacao, StatusImportacao } from '@shared/model
 import { Subscription } from 'rxjs';
 import { inputPesquisa } from '@shared/rxjs-operators';
 import { CodigoEtapaObrigatoria } from '@shared/models/cronograma';
+import { UsuariosApiService } from '@core/api/usuarios-api.service';
 
 declare var $: any;
 
@@ -46,7 +47,8 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private toasts: ToastsService,
     private importacoesApi: ImportacoesApiService,
-    private arquivosApi: ArquivosApiService) { }
+    private arquivosApi: ArquivosApiService,
+    private usuariosApi: UsuariosApiService) { }
 
   ngOnInit() {
     this.route.data
@@ -184,6 +186,21 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
       });
   }
 
+  async redefinirSenha(eleitor: Eleitor) {
+    const confirmacao = await this.toasts.confirmModal(`Deseja mesmo excluir redefinir a senha de ${eleitor.nome}. A nova senha será sua data de nascimento.`).toPromise();
+    if (!confirmacao) return;
+    const data = new Date(eleitor.dataNascimento);
+    const senha = data.getDate().toString().padStart(2, '0') + '/' + (data.getMonth() + 1).toString().padStart(2, '0') + '/' + data.getFullYear();
+    this.usuariosApi.putRedefinirSenha({ email: eleitor.email, senha: senha })
+      .subscribe(() => {
+        this.toasts.showMessage({
+          message: 'Senha redefinida com sucesso!',
+          title: 'Sucesso!',
+          type: ToastType.success
+        });
+      });
+  }
+  
 
   get alertStatusImportacao(): string {
     if (!this.ultimaImportacao) { return ''; }

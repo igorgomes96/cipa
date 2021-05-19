@@ -144,5 +144,8 @@
       }
     }
   },
-  "defaultProject": "cipa"
+  "defaultProject": "cipa",
+  "cli": {
+    "analytics": false
+  }
 }

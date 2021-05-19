@@ -93,6 +93,8 @@
           <td>{{ eleitor.dataAdmissao | date:'dd/MM/yyyy' }}</td>
           <td class="text-right">
             <div>
+              <button class="btn btn-xs btn-outline btn-warning m-r-xs" (click)="redefinirSenha(eleitor)"><em
+                class="fa fa-key"></em></button>
               <a class="btn btn-xs btn-outline btn-success m-r-xs" [routerLink]="['./', eleitor.id]"><em
                   class="fa fa-pencil"></em></a>
               <button class="btn btn-xs btn-outline btn-danger" (click)="excluir(eleitor.id)"><em

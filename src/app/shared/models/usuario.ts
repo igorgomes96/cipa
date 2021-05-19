@@ -5,14 +5,14 @@ export enum Perfil {
 }
 
 export class Usuario {
-  id: number;
-  nome: string;
+  id?: number;
+  nome?: string;
   email: string;
   senha: string;
-  confirmacaoSenha: string;
-  perfil: Perfil;
-  codigoRecuperacao: string;
-  cargo: string;
+  confirmacaoSenha?: string;
+  perfil?: Perfil;
+  codigoRecuperacao?: string;
+  cargo?: string;
 }
 
 export class AuthInfo {
