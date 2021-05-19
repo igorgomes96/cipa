@@ -83,6 +83,7 @@
           <th>Nome</th>
           <th>E-mail</th>
           <th>Admissão</th>
+          <th>Nascimento</th>
           <th class="text-right"></th>
         </tr>
       </thead>
@@ -91,6 +92,7 @@
           <td>{{ eleitor.nome }}</td>
           <td>{{ eleitor.email }}</td>
           <td>{{ eleitor.dataAdmissao | date:'dd/MM/yyyy' }}</td>
+          <td>{{ eleitor.dataNascimento | date:'dd/MM/yyyy' }}</td>
           <td class="text-right">
             <div>
               <button class="btn btn-xs btn-outline btn-warning m-r-xs" (click)="redefinirSenha(eleitor)"><em
