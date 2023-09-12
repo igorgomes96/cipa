@@ -33,4 +33,8 @@ export class UsuariosApiService extends GenericApi<Usuario> {
     return this.http.put<Usuario>(`${this.url}${id}/administradores`, usuario).pipe(take(1));
   }
 
+  putRedefinirSenha(usuario: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.url}redefinirsenha`, usuario).pipe(take(1));
+  }
+
 }
