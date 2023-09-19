@@ -21,9 +21,9 @@
           <button class="btn btn-outline btn-danger btn-xs m-r-xs" (click)="deleteFile(arquivo.id)">
             <i class="fa fa-trash"></i>
           </button>
-          <button class="btn btn-outline btn-primary btn-xs" (click)="download(arquivo)">
+          <a class="btn btn-outline btn-primary btn-xs" [href]="arquivo.path" target="_blank">
             <i class="fa fa-download"></i>
-          </button>
+          </a>
         </td>
         <td class="project-title">
           <strong>{{ arquivo.nome }}</strong>

@@ -11,13 +11,9 @@ export class ResultadoApuracaoComponent implements OnInit {
 
   @Input() apuracao: Apuracao[];
 
-  constructor(private eleicoesApi: EleicoesApiService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.apuracao.filter(a => a.inscricaoId).forEach(a => {
-      this.eleicoesApi.getFotoInscrito(a.eleicaoId, a.inscricaoId)
-        .subscribe(foto => a.foto = foto);
-    });
   }
 
   colocacao(indice: number) {

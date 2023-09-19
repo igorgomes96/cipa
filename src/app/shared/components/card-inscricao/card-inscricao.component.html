@@ -2,8 +2,8 @@
   <div class="ibox-content product-box">
 
     <div class="foto">
-      <img [src]="foto" alt="Foto do candidato" *ngIf="foto">
-      <img src="/assets/img/icone.jpg" alt="Nenhuma foto do candidato" *ngIf="!foto">
+      <img [src]="candidato.foto" alt="Foto do candidato" *ngIf="candidato?.foto">
+      <img src="/assets/img/icone.jpg" alt="Nenhuma foto do candidato" *ngIf="!candidato?.foto">
 
     </div>
     <div class="product-desc">
