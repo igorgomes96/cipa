@@ -187,10 +187,12 @@ export class EleitoresListaComponent implements OnInit, OnDestroy {
   }
 
   async redefinirSenha(eleitor: Eleitor) {
-    const confirmacao = await this.toasts.confirmModal(`Deseja mesmo excluir redefinir a senha de ${eleitor.nome}. A nova senha será sua data de nascimento.`).toPromise();
+    const confirmacao = await this.toasts.confirmModal(
+      `Deseja mesmo excluir redefinir a senha de ${eleitor.nome}. A nova senha será sua data de nascimento (ddmmaaaa) + matrícula.`).toPromise();
     if (!confirmacao) return;
     const data = new Date(eleitor.dataNascimento);
-    const senha = data.getDate().toString().padStart(2, '0') + '/' + (data.getMonth() + 1).toString().padStart(2, '0') + '/' + data.getFullYear();
+    const senha = data.getDate().toString().padStart(2, '0') + (data.getMonth() + 1).toString().padStart(2, '0') + data.getFullYear().toString()
+      + eleitor.matricula;
     this.usuariosApi.putRedefinirSenha({ email: eleitor.email, senha: senha })
       .subscribe(() => {
         this.toasts.showMessage({
