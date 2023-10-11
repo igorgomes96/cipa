@@ -12,7 +12,8 @@
     <app-apuracao-chart [apuracao]="apuracao" barChartType="horizontalBar"></app-apuracao-chart>
   </app-panel>
 
-  <div class="row" *ngIf="resultado && eleicao.dimensionamento.qtdaVotos >= eleicao.dimensionamento.qtdaMinimaVotos">
+  <div class="row" *ngIf="resultado">
+    <!-- <div class="row" *ngIf="resultado && eleicao.dimensionamento.qtdaVotos >= eleicao.dimensionamento.qtdaMinimaVotos"> -->
     <div class="col-md-6 col-sm-12">
       <app-panel title="Resultado da Apuração" labelText="Efetivos" labelClass="label-primary" [collapsible]="false">
         <app-resultado-apuracao [apuracao]="resultado.efetivos"></app-resultado-apuracao>
