@@ -37,10 +37,12 @@ export class EleicoesListaComponent implements OnInit {
   carregaEleicoes() {
     this.eleicoesApi.getAll({
       status: 'aberta'
-    })
-      .subscribe((eleicoes: Eleicao[]) => {
+    }).subscribe((eleicoes: Eleicao[]) => {
         this.eleicoes = eleicoes;
-      });
+        if (this.eleicoes.length === 0) {
+          this.carregarEleicoesFinalizadas();
+        }
+    });
   }
 
 
