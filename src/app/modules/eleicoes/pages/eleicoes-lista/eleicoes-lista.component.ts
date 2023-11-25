@@ -18,13 +18,6 @@ import { from, forkJoin, of } from 'rxjs';
 })
 export class EleicoesListaComponent implements OnInit {
 
-  // paginationInfo: PagedResult<Eleicao> = {
-  //   currentPage: 1,
-  //   pageSize: 100,
-  //   pageCount: 0,
-  //   result: [],
-  //   totalRecords: 0
-  // };
   eleicoes: Eleicao[];
   eleicoesFinalizadas: Eleicao[];
   authInfo: AuthInfo;
@@ -42,18 +35,20 @@ export class EleicoesListaComponent implements OnInit {
 
 
   carregaEleicoes() {
-    const http = this.eleicoesApi.getAll({
+    this.eleicoesApi.getAll({
       status: 'aberta'
-    });
-    http.pipe(
-      tap((eleicoes: Eleicao[]) => {
+    })
+      .subscribe((eleicoes: Eleicao[]) => {
         this.eleicoes = eleicoes;
-      }),
-      delay(500),
-      switchMap(_ => this.eleicoesApi.getAll({ status: 'finalizada' }))
-    ).subscribe((eleicoesFinalizadas: Eleicao[]) => {
-      this.eleicoesFinalizadas = eleicoesFinalizadas;
-    });
+      });
+  }
+
+
+  carregarEleicoesFinalizadas() {
+    this.eleicoesApi.getAll({ status: 'finalizada' })
+      .subscribe((eleicoesFinalizadas: Eleicao[]) => {
+        this.eleicoesFinalizadas = eleicoesFinalizadas;
+      });
   }
 
   buscaEleicao(id: number): Eleicao {

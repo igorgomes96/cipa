@@ -36,19 +36,14 @@ export class EleicaoCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.eleicao && !this.eleicao.dataFinalizacao) {
-
-      this.eleicoesApi.getUsuarioEhEleitor(this.eleicao.id)
-        .pipe(
-          tap(usuarioEhEleitor => this.eleicao.usuarioEleitor = usuarioEhEleitor),
-          filter(usuarioEhEleitor => usuarioEhEleitor && this.eleicaoJaPassouDasInscricoes),
-          switchMap(_ => forkJoin({
-            candidato: this.eleicoesApi.getInscricaoUsuario(this.eleicao.id),
-            voto: this.eleicoesApi.getVotoUsuario(this.eleicao.id)
-          }))).subscribe(dados => {
-            this.eleicao.candidato = dados.candidato;
-            this.eleicao.voto = dados.voto;
-          });
+    if (this.eleicao && !this.eleicao.dataFinalizacao && this.eleicao.usuarioEleitor && this.eleicaoJaPassouDasInscricoes) {
+      forkJoin({
+        candidato: this.eleicoesApi.getInscricaoUsuario(this.eleicao.id),
+        voto: this.eleicoesApi.getVotoUsuario(this.eleicao.id)
+      }).subscribe(dados => {
+        this.eleicao.candidato = dados.candidato;
+        this.eleicao.voto = dados.voto;
+      });
     }
   }
 

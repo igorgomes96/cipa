@@ -68,10 +68,6 @@ export class EleicoesApiService extends GenericApi<Eleicao> {
     return this.http.delete(`${this.url}${idEleicao}/eleitores/${idEleitor}`).pipe(take(1));
   }
 
-  getUsuarioEhEleitor(idEleicao: number): Observable<boolean> {
-    return this.http.get<boolean>(`${this.url}${idEleicao}/usuarioeleitor`).pipe(take(1));
-  }
-
   postConfiguracoes(idEleicao: number, configuracao: ConfiguracaoEleicao) {
     return this.http.post<void>(`${this.url}${idEleicao}/configuracoes`, configuracao).pipe(take(1));
   }
